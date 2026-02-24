@@ -10,6 +10,8 @@ export interface Resource {
     image_url: string | null;
     tags: string[] | null;
     status: 'active' | 'inactive';
+    sample_videos?: string[];
+    metadata?: Record<string, any> | null;
 }
 
 export interface Booking {
@@ -21,6 +23,7 @@ export interface Booking {
     end_time: string;
     status: BookingStatus;
     total_price: number;
+    metadata?: Record<string, any> | null;
 }
 
 export interface Profile {
@@ -29,5 +32,6 @@ export interface Profile {
     full_name: string | null;
     brand_name: string | null;
     phone: string | null;
+    email: string | null;
     role: 'admin' | 'client';
 }

@@ -19,25 +19,37 @@ export function DraggableModelCard({ model }: DraggableModelCardProps) {
     } : undefined;
 
     return (
-        <div ref={setNodeRef} style={style} {...listeners} {...attributes} className="cursor-grab active:cursor-grabbing touch-none">
-            <Card className={cn("overflow-hidden hover:shadow-md transition-shadow", isDragging && "opacity-50 ring-2 ring-primary")}>
-                <div className="flex items-center gap-4 p-3">
-                    <div className="h-16 w-16 shrink-0 overflow-hidden rounded-md bg-muted">
-                        {model.image_url && (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img src={model.image_url} alt={model.name} className="h-full w-full object-cover" />
-                        )}
-                    </div>
-                    <div className="flex flex-col gap-1">
-                        <h4 className="font-bold">{model.name}</h4>
+        <div ref={setNodeRef} style={style} {...listeners} {...attributes} className="cursor-grab active:cursor-grabbing touch-none group h-[400px]">
+            <Card className={cn("h-full overflow-hidden relative border-0 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20", isDragging && "opacity-50 ring-2 ring-primary rotate-3 scale-105")}>
+
+                {/* Full Height Image */}
+                <div className="absolute inset-0 bg-muted">
+                    {model.image_url && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={model.image_url} alt={model.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    )}
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-60" />
+                </div>
+
+                {/* Content Overlay - Always visible name, extra details on hover */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 transition-transform duration-300 group-hover:translate-y-0">
+                    <h4 className="font-black text-2xl text-white mb-1 drop-shadow-md">{model.name}</h4>
+
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col gap-2">
                         <div className="flex flex-wrap gap-1">
-                            {model.tags?.slice(0, 2).map((tag) => (
-                                <Badge key={tag} variant="secondary" className="text-[10px] px-1 py-0 h-5">
+                            {model.tags?.slice(0, 3).map((tag) => (
+                                <Badge key={tag} variant="secondary" className="bg-primary/20 text-primary-foreground border-primary/20 text-[10px] px-1.5 backdrop-blur-sm">
                                     #{tag}
                                 </Badge>
                             ))}
                         </div>
-                        <span className="text-xs text-muted-foreground">{model.hourly_rate} MAD/hr</span>
+                        <div className="flex items-center justify-between mt-2">
+                            {/* Price hidden for Devis flow */}
+                            {/* <span className="text-sm font-bold text-white bg-primary px-2 py-0.5 rounded-md shadow-lg">
+                                {model.hourly_rate} MAD/hr
+                            </span> */}
+                        </div>
                     </div>
                 </div>
             </Card>

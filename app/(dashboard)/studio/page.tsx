@@ -1,9 +1,11 @@
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/utils/supabase/server";
 import { ResourceCard } from "@/components/studio/ResourceCard";
+import { Clapperboard } from "lucide-react";
 import { Resource } from "@/types/database";
 
 // This is a Server Component, so we can fetch data directly
 export default async function StudioPage() {
+    const supabase = await createClient();
     const { data: resources, error } = await supabase
         .from("resources")
         .select("*")
@@ -17,13 +19,15 @@ export default async function StudioPage() {
     return (
         <div className="space-y-8">
             <div>
-                <h2 className="text-3xl font-black tracking-tight">Book a Studio 🎙️</h2>
+                <h2 className="flex items-center gap-2 text-3xl font-black tracking-tight">
+                    Choose Your Set <Clapperboard className="h-8 w-8 text-primary" />
+                </h2>
                 <p className="text-muted-foreground">
-                    Premium spaces for your next podcast, shoot, or creative session.
+                    One studio, infinite possibilities. Book the specific setup for your content.
                 </p>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid gap-6 grid-cols-1">
                 {resources?.map((resource) => (
                     <ResourceCard key={resource.id} resource={resource as Resource} />
                 ))}

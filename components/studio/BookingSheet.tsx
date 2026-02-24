@@ -43,10 +43,13 @@ export function BookingSheet({ resource, children }: BookingSheetProps) {
 
         const res = await createBooking(resource.id, null, date, timeSlot, calculateTotal());
 
-        if (res.success) {
+        if (res.success && 'bookingId' in res) {
             router.push(`/success?id=${res.bookingId}`);
-        } else {
+        } else if (!res.success && 'error' in res) {
             alert("Booking failed: " + res.error);
+            setIsLoading(false);
+        } else {
+            alert("Booking failed.");
             setIsLoading(false);
         }
     };

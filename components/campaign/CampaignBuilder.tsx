@@ -1,215 +1,283 @@
 "use client";
 
-import { useState } from 'react';
-import {
-    DndContext,
-    DragOverlay,
-    useSensor,
-    useSensors,
-    MouseSensor,
-    TouchSensor,
-    DragStartEvent,
-    DragEndEvent,
-} from '@dnd-kit/core';
-import { useDroppable } from '@dnd-kit/core';
+import { useState, useEffect } from 'react';
 import { Resource } from '@/types/database';
 import { useCampaignStore } from '@/store/useCampaignStore';
-import { DraggableModelCard } from './DraggableModelCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { X, Film, Gift, MessageCircle } from 'lucide-react';
+import { Film, CalendarIcon, Rocket, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { format } from "date-fns";
+import { useTranslations } from "next-intl";
 
-// Droppable Area Component
-function DroppableArea({ children }: { children: React.ReactNode }) {
-    const { setNodeRef, isOver } = useDroppable({
-        id: 'campaign-drop-zone',
-    });
-
-    return (
-        <div
-            ref={setNodeRef}
-            className={cn(
-                "min-h-[400px] rounded-xl border-2 border-dashed transition-colors p-4",
-                isOver ? "border-primary bg-primary/5" : "border-muted-foreground/25"
-            )}
-        >
-            {children}
-        </div>
-    );
-}
+import { Timeline, TimelineStep } from '@/components/ui/Timeline';
+import { CampaignSetupStep } from './steps/CampaignSetupStep';
+import { TalentSelectionStep } from './steps/TalentSelectionStep';
+import { VideoStyleStep } from './steps/VideoStyleStep';
+import { StudioSelectionStep } from './steps/StudioSelectionStep';
+import { CreativeBriefStep } from './steps/CreativeBriefStep';
+import { CalendarStep } from './steps/CalendarStep';
+import { createCampaignBooking } from '@/actions/create-booking';
+import { useRouter } from 'next/navigation';
 
 interface CampaignBuilderProps {
     availableModels: Resource[];
+    availableStudios: Resource[];
 }
 
-import { useRouter } from 'next/navigation';
-import { createCampaignBooking } from '@/actions/create-booking';
-
-export function CampaignBuilder({ availableModels }: CampaignBuilderProps) {
-    const { selectedModels, addModel, removeModel, videoStyle, setVideoStyle } = useCampaignStore();
-    const [activeId, setActiveId] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
+export function CampaignBuilder({ availableModels, availableStudios }: CampaignBuilderProps) {
+    const { selectedModels, date, time, reset, selectedStudio, globalQuantity, globalVideoStyle } = useCampaignStore();
     const router = useRouter();
+    const [isMounted, setIsMounted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const t = useTranslations('Campaign');
+    const tc = useTranslations('Common');
 
-    const sensors = useSensors(
-        useSensor(MouseSensor, { activationConstraint: { distance: 10 } }),
-        useSensor(TouchSensor, { activationConstraint: { delay: 250, tolerance: 5 } })
-    );
+    // Steps Definition (inside component to access translations)
+    const ALL_STEPS: TimelineStep[] = [
+        { id: 'setup', title: t('stepSetup'), description: t('stepSetupDesc') },
+        { id: 'talent', title: t('stepTalent'), description: t('stepTalentDesc') },
+        { id: 'style', title: t('stepStyle'), description: t('stepStyleDesc') },
+        { id: 'studio', title: t('stepStudio'), description: t('stepStudioDesc') },
+        { id: 'brief', title: t('stepBrief'), description: t('stepBriefDesc') },
+        { id: 'schedule', title: t('stepSchedule'), description: t('stepScheduleDesc') },
+        { id: 'review', title: t('stepReview'), description: t('stepReviewDesc') },
+    ];
 
-    const handleDragStart = (event: DragStartEvent) => {
-        setActiveId(event.active.id as string);
-    };
+    // State Machine
+    const [currentStepIndex, setCurrentStepIndex] = useState(0);
+    const [skippedSteps, setSkippedSteps] = useState<string[]>([]);
 
-    const handleDragEnd = (event: DragEndEvent) => {
-        const { active, over } = event;
+    // Derived Steps (filtering out skipped ones)
+    const activeSteps = ALL_STEPS.filter(step => !skippedSteps.includes(step.id));
+    const currentStep = activeSteps[currentStepIndex];
 
-        if (over && over.id === 'campaign-drop-zone') {
-            const model = active.data.current as Resource;
-            if (model) {
-                addModel(model);
-            }
+    console.log("Active Steps:", activeSteps);
+
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted) return null;
+
+    // Handlers
+    const handleNext = () => {
+        if (currentStepIndex < activeSteps.length - 1) {
+            setCurrentStepIndex(prev => prev + 1);
         }
-        setActiveId(null);
     };
+
+    const handleBack = () => {
+        if (currentStepIndex > 0) {
+            setCurrentStepIndex(prev => prev - 1);
+        } else {
+            // If back from first step, maybe reset skipped steps?
+            // For now just stay.
+        }
+    };
+
+    const handleSetupComplete = (hasTalent: boolean, hasScript: boolean) => {
+        const newSkipped = [];
+        if (hasTalent) {
+            newSkipped.push('talent');
+        }
+        setSkippedSteps(newSkipped);
+        setTimeout(() => handleNext(), 100); // Small delay for animation
+    };
+
+    // Calculate Total Price
+    const hasNoTalent = selectedModels.length === 0;
+    const totalVideos = hasNoTalent ? globalQuantity : selectedModels.reduce((acc, m) => acc + (m.quantity || 1), 0);
+
+    // Model Cost
+    const modelsCost = selectedModels.reduce((acc, m) => acc + m.hourly_rate * (m.quantity || 1), 0);
+
+    // Studio Cost
+    const recommendedHours = Math.max(2, Math.ceil(totalVideos * 0.5)); // Estimate: 30 mins per video, min 2 hours
+    const estimatedHours = selectedStudio ? recommendedHours : 0;
+    const finalStudioCost = selectedStudio ? selectedStudio.hourly_rate * estimatedHours : 0;
+
+    const platformFee = (modelsCost + finalStudioCost) * 0.1;
+    const total = modelsCost + finalStudioCost + platformFee;
 
     const handleLaunch = async () => {
         setIsLoading(true);
-        const totalPrice = selectedModels.reduce((acc, m) => acc + m.hourly_rate, 0) * 2;
-        const modelIds = selectedModels.map(m => m.id);
+        try {
+            const models = selectedModels.map(m => ({ id: m.id, quantity: m.quantity || 1 }));
+            const studioId = selectedStudio ? selectedStudio.id : null;
+            const style = hasNoTalent ? globalVideoStyle : "Per Model";
 
-        const res = await createCampaignBooking(modelIds, videoStyle, totalPrice);
+            const res = await createCampaignBooking(
+                models,
+                studioId,
+                globalQuantity,
+                style,
+                total,
+                date,
+                time
+            );
 
-        if (res.success) {
-            router.push(`/success?id=${res.bookingId}`);
-        } else {
-            alert("Campaign launch failed: " + (res.error || "Unknown error"));
+            if (res.success && 'bookingId' in res) {
+                reset(); // Clear store after successful booking
+                router.push(`/success?id=${res.bookingId}`);
+            } else if (!res.success && 'error' in res) {
+                alert(t('launchFailed') + ": " + (res.error || t('unexpectedError')));
+            } else {
+                alert(t('launchFailed'));
+            }
+        } catch (error) {
+            console.error("Booking failed", error);
+            alert(t('unexpectedError'));
+        } finally {
             setIsLoading(false);
         }
     };
 
-    const activeModel = availableModels.find((m) => m.id === activeId);
+    // Render Current Step Content
+    const renderStepContent = () => {
+        switch (currentStep.id) {
+            case 'setup':
+                return <CampaignSetupStep onComplete={handleSetupComplete} />;
+            case 'talent':
+                return (
+                    <TalentSelectionStep
+                        availableModels={availableModels}
+                        onNext={handleNext}
+                        onBack={handleBack}
+                    />
+                );
+            case 'style': // Added Video Style step case
+                return (
+                    <VideoStyleStep
+                        onNext={handleNext}
+                        onBack={handleBack}
+                    />
+                );
+            case 'studio':
+                return (
+                    <StudioSelectionStep
+                        availableStudios={availableStudios}
+                        onNext={handleNext}
+                        onBack={handleBack}
+                    />
+                );
+            case 'brief':
+                return <CreativeBriefStep onNext={handleNext} onBack={handleBack} />;
+            case 'schedule':
+                return <CalendarStep onNext={handleNext} onBack={handleBack} />;
+            case 'review':
+                return (
+                    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <div>
+                            <h2 className="flex items-center gap-2 text-3xl font-black tracking-tight">
+                                {t('reviewTitle')} <Rocket className="h-8 w-8 text-primary" />
+                            </h2>
+                            <p className="text-muted-foreground text-lg">
+                                {t('reviewSubtitle')}
+                            </p>
+                        </div>
+
+                        <div className="grid gap-6 md:grid-cols-2">
+                            {/* Summary Card */}
+                            <Card className="p-6 space-y-4 h-fit">
+                                <h3 className="font-bold text-xl">{t('campaignRequest')}</h3>
+                                <div className="space-y-3 text-sm">
+                                    <div className="flex justify-between py-2 border-b">
+                                        <span className="text-muted-foreground">{t('shootDate')}</span>
+                                        <span className="font-medium flex items-center gap-2">
+                                            <CalendarIcon className="h-4 w-4" />
+                                            {date ? format(date, "MMM do, yyyy") : t('tbd')} {time ? `${t('at')} ${time}` : ''}
+                                        </span>
+                                    </div>
+                                    <div className="flex justify-between py-2 border-b">
+                                        <span className="text-muted-foreground">{t('totalVideoCount')}</span>
+                                        <span className="font-medium">
+                                            {totalVideos}
+                                        </span>
+                                    </div>
+                                    <div className="flex justify-between py-2 border-b">
+                                        <span className="text-muted-foreground">{t('talentCount')}</span>
+                                        <span className="font-medium">{hasNoTalent ? t('ownTalent') : selectedModels.length}</span>
+                                    </div>
+                                    <div className="flex justify-between py-2 border-b">
+                                        <span className="text-muted-foreground">{t('studio')}</span>
+                                        <span className="font-medium">{selectedStudio?.name || tc('none')}</span>
+                                    </div>
+                                </div>
+                            </Card>
+
+                            {/* Quote Card */}
+                            <Card className="p-6 space-y-4 border-primary/20 bg-primary/5">
+                                <h3 className="font-bold text-xl text-primary">{t('estimatedQuote')}</h3>
+                                <div className="space-y-2">
+                                    {selectedModels.map(model => (
+                                        <div key={model.id} className="flex justify-between text-sm">
+                                            <span>{model.name} (x{model.quantity || 1})</span>
+                                            <span>{(model.hourly_rate * (model.quantity || 1)).toFixed(2)} MAD</span>
+                                        </div>
+                                    ))}
+                                    {hasNoTalent && (
+                                        <div className="flex justify-between text-sm">
+                                            <span>{t('production')} (x{globalQuantity})</span>
+                                            <span className="text-muted-foreground italic">{t('quotedLater')}</span>
+                                        </div>
+                                    )}
+                                    {selectedStudio && (
+                                        <div className="flex justify-between text-sm">
+                                            <span>{t('studio')} ({selectedStudio.name}) - {estimatedHours}h</span>
+                                            <span>{finalStudioCost.toFixed(2)} MAD</span>
+                                        </div>
+                                    )}
+                                    <div className="flex justify-between text-sm text-muted-foreground pt-2 border-t border-dashed border-primary/20">
+                                        <span>{t('platformFee')}</span>
+                                        <span>{platformFee.toFixed(2)} MAD</span>
+                                    </div>
+                                    <div className="flex justify-between text-xl font-black pt-4 border-t border-primary/20">
+                                        <span>{tc('total')}</span>
+                                        <span>{total.toFixed(2)} MAD</span>
+                                    </div>
+                                </div>
+                                <Button
+                                    className="w-full font-bold text-lg h-12 shadow-lg shadow-primary/25 mt-4"
+                                    onClick={handleLaunch}
+                                    disabled={isLoading}
+                                >
+                                    {isLoading ? t('submitting') : t('submitRequest')}
+                                </Button>
+                            </Card>
+                        </div>
+
+                        <Button variant="ghost" onClick={handleBack} className="mt-4">{tc('back')}</Button>
+                    </div>
+                );
+            default:
+                return null;
+        }
+    };
 
     return (
-        <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-            <div className="grid gap-8 lg:grid-cols-2">
-                {/* Left Column: Available Models */}
-                <div className="space-y-4">
-                    <div>
-                        <h3 className="text-xl font-bold">Step 1: Choose Talent</h3>
-                        <p className="text-muted-foreground text-sm">Drag models to your campaign.</p>
-                    </div>
-                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                        {availableModels.map((model) => (
-                            <DraggableModelCard key={model.id} model={model} />
-                        ))}
-                    </div>
+        <div className="relative">
+            {/* Loading Overlay */}
+            {isLoading && (
+                <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/60 backdrop-blur-md rounded-xl animate-in fade-in duration-300">
+                    <Loader2 className="h-16 w-16 text-primary animate-spin mb-4" />
+                    <h3 className="text-xl font-black uppercase tracking-widest text-white">{t('launchingCampaign')}</h3>
+                    <p className="text-muted-foreground mt-2">{t('securingSlots')}</p>
+                </div>
+            )}
+
+            <div className={cn("grid lg:grid-cols-[250px_1fr] gap-8 items-start transition-opacity duration-300", isLoading ? "opacity-30 pointer-events-none" : "opacity-100")}>
+                {/* Left Sidebar: Timeline */}
+                <div className="hidden lg:block sticky top-24">
+                    <Timeline steps={activeSteps} currentStep={currentStepIndex} />
                 </div>
 
-                {/* Right Column: Campaign Drop Zone */}
-                <div className="space-y-6">
-                    <div>
-                        <h3 className="text-xl font-bold">Step 2: Build Campaign</h3>
-                        <p className="text-muted-foreground text-sm">Drop models here.</p>
-                    </div>
-
-                    <DroppableArea>
-                        {selectedModels.length === 0 ? (
-                            <div className="flex h-full flex-col items-center justify-center text-center text-muted-foreground mt-20">
-                                <p>Drag models here to start building your squad.</p>
-                            </div>
-                        ) : (
-                            <div className="space-y-3">
-                                {selectedModels.map((model) => (
-                                    <Card key={model.id} className="relative overflow-hidden">
-                                        <div className="flex items-center gap-4 p-3 pr-12">
-                                            <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full bg-muted">
-                                                {model.image_url && (
-                                                    // eslint-disable-next-line @next/next/no-img-element
-                                                    <img src={model.image_url} alt={model.name} className="h-full w-full object-cover" />
-                                                )}
-                                            </div>
-                                            <div>
-                                                <h4 className="font-bold text-sm">{model.name}</h4>
-                                                <Badge variant="outline" className="text-[10px]">{model.hourly_rate} MAD/hr</Badge>
-                                            </div>
-                                            <Button
-                                                variant="ghost"
-                                                size="icon"
-                                                className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-destructive"
-                                                onClick={() => removeModel(model.id)}
-                                            >
-                                                <X className="h-4 w-4" />
-                                            </Button>
-                                        </div>
-                                    </Card>
-                                ))}
-                            </div>
-                        )}
-                    </DroppableArea>
-
-                    {/* Video Style Selector */}
-                    <div className="space-y-3">
-                        <h3 className="text-lg font-semibold">Step 3: Video Style</h3>
-                        <div className="grid grid-cols-3 gap-3">
-                            {[
-                                { id: 'unboxing', label: 'Unboxing', icon: Gift },
-                                { id: 'testimonial', label: 'Testimonial', icon: MessageCircle },
-                                { id: 'skit', label: 'Comedy Skit', icon: Film },
-                            ].map((style) => {
-                                const Icon = style.icon;
-                                const isSelected = videoStyle === style.id;
-                                return (
-                                    <button
-                                        key={style.id}
-                                        onClick={() => setVideoStyle(style.id)}
-                                        className={cn(
-                                            "flex flex-col items-center justify-center gap-2 rounded-xl border p-4 transition-all hover:bg-muted/50",
-                                            isSelected ? "border-primary bg-primary/5 ring-1 ring-primary" : "bg-card"
-                                        )}
-                                    >
-                                        <Icon className={cn("h-6 w-6", isSelected ? "text-primary" : "text-muted-foreground")} />
-                                        <span className={cn("text-xs font-medium", isSelected && "text-primary")}>{style.label}</span>
-                                    </button>
-                                )
-                            })}
-                        </div>
-                    </div>
-
-                    <div className="pt-4 border-t">
-                        <div className="flex justify-between items-center mb-4">
-                            <span className="text-muted-foreground">Total Budget Est.</span>
-                            <span className="text-2xl font-black">{selectedModels.reduce((acc, m) => acc + m.hourly_rate, 0) * 2} MAD</span>
-                        </div>
-                        <Button
-                            className="w-full"
-                            size="lg"
-                            disabled={selectedModels.length === 0 || !videoStyle || isLoading}
-                            onClick={handleLaunch}
-                        >
-                            {isLoading ? "Launching..." : "Launch Campaign 🚀"}
-                        </Button>
-                    </div>
+                {/* Right Content: Current Step */}
+                <div className="min-h-[500px]">
+                    {renderStepContent()}
                 </div>
             </div>
-
-            <DragOverlay>
-                {activeModel ? (
-                    <Card className="w-[300px] shadow-2xl cursor-grabbing opacity-90 rotate-3">
-                        <div className="flex items-center gap-4 p-3">
-                            <div className="h-16 w-16 shrink-0 overflow-hidden rounded-md bg-muted">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                {activeModel.image_url && <img src={activeModel.image_url} alt={activeModel.name} className="h-full w-full object-cover" />}
-                            </div>
-                            <div>
-                                <h4 className="font-bold">{activeModel.name}</h4>
-                                <span className="text-xs text-muted-foreground">Dragging...</span>
-                            </div>
-                        </div>
-                    </Card>
-                ) : null}
-            </DragOverlay>
-        </DndContext>
+        </div>
     );
 }

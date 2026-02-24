@@ -58,3 +58,4 @@ create policy "Resources are viewable by everyone" on resources for select using
 
 create policy "Users can view their own bookings" on bookings for select using (auth.uid() = user_id);
 create policy "Users can insert their own bookings" on bookings for insert with check (auth.uid() = user_id);
+create policy "Users can update their own profile" on profiles for update using (auth.uid() = id);
