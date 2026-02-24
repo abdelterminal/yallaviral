@@ -47,7 +47,7 @@ function SuccessContent() {
                     </Link>
                 </Button>
                 <Button asChild variant="ghost">
-                    <Link href="/">{tc('backToDashboard')}</Link>
+                    <Link href="/dashboard">{tc('backToDashboard')}</Link>
                 </Button>
             </div>
         </div>
