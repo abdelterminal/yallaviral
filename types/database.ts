@@ -24,6 +24,8 @@ export interface Booking {
     status: BookingStatus;
     total_price: number;
     metadata?: Record<string, any> | null;
+    rejected_at?: string | null;
+    rejection_reason?: string | null;
 }
 
 export interface Profile {
