@@ -11,7 +11,7 @@ export const revalidate = 0;
 export async function generateMetadata() {
     const t = await getTranslations('Nav');
     return {
-        title: `${t('requests')} - YallaViral`,
+        title: `${t('campaigns')} - YallaViral`,
     };
 }
 
@@ -55,7 +55,7 @@ export default async function RequestsPage() {
                 </div>
                 <Link href="/campaign">
                     <Button className="font-bold shadow-lg shadow-primary/25">
-                        <Plus className="mr-2 h-4 w-4" /> {tc('newCampaign')}
+                        <Plus className="mr-2 h-4 w-4" /> {t('newCampaign')}
                     </Button>
                 </Link>
             </div>

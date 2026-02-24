@@ -7,7 +7,7 @@ import { getTranslations } from "next-intl/server";
 export async function generateMetadata() {
     const t = await getTranslations('Nav');
     return {
-        title: `${t('analytics')} - YallaViral`,
+        title: `${t('mySummary')} - YallaViral`,
         description: "Your booking and spending summary.",
     };
 }
