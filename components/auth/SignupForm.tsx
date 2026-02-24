@@ -42,6 +42,8 @@ export default function SignupForm() {
 
                 if (result?.error) {
                     setError(result.error)
+                    const passwordInput = document.getElementById('password') as HTMLInputElement;
+                    if (passwordInput) passwordInput.value = '';
                     return
                 }
 
@@ -53,6 +55,8 @@ export default function SignupForm() {
                     throw error
                 }
                 setError(error.message || t('somethingWentWrong'))
+                const passwordInput = document.getElementById('password') as HTMLInputElement;
+                if (passwordInput) passwordInput.value = '';
             }
         })
     }
@@ -107,7 +111,7 @@ export default function SignupForm() {
                             name="fullName"
                             placeholder={t('namePlaceholder')}
                             required
-                            className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 text-base transition-all focus:bg-white/10"
+                            className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-white/10"
                         />
                     </div>
                     <div className="space-y-1.5">
@@ -117,7 +121,7 @@ export default function SignupForm() {
                             name="brandName"
                             placeholder={t('companyPlaceholder')}
                             required
-                            className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 text-base transition-all focus:bg-white/10"
+                            className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-white/10"
                         />
                     </div>
                 </div>
@@ -131,7 +135,7 @@ export default function SignupForm() {
                             type="email"
                             placeholder={t('emailPlaceholder')}
                             required
-                            className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 text-base transition-all focus:bg-white/10"
+                            className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-white/10"
                         />
                     </div>
                     <div className="space-y-1.5">
@@ -142,7 +146,7 @@ export default function SignupForm() {
                             type="tel"
                             placeholder={t('phonePlaceholder')}
                             required
-                            className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 text-base transition-all focus:bg-white/10"
+                            className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-white/10"
                         />
                     </div>
                 </div>
@@ -155,7 +159,7 @@ export default function SignupForm() {
                         type="password"
                         placeholder="••••••••"
                         required
-                        className="bg-white/5 border-white/10 text-white h-10 rounded-xl focus:border-primary/50 text-base transition-all focus:bg-white/10"
+                        className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-white/10"
                     />
                 </div>
 

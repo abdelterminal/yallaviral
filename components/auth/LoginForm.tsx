@@ -35,6 +35,8 @@ export function LoginForm() {
             if (signInError) {
                 setError(signInError.message);
                 setIsLoading(false);
+                const passwordInput = document.getElementById('password') as HTMLInputElement;
+                if (passwordInput) passwordInput.value = '';
                 return;
             }
 
@@ -43,6 +45,8 @@ export function LoginForm() {
         } catch (err) {
             setError(t('signInError'));
             setIsLoading(false);
+            const passwordInput = document.getElementById('password') as HTMLInputElement;
+            if (passwordInput) passwordInput.value = '';
         }
     }
 
@@ -76,7 +80,7 @@ export function LoginForm() {
                         autoCorrect="off"
                         required
                         disabled={isLoading}
-                        className="h-12 bg-white/5 border-white/10 focus:border-primary/50 text-white placeholder:text-slate-600 rounded-xl transition-all"
+                        className="h-12 bg-white/5 border-white/10 focus:border-primary/50 text-white placeholder:text-slate-600 focus:placeholder-transparent rounded-xl transition-all"
                     />
                 </div>
                 <div className="space-y-1.5">
@@ -96,7 +100,7 @@ export function LoginForm() {
                         autoComplete="current-password"
                         required
                         disabled={isLoading}
-                        className="h-12 bg-white/5 border-white/10 focus:border-primary/50 text-white placeholder:text-slate-600 rounded-xl px-4 transition-all"
+                        className="h-12 bg-white/5 border-white/10 focus:border-primary/50 text-white placeholder:text-slate-600 focus:placeholder-transparent rounded-xl px-4 transition-all"
                     />
                 </div>
 
