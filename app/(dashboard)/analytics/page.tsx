@@ -39,46 +39,46 @@ export default async function AnalyticsPage() {
 
     const stats = [
         {
-            title: t('metrics.totalSpent'),
+            title: t('totalSpent'),
             value: `${totalSpent.toLocaleString()} MAD`,
             icon: Coins,
             glow: "124, 58, 237", // purple
-            description: t('metrics.allTimeSpending'),
+            description: t('allTimeSpending'),
         },
         {
-            title: t('metrics.completedOrders'),
+            title: t('completedOrders'),
             value: completed,
             icon: CheckCircle2,
             glow: "34, 197, 94", // green
-            description: t('metrics.successfullyDelivered'),
+            description: t('successfullyDelivered'),
         },
         {
-            title: t('metrics.inProgress'),
+            title: t('inProgress'),
             value: inProgress,
             icon: Clock,
             glow: "234, 179, 8", // amber
-            description: t('metrics.awaitingConfirmation'),
+            description: t('awaitingConfirmation'),
         },
         {
-            title: t('metrics.rejected'),
+            title: t('rejected'),
             value: rejected,
             icon: XCircle,
             glow: "239, 68, 68", // red
-            description: t('metrics.declinedBookings'),
+            description: t('declinedBookings'),
         },
         {
-            title: t('metrics.totalBookings'),
+            title: t('totalBookings'),
             value: totalBookings,
             icon: CalendarDays,
             glow: "59, 130, 246", // blue
-            description: t('metrics.allTimeOrders'),
+            description: t('allTimeOrders'),
         },
         {
-            title: t('metrics.avgOrderValue'),
+            title: t('avgOrderValue'),
             value: `${avgOrderValue.toLocaleString()} MAD`,
             icon: TrendingUp,
             glow: "168, 85, 247", // violet
-            description: t('metrics.perBookingAverage'),
+            description: t('perBookingAverage'),
         },
     ];
 

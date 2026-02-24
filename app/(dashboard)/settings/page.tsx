@@ -53,16 +53,16 @@ export default async function SettingsPage({
             <Tabs defaultValue={defaultTab} className="space-y-8">
                 <TabsList className="bg-white/5 border border-white/10 p-1 h-auto rounded-full inline-flex">
                     <TabsTrigger value="profile" className="rounded-full data-[state=active]:bg-white data-[state=active]:text-black px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
-                        <User className="h-4 w-4 mr-2" /> {t('tabs.profile')}
+                        <User className="h-4 w-4 mr-2" /> {t('profileTab')}
                     </TabsTrigger>
                     <TabsTrigger value="billing" className="rounded-full data-[state=active]:bg-white data-[state=active]:text-black px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
-                        <CreditCard className="h-4 w-4 mr-2" /> {t('tabs.billing')}
+                        <CreditCard className="h-4 w-4 mr-2" /> {t('billingTab')}
                     </TabsTrigger>
                     <TabsTrigger value="notifications" className="rounded-full data-[state=active]:bg-white data-[state=active]:text-black px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
-                        <Bell className="h-4 w-4 mr-2" /> {t('tabs.notifications')}
+                        <Bell className="h-4 w-4 mr-2" /> {t('notificationsTab')}
                     </TabsTrigger>
                     <TabsTrigger value="security" className="rounded-full data-[state=active]:bg-white data-[state=active]:text-black px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
-                        <Shield className="h-4 w-4 mr-2" /> {t('tabs.security')}
+                        <Shield className="h-4 w-4 mr-2" /> {t('securityTab')}
                     </TabsTrigger>
                 </TabsList>
 
@@ -73,7 +73,7 @@ export default async function SettingsPage({
                 <TabsContent value="billing" className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-500">
                     <Card className="bg-gradient-to-br from-primary/10 to-purple-900/10 border-white/10 backdrop-blur-sm text-center py-12">
                         <CardHeader>
-                            <CardTitle className="text-2xl">{t('tabs.billing')} & Payments</CardTitle>
+                            <CardTitle className="text-2xl">{t('billingTitle')}</CardTitle>
                             <CardDescription className="text-base max-w-md mx-auto">
                                 {t('billingDesc')}
                             </CardDescription>
@@ -81,7 +81,7 @@ export default async function SettingsPage({
                         <CardContent>
                             <a href="https://wa.me/212600000000?text=Hi%2C%20I%27d%20like%20to%20discuss%20billing" target="_blank" rel="noopener noreferrer">
                                 <Button className="font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-900/20">
-                                    {t('contactWhatsapp')}
+                                    {t('contactWhatsApp')}
                                 </Button>
                             </a>
                         </CardContent>
