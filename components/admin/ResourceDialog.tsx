@@ -125,7 +125,7 @@ export function ResourceDialog({ resource, defaultType = "model" }: ResourceDial
                     </Button>
                 )}
             </DialogTrigger>
-            <DialogContent className="bg-card border-border text-foreground sm:max-w-[425px]">
+            <DialogContent className="bg-card border-border text-foreground sm:max-w-[425px] max-h-[85vh] overflow-y-auto">
                 <DialogHeader>
                     <DialogTitle>{resource ? "Edit Resource" : "Add New Resource"}</DialogTitle>
                 </DialogHeader>

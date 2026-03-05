@@ -21,16 +21,23 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import { getDateLocale } from "@/utils/date-locale";
+import { getStatusBadgeVariant } from "@/lib/utils";
 
 interface BookingsTableProps {
     bookings: any[];
 }
 
+const STATUS_FILTERS = ["all", "pending", "confirmed", "rejected", "completed"] as const;
+type StatusFilter = typeof STATUS_FILTERS[number];
+
 export function BookingsTable({ bookings }: BookingsTableProps) {
     const router = useRouter();
     const [processingId, setProcessingId] = useState<string | null>(null);
+    const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
     const locale = useLocale();
     const dateFnsLocale = getDateLocale(locale);
+
+    const filtered = statusFilter === "all" ? bookings : bookings.filter(b => b.status === statusFilter);
 
     const handleAction = async (id: string, action: 'approve' | 'reject') => {
         setProcessingId(id);
@@ -61,6 +68,27 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
     };
 
     return (
+        <div className="space-y-4">
+            {/* Status Filter Tabs */}
+            <div className="flex flex-wrap gap-2">
+                {STATUS_FILTERS.map((filter) => {
+                    const count = filter === "all" ? bookings.length : bookings.filter(b => b.status === filter).length;
+                    return (
+                        <button
+                            key={filter}
+                            onClick={() => setStatusFilter(filter)}
+                            className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all capitalize ${
+                                statusFilter === filter
+                                    ? "bg-primary text-primary-foreground shadow-sm"
+                                    : "bg-muted text-muted-foreground hover:text-foreground hover:bg-muted/80"
+                            }`}
+                        >
+                            {filter} ({count})
+                        </button>
+                    );
+                })}
+            </div>
+
         <div className="rounded-md border border-border bg-card backdrop-blur-sm">
             <Table>
                 <TableHeader>
@@ -75,7 +103,7 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {bookings.length === 0 ? (
+                    {filtered.length === 0 ? (
                         <TableRow className="hover:bg-transparent border-none">
                             <TableCell colSpan={7} className="h-[300px] text-center">
                                 <div className="flex flex-col items-center justify-center text-muted-foreground animate-in fade-in duration-700">
@@ -92,7 +120,7 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
                             </TableCell>
                         </TableRow>
                     ) : (
-                        bookings.map((booking) => (
+                        filtered.map((booking) => (
                             <TableRow key={booking.id} className="border-border hover:bg-muted/50">
                                 <TableCell className="font-mono text-xs">{booking.id.slice(0, 8)}</TableCell>
                                 <TableCell>
@@ -108,21 +136,13 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
                                     {booking.total_price?.toFixed(2)} MAD
                                 </TableCell>
                                 <TableCell>
-                                    <Badge
-                                        variant="outline"
-                                        className={`capitalize ${booking.status === 'confirmed'
-                                            ? 'border-emerald-500/50 text-emerald-600 bg-emerald-50'
-                                            : booking.status === 'rejected'
-                                                ? 'border-red-500/50 text-red-500 bg-red-500/10'
-                                                : 'border-yellow-500/50 text-yellow-500 bg-yellow-500/10'
-                                            }`}
-                                    >
+                                    <Badge variant={getStatusBadgeVariant(booking.status)} className="capitalize">
                                         {booking.status}
                                     </Badge>
                                 </TableCell>
                                 <TableCell>
                                     {booking.payment_status === 'paid' ? (
-                                        <Badge variant="outline" className="border-emerald-500/50 text-emerald-600 bg-emerald-50">Paid</Badge>
+                                        <Badge variant="paid">Paid</Badge>
                                     ) : booking.payment_status === 'pending' ? (
                                         <Button
                                             size="sm"
@@ -135,7 +155,7 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
                                             Confirm Pay
                                         </Button>
                                     ) : booking.status === 'confirmed' ? (
-                                        <Badge variant="outline" className="border-orange-500/50 text-orange-400 bg-orange-500/10">Unpaid</Badge>
+                                        <Badge variant="unpaid">Unpaid</Badge>
                                     ) : (
                                         <span className="text-xs text-muted-foreground">—</span>
                                     )}
@@ -166,6 +186,7 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
                     )}
                 </TableBody>
             </Table>
-        </div >
+        </div>
+        </div>
     );
 }

@@ -14,6 +14,13 @@ const badgeVariants = cva("inline-flex items-center justify-center rounded-full 
         outline: "border-border text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         link: "text-primary underline-offset-4 [a&]:hover:underline",
+        // Status variants
+        pending: "bg-amber-50 text-amber-700 border-amber-200",
+        confirmed: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        rejected: "bg-red-50 text-red-600 border-red-200",
+        completed: "bg-blue-50 text-blue-600 border-blue-200",
+        unpaid: "bg-orange-50 text-orange-600 border-orange-200",
+        paid: "bg-emerald-50 text-emerald-700 border-emerald-200",
       },
     },
     defaultVariants: {

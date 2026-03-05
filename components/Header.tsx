@@ -163,7 +163,7 @@ export function Header({ profile }: { profile: any }) {
                             placeholder={t('searchPlaceholder')}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full h-11 rounded-full border border-border bg-slate-50 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/50 focus:border-primary/30 transition-all"
+                            className="w-full h-11 rounded-full border border-border bg-slate-50 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary focus:border-primary/30 transition-all"
                         />
                         <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1 pointer-events-none">
                             <span className="text-[10px] font-mono text-muted-foreground border border-border rounded px-1.5 py-0.5 group-focus-within:text-primary group-focus-within:border-primary/30 transition-all">⌘K</span>
