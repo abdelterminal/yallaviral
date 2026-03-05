@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Clock, CreditCard, FileText, Plus } from "lucide-react";
 import Link from "next/link";
 import { getTranslations, getLocale } from "next-intl/server";
+import { getStatusBadgeVariant } from "@/lib/utils";
 
 export async function generateMetadata() {
     const t = await getTranslations('Nav');
@@ -59,12 +60,6 @@ export default async function DashboardPage() {
         { label: t('totalSpent'), value: `${totalSpent.toLocaleString()} MAD`, icon: Calendar },
     ];
 
-    const statusColors: Record<string, string> = {
-        pending: "text-amber-600 bg-amber-50 border-amber-200",
-        confirmed: "text-emerald-600 bg-emerald-50 border-emerald-200",
-        rejected: "text-red-600 bg-red-50 border-red-200",
-        completed: "text-blue-600 bg-blue-50 border-blue-200",
-    };
 
     return (
         <div className="flex-1 space-y-6 p-6 md:p-8 pt-6 animate-in fade-in duration-500">
@@ -158,10 +153,7 @@ export default async function DashboardPage() {
                                         <span className="text-sm font-mono text-muted-foreground hidden sm:block">
                                             {booking.total_price?.toLocaleString()} MAD
                                         </span>
-                                        <Badge
-                                            variant="outline"
-                                            className={`capitalize text-xs ${statusColors[booking.status] || "text-gray-500 bg-gray-50 border-gray-200"}`}
-                                        >
+                                        <Badge variant={getStatusBadgeVariant(booking.status)} className="capitalize">
                                             {tc(booking.status)}
                                         </Badge>
                                     </div>

@@ -1,4 +1,5 @@
 import { HolographicCard } from "@/components/dashboard/HolographicCard";
+import { AnalyticsCharts } from "@/components/dashboard/AnalyticsCharts";
 import { Coins, CheckCircle2, Clock, XCircle, CalendarDays, TrendingUp } from "lucide-react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
@@ -24,8 +25,9 @@ export default async function AnalyticsPage() {
     // Fetch all user bookings in one query
     const { data: bookings } = await supabase
         .from("bookings")
-        .select("total_price, status")
-        .eq("user_id", user.id);
+        .select("total_price, status, created_at")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: true });
 
     const allBookings = bookings || [];
 
@@ -118,6 +120,9 @@ export default async function AnalyticsPage() {
                     );
                 })}
             </div>
+
+            {/* Charts */}
+            <AnalyticsCharts bookings={allBookings} />
         </div>
     );
 }

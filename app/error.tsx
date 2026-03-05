@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AlertCircle } from "lucide-react";
 
@@ -11,6 +11,10 @@ export default function Error({
     error: Error & { digest?: string };
     reset: () => void;
 }) {
+    const [errorRef] = useState(() =>
+        error.digest || crypto.randomUUID().slice(0, 8).toUpperCase()
+    );
+
     useEffect(() => {
         console.error(error);
     }, [error]);
@@ -25,8 +29,8 @@ export default function Error({
                 Something went wrong!
             </h2>
 
-            <p className="text-gray-400 text-center max-w-md">
-                Production error. We've logged this issue and our team is looking into it.
+            <p className="text-muted-foreground text-center max-w-md">
+                We've logged this issue and our team is looking into it.
             </p>
 
             <div className="flex gap-4">
@@ -37,6 +41,10 @@ export default function Error({
                     Go to Dashboard
                 </Button>
             </div>
+
+            <p className="text-xs text-muted-foreground font-mono">
+                Error ref: {errorRef}
+            </p>
         </div>
     );
 }

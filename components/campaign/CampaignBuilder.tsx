@@ -268,13 +268,31 @@ export function CampaignBuilder({ availableModels, availableStudios }: CampaignB
             )}
 
             <div className={cn("grid lg:grid-cols-[250px_1fr] gap-8 items-start transition-opacity duration-300", isLoading ? "opacity-30 pointer-events-none" : "opacity-100")}>
-                {/* Left Sidebar: Timeline */}
+                {/* Left Sidebar: Timeline (desktop only) */}
                 <div className="hidden lg:block sticky top-24">
                     <Timeline steps={activeSteps} currentStep={currentStepIndex} />
                 </div>
 
                 {/* Right Content: Current Step */}
                 <div className="min-h-[500px]">
+                    {/* Mobile Step Progress Indicator (hidden on lg+) */}
+                    <div className="lg:hidden mb-6">
+                        <div className="flex items-center justify-between mb-2">
+                            <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                                Step {currentStepIndex + 1} / {activeSteps.length}
+                            </span>
+                            <span className="text-xs font-bold text-primary">
+                                {currentStep.title}
+                            </span>
+                        </div>
+                        <div className="h-1.5 w-full bg-muted rounded-full overflow-hidden">
+                            <div
+                                className="h-full bg-primary rounded-full transition-all duration-500 ease-in-out"
+                                style={{ width: `${((currentStepIndex + 1) / activeSteps.length) * 100}%` }}
+                            />
+                        </div>
+                    </div>
+
                     {renderStepContent()}
                 </div>
             </div>

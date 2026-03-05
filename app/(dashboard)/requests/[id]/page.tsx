@@ -11,6 +11,7 @@ import { notFound } from "next/navigation";
 import { InvoiceTemplate } from "@/components/invoice/InvoiceTemplate";
 import { getTranslations, getLocale } from "next-intl/server";
 import { getDateLocale } from "@/utils/date-locale";
+import { getStatusBadgeVariant } from "@/lib/utils";
 
 // Force dynamic rendering for this page since it depends on params
 export const dynamic = "force-dynamic";
@@ -113,7 +114,7 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                         <h1 className="text-3xl font-black tracking-tight flex items-center gap-3">
                             {t('campaignHash', { id: booking.id.slice(0, 8) })}
                         </h1>
-                        <Badge variant={booking.status === 'completed' ? 'default' : 'secondary'} className="text-sm px-3 py-1 font-bold uppercase tracking-wider">
+                        <Badge variant={getStatusBadgeVariant(booking.status)} className="text-sm px-3 py-1 font-bold uppercase tracking-wider">
                             {tc(booking.status)}
                         </Badge>
                     </div>

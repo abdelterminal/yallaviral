@@ -6,6 +6,7 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { AdminActionButtons } from "@/components/admin/AdminActionButtons";
 import { getTranslations } from "next-intl/server";
+import { getStatusBadgeVariant } from "@/lib/utils";
 
 export const revalidate = 0;
 
@@ -47,17 +48,6 @@ export default async function AdminDashboard() {
         { label: t('stats.totalUsers'), value: userCount || 0, icon: Users },
     ];
 
-    const statusColors: Record<string, string> = {
-        pending: "text-amber-600 bg-amber-50 border-amber-200",
-        confirmed: "text-emerald-600 bg-emerald-400/10 border-emerald-400/20",
-        rejected: "text-destructive bg-red-50 border-red-200",
-    };
-
-    const paymentColors: Record<string, string> = {
-        unpaid: "text-orange-400 bg-orange-400/10 border-orange-400/20",
-        pending: "text-yellow-400 bg-yellow-400/10 border-yellow-400/20",
-        paid: "text-emerald-600 bg-emerald-400/10 border-emerald-400/20",
-    };
 
     return (
         <div className="space-y-6 animate-in fade-in duration-500">
@@ -140,13 +130,13 @@ export default async function AdminDashboard() {
                                                 {booking.total_price?.toLocaleString()} MAD
                                             </td>
                                             <td className="px-5 py-3">
-                                                <Badge variant="outline" className={`capitalize text-xs ${statusColors[booking.status] || ""}`}>
+                                                <Badge variant={getStatusBadgeVariant(booking.status)} className="capitalize">
                                                     {tc(booking.status)}
                                                 </Badge>
                                             </td>
                                             <td className="px-5 py-3">
                                                 {booking.payment_status && booking.status === "confirmed" ? (
-                                                    <Badge variant="outline" className={`capitalize text-xs ${paymentColors[booking.payment_status] || ""}`}>
+                                                    <Badge variant={getStatusBadgeVariant(booking.payment_status)} className="capitalize">
                                                         {tc(booking.payment_status)}
                                                     </Badge>
                                                 ) : (

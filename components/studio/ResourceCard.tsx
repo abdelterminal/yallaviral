@@ -29,12 +29,6 @@ export function ResourceCard({ resource }: ResourceCardProps) {
                     </div>
                 )}
 
-                {/* Price Badge Overlay (Mobile Only) */}
-                <div className="absolute top-4 left-4 md:hidden">
-                    <Badge className="bg-white text-foreground font-black text-lg px-4 py-2 shadow-sm rounded-2xl border border-slate-100">
-                        {resource.hourly_rate} MAD<span className="text-sm font-bold text-muted-foreground ml-1">/hr</span>
-                    </Badge>
-                </div>
             </div>
 
             {/* Content & Action Container */}
@@ -78,7 +72,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
 
                 {/* Action Section (Right) */}
                 <div className="p-8 border-t md:border-t-0 md:border-l border-slate-50 bg-slate-50/30 flex flex-row md:flex-col items-center md:justify-center justify-between gap-6 min-w-[240px]">
-                    <div className="hidden md:flex flex-col items-center mb-4">
+                    <div className="flex flex-col items-center mb-4">
                         <span className="text-4xl font-black text-foreground tracking-tighter">{resource.hourly_rate} MAD</span>
                         <span className="text-muted-foreground text-sm font-bold uppercase tracking-widest mt-1">per hour</span>
                     </div>
