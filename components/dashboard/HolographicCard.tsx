@@ -10,35 +10,13 @@ interface HolographicCardProps {
     glowColor?: string;
 }
 
-export function HolographicCard({ children, className, glowColor = "124, 58, 237" }: HolographicCardProps) {
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
-
-    function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
-        const { left, top } = currentTarget.getBoundingClientRect();
-        mouseX.set(clientX - left);
-        mouseY.set(clientY - top);
-    }
-
+export function HolographicCard({ children, className }: HolographicCardProps) {
     return (
         <div
-            className={cn("group relative border border-transparent bg-card shadow-[0_8px_30px_rgba(0,0,0,0.08)] overflow-hidden rounded-xl",
+            className={cn("group relative border border-border bg-card shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] overflow-hidden rounded-3xl transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)]",
                 className
             )}
-            onMouseMove={handleMouseMove}
         >
-            <motion.div
-                className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
-                style={{
-                    background: useMotionTemplate`
-            radial-gradient(
-              650px circle at ${mouseX}px ${mouseY}px,
-              rgba(${glowColor}, 0.15),
-              transparent 80%
-            )
-          `,
-                }}
-            />
             <div className="relative flex h-full w-full flex-col">{children}</div>
         </div>
     );

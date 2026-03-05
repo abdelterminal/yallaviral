@@ -13,27 +13,26 @@ export function LandingHowItWorks() {
     const t = useTranslations('Landing');
 
     return (
-        <section className="py-24 bg-background relative">
+        <section className="py-32 bg-white relative">
             <div className="container px-4 md:px-6 mx-auto">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl font-black tracking-tighter sm:text-5xl text-foreground mb-4">
+                <div className="text-center mb-20">
+                    <h2 className="text-4xl font-black tracking-tighter sm:text-6xl text-foreground mb-6">
                         {t('howItWorksTitle')}
                     </h2>
-                    <p className="text-foreground/80 text-lg">
+                    <p className="text-muted-foreground text-xl max-w-2xl mx-auto">
                         {t('howItWorksSubtitle')}
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative max-w-5xl mx-auto">
                     {/* Connecting Line (Desktop) */}
-                    <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-primary/20 via-primary/50 to-primary/20" />
+                    <div className="hidden md:block absolute top-12 left-[20%] right-[20%] h-0.5 bg-slate-100" />
 
                     {stepKeys.map((step, index) => (
-                        <div key={index} className="flex flex-col items-center text-center space-y-6 relative z-10">
-                            <div className="h-24 w-24 rounded-full bg-background border border-border flex items-center justify-center relative shadow-[0_0_30px_rgba(124,58,237,0.2)] group hover:scale-110 transition-transform duration-300">
-                                <div className="absolute inset-0 rounded-full bg-primary/5 animate-pulse" />
-                                <step.icon className="h-10 w-10 text-primary group-hover:text-foreground transition-colors" />
-                                <div className="absolute -top-2 -right-2 h-8 w-8 rounded-full bg-white text-black font-bold flex items-center justify-center border-4 border-black text-sm">
+                        <div key={index} className="flex flex-col items-center text-center space-y-8 relative z-10">
+                            <div className="h-24 w-24 rounded-[2rem] bg-white border border-slate-100 flex items-center justify-center relative shadow-sm group hover:border-primary/30 transition-all duration-300">
+                                <step.icon className="h-10 w-10 text-primary transition-transform group-hover:scale-110" />
+                                <div className="absolute -top-3 -right-3 h-10 w-10 rounded-full bg-primary text-white font-black flex items-center justify-center border-4 border-white shadow-sm text-sm">
                                     {index + 1}
                                 </div>
                             </div>

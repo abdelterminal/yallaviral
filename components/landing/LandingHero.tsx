@@ -12,10 +12,7 @@ export function LandingHero() {
     return (
         <section className="relative w-full pt-20 pb-32 lg:pt-32 lg:pb-40 overflow-hidden">
             {/* Background Effects */}
-            <div className="absolute inset-0 -z-10">
-                <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-primary/30 rounded-full blur-[100px] opacity-40 animate-pulse" />
-                <div className="absolute bottom-0 left-0 w-[600px] h-[500px] bg-purple-600/20 rounded-full blur-[100px] opacity-20" />
-            </div>
+            <div className="absolute inset-0 -z-10 bg-grid-slate-100/[0.04] bg-[bottom_1px_center]" />
 
             <div className="container px-4 md:px-6 mx-auto relative z-10">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -36,10 +33,10 @@ export function LandingHero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.1 }}
-                            className="text-5xl font-black tracking-tight sm:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-gray-500 leading-[1.1]"
+                            className="text-6xl font-black tracking-tight sm:text-7xl lg:text-[5rem] text-foreground leading-[1.05]"
                         >
                             {t('heroTitle1')} <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-pink-500">
+                            <span className="text-primary">
                                 {t('heroTitle2')}
                             </span>
                         </motion.h1>
@@ -60,12 +57,12 @@ export function LandingHero() {
                             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
                         >
                             <Link href="/signup">
-                                <Button size="lg" className="h-14 px-8 text-lg font-bold w-full sm:w-auto bg-primary hover:bg-primary/90 shadow-md hover:shadow-[0_0_40px_rgba(124,58,237,0.6)] hover:scale-105 transition-all duration-300">
+                                <Button size="lg" className="h-14 px-8 text-lg w-full sm:w-auto hover:scale-105 transition-transform duration-300">
                                     {t('ctaStart')} <ArrowRight className="ml-2 h-5 w-5" />
                                 </Button>
                             </Link>
                             <Link href="/models">
-                                <Button variant="outline" size="lg" className="h-14 px-8 text-lg font-bold w-full sm:w-auto border-border bg-muted/50 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-primary hover:text-primary hover:bg-primary/10 hover:shadow-sm">
+                                <Button variant="outline" size="lg" className="h-14 px-8 text-lg w-full sm:w-auto border-border bg-card shadow-sm hover:scale-105 transition-transform duration-300">
                                     {t('ctaViewTalent')}
                                 </Button>
                             </Link>
@@ -95,29 +92,29 @@ export function LandingHero() {
 
                     {/* RIGHT COLUMN: Visuals */}
                     <div className="relative h-[600px] w-full hidden lg:block">
-                        {/* Abstract Gradient Blob behind cards */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-primary/30 to-purple-600/30 rounded-full blur-[80px] animate-pulse-slow" />
+                        {/* Soft background blob */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[80px]" />
 
                         {/* Card 1: Creator Profile (Top Left) */}
                         <motion.div
                             initial={{ opacity: 0, x: -50, y: -50 }}
                             animate={{ opacity: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.5 }}
-                            className="absolute top-10 left-0 glass-card p-4 rounded-2xl w-64"
+                            className="absolute top-10 left-0 bg-card border border-border shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] p-5 rounded-3xl w-64"
                         >
-                            <div className="flex items-center gap-3 mb-3">
-                                <div className="w-10 h-10 rounded-full bg-gray-700 overflow-hidden">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="w-10 h-10 rounded-full bg-muted overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80" alt="Kenza" />
                                 </div>
                                 <div>
-                                    <p className="text-foreground font-bold text-sm">{t('creatorName')}</p>
-                                    <p className="text-xs text-primary">{t('creatorAction')}</p>
+                                    <p className="text-foreground font-bold text-sm tracking-tight">{t('creatorName')}</p>
+                                    <p className="text-xs text-primary font-medium">{t('creatorAction')}</p>
                                 </div>
                             </div>
-                            <div className="h-32 bg-gray-800/50 rounded-lg flex items-center justify-center relative overflow-hidden group">
-                                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&q=80" className="absolute inset-0 w-full h-full object-cover opacity-60" alt="Content" />
-                                <div className="w-10 h-10 bg-muted backdrop-blur-md rounded-full flex items-center justify-center">
-                                    <Play className="w-5 h-5 text-foreground fill-current" />
+                            <div className="h-32 bg-muted rounded-xl flex items-center justify-center relative overflow-hidden group">
+                                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&q=80" className="absolute inset-0 w-full h-full object-cover opacity-80" alt="Content" />
+                                <div className="w-12 h-12 bg-white/90 shadow-sm backdrop-blur-md rounded-full flex items-center justify-center transition-transform group-hover:scale-110">
+                                    <Play className="w-5 h-5 text-primary fill-current ml-1" />
                                 </div>
                             </div>
                         </motion.div>
@@ -127,19 +124,19 @@ export function LandingHero() {
                             initial={{ opacity: 0, x: 50, y: 50 }}
                             animate={{ opacity: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.7 }}
-                            className="absolute bottom-20 right-0 glass-card p-4 rounded-2xl w-72"
+                            className="absolute bottom-20 right-0 bg-card border border-border shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] p-5 rounded-3xl w-72"
                         >
-                            <div className="flex justify-between items-center mb-3">
+                            <div className="flex justify-between items-center mb-4">
                                 <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{t('studioBooking')}</span>
-                                <span className="text-xs bg-green-500/20 text-primary px-2 py-1 rounded-full">{t('confirmed')}</span>
+                                <span className="text-xs bg-primary/10 font-bold text-primary px-3 py-1 rounded-full">{t('confirmed')}</span>
                             </div>
                             <div className="flex items-center gap-4">
-                                <div className="w-16 h-16 rounded-lg bg-gray-800 overflow-hidden">
+                                <div className="w-16 h-16 rounded-xl bg-muted overflow-hidden shrink-0">
                                     <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=200&q=80" alt="Studio" className="w-full h-full object-cover" />
                                 </div>
                                 <div>
-                                    <p className="text-foreground font-bold">{t('studioName')}</p>
-                                    <p className="text-xs text-muted-foreground">Tue, 24 Oct • 14:00</p>
+                                    <p className="text-foreground font-bold tracking-tight">{t('studioName')}</p>
+                                    <p className="text-sm font-medium text-muted-foreground mt-0.5">Tue, 24 Oct • 14:00</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -149,21 +146,23 @@ export function LandingHero() {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, delay: 0.9 }}
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 glass-card border-primary/30 p-5 rounded-2xl w-60"
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card border border-border shadow-[0_20px_40px_-5px_rgba(124,58,237,0.1)] p-6 rounded-3xl w-64"
                         >
-                            <div className="flex items-center gap-2 mb-2">
-                                <TrendingUp className="w-5 h-5 text-primary" />
+                            <div className="flex items-center gap-2 mb-3">
+                                <div className="p-2 bg-primary/10 rounded-xl">
+                                    <TrendingUp className="w-5 h-5 text-primary" />
+                                </div>
                                 <span className="text-foreground font-bold">{t('viralReach')}</span>
                             </div>
-                            <div className="text-4xl font-black text-foreground mb-1">+420%</div>
-                            <p className="text-xs text-muted-foreground">{t('vsLastMonth')}</p>
+                            <div className="text-5xl font-black text-foreground mb-1 tracking-tighter">+420%</div>
+                            <p className="text-sm font-medium text-muted-foreground">{t('vsLastMonth')}</p>
 
-                            <div className="mt-4 h-1 w-full bg-muted rounded-full overflow-hidden">
+                            <div className="mt-5 h-1.5 w-full bg-muted rounded-full overflow-hidden">
                                 <motion.div
                                     initial={{ width: 0 }}
                                     animate={{ width: "85%" }}
                                     transition={{ duration: 1.5, delay: 1 }}
-                                    className="h-full bg-primary"
+                                    className="h-full bg-gradient-to-r from-primary to-purple-500 rounded-full"
                                 />
                             </div>
                         </motion.div>

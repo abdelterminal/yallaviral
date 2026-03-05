@@ -72,20 +72,16 @@ export function Sidebar() {
             <Link
               key={link.href}
               href={link.href}
-              className="group relative flex items-center gap-4 transition-all duration-300"
+              className={cn("group relative flex items-center gap-4 transition-all duration-300 rounded-2xl p-3 w-[calc(100%-1rem)] mx-2",
+                isActive ? "bg-primary text-primary-foreground shadow-[0_8px_30px_rgb(0_0_0_/_0.08)]" : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              )}
             >
-              <div
-                className={cn("flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl transition-all duration-300 group-hover:scale-105",
-                  isActive
-                    ? "bg-gradient-to-br from-primary via-primary to-purple-600 text-primary-foreground shadow-md ring-1 ring-primary/20"
-                    : "text-muted-foreground hover:bg-muted hover:text-primary"
-                )}
-              >
-                <Icon className={cn("h-5 w-5", isActive && "fill-current animate-pulse")} />
+              <div className="flex-shrink-0 flex items-center justify-center w-8">
+                <Icon className={cn("h-6 w-6 transition-transform group-hover:scale-110", isActive && "fill-current")} />
               </div>
               <span
-                className={cn("text-sm font-medium transition-all duration-300 whitespace-nowrap overflow-hidden group-hover:translate-x-1", "opacity-0 group-hover/sidebar:opacity-100",
-                  isActive ? "text-foreground" : "text-muted-foreground group-hover:text-primary"
+                className={cn("text-base font-bold transition-all duration-300 whitespace-nowrap overflow-hidden", "opacity-0 group-hover/sidebar:opacity-100",
+                  isActive ? "text-primary-foreground" : ""
                 )}
               >
                 {t(link.titleKey)}

@@ -13,27 +13,26 @@ export function ResourceCard({ resource }: ResourceCardProps) {
     const isAvailable = resource.status === 'active';
 
     return (
-        <Card className="group overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] border-transparent flex flex-col md:flex-row h-auto md:h-[300px] bg-card backdrop-blur-sm">
+        <Card className="group overflow-hidden rounded-3xl transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border-border flex flex-col md:flex-row h-auto md:h-[320px] bg-card">
             {/* Image Section (Left) */}
-            <div className="w-full md:w-2/5 relative overflow-hidden bg-muted">
+            <div className="w-full md:w-2/5 relative overflow-hidden bg-slate-100">
                 {resource.image_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                         src={resource.image_url}
                         alt={resource.name}
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                 ) : (
-                    <div className="flex h-full items-center justify-center bg-muted/50 text-muted-foreground">
+                    <div className="flex h-full items-center justify-center text-slate-400 font-bold uppercase tracking-wider text-xs">
                         No Image
                     </div>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent md:hidden" />
 
                 {/* Price Badge Overlay (Mobile Only) */}
                 <div className="absolute top-4 left-4 md:hidden">
-                    <Badge className="bg-black/80 backdrop-blur text-foreground font-bold text-lg px-3 py-1 shadow-sm rounded-xl border border-border">
-                        {resource.hourly_rate} MAD<span className="text-xs font-normal text-muted-foreground ml-1">/hr</span>
+                    <Badge className="bg-white text-foreground font-black text-lg px-4 py-2 shadow-sm rounded-2xl border border-slate-100">
+                        {resource.hourly_rate} MAD<span className="text-sm font-bold text-muted-foreground ml-1">/hr</span>
                     </Badge>
                 </div>
             </div>
@@ -41,12 +40,12 @@ export function ResourceCard({ resource }: ResourceCardProps) {
             {/* Content & Action Container */}
             <div className="flex flex-1 flex-col md:flex-row">
                 {/* Content Section (Middle) */}
-                <div className="flex-1 p-6 flex flex-col relative">
-                    <div className="flex items-start justify-between mb-2">
-                        <CardTitle className="text-2xl font-black tracking-tight text-foreground group-hover:text-primary transition-colors">{resource.name}</CardTitle>
+                <div className="flex-1 p-8 flex flex-col relative justify-center">
+                    <div className="flex items-start justify-between mb-4">
+                        <CardTitle className="text-3xl font-black tracking-tighter text-foreground group-hover:text-primary transition-colors">{resource.name}</CardTitle>
                         {isAvailable && (
-                            <Badge variant="outline" className="text-emerald-600 border-emerald-200 bg-emerald-50 rounded-lg hidden md:flex items-center gap-1">
-                                <span className="relative flex h-2 w-2 mr-1">
+                            <Badge variant="outline" className="text-emerald-600 border-emerald-100 bg-emerald-50 rounded-full hidden md:flex items-center gap-1.5 px-3 py-1 text-xs">
+                                <span className="relative flex h-2 w-2">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                                 </span>
@@ -55,11 +54,11 @@ export function ResourceCard({ resource }: ResourceCardProps) {
                         )}
                     </div>
 
-                    <p className="text-muted-foreground mb-6 line-clamp-2 flex-grow text-sm leading-relaxed">
+                    <p className="text-muted-foreground mb-8 line-clamp-2 text-base font-medium leading-relaxed">
                         Professional studio space equipped with everything you need for high-quality production.
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mt-auto">
+                    <div className="flex flex-wrap gap-3">
                         {resource.tags?.map(tag => {
                             let Icon = Zap;
                             if (tag.includes('mic')) Icon = Mic;
@@ -68,8 +67,8 @@ export function ResourceCard({ resource }: ResourceCardProps) {
                             if (tag.includes('sofa')) Icon = Armchair;
 
                             return (
-                                <div key={tag} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted/50 border-transparent text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
-                                    <Icon className="h-3 w-3 text-primary" />
+                                <div key={tag} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-slate-100 text-xs font-bold text-muted-foreground hover:bg-primary/5 hover:text-primary hover:border-primary/20 transition-all cursor-default">
+                                    <Icon className="h-3.5 w-3.5" />
                                     <span className="capitalize">{tag}</span>
                                 </div>
                             );
@@ -78,14 +77,14 @@ export function ResourceCard({ resource }: ResourceCardProps) {
                 </div>
 
                 {/* Action Section (Right) */}
-                <div className="p-6 border-t md:border-t-0 md:border-l border-transparent bg-muted/10 flex flex-row md:flex-col items-center md:justify-center justify-between gap-4 min-w-[200px]">
-                    <div className="hidden md:flex flex-col items-center">
-                        <span className="text-3xl font-black text-foreground">{resource.hourly_rate} MAD</span>
-                        <span className="text-muted-foreground text-xs font-medium uppercase tracking-wider">per hour</span>
+                <div className="p-8 border-t md:border-t-0 md:border-l border-slate-50 bg-slate-50/30 flex flex-row md:flex-col items-center md:justify-center justify-between gap-6 min-w-[240px]">
+                    <div className="hidden md:flex flex-col items-center mb-4">
+                        <span className="text-4xl font-black text-foreground tracking-tighter">{resource.hourly_rate} MAD</span>
+                        <span className="text-muted-foreground text-sm font-bold uppercase tracking-widest mt-1">per hour</span>
                     </div>
 
                     <BookingSheet resource={resource}>
-                        <Button size="lg" className="w-full font-bold shadow-sm hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] transition-all rounded-xl">
+                        <Button size="lg" className="w-full h-14 font-black transition-all rounded-2xl text-lg shadow-sm hover:scale-105">
                             Book This Set
                         </Button>
                     </BookingSheet>
