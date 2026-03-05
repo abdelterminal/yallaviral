@@ -12,6 +12,7 @@ export const revalidate = 0;
 export default async function AdminDashboard() {
     const supabase = await createClient();
     const t = await getTranslations('Admin');
+    const tc = await getTranslations('Common');
 
     // Fetch all stats in parallel
     const [
@@ -47,22 +48,22 @@ export default async function AdminDashboard() {
     ];
 
     const statusColors: Record<string, string> = {
-        pending: "text-amber-400 bg-amber-400/10 border-amber-400/20",
-        confirmed: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
-        rejected: "text-red-400 bg-red-400/10 border-red-400/20",
+        pending: "text-amber-600 bg-amber-50 border-amber-200",
+        confirmed: "text-emerald-600 bg-emerald-400/10 border-emerald-400/20",
+        rejected: "text-destructive bg-red-50 border-red-200",
     };
 
     const paymentColors: Record<string, string> = {
         unpaid: "text-orange-400 bg-orange-400/10 border-orange-400/20",
         pending: "text-yellow-400 bg-yellow-400/10 border-yellow-400/20",
-        paid: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
+        paid: "text-emerald-600 bg-emerald-400/10 border-emerald-400/20",
     };
 
     return (
         <div className="space-y-6 animate-in fade-in duration-500">
             {/* Header */}
             <div>
-                <h1 className="text-2xl font-bold tracking-tight text-white">{t('title')}</h1>
+                <h1 className="text-2xl font-bold tracking-tight text-foreground">{t('title')}</h1>
                 <p className="text-sm text-muted-foreground mt-1">{t('subtitle')}</p>
             </div>
 
@@ -73,7 +74,7 @@ export default async function AdminDashboard() {
                         key={stat.label}
                         className={`rounded-xl border p-5 ${stat.highlight
                             ? "border-primary/30 bg-primary/5"
-                            : "border-white/10 bg-white/5"
+                            : "border-border bg-muted/50"
                             }`}
                     >
                         <div className="flex items-center justify-between mb-3">
@@ -82,7 +83,7 @@ export default async function AdminDashboard() {
                             </span>
                             <stat.icon className="h-4 w-4 text-muted-foreground" />
                         </div>
-                        <p className={`text-2xl font-bold ${stat.highlight ? "text-primary" : "text-white"}`}>
+                        <p className={`text-2xl font-bold ${stat.highlight ? "text-primary" : "text-foreground"}`}>
                             {stat.value}
                         </p>
                     </div>
@@ -90,9 +91,9 @@ export default async function AdminDashboard() {
             </div>
 
             {/* Actionable Bookings */}
-            <div className="rounded-xl border border-white/10 bg-white/5 overflow-hidden">
-                <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-                    <h2 className="text-sm font-semibold text-white">{t('needsAttention')}</h2>
+            <div className="rounded-xl border border-border bg-muted/50 overflow-hidden">
+                <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+                    <h2 className="text-sm font-semibold text-foreground">{t('needsAttention')}</h2>
                     <Link href="/admin/bookings" className="text-xs text-primary hover:text-primary/80 font-medium transition-colors">
                         {t('allBookings')}
                     </Link>
@@ -100,17 +101,17 @@ export default async function AdminDashboard() {
 
                 {(!actionableBookings || actionableBookings.length === 0) ? (
                     <div className="flex flex-col items-center justify-center py-16 text-center">
-                        <div className="h-12 w-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-3">
-                            <CheckCircle className="h-5 w-5 text-emerald-400" />
+                        <div className="h-12 w-12 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mb-3">
+                            <CheckCircle className="h-5 w-5 text-emerald-600" />
                         </div>
-                        <p className="text-sm text-emerald-400 font-medium">{t('allClear')}</p>
+                        <p className="text-sm text-emerald-600 font-medium">{t('allClear')}</p>
                         <p className="text-xs text-muted-foreground mt-1">{t('noAttentionNeeded')}</p>
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm">
                             <thead>
-                                <tr className="border-b border-white/10">
+                                <tr className="border-b border-border">
                                     <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('table.client')}</th>
                                     <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('table.resource')}</th>
                                     <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('table.amount')}</th>
@@ -125,28 +126,28 @@ export default async function AdminDashboard() {
                                     const name = profile?.brand_name || profile?.full_name || t('table.unknown');
 
                                     return (
-                                        <tr key={booking.id} className="border-b border-white/5 hover:bg-white/[0.03] transition-colors">
+                                        <tr key={booking.id} className="border-b border-border hover:bg-muted/50 transition-colors">
                                             <td className="px-5 py-3">
                                                 <div>
-                                                    <p className="font-medium text-white text-sm">{name}</p>
+                                                    <p className="font-medium text-foreground text-sm">{name}</p>
                                                     <p className="text-xs text-muted-foreground">{profile?.email}</p>
                                                 </div>
                                             </td>
                                             <td className="px-5 py-3 text-muted-foreground text-sm">
                                                 {booking.resources?.name || "—"}
                                             </td>
-                                            <td className="px-5 py-3 text-white font-mono text-sm">
+                                            <td className="px-5 py-3 text-foreground font-mono text-sm">
                                                 {booking.total_price?.toLocaleString()} MAD
                                             </td>
                                             <td className="px-5 py-3">
                                                 <Badge variant="outline" className={`capitalize text-xs ${statusColors[booking.status] || ""}`}>
-                                                    {booking.status}
+                                                    {tc(booking.status)}
                                                 </Badge>
                                             </td>
                                             <td className="px-5 py-3">
                                                 {booking.payment_status && booking.status === "confirmed" ? (
                                                     <Badge variant="outline" className={`capitalize text-xs ${paymentColors[booking.payment_status] || ""}`}>
-                                                        {booking.payment_status}
+                                                        {tc(booking.payment_status)}
                                                     </Badge>
                                                 ) : (
                                                     <span className="text-xs text-muted-foreground">—</span>

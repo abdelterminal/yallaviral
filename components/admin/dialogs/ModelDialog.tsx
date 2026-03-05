@@ -117,7 +117,7 @@ export function ModelDialog({ resource }: ModelDialogProps) {
                     </Button>
                 )}
             </DialogTrigger>
-            <DialogContent className="bg-black/90 border-white/10 text-white sm:max-w-[425px]">
+            <DialogContent className="bg-card border-border text-foreground sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>{resource ? "Edit Model" : "Add New Model"}</DialogTitle>
                 </DialogHeader>
@@ -130,7 +130,7 @@ export function ModelDialog({ resource }: ModelDialogProps) {
                                 <FormItem>
                                     <FormLabel>Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Model Name" {...field} className="bg-white/5 border-white/10" />
+                                        <Input placeholder="Model Name" {...field} className="bg-muted/50 border-border" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -144,7 +144,7 @@ export function ModelDialog({ resource }: ModelDialogProps) {
                                 <FormItem>
                                     <FormLabel>Hourly Rate (MAD)</FormLabel>
                                     <FormControl>
-                                        <Input type="number" placeholder="0.00" {...field} className="bg-white/5 border-white/10" />
+                                        <Input type="number" placeholder="0.00" {...field} className="bg-muted/50 border-border" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -162,14 +162,14 @@ export function ModelDialog({ resource }: ModelDialogProps) {
                                             <Input
                                                 type="file"
                                                 accept="image/*"
-                                                className="bg-white/5 border-white/10 cursor-pointer text-xs"
+                                                className="bg-muted/50 border-border cursor-pointer text-xs"
                                                 onChange={handleImageUpload}
                                                 disabled={uploading}
                                             />
                                         </div>
                                     </div>
                                     {field.value && (
-                                        <div className="mt-2 relative h-32 w-24 rounded-md overflow-hidden border border-white/20">
+                                        <div className="mt-2 relative h-32 w-24 rounded-md overflow-hidden border border-border">
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img src={field.value} alt="Preview" className="h-full w-full object-cover" />
                                         </div>
@@ -186,7 +186,7 @@ export function ModelDialog({ resource }: ModelDialogProps) {
                                 <FormItem>
                                     <FormLabel>Bio / Stats</FormLabel>
                                     <FormControl>
-                                        <Textarea placeholder="Height, measurements, experience..." {...field} className="bg-white/5 border-white/10 resize-none h-24" />
+                                        <Textarea placeholder="Height, measurements, experience..." {...field} className="bg-muted/50 border-border resize-none h-24" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

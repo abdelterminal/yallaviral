@@ -61,7 +61,7 @@ export default async function RequestsPage() {
             </div>
 
             {!bookings || bookings.length === 0 ? (
-                <div className="rounded-xl border border-dashed border-white/20 bg-white/5 p-12 text-center space-y-4">
+                <div className="rounded-xl border border-dashed border-border bg-muted/50 p-12 text-center space-y-4">
                     <p className="text-muted-foreground text-lg">{t('noCampaigns')}</p>
                     <Link href="/campaign">
                         <Button variant="outline">{t('startFirst')}</Button>

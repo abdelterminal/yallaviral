@@ -22,8 +22,7 @@ export function HolographicCard({ children, className, glowColor = "124, 58, 237
 
     return (
         <div
-            className={cn(
-                "group relative border border-white/10 bg-black/40 backdrop-blur-xl overflow-hidden rounded-xl",
+            className={cn( "group relative border border-border bg-card  overflow-hidden rounded-xl",
                 className
             )}
             onMouseMove={handleMouseMove}

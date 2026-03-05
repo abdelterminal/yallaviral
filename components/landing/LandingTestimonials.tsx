@@ -15,13 +15,13 @@ export function LandingTestimonials() {
     const t = useTranslations('Landing');
 
     return (
-        <section className="py-24 bg-black/50 border-t border-white/5">
+        <section className="py-24 bg-muted/50 border-t border-border">
             <div className="container px-4 md:px-6 mx-auto">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl font-black tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 mb-4">
+                    <h2 className="text-3xl font-black tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground mb-4">
                         {t('statsTitle')}
                     </h2>
-                    <p className="text-white/60 text-lg max-w-xl mx-auto">
+                    <p className="text-muted-foreground text-lg max-w-xl mx-auto">
                         {t('statsSubtitle')}
                     </p>
                 </div>
@@ -33,7 +33,7 @@ export function LandingTestimonials() {
                         return (
                             <div
                                 key={i}
-                                className="flex flex-col items-center text-center p-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:border-white/20 transition-all"
+                                className="flex flex-col items-center text-center p-8 rounded-2xl border border-border bg-muted/50 backdrop-blur-sm hover:border-primary/30 transition-all"
                             >
                                 <div
                                     className="h-12 w-12 rounded-xl flex items-center justify-center mb-4"
@@ -41,7 +41,7 @@ export function LandingTestimonials() {
                                 >
                                     <Icon className="h-6 w-6" />
                                 </div>
-                                <span className="text-4xl font-black text-white mb-1">{stat.value}</span>
+                                <span className="text-4xl font-black text-foreground mb-1">{stat.value}</span>
                                 <span className="text-sm text-muted-foreground font-medium">{t(stat.labelKey)}</span>
                             </div>
                         );

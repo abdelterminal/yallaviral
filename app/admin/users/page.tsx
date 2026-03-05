@@ -16,7 +16,7 @@ export default async function AdminUsersPage() {
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight text-white">Users</h2>
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground">Users</h2>
                     <p className="text-muted-foreground">Overview of all registered users.</p>
                 </div>
                 <UserDialog />

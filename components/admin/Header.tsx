@@ -24,12 +24,12 @@ export function AdminHeader({ user }: AdminHeaderProps) {
     };
 
     return (
-        <header className="h-16 border-b border-white/10 flex items-center justify-between px-8 bg-black">
+        <header className="h-16 border-b border-border flex items-center justify-between px-8 bg-background">
             <h1 className="text-lg font-semibold">{t('adminDashboard')}</h1>
 
             <div className="flex items-center gap-4">
                 <div className="text-right hidden md:block">
-                    <p className="text-sm font-medium text-white">{user.user_metadata?.full_name || user.email}</p>
+                    <p className="text-sm font-medium text-foreground">{user.user_metadata?.full_name || user.email}</p>
                     <p className="text-xs text-muted-foreground capitalize">{user.user_metadata?.role}</p>
                 </div>
 
@@ -40,13 +40,13 @@ export function AdminHeader({ user }: AdminHeaderProps) {
                             <AvatarFallback>{user.email?.charAt(0).toUpperCase()}</AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-56 bg-black border-white/10 text-white">
+                    <DropdownMenuContent align="end" className="w-56 bg-background border-border text-foreground">
                         <DropdownMenuLabel>{t('myAccount')}</DropdownMenuLabel>
-                        <DropdownMenuSeparator className="bg-white/10" />
-                        <DropdownMenuItem className="cursor-pointer focus:bg-white/10 focus:text-white">
+                        <DropdownMenuSeparator className="bg-muted" />
+                        <DropdownMenuItem className="cursor-pointer focus:bg-muted focus:text-foreground">
                             <UserIcon className="mr-2 h-4 w-4" /> {t('profile')}
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={handleSignOut} className="text-red-500 cursor-pointer focus:bg-red-500/10 focus:text-red-500">
+                        <DropdownMenuItem onClick={handleSignOut} className="text-red-500 cursor-pointer focus:bg-destructive/10 focus:text-red-500">
                             <LogOut className="mr-2 h-4 w-4" /> {tc('logOut')}
                         </DropdownMenuItem>
                     </DropdownMenuContent>

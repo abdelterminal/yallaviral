@@ -18,7 +18,7 @@ export default async function AdminStudiosPage() {
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-2">
                         <Building2 className="h-8 w-8 text-primary" /> Studios
                     </h2>
                     <p className="text-muted-foreground">Manage your studio spaces.</p>

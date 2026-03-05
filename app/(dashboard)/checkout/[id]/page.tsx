@@ -2,12 +2,18 @@ import { createClient } from "@/utils/supabase/server";
 import { notFound, redirect } from "next/navigation";
 import { format } from "date-fns";
 import { CheckoutActions } from "@/components/checkout/CheckoutActions";
+import { getTranslations, getLocale } from "next-intl/server";
+import { getDateLocale } from "@/utils/date-locale";
 
 export const dynamic = "force-dynamic";
 
 export default async function CheckoutPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     const supabase = await createClient();
+    const t = await getTranslations('Checkout');
+    const tc = await getTranslations('Common');
+    const locale = await getLocale();
+    const dateFnsLocale = getDateLocale(locale);
 
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) redirect("/login");
@@ -32,7 +38,11 @@ export default async function CheckoutPage({ params }: { params: Promise<{ id: s
     }
 
     const whatsappMessage = encodeURIComponent(
-        `Hello YallaViral! 👋\n\nI'd like to complete payment for:\n📋 Booking: #${booking.id.slice(0, 8)}\n💰 Amount: ${booking.total_price?.toFixed(2)} MAD\n📅 Shoot Date: ${booking.start_time ? format(new Date(booking.start_time), "PPP") : "TBD"}\n\nPlease share the payment details.`
+        t('whatsappMessage', {
+            id: booking.id.slice(0, 8),
+            amount: booking.total_price?.toFixed(2),
+            date: booking.start_time ? format(new Date(booking.start_time), "PPP", { locale: dateFnsLocale }) : "TBD"
+        })
     );
     const whatsappUrl = `https://wa.me/212600000000?text=${whatsappMessage}`;
 
@@ -46,22 +56,22 @@ export default async function CheckoutPage({ params }: { params: Promise<{ id: s
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h1 className="text-3xl font-black tracking-tight text-white">Complete Payment</h1>
-                    <p className="text-muted-foreground">Your booking has been approved! Complete payment to start production.</p>
+                    <h1 className="text-3xl font-black tracking-tight text-foreground">{t('completePayment')}</h1>
+                    <p className="text-muted-foreground">{t('bookingApprovedDesc')}</p>
                 </div>
 
                 {/* Order Summary */}
-                <div className="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl overflow-hidden">
+                <div className="rounded-2xl border border-border bg-card overflow-hidden">
                     <div className="p-6 space-y-4">
-                        <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                        <div className="flex items-center justify-between pb-4 border-b border-border">
                             <div>
-                                <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Booking Reference</p>
-                                <p className="text-white font-bold text-lg">#{booking.id.slice(0, 8)}</p>
+                                <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">{t('bookingReference')}</p>
+                                <p className="text-foreground font-bold text-lg">#{booking.id.slice(0, 8)}</p>
                             </div>
                             <div className="text-right">
-                                <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">Status</p>
-                                <span className="inline-block px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                                    Approved
+                                <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">{t('status')}</p>
+                                <span className="inline-block px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">
+                                    {t('approved')}
                                 </span>
                             </div>
                         </div>
@@ -69,32 +79,32 @@ export default async function CheckoutPage({ params }: { params: Promise<{ id: s
                         <div className="space-y-3">
                             {booking.resources?.name && (
                                 <div className="flex justify-between text-sm">
-                                    <span className="text-muted-foreground">Resource</span>
-                                    <span className="text-white font-medium">{booking.resources.name}</span>
+                                    <span className="text-muted-foreground">{t('resource')}</span>
+                                    <span className="text-foreground font-medium">{booking.resources.name}</span>
                                 </div>
                             )}
                             <div className="flex justify-between text-sm">
-                                <span className="text-muted-foreground">Shoot Date</span>
-                                <span className="text-white font-medium">
-                                    {booking.start_time ? format(new Date(booking.start_time), "PPP") : "To be confirmed"}
+                                <span className="text-muted-foreground">{t('shootDate')}</span>
+                                <span className="text-foreground font-medium">
+                                    {booking.start_time ? format(new Date(booking.start_time), "PPP", { locale: dateFnsLocale }) : t('toBeConfirmed')}
                                 </span>
                             </div>
                             <div className="flex justify-between text-sm">
-                                <span className="text-muted-foreground">Booking Date</span>
-                                <span className="text-white font-medium">{format(new Date(booking.created_at), "PPP")}</span>
+                                <span className="text-muted-foreground">{t('bookingDate')}</span>
+                                <span className="text-foreground font-medium">{format(new Date(booking.created_at), "PPP", { locale: dateFnsLocale })}</span>
                             </div>
                         </div>
 
-                        <div className="pt-4 border-t border-white/10">
+                        <div className="pt-4 border-t border-border">
                             <div className="flex justify-between items-baseline">
-                                <span className="text-muted-foreground font-medium">Total Amount</span>
-                                <span className="text-3xl font-black text-white">{booking.total_price?.toFixed(2)} <span className="text-lg text-muted-foreground">MAD</span></span>
+                                <span className="text-muted-foreground font-medium">{t('totalAmount')}</span>
+                                <span className="text-3xl font-black text-foreground">{booking.total_price?.toFixed(2)} <span className="text-lg text-muted-foreground">MAD</span></span>
                             </div>
                         </div>
                     </div>
 
                     {/* Payment Actions */}
-                    <div className="p-6 bg-white/[0.02] border-t border-white/10">
+                    <div className="p-6 bg-muted/30 border-t border-border">
                         <CheckoutActions
                             bookingId={booking.id}
                             whatsappUrl={whatsappUrl}
@@ -105,7 +115,7 @@ export default async function CheckoutPage({ params }: { params: Promise<{ id: s
 
                 {/* Help */}
                 <p className="text-center text-xs text-muted-foreground">
-                    Having trouble? Contact us at <a href="mailto:support@yallaviral.com" className="text-primary hover:underline">support@yallaviral.com</a>
+                    {t('havingTrouble')} <a href="mailto:support@yallaviral.com" className="text-primary hover:underline">support@yallaviral.com</a>
                 </p>
             </div>
         </div>

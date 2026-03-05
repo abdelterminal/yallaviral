@@ -2,11 +2,12 @@ import { createClient } from "@/utils/supabase/server";
 import { BookingCalendar } from "@/components/dashboard/BookingCalendar";
 import { redirect } from "next/navigation";
 import { format } from "date-fns";
+import { getDateLocale } from "@/utils/date-locale";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, CreditCard, FileText, Plus } from "lucide-react";
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 
 export async function generateMetadata() {
     const t = await getTranslations('Nav');
@@ -20,6 +21,7 @@ export default async function DashboardPage() {
     const supabase = await createClient();
     const t = await getTranslations('Dashboard');
     const tc = await getTranslations('Common');
+    const locale = await getLocale();
 
     const {
         data: { user },
@@ -58,10 +60,10 @@ export default async function DashboardPage() {
     ];
 
     const statusColors: Record<string, string> = {
-        pending: "text-amber-400 bg-amber-400/10 border-amber-400/20",
-        confirmed: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
-        rejected: "text-red-400 bg-red-400/10 border-red-400/20",
-        completed: "text-blue-400 bg-blue-400/10 border-blue-400/20",
+        pending: "text-amber-600 bg-amber-50 border-amber-200",
+        confirmed: "text-emerald-600 bg-emerald-50 border-emerald-200",
+        rejected: "text-red-600 bg-red-50 border-red-200",
+        completed: "text-blue-600 bg-blue-50 border-blue-200",
     };
 
     return (
@@ -69,7 +71,7 @@ export default async function DashboardPage() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold tracking-tight text-white">
+                    <h1 className="text-2xl font-bold tracking-tight text-foreground">
                         {t('welcomeBack', { name: firstName })}
                     </h1>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -90,7 +92,7 @@ export default async function DashboardPage() {
                         key={stat.label}
                         className={`rounded-xl border p-5 ${stat.highlight
                             ? "border-primary/30 bg-primary/5"
-                            : "border-white/10 bg-white/5"
+                            : "border-border bg-card"
                             }`}
                     >
                         <div className="flex items-center justify-between mb-3">
@@ -99,7 +101,7 @@ export default async function DashboardPage() {
                             </span>
                             <stat.icon className="h-4 w-4 text-muted-foreground" />
                         </div>
-                        <p className={`text-2xl font-bold ${stat.highlight ? "text-primary" : "text-white"}`}>
+                        <p className={`text-2xl font-bold ${stat.highlight ? "text-primary" : "text-foreground"}`}>
                             {stat.value}
                         </p>
                     </div>
@@ -109,9 +111,9 @@ export default async function DashboardPage() {
             {/* Main Content */}
             <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
                 {/* Recent Bookings Table */}
-                <div className="rounded-xl border border-white/10 bg-white/5 overflow-hidden">
-                    <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-                        <h2 className="text-sm font-semibold text-white">{t('recentBookings')}</h2>
+                <div className="rounded-xl border border-border bg-card overflow-hidden">
+                    <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+                        <h2 className="text-sm font-semibold text-foreground">{t('recentBookings')}</h2>
                         <Link href="/requests" className="text-xs text-primary hover:text-primary/80 font-medium transition-colors">
                             {tc('viewAll')}
                         </Link>
@@ -119,7 +121,7 @@ export default async function DashboardPage() {
 
                     {(!recentBookings || recentBookings.length === 0) ? (
                         <div className="flex flex-col items-center justify-center py-16 text-center">
-                            <div className="h-12 w-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-3">
+                            <div className="h-12 w-12 rounded-full bg-muted border border-border flex items-center justify-center mb-3">
                                 <FileText className="h-5 w-5 text-muted-foreground/50" />
                             </div>
                             <p className="text-sm text-muted-foreground">{t('noBookingsYet')}</p>
@@ -128,15 +130,15 @@ export default async function DashboardPage() {
                             </Link>
                         </div>
                     ) : (
-                        <div className="divide-y divide-white/5">
+                        <div className="divide-y divide-border">
                             {recentBookings.map((booking: any) => (
                                 <Link
                                     key={booking.id}
                                     href={`/requests/${booking.id}`}
-                                    className="flex items-center justify-between px-5 py-3.5 hover:bg-white/5 transition-colors group"
+                                    className="flex items-center justify-between px-5 py-3.5 hover:bg-muted/50 transition-colors group"
                                 >
                                     <div className="flex items-center gap-3 min-w-0">
-                                        <div className="h-9 w-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 overflow-hidden">
+                                        <div className="h-9 w-9 rounded-lg bg-muted border border-border flex items-center justify-center shrink-0 overflow-hidden">
                                             {booking.resources?.image_url ? (
                                                 <img src={booking.resources.image_url} alt="" className="h-full w-full object-cover" />
                                             ) : (
@@ -144,21 +146,21 @@ export default async function DashboardPage() {
                                             )}
                                         </div>
                                         <div className="min-w-0">
-                                            <p className="text-sm font-medium text-white truncate">
+                                            <p className="text-sm font-medium text-foreground truncate">
                                                 {booking.resources?.name || `#${booking.id.slice(0, 8)}`}
                                             </p>
                                             <p className="text-xs text-muted-foreground">
-                                                {format(new Date(booking.created_at), "MMM d, yyyy")}
+                                                {format(new Date(booking.created_at), "MMM d, yyyy", { locale: getDateLocale(locale) })}
                                             </p>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3 shrink-0 ml-4">
-                                        <span className="text-sm font-mono text-white/70 hidden sm:block">
+                                        <span className="text-sm font-mono text-muted-foreground hidden sm:block">
                                             {booking.total_price?.toLocaleString()} MAD
                                         </span>
                                         <Badge
                                             variant="outline"
-                                            className={`capitalize text-xs ${statusColors[booking.status] || "text-gray-400 bg-gray-400/10 border-gray-400/20"}`}
+                                            className={`capitalize text-xs ${statusColors[booking.status] || "text-gray-500 bg-gray-50 border-gray-200"}`}
                                         >
                                             {tc(booking.status)}
                                         </Badge>

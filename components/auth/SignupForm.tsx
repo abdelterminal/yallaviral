@@ -65,17 +65,17 @@ export default function SignupForm() {
         return (
             <div className="w-full max-w-[400px] flex flex-col items-center justify-center text-center space-y-6 animate-in fade-in duration-500">
                 <div className="h-20 w-20 bg-green-500/10 rounded-full flex items-center justify-center border border-green-500/20 shadow-xl shadow-green-500/10">
-                    <Sparkles className="h-10 w-10 text-green-400" />
+                    <Sparkles className="h-10 w-10 text-primary" />
                 </div>
                 <div className="space-y-2">
-                    <h2 className="text-3xl font-black text-white tracking-tight">{t('checkYourEmail')}</h2>
+                    <h2 className="text-3xl font-black text-foreground tracking-tight">{t('checkYourEmail')}</h2>
                     <p className="text-muted-foreground max-w-xs mx-auto text-base">
                         {t('confirmationSent')}
                     </p>
                 </div>
                 <div className="w-full max-w-xs space-y-3 pt-2">
-                    <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs text-muted-foreground space-y-1">
-                        <p className="font-bold text-white/60">{t('didntReceive')}</p>
+                    <div className="p-3 rounded-xl bg-muted/50 border border-border text-xs text-muted-foreground space-y-1">
+                        <p className="font-bold text-muted-foreground">{t('didntReceive')}</p>
                         <p>{t('checkSpam')}</p>
                     </div>
                     <Link href="/login">
@@ -91,12 +91,12 @@ export default function SignupForm() {
     return (
         <div className="w-full max-w-[400px] flex flex-col h-full justify-center max-h-[800px]">
             <div className="mb-6 text-center lg:text-left">
-                <h2 className="text-4xl font-black text-white tracking-tight mb-1">{t('createAccount')}</h2>
+                <h2 className="text-4xl font-black text-foreground tracking-tight mb-1">{t('createAccount')}</h2>
                 <p className="text-base text-muted-foreground">{t('createAccountSubtitle')}</p>
             </div>
 
             {error && (
-                <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center gap-2 text-red-400 text-xs">
+                <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center gap-2 text-destructive text-xs">
                     <AlertCircle className="h-4 w-4 shrink-0" />
                     <p className="font-medium">{error}</p>
                 </div>
@@ -105,69 +105,69 @@ export default function SignupForm() {
             <form action={handleSubmit} className="space-y-4" noValidate>
                 <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                        <Label htmlFor="fullName" className="text-white text-xs font-black uppercase opacity-60 ml-1">{t('fullName')}</Label>
+                        <Label htmlFor="fullName" className="text-foreground text-xs font-black uppercase opacity-60 ml-1">{t('fullName')}</Label>
                         <Input
                             id="fullName"
                             name="fullName"
                             placeholder={t('namePlaceholder')}
                             required
-                            className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-white/10"
+                            className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-muted"
                         />
                     </div>
                     <div className="space-y-1.5">
-                        <Label htmlFor="brandName" className="text-white text-xs font-black uppercase opacity-60 ml-1">{t('company')}</Label>
+                        <Label htmlFor="brandName" className="text-foreground text-xs font-black uppercase opacity-60 ml-1">{t('company')}</Label>
                         <Input
                             id="brandName"
                             name="brandName"
                             placeholder={t('companyPlaceholder')}
                             required
-                            className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-white/10"
+                            className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-muted"
                         />
                     </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                        <Label htmlFor="email" className="text-white text-xs font-black uppercase opacity-60 ml-1">{t('email')}</Label>
+                        <Label htmlFor="email" className="text-foreground text-xs font-black uppercase opacity-60 ml-1">{t('email')}</Label>
                         <Input
                             id="email"
                             name="email"
                             type="email"
                             placeholder={t('emailPlaceholder')}
                             required
-                            className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-white/10"
+                            className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-muted"
                         />
                     </div>
                     <div className="space-y-1.5">
-                        <Label htmlFor="phone" className="text-white text-xs font-black uppercase opacity-60 ml-1">{t('phone')}</Label>
+                        <Label htmlFor="phone" className="text-foreground text-xs font-black uppercase opacity-60 ml-1">{t('phone')}</Label>
                         <Input
                             id="phone"
                             name="phone"
                             type="tel"
                             placeholder={t('phonePlaceholder')}
                             required
-                            className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-white/10"
+                            className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-muted"
                         />
                     </div>
                 </div>
 
                 <div className="space-y-1.5">
-                    <Label htmlFor="password" className="text-white text-xs font-black uppercase opacity-60 ml-1">{t('password')}</Label>
+                    <Label htmlFor="password" className="text-foreground text-xs font-black uppercase opacity-60 ml-1">{t('password')}</Label>
                     <Input
                         id="password"
                         name="password"
                         type="password"
                         placeholder="••••••••"
                         required
-                        className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-white/10"
+                        className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-muted"
                     />
                 </div>
 
                 {/* Bot Verification Box */}
                 <div className="py-2">
                     <div className="relative">
-                        <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/[0.07] transition-all cursor-pointer group active:scale-[0.99] hover:border-white/20 select-none">
-                            <div className="h-5 w-5 rounded-lg border-2 border-primary/50 flex items-center justify-center bg-black transition-all group-hover:border-primary relative shrink-0 text-primary">
+                        <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/50 border border-border hover:bg-muted/70 transition-all cursor-pointer group active:scale-[0.99] hover:border-primary/30 select-none">
+                            <div className="h-5 w-5 rounded-lg border-2 border-primary/50 flex items-center justify-center bg-background transition-all group-hover:border-primary relative shrink-0 text-primary">
                                 <input
                                     type="checkbox"
                                     id="robot"
@@ -176,7 +176,7 @@ export default function SignupForm() {
                                 />
                                 <CheckCircle2 className="h-3.5 w-3.5 opacity-0 peer-checked:opacity-100 transition-opacity" />
                             </div>
-                            <Label htmlFor="robot" className="text-xs text-white/70 cursor-pointer font-bold select-none group-hover:text-white transition-colors">
+                            <Label htmlFor="robot" className="text-xs text-muted-foreground cursor-pointer font-bold select-none group-hover:text-foreground transition-colors">
                                 {t('notRobot')}
                             </Label>
                             <div className="ml-auto opacity-30 text-[8px] font-black tracking-widest uppercase">
@@ -190,10 +190,10 @@ export default function SignupForm() {
                     <Button
                         type="submit"
                         disabled={isPending}
-                        className="w-full h-12 font-black text-base bg-primary hover:bg-primary/90 text-white shadow-[0_8px_16px_rgba(124,58,237,0.2)] rounded-xl transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:grayscale"
+                        className="w-full h-12 font-black text-base bg-primary hover:bg-primary/90 text-foreground shadow-[0_8px_16px_rgba(124,58,237,0.2)] rounded-xl transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:grayscale"
                     >
                         {isPending ? (
-                            <Loader2 className="h-5 w-5 animate-spin text-white" />
+                            <Loader2 className="h-5 w-5 animate-spin text-foreground" />
                         ) : (
                             <>
                                 <Sparkles className="h-4 w-4 mr-2" />

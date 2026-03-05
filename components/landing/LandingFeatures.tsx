@@ -15,13 +15,13 @@ export function LandingFeatures() {
     const t = useTranslations('Landing');
 
     return (
-        <section id="features" className="py-24 bg-black/50 relative overflow-hidden">
+        <section id="features" className="py-24 bg-muted/50 relative overflow-hidden">
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="text-center max-w-2xl mx-auto mb-16">
-                    <h2 className="text-3xl font-black tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 mb-4">
+                    <h2 className="text-3xl font-black tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground mb-4">
                         {t('featuresTitle')}
                     </h2>
-                    <p className="text-white/80 text-lg">
+                    <p className="text-foreground/80 text-lg">
                         {t('featuresSubtitle')}
                     </p>
                 </div>
@@ -36,8 +36,8 @@ export function LandingFeatures() {
                                 >
                                     <feature.icon className="h-6 w-6" />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-3">{t(feature.titleKey)}</h3>
-                                <p className="text-sm text-white/70 leading-relaxed max-w-[280px] mx-auto">
+                                <h3 className="text-xl font-bold text-foreground mb-3">{t(feature.titleKey)}</h3>
+                                <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px] mx-auto">
                                     {t(feature.descKey)}
                                 </p>
                             </div>

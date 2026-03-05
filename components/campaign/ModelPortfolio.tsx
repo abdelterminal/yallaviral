@@ -28,7 +28,7 @@ export function ModelPortfolio({ model, children }: ModelPortfolioProps) {
                     </Button>
                 )}
             </DialogTrigger>
-            <DialogContent className="bg-black/95 border-white/10 backdrop-blur-xl text-white max-w-2xl max-h-[80vh] overflow-y-auto">
+            <DialogContent className="bg-card border-border  text-foreground max-w-2xl max-h-[80vh] overflow-y-auto">
                 <DialogHeader>
                     <DialogTitle className="text-xl font-black flex items-center gap-3">
                         <div className="h-10 w-10 rounded-full overflow-hidden ring-2 ring-primary/30">
@@ -49,7 +49,7 @@ export function ModelPortfolio({ model, children }: ModelPortfolioProps) {
                         {portfolio.map((url, index) => (
                             <div
                                 key={index}
-                                className="aspect-[4/5] rounded-xl overflow-hidden border border-white/10 group cursor-pointer hover:border-primary/40 transition-all"
+                                className="aspect-[4/5] rounded-xl overflow-hidden border border-border group cursor-pointer hover:border-primary/40 transition-all"
                             >
                                 <img
                                     src={url}
@@ -61,7 +61,7 @@ export function ModelPortfolio({ model, children }: ModelPortfolioProps) {
                     </div>
                 ) : (
                     <div className="flex flex-col items-center justify-center py-16 text-center">
-                        <div className="h-16 w-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4">
+                        <div className="h-16 w-16 rounded-full bg-muted/50 border border-border flex items-center justify-center mb-4">
                             <ImageIcon className="h-8 w-8 text-muted-foreground/50" />
                         </div>
                         <p className="text-muted-foreground font-medium">No portfolio items yet</p>

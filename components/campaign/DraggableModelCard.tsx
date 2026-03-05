@@ -34,7 +34,7 @@ export function DraggableModelCard({ model }: DraggableModelCardProps) {
 
                 {/* Content Overlay - Always visible name, extra details on hover */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 transition-transform duration-300 group-hover:translate-y-0">
-                    <h4 className="font-black text-2xl text-white mb-1 drop-shadow-md">{model.name}</h4>
+                    <h4 className="font-black text-2xl text-foreground mb-1 drop-shadow-md">{model.name}</h4>
 
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col gap-2">
                         <div className="flex flex-wrap gap-1">
@@ -46,7 +46,7 @@ export function DraggableModelCard({ model }: DraggableModelCardProps) {
                         </div>
                         <div className="flex items-center justify-between mt-2">
                             {/* Price hidden for Devis flow */}
-                            {/* <span className="text-sm font-bold text-white bg-primary px-2 py-0.5 rounded-md shadow-lg">
+                            {/* <span className="text-sm font-bold text-foreground bg-primary px-2 py-0.5 rounded-md shadow-lg">
                                 {model.hourly_rate} MAD/hr
                             </span> */}
                         </div>

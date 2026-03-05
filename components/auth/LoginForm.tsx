@@ -80,7 +80,7 @@ export function LoginForm() {
                         autoCorrect="off"
                         required
                         disabled={isLoading}
-                        className="h-12 bg-white/5 border-white/10 focus:border-primary/50 text-white placeholder:text-slate-600 focus:placeholder-transparent rounded-xl transition-all"
+                        className="h-12 bg-muted/50 border-border focus:border-primary/50 text-foreground placeholder:text-slate-600 focus:placeholder-transparent rounded-xl transition-all"
                     />
                 </div>
                 <div className="space-y-1.5">
@@ -100,14 +100,14 @@ export function LoginForm() {
                         autoComplete="current-password"
                         required
                         disabled={isLoading}
-                        className="h-12 bg-white/5 border-white/10 focus:border-primary/50 text-white placeholder:text-slate-600 focus:placeholder-transparent rounded-xl px-4 transition-all"
+                        className="h-12 bg-muted/50 border-border focus:border-primary/50 text-foreground placeholder:text-slate-600 focus:placeholder-transparent rounded-xl px-4 transition-all"
                     />
                 </div>
 
                 <Button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full h-12 font-bold text-base bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_rgba(124,58,237,0.3)] hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] transition-all rounded-xl mt-6 group"
+                    className="w-full h-12 font-bold text-base bg-primary hover:bg-primary/90 text-foreground shadow-sm hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] transition-all rounded-xl mt-6 group"
                 >
                     {isLoading ? (
                         <Loader2 className="h-5 w-5 animate-spin" />

@@ -29,8 +29,8 @@ function formatFileSize(bytes: number | null) {
 }
 
 function getFileIcon(type: string | null) {
-    if (type?.startsWith("video/")) return <FileVideo className="h-5 w-5 text-purple-400" />;
-    if (type?.startsWith("image/")) return <FileImage className="h-5 w-5 text-blue-400" />;
+    if (type?.startsWith("video/")) return <FileVideo className="h-5 w-5 text-primary" />;
+    if (type?.startsWith("image/")) return <FileImage className="h-5 w-5 text-blue-600" />;
     return <File className="h-5 w-5 text-muted-foreground" />;
 }
 
@@ -82,7 +82,7 @@ export function AdminDeliverablesPanel({ bookingId, deliverables }: AdminDeliver
         <div className="space-y-4">
             {/* Upload button */}
             <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+                <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
                     Deliverables ({deliverables.length})
                 </h3>
                 <div>
@@ -110,7 +110,7 @@ export function AdminDeliverablesPanel({ bookingId, deliverables }: AdminDeliver
 
             {/* File list */}
             {deliverables.length === 0 ? (
-                <div className="p-8 rounded-xl border border-dashed border-white/10 text-center text-muted-foreground text-sm">
+                <div className="p-8 rounded-xl border border-dashed border-border text-center text-muted-foreground text-sm">
                     No deliverables uploaded yet. Click &quot;Upload File&quot; to add content.
                 </div>
             ) : (
@@ -118,11 +118,11 @@ export function AdminDeliverablesPanel({ bookingId, deliverables }: AdminDeliver
                     {deliverables.map((d) => (
                         <div
                             key={d.id}
-                            className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
+                            className="flex items-center gap-3 p-3 rounded-xl bg-muted/50 border border-border hover:bg-muted transition-colors group"
                         >
                             {getFileIcon(d.file_type)}
                             <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-white truncate">{d.file_name}</p>
+                                <p className="text-sm font-medium text-foreground truncate">{d.file_name}</p>
                                 <p className="text-xs text-muted-foreground">{formatFileSize(d.file_size)}</p>
                             </div>
                             <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -134,7 +134,7 @@ export function AdminDeliverablesPanel({ bookingId, deliverables }: AdminDeliver
                                 <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="h-8 w-8 text-red-500 hover:text-red-400 hover:bg-red-500/20"
+                                    className="h-8 w-8 text-red-500 hover:text-destructive hover:bg-red-500/20"
                                     onClick={() => handleDelete(d.id, d.file_url)}
                                     disabled={deleting === d.id}
                                 >

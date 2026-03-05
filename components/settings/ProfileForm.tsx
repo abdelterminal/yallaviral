@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Save, Loader2, CheckCircle } from "lucide-react"
 import { updateProfile } from '@/app/(dashboard)/settings/actions'
+import { useTranslations } from "next-intl"
 
 
 interface ProfileFormProps {
@@ -26,6 +27,8 @@ export function ProfileForm({ user, profile }: ProfileFormProps) {
     const [isPending, startTransition] = useTransition()
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const t = useTranslations('Settings')
+    const tc = useTranslations('Common')
 
     async function handleSubmit(formData: FormData) {
         setSuccess(false)
@@ -41,27 +44,27 @@ export function ProfileForm({ user, profile }: ProfileFormProps) {
                     setTimeout(() => setSuccess(false), 3000)
                 }
             } catch (err) {
-                setError("Something went wrong. Please try again.")
+                setError(tc('somethingWentWrong'))
             }
         })
     }
 
     return (
-        <Card className="bg-black/40 border-white/10 backdrop-blur-sm">
+        <Card className="bg-card border-border backdrop-blur-sm">
             <CardHeader>
-                <CardTitle>Profile Information</CardTitle>
-                <CardDescription>Update your personal details and public profile.</CardDescription>
+                <CardTitle>{t('profileTitle')}</CardTitle>
+                <CardDescription>{t('profileDesc')}</CardDescription>
             </CardHeader>
             <form action={handleSubmit}>
                 <CardContent className="space-y-6">
-                    <div className="flex items-center gap-6 pb-6 border-b border-white/10">
-                        <div className="h-24 w-24 rounded-full bg-gradient-to-br from-primary to-purple-900 border-4 border-black shadow-xl flex items-center justify-center text-3xl font-black text-white uppercase">
+                    <div className="flex items-center gap-6 pb-6 border-b border-border">
+                        <div className="h-24 w-24 rounded-full bg-gradient-to-br from-primary to-purple-900 border-4 border-black shadow-xl flex items-center justify-center text-3xl font-black text-foreground uppercase">
                             {profile?.full_name ? profile.full_name.substring(0, 2) : user.email.substring(0, 2)}
                         </div>
                         <div className="space-y-2">
                             {/* Avatar upload could go here later */}
-                            <Button type="button" variant="outline" size="sm" className="border-white/10 hover:bg-white/5" disabled>Change Avatar</Button>
-                            <p className="text-xs text-muted-foreground">JPG, GIF or PNG. Max size of 800K</p>
+                            <Button type="button" variant="outline" size="sm" className="border-border hover:bg-muted/50" disabled>{t('changeAvatar')}</Button>
+                            <p className="text-xs text-muted-foreground">{t('avatarHint')}</p>
                         </div>
                     </div>
 
@@ -73,57 +76,57 @@ export function ProfileForm({ user, profile }: ProfileFormProps) {
 
                     {success && (
                         <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-lg text-green-500 text-sm font-medium flex items-center gap-2">
-                            <CheckCircle className="h-4 w-4" /> Profile updated successfully
+                            <CheckCircle className="h-4 w-4" /> {t('profileUpdated')}
                         </div>
                     )}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <Label>Full Name</Label>
+                            <Label>{t('fullName')}</Label>
                             <Input
                                 name="fullName"
                                 placeholder="Abdel"
                                 defaultValue={profile?.full_name || ''}
-                                className="bg-white/5 border-white/10 focus:border-primary/50 transition-colors"
+                                className="bg-muted/50 border-border focus:border-primary/50 transition-colors"
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>Email</Label>
+                            <Label>{t('email')}</Label>
                             <Input
                                 disabled
                                 value={profile?.email || user.email}
-                                className="bg-white/5 border-white/10 opacity-50 cursor-not-allowed"
+                                className="bg-muted/50 border-border opacity-50 cursor-not-allowed"
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>Company Name</Label>
+                            <Label>{t('companyName')}</Label>
                             <Input
                                 name="brandName"
                                 placeholder="Yalla Viral"
                                 defaultValue={profile?.brand_name || ''}
-                                className="bg-white/5 border-white/10 focus:border-primary/50 transition-colors"
+                                className="bg-muted/50 border-border focus:border-primary/50 transition-colors"
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>Phone Number</Label>
+                            <Label>{t('phoneNumber')}</Label>
                             <Input
                                 name="phone"
                                 placeholder="+212 6..."
                                 defaultValue={profile?.phone || ''}
-                                className="bg-white/5 border-white/10 focus:border-primary/50 transition-colors"
+                                className="bg-muted/50 border-border focus:border-primary/50 transition-colors"
                             />
                         </div>
                     </div>
                 </CardContent>
-                <CardFooter className="border-t border-white/10 px-6 py-4 flex justify-end">
+                <CardFooter className="border-t border-border px-6 py-4 flex justify-end">
                     <Button type="submit" disabled={isPending} className="font-bold shadow-lg shadow-primary/20">
                         {isPending ? (
                             <>
-                                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving...
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> {t('saving')}
                             </>
                         ) : (
                             <>
-                                <Save className="mr-2 h-4 w-4" /> Save Changes
+                                <Save className="mr-2 h-4 w-4" /> {t('saveChanges')}
                             </>
                         )}
                     </Button>

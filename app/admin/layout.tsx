@@ -27,9 +27,9 @@ export default async function AdminLayout({
     }
 
     return (
-        <div className="flex h-screen bg-black text-white">
+        <div className="flex h-screen bg-background text-foreground">
             {/* Sidebar */}
-            <div className="w-64 border-r border-white/10 hidden md:block">
+            <div className="w-64 border-r border-border hidden md:block">
                 <Sidebar />
             </div>
 

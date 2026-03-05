@@ -124,7 +124,7 @@ export function InvoiceTemplate({ data }: { data: InvoiceData }) {
             variant="outline"
             size="sm"
             onClick={handlePrint}
-            className="border-white/10 bg-white/5 hover:bg-white/10 hover:text-white font-medium"
+            className="border-border bg-muted/50 hover:bg-muted hover:text-foreground font-medium"
         >
             <Printer className="h-4 w-4 mr-2" /> Invoice
         </Button>

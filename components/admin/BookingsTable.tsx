@@ -19,6 +19,8 @@ import { RejectBookingDialog } from "@/components/admin/RejectBookingDialog";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
+import { useLocale } from "next-intl";
+import { getDateLocale } from "@/utils/date-locale";
 
 interface BookingsTableProps {
     bookings: any[];
@@ -27,6 +29,8 @@ interface BookingsTableProps {
 export function BookingsTable({ bookings }: BookingsTableProps) {
     const router = useRouter();
     const [processingId, setProcessingId] = useState<string | null>(null);
+    const locale = useLocale();
+    const dateFnsLocale = getDateLocale(locale);
 
     const handleAction = async (id: string, action: 'approve' | 'reject') => {
         setProcessingId(id);
@@ -57,17 +61,17 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
     };
 
     return (
-        <div className="rounded-md border border-white/10 bg-black/40 backdrop-blur-sm">
+        <div className="rounded-md border border-border bg-card backdrop-blur-sm">
             <Table>
                 <TableHeader>
-                    <TableRow className="border-white/10 hover:bg-white/5">
-                        <TableHead className="text-white">ID</TableHead>
-                        <TableHead className="text-white">Client</TableHead>
-                        <TableHead className="text-white">Date</TableHead>
-                        <TableHead className="text-white">Amount</TableHead>
-                        <TableHead className="text-white">Status</TableHead>
-                        <TableHead className="text-white">Payment</TableHead>
-                        <TableHead className="text-right text-white">Actions</TableHead>
+                    <TableRow className="border-border hover:bg-muted/50">
+                        <TableHead className="text-foreground">ID</TableHead>
+                        <TableHead className="text-foreground">Client</TableHead>
+                        <TableHead className="text-foreground">Date</TableHead>
+                        <TableHead className="text-foreground">Amount</TableHead>
+                        <TableHead className="text-foreground">Status</TableHead>
+                        <TableHead className="text-foreground">Payment</TableHead>
+                        <TableHead className="text-right text-foreground">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -75,13 +79,13 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
                         <TableRow className="hover:bg-transparent border-none">
                             <TableCell colSpan={7} className="h-[300px] text-center">
                                 <div className="flex flex-col items-center justify-center text-muted-foreground animate-in fade-in duration-700">
-                                    <div className="h-16 w-16 mb-4 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                                        <Inbox className="h-8 w-8 opacity-50 text-white" />
+                                    <div className="h-16 w-16 mb-4 rounded-full bg-muted/50 border border-border flex items-center justify-center">
+                                        <Inbox className="h-8 w-8 opacity-50 text-foreground" />
                                     </div>
-                                    <p className="font-mono text-sm font-bold uppercase tracking-wider text-white/70">
+                                    <p className="font-mono text-sm font-bold uppercase tracking-wider text-muted-foreground">
                                         No bookings found
                                     </p>
-                                    <p className="text-xs text-white/40 mt-2 max-w-[200px]">
+                                    <p className="text-xs text-muted-foreground/60 mt-2 max-w-[200px]">
                                         There are no operations in this table yet.
                                     </p>
                                 </div>
@@ -89,25 +93,25 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
                         </TableRow>
                     ) : (
                         bookings.map((booking) => (
-                            <TableRow key={booking.id} className="border-white/10 hover:bg-white/5">
+                            <TableRow key={booking.id} className="border-border hover:bg-muted/50">
                                 <TableCell className="font-mono text-xs">{booking.id.slice(0, 8)}</TableCell>
                                 <TableCell>
                                     <div className="flex flex-col">
-                                        <span className="font-medium text-white">{booking.profiles?.full_name || 'Unknown'}</span>
+                                        <span className="font-medium text-foreground">{booking.profiles?.full_name || 'Unknown'}</span>
                                         <span className="text-xs text-muted-foreground">{booking.profiles?.email}</span>
                                     </div>
                                 </TableCell>
                                 <TableCell className="text-muted-foreground">
-                                    {format(new Date(booking.created_at), "MMM do, yyyy")}
+                                    {format(new Date(booking.created_at), "MMM do, yyyy", { locale: dateFnsLocale })}
                                 </TableCell>
-                                <TableCell className="font-mono text-emerald-400">
+                                <TableCell className="font-mono text-emerald-600">
                                     {booking.total_price?.toFixed(2)} MAD
                                 </TableCell>
                                 <TableCell>
                                     <Badge
                                         variant="outline"
                                         className={`capitalize ${booking.status === 'confirmed'
-                                            ? 'border-emerald-500/50 text-emerald-400 bg-emerald-500/10'
+                                            ? 'border-emerald-500/50 text-emerald-600 bg-emerald-50'
                                             : booking.status === 'rejected'
                                                 ? 'border-red-500/50 text-red-500 bg-red-500/10'
                                                 : 'border-yellow-500/50 text-yellow-500 bg-yellow-500/10'
@@ -118,7 +122,7 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
                                 </TableCell>
                                 <TableCell>
                                     {booking.payment_status === 'paid' ? (
-                                        <Badge variant="outline" className="border-emerald-500/50 text-emerald-400 bg-emerald-500/10">Paid</Badge>
+                                        <Badge variant="outline" className="border-emerald-500/50 text-emerald-600 bg-emerald-50">Paid</Badge>
                                     ) : booking.payment_status === 'pending' ? (
                                         <Button
                                             size="sm"
@@ -142,7 +146,7 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
                                             <Button
                                                 size="sm"
                                                 variant="ghost"
-                                                className="text-emerald-500 hover:text-emerald-400 hover:bg-emerald-500/20 h-8 w-8 p-0"
+                                                className="text-emerald-500 hover:text-emerald-600 hover:bg-emerald-50 h-8 w-8 p-0"
                                                 onClick={() => handleAction(booking.id, 'approve')}
                                                 disabled={!!processingId}
                                             >

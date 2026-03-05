@@ -14,9 +14,7 @@ interface CalendarStepProps {
     onBack: () => void;
 }
 
-const TIME_SLOTS = [
-    "09:00 AM", "10:00 AM", "11:00 AM",
-    "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM"
+const TIME_SLOTS = [ "09:00 AM", "10:00 AM", "11:00 AM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM"
 ];
 
 import { getBookedSlots } from "@/actions/check-availability";
@@ -82,10 +80,9 @@ export function CalendarStep({ onNext, onBack }: CalendarStepProps) {
                                     key={slot}
                                     variant={time === slot ? "default" : "outline"}
                                     disabled={!date || isBooked}
-                                    className={cn(
-                                        "w-full font-medium transition-all relative overflow-hidden",
+                                    className={cn( "w-full font-medium transition-all relative overflow-hidden",
                                         time === slot && "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105 ring-2 ring-primary ring-offset-2 ring-offset-background",
-                                        isBooked && "opacity-50 cursor-not-allowed bg-red-500/10 border-red-500/20 text-red-500 hover:bg-red-500/10 hover:text-red-500"
+                                        isBooked && "opacity-50 cursor-not-allowed bg-red-500/10 border-red-500/20 text-red-500 hover:bg-destructive/10 hover:text-red-500"
                                     )}
                                     onClick={() => setTime(slot)}
                                 >

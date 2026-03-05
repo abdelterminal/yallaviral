@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { updateNotificationPreferences } from "@/actions/settings";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface NotificationsFormProps {
     defaults: {
@@ -20,6 +21,7 @@ interface NotificationsFormProps {
 export function NotificationsForm({ defaults }: NotificationsFormProps) {
     const [prefs, setPrefs] = useState(defaults);
     const [saving, setSaving] = useState<string | null>(null);
+    const t = useTranslations('Settings');
 
     async function handleToggle(key: keyof typeof prefs) {
         const newValue = !prefs[key];
@@ -30,10 +32,10 @@ export function NotificationsForm({ defaults }: NotificationsFormProps) {
         const result = await updateNotificationPreferences(newPrefs);
 
         if (result.error) {
-            toast.error("Failed to save", { description: result.error });
+            toast.error(t('failedToSave'), { description: result.error });
             setPrefs(prefs); // Revert
         } else {
-            toast.success("Preferences updated");
+            toast.success(t('preferencesUpdated'));
         }
 
         setSaving(null);
@@ -42,31 +44,31 @@ export function NotificationsForm({ defaults }: NotificationsFormProps) {
     const items = [
         {
             key: "notify_campaign_updates" as const,
-            label: "Campaign Status Updates",
-            description: "Receive emails when your campaign moves to a new stage.",
+            label: t('campaignStatusUpdates'),
+            description: t('campaignStatusDesc'),
         },
         {
             key: "notify_deliverables" as const,
-            label: "New Deliverables",
-            description: "Get notified when a draft or final video is ready.",
+            label: t('newDeliverables'),
+            description: t('newDeliverablesDesc'),
         },
         {
             key: "notify_marketing" as const,
-            label: "Marketing & Tips",
-            description: "Receive weekly tips on how to grow your brand.",
+            label: t('marketingTips'),
+            description: t('marketingTipsDesc'),
         },
     ];
 
     return (
-        <Card className="bg-black/40 border-white/10 backdrop-blur-sm">
+        <Card className="bg-card border-border backdrop-blur-sm">
             <CardHeader>
-                <CardTitle>Email Notifications</CardTitle>
-                <CardDescription>Choose what updates you want to receive.</CardDescription>
+                <CardTitle>{t('emailNotifications')}</CardTitle>
+                <CardDescription>{t('emailNotificationsDesc')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
                 {items.map((item, index) => (
                     <div key={item.key}>
-                        {index > 0 && <Separator className="bg-white/10 mb-6" />}
+                        {index > 0 && <Separator className="bg-muted mb-6" />}
                         <div className="flex items-center justify-between space-x-2">
                             <div className="space-y-1">
                                 <Label className="text-base font-bold">{item.label}</Label>

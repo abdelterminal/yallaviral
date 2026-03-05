@@ -40,7 +40,7 @@ export default function ForgotPasswordPage() {
     };
 
     return (
-        <div className="min-h-screen bg-black flex flex-col items-center justify-center text-white font-sans selection:bg-primary/30 selection:text-white relative p-6">
+        <div className="min-h-screen bg-background flex flex-col items-center justify-center text-foreground font-sans selection:bg-primary/30 selection:text-foreground relative p-6">
 
             <div className="absolute top-8 right-8 z-50">
                 <LanguageSwitcher />
@@ -55,7 +55,7 @@ export default function ForgotPasswordPage() {
                     <span className="font-black text-3xl tracking-tight">Yalla<span className="text-primary">Viral</span></span>
                 </Link>
 
-                <div className="w-full bg-white/5 border border-white/10 p-8 rounded-3xl shadow-xl backdrop-blur-sm relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
+                <div className="w-full bg-muted/50 border border-border p-8 rounded-3xl shadow-xl backdrop-blur-sm relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
                     <div className="text-center mb-8">
                         <h1 className="text-3xl font-black tracking-tight mb-2">{t('forgotTitle')}</h1>
                         <p className="text-sm text-slate-400">{t('forgotSubtitle')}</p>
@@ -64,7 +64,7 @@ export default function ForgotPasswordPage() {
                     {isSubmitted ? (
                         <div className="text-center space-y-4 animate-in fade-in zoom-in-95 duration-500">
                             <div className="mx-auto w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center mb-4 border border-green-500/20">
-                                <CheckCircle2 className="h-6 w-6 text-green-400" />
+                                <CheckCircle2 className="h-6 w-6 text-primary" />
                             </div>
                             <h2 className="text-xl font-bold">{t('checkEmail')}</h2>
                             <p className="text-sm text-slate-400">
@@ -85,14 +85,14 @@ export default function ForgotPasswordPage() {
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="name@company.com"
                                     required
-                                    className="h-12 bg-white/5 border-white/10 focus:border-primary/50 text-white placeholder:text-slate-600 rounded-xl transition-all"
+                                    className="h-12 bg-muted/50 border-border focus:border-primary/50 text-foreground placeholder:text-slate-600 rounded-xl transition-all"
                                 />
                             </div>
 
                             <Button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full h-12 font-bold text-base bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_rgba(124,58,237,0.3)] hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] transition-all rounded-xl mt-6 group"
+                                className="w-full h-12 font-bold text-base bg-primary hover:bg-primary/90 text-foreground shadow-sm hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] transition-all rounded-xl mt-6 group"
                             >
                                 {isLoading ? (
                                     <Loader2 className="h-5 w-5 animate-spin" />
@@ -104,7 +104,7 @@ export default function ForgotPasswordPage() {
                             </Button>
 
                             <div className="text-center mt-6">
-                                <Link href="/login" className="text-sm text-slate-400 hover:text-white transition-colors">
+                                <Link href="/login" className="text-sm text-slate-400 hover:text-foreground transition-colors">
                                     {t('backToLogin')}
                                 </Link>
                             </div>

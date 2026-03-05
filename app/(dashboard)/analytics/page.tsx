@@ -86,7 +86,7 @@ export default async function AnalyticsPage() {
         <div className="space-y-8 pb-12 animate-in fade-in duration-500">
             {/* Header */}
             <div>
-                <h1 className="text-3xl font-black tracking-tight text-white">
+                <h1 className="text-3xl font-black tracking-tight text-foreground">
                     {t('title')}
                 </h1>
                 <p className="text-muted-foreground mt-1 text-sm">
@@ -107,7 +107,7 @@ export default async function AnalyticsPage() {
                                 <Icon className="h-4 w-4 text-muted-foreground" />
                             </div>
                             <div className="mt-2">
-                                <div className="text-3xl font-mono font-bold text-white">
+                                <div className="text-3xl font-mono font-bold text-foreground">
                                     {stat.value}
                                 </div>
                                 <p className="text-xs text-muted-foreground mt-1">
