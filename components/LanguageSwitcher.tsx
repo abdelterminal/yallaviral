@@ -34,7 +34,7 @@ export function LanguageSwitcher() {
                 <Button
                     variant="ghost"
                     size="icon"
-                    className="h-9 w-9 text-muted-foreground hover:text-white hover:bg-white/10 rounded-full transition-all"
+                    className="h-9 w-9 text-muted-foreground hover:text-foreground hover:bg-muted rounded-full transition-all"
                     disabled={isPending}
                 >
                     <Globe className="h-4 w-4" />
@@ -43,13 +43,13 @@ export function LanguageSwitcher() {
             </DropdownMenuTrigger>
             <DropdownMenuContent
                 align="end"
-                className="w-40 bg-black/90 border-white/10 backdrop-blur-xl text-white"
+                className="w-40 bg-card border-border  text-foreground"
             >
                 {languages.map((lang) => (
                     <DropdownMenuItem
                         key={lang.code}
                         onClick={() => switchLocale(lang.code)}
-                        className="focus:bg-white/10 cursor-pointer gap-2"
+                        className="focus:bg-muted cursor-pointer gap-2"
                     >
                         <span className="text-base">{lang.flag}</span>
                         <span className="text-sm font-medium">{lang.label}</span>

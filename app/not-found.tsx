@@ -4,7 +4,7 @@ import { VideoOff } from "lucide-react";
 
 export default function NotFound() {
     return (
-        <div className="flex h-screen w-full flex-col items-center justify-center bg-black text-white space-y-6">
+        <div className="flex h-screen w-full flex-col items-center justify-center bg-background text-foreground space-y-6">
             <div className="relative">
                 <VideoOff className="h-24 w-24 text-gray-700" />
                 <div className="absolute top-0 right-0 h-6 w-6 rounded-full bg-red-500 animate-pulse" />

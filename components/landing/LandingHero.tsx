@@ -26,7 +26,7 @@ export function LandingHero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm font-medium text-primary backdrop-blur-xl"
+                            className="inline-flex items-center rounded-full border border-border bg-muted/50 px-3 py-1 text-sm font-medium text-primary "
                         >
                             <Sparkles className="mr-2 h-3.5 w-3.5" />
                             <span className="text-xs uppercase tracking-wider font-bold">{t('badge')}</span>
@@ -48,7 +48,7 @@ export function LandingHero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="max-w-[600px] text-white/80 text-lg md:text-xl font-light leading-relaxed"
+                            className="max-w-[600px] text-foreground/80 text-lg md:text-xl font-light leading-relaxed"
                         >
                             {t('heroDescription', { code: 'MAROC2026' })}
                         </motion.p>
@@ -60,12 +60,12 @@ export function LandingHero() {
                             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
                         >
                             <Link href="/signup">
-                                <Button size="lg" className="h-14 px-8 text-lg font-bold w-full sm:w-auto bg-primary hover:bg-primary/90 shadow-[0_0_20px_rgba(124,58,237,0.4)] hover:shadow-[0_0_40px_rgba(124,58,237,0.6)] hover:scale-105 transition-all duration-300">
+                                <Button size="lg" className="h-14 px-8 text-lg font-bold w-full sm:w-auto bg-primary hover:bg-primary/90 shadow-md hover:shadow-[0_0_40px_rgba(124,58,237,0.6)] hover:scale-105 transition-all duration-300">
                                     {t('ctaStart')} <ArrowRight className="ml-2 h-5 w-5" />
                                 </Button>
                             </Link>
                             <Link href="/models">
-                                <Button variant="outline" size="lg" className="h-14 px-8 text-lg font-bold w-full sm:w-auto border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-primary hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(124,58,237,0.3)]">
+                                <Button variant="outline" size="lg" className="h-14 px-8 text-lg font-bold w-full sm:w-auto border-border bg-muted/50 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-primary hover:text-primary hover:bg-primary/10 hover:shadow-sm">
                                     {t('ctaViewTalent')}
                                 </Button>
                             </Link>
@@ -75,7 +75,7 @@ export function LandingHero() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
-                            className="flex items-center gap-4 text-sm font-medium text-white/70"
+                            className="flex items-center gap-4 text-sm font-medium text-muted-foreground"
                         >
                             <div className="flex -space-x-3">
                                 {[1, 2, 3, 4].map((i) => (
@@ -103,21 +103,21 @@ export function LandingHero() {
                             initial={{ opacity: 0, x: -50, y: -50 }}
                             animate={{ opacity: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.5 }}
-                            className="absolute top-10 left-0 bg-black/60 backdrop-blur-xl border border-white/10 p-4 rounded-2xl w-64 shadow-2xl"
+                            className="absolute top-10 left-0 bg-card  border border-border p-4 rounded-2xl w-64 shadow-2xl"
                         >
                             <div className="flex items-center gap-3 mb-3">
                                 <div className="w-10 h-10 rounded-full bg-gray-700 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80" alt="Kenza" />
                                 </div>
                                 <div>
-                                    <p className="text-white font-bold text-sm">{t('creatorName')}</p>
+                                    <p className="text-foreground font-bold text-sm">{t('creatorName')}</p>
                                     <p className="text-xs text-primary">{t('creatorAction')}</p>
                                 </div>
                             </div>
                             <div className="h-32 bg-gray-800/50 rounded-lg flex items-center justify-center relative overflow-hidden group">
                                 <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&q=80" className="absolute inset-0 w-full h-full object-cover opacity-60" alt="Content" />
-                                <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
-                                    <Play className="w-5 h-5 text-white fill-current" />
+                                <div className="w-10 h-10 bg-muted backdrop-blur-md rounded-full flex items-center justify-center">
+                                    <Play className="w-5 h-5 text-foreground fill-current" />
                                 </div>
                             </div>
                         </motion.div>
@@ -127,19 +127,19 @@ export function LandingHero() {
                             initial={{ opacity: 0, x: 50, y: 50 }}
                             animate={{ opacity: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.7 }}
-                            className="absolute bottom-20 right-0 bg-black/60 backdrop-blur-xl border border-white/10 p-4 rounded-2xl w-72 shadow-2xl"
+                            className="absolute bottom-20 right-0 bg-card  border border-border p-4 rounded-2xl w-72 shadow-2xl"
                         >
                             <div className="flex justify-between items-center mb-3">
-                                <span className="text-xs font-bold text-white/70 uppercase tracking-wider">{t('studioBooking')}</span>
-                                <span className="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">{t('confirmed')}</span>
+                                <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{t('studioBooking')}</span>
+                                <span className="text-xs bg-green-500/20 text-primary px-2 py-1 rounded-full">{t('confirmed')}</span>
                             </div>
                             <div className="flex items-center gap-4">
                                 <div className="w-16 h-16 rounded-lg bg-gray-800 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=200&q=80" alt="Studio" className="w-full h-full object-cover" />
                                 </div>
                                 <div>
-                                    <p className="text-white font-bold">{t('studioName')}</p>
-                                    <p className="text-xs text-white/60">Tue, 24 Oct • 14:00</p>
+                                    <p className="text-foreground font-bold">{t('studioName')}</p>
+                                    <p className="text-xs text-muted-foreground">Tue, 24 Oct • 14:00</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -149,16 +149,16 @@ export function LandingHero() {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, delay: 0.9 }}
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/80 backdrop-blur-xl border border-primary/30 p-5 rounded-2xl w-60 shadow-[0_0_50px_rgba(124,58,237,0.3)]"
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card  border border-primary/30 p-5 rounded-2xl w-60 shadow-lg"
                         >
                             <div className="flex items-center gap-2 mb-2">
                                 <TrendingUp className="w-5 h-5 text-primary" />
-                                <span className="text-white font-bold">{t('viralReach')}</span>
+                                <span className="text-foreground font-bold">{t('viralReach')}</span>
                             </div>
-                            <div className="text-4xl font-black text-white mb-1">+420%</div>
-                            <p className="text-xs text-white/60">{t('vsLastMonth')}</p>
+                            <div className="text-4xl font-black text-foreground mb-1">+420%</div>
+                            <p className="text-xs text-muted-foreground">{t('vsLastMonth')}</p>
 
-                            <div className="mt-4 h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                            <div className="mt-4 h-1 w-full bg-muted rounded-full overflow-hidden">
                                 <motion.div
                                     initial={{ width: 0 }}
                                     animate={{ width: "85%" }}

@@ -13,13 +13,13 @@ export function LandingHowItWorks() {
     const t = useTranslations('Landing');
 
     return (
-        <section className="py-24 bg-black relative">
+        <section className="py-24 bg-background relative">
             <div className="container px-4 md:px-6 mx-auto">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl font-black tracking-tighter sm:text-5xl text-white mb-4">
+                    <h2 className="text-3xl font-black tracking-tighter sm:text-5xl text-foreground mb-4">
                         {t('howItWorksTitle')}
                     </h2>
-                    <p className="text-white/80 text-lg">
+                    <p className="text-foreground/80 text-lg">
                         {t('howItWorksSubtitle')}
                     </p>
                 </div>
@@ -30,16 +30,16 @@ export function LandingHowItWorks() {
 
                     {stepKeys.map((step, index) => (
                         <div key={index} className="flex flex-col items-center text-center space-y-6 relative z-10">
-                            <div className="h-24 w-24 rounded-full bg-black border border-white/10 flex items-center justify-center relative shadow-[0_0_30px_rgba(124,58,237,0.2)] group hover:scale-110 transition-transform duration-300">
+                            <div className="h-24 w-24 rounded-full bg-background border border-border flex items-center justify-center relative shadow-[0_0_30px_rgba(124,58,237,0.2)] group hover:scale-110 transition-transform duration-300">
                                 <div className="absolute inset-0 rounded-full bg-primary/5 animate-pulse" />
-                                <step.icon className="h-10 w-10 text-primary group-hover:text-white transition-colors" />
+                                <step.icon className="h-10 w-10 text-primary group-hover:text-foreground transition-colors" />
                                 <div className="absolute -top-2 -right-2 h-8 w-8 rounded-full bg-white text-black font-bold flex items-center justify-center border-4 border-black text-sm">
                                     {index + 1}
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <h3 className="text-xl font-bold text-white">{t(step.titleKey)}</h3>
-                                <p className="text-white/70 text-sm leading-relaxed max-w-[250px] mx-auto">
+                                <h3 className="text-xl font-bold text-foreground">{t(step.titleKey)}</h3>
+                                <p className="text-muted-foreground text-sm leading-relaxed max-w-[250px] mx-auto">
                                     {t(step.descKey)}
                                 </p>
                             </div>

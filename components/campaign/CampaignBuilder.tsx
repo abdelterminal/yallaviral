@@ -260,9 +260,9 @@ export function CampaignBuilder({ availableModels, availableStudios }: CampaignB
         <div className="relative">
             {/* Loading Overlay */}
             {isLoading && (
-                <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/60 backdrop-blur-md rounded-xl animate-in fade-in duration-300">
+                <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-card backdrop-blur-md rounded-xl animate-in fade-in duration-300">
                     <Loader2 className="h-16 w-16 text-primary animate-spin mb-4" />
-                    <h3 className="text-xl font-black uppercase tracking-widest text-white">{t('launchingCampaign')}</h3>
+                    <h3 className="text-xl font-black uppercase tracking-widest text-foreground">{t('launchingCampaign')}</h3>
                     <p className="text-muted-foreground mt-2">{t('securingSlots')}</p>
                 </div>
             )}

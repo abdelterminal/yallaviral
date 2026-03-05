@@ -50,101 +50,67 @@
 :root {
   --radius: 0.75rem;
 
-  /* Theme: Neon & Noir */
+  /* ===== Light Mode: "The Viral Creator" ===== */
 
-  /* Background: Pure Black */
-  --background: 0 0% 0%;
-  /* Pure Black */
-  --foreground: 0 0% 100%;
-  /* Pure White */
+  /* Background: Cool off-white (#F8FAFC) */
+  --background: 210 40% 98%;
+  /* Foreground: Dark slate (#0F172A) */
+  --foreground: 222 47% 11%;
 
-  /* Surface: Dark Blue Glass (keeping slightly visible for depth) */
-  --card: 240 10% 4%;
-  --card-foreground: 0 0% 100%;
+  /* Cards/Surfaces: Pure white */
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
 
-  --popover: 230 25% 6%;
-  --popover-foreground: 0 0% 100%;
+  /* Popovers */
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
 
-  /* Primary: Electric Purple */
-  --primary: 270 85% 57%;
-  /* Vibrant Purple */
+  /* Primary: Vibrant Violet (#7C3AED) */
+  --primary: 263 83% 58%;
   --primary-foreground: 0 0% 100%;
 
-  /* Secondary: Deep Blue/Indigo */
-  --secondary: 230 35% 15%;
-  /* Rich Dark Blue */
-  --secondary-foreground: 210 40% 98%;
+  /* Secondary: Soft slate (#F1F5F9) */
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
 
-  --muted: 230 30% 12%;
-  --muted-foreground: 230 20% 65%;
+  /* Muted: Light gray surface */
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
 
-  /* Accent: Neon Green (Viral) */
-  --accent: 150 100% 50%;
-  /* Bright Green */
-  --accent-foreground: 240 10% 4%;
+  /* Accent: Same as secondary for light mode */
+  --accent: 210 40% 96%;
+  --accent-foreground: 222 47% 11%;
 
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
+  /* Destructive */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
 
-  /* Borders: Glassy White/Blue */
-  --border: 230 30% 12%;
-  --input: 230 30% 12%;
-  --ring: 270 85% 57%;
+  /* Borders & Inputs (#E2E8F0) */
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 263 83% 58%;
 
   /* Chart Colors */
-  --chart-1: 270 85% 57%;
-  /* Purple */
-  --chart-2: 150 100% 50%;
-  /* Green */
-  --chart-3: 190 90% 50%;
-  /* Cyan/Blue */
-  --chart-4: 320 80% 60%;
+  --chart-1: 263 83% 58%;
+  /* Violet */
+  --chart-2: 160 84% 39%;
+  /* Emerald */
+  --chart-3: 199 89% 48%;
+  /* Sky */
+  --chart-4: 330 81% 60%;
   /* Pink */
-  --chart-5: 40 90% 60%;
-  /* Orange */
+  --chart-5: 35 92% 50%;
+  /* Amber */
 
   /* Sidebar */
-  --sidebar: 240 10% 4%;
-  --sidebar-foreground: 230 20% 70%;
-  --sidebar-primary: 270 85% 57%;
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 215 16% 47%;
+  --sidebar-primary: 263 83% 58%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 230 35% 15%;
-  /* Dark Blue Hover */
-  --sidebar-accent-foreground: 150 100% 50%;
-  /* Green Text on Hover? */
-  --sidebar-border: 230 30% 12%;
-  --sidebar-ring: 270 85% 57%;
-}
-
-.dark {
-  /* Inherit root in this case since we are "dark mode first" */
-  --background: 0 0% 0%;
-  --foreground: 0 0% 100%;
-  --card: 240 10% 4%;
-  --card-foreground: 0 0% 100%;
-  --popover: 230 25% 6%;
-  --popover-foreground: 0 0% 100%;
-  --primary: 270 85% 57%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 230 35% 15%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 230 30% 12%;
-  --muted-foreground: 230 20% 65%;
-  --accent: 150 100% 50%;
-  --accent-foreground: 240 10% 4%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 230 30% 12%;
-  --input: 230 30% 12%;
-  --ring: 270 85% 57%;
-  --sidebar: 240 10% 4%;
-  --sidebar-foreground: 230 20% 70%;
-  --sidebar-primary: 270 85% 57%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 230 35% 15%;
-  --sidebar-accent-foreground: 150 100% 50%;
-  --sidebar-border: 230 30% 12%;
-  --sidebar-ring: 270 85% 57%;
+  --sidebar-accent: 210 40% 96%;
+  --sidebar-accent-foreground: 263 83% 58%;
+  --sidebar-border: 214 32% 91%;
+  --sidebar-ring: 263 83% 58%;
 }
 
 @layer base {
@@ -154,23 +120,16 @@
 
   body {
     @apply bg-background text-foreground;
-    background-color: #1b1b1b !important;
-    color: #ffffff !important;
   }
 }
 
 @layer utilities {
   .glow-text {
-    text-shadow: 0 0 20px rgb(var(--primary));
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.3);
   }
 
   .glow-box {
-    box-shadow: 0 0 20px -5px rgb(124 58 237 / 0.5);
-    /* Purple Glow */
-  }
-
-  .glow-green {
-    box-shadow: 0 0 15px -3px rgb(74 222 128 / 0.6);
+    box-shadow: 0 0 20px -5px hsl(263 83% 58% / 0.25);
   }
 }
 

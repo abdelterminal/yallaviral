@@ -11,12 +11,7 @@ export function GlowProvider({ children }: { children: React.ReactNode }) {
         if (!pathname) return;
 
         // Define the paths where the glow effect should be active
-        const allowedPrefixes = [
-            "/dashboard",
-            "/requests", // Campaigns
-            "/campaign", // Discover
-            "/studio",   // Studios
-            "/analytics" // Analytics
+        const allowedPrefixes = [ "/dashboard", "/requests", // Campaigns "/campaign", // Discover "/studio",   // Studios "/analytics" // Analytics
         ];
 
         const isAllowed = allowedPrefixes.some(prefix => pathname.startsWith(prefix));
@@ -27,8 +22,7 @@ export function GlowProvider({ children }: { children: React.ReactNode }) {
         <div
             className="contents"
             style={{
-                // @ts-ignore - CSS custom properties are valid but TS complains sometimes
-                "--card-glow-opacity": shouldGlow ? "1" : "0"
+                // @ts-ignore - CSS custom properties are valid but TS complains sometimes "--card-glow-opacity": shouldGlow ? "1" : "0"
             } as React.CSSProperties}
         >
             {children}

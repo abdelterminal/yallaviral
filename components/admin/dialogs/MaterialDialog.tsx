@@ -122,7 +122,7 @@ export function MaterialDialog({ resource }: MaterialDialogProps) {
                     </Button>
                 )}
             </DialogTrigger>
-            <DialogContent className="bg-black/90 border-white/10 text-white sm:max-w-[425px]">
+            <DialogContent className="bg-card border-border text-foreground sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>{resource ? "Edit Material" : "Add New Material"}</DialogTitle>
                 </DialogHeader>
@@ -135,7 +135,7 @@ export function MaterialDialog({ resource }: MaterialDialogProps) {
                                 <FormItem>
                                     <FormLabel>Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Camera, Light, etc." {...field} className="bg-white/5 border-white/10" />
+                                        <Input placeholder="Camera, Light, etc." {...field} className="bg-muted/50 border-border" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -150,7 +150,7 @@ export function MaterialDialog({ resource }: MaterialDialogProps) {
                                     <FormItem>
                                         <FormLabel>Price (MAD)</FormLabel>
                                         <FormControl>
-                                            <Input type="number" placeholder="0.00" {...field} className="bg-white/5 border-white/10" />
+                                            <Input type="number" placeholder="0.00" {...field} className="bg-muted/50 border-border" />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -163,7 +163,7 @@ export function MaterialDialog({ resource }: MaterialDialogProps) {
                                     <FormItem>
                                         <FormLabel>Quantity</FormLabel>
                                         <FormControl>
-                                            <Input type="number" placeholder="1" {...field} className="bg-white/5 border-white/10" />
+                                            <Input type="number" placeholder="1" {...field} className="bg-muted/50 border-border" />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -182,14 +182,14 @@ export function MaterialDialog({ resource }: MaterialDialogProps) {
                                             <Input
                                                 type="file"
                                                 accept="image/*"
-                                                className="bg-white/5 border-white/10 cursor-pointer text-xs"
+                                                className="bg-muted/50 border-border cursor-pointer text-xs"
                                                 onChange={handleImageUpload}
                                                 disabled={uploading}
                                             />
                                         </div>
                                     </div>
                                     {field.value && (
-                                        <div className="mt-2 relative h-24 w-24 rounded-md overflow-hidden border border-white/20">
+                                        <div className="mt-2 relative h-24 w-24 rounded-md overflow-hidden border border-border">
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img src={field.value} alt="Preview" className="h-full w-full object-cover" />
                                         </div>
@@ -206,7 +206,7 @@ export function MaterialDialog({ resource }: MaterialDialogProps) {
                                 <FormItem>
                                     <FormLabel>Description</FormLabel>
                                     <FormControl>
-                                        <Textarea placeholder="Details about the equipment..." {...field} className="bg-white/5 border-white/10 resize-none h-20" />
+                                        <Textarea placeholder="Details about the equipment..." {...field} className="bg-muted/50 border-border resize-none h-20" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

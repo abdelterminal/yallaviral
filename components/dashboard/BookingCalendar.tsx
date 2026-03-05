@@ -12,9 +12,9 @@ export function BookingCalendar({ bookedDates }: BookingCalendarProps) {
     const t = useTranslations('Shared');
 
     return (
-        <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+        <div className="rounded-xl border border-border bg-muted/50 p-5">
             <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
                     <CalendarDays className="h-4 w-4 text-primary" />
                     {t('calendar')}
                 </h3>
@@ -22,7 +22,7 @@ export function BookingCalendar({ bookedDates }: BookingCalendarProps) {
                     <span className="text-xs text-muted-foreground">{bookedDates.length} {t('bookedText')}</span>
                 )}
             </div>
-            <div className="flex justify-center [&_.rdp]:text-white [&_.rdp-day]:text-sm [&_.rdp-day]:rounded-lg [&_.rdp-day_button]:w-9 [&_.rdp-day_button]:h-9 [&_.rdp-head_cell]:text-muted-foreground [&_.rdp-head_cell]:text-xs [&_.rdp-head_cell]:font-normal [&_.rdp-caption_label]:text-white [&_.rdp-caption_label]:font-bold [&_.rdp-nav_button]:text-muted-foreground [&_.rdp-nav_button:hover]:text-white [&_.rdp-button:hover]:bg-white/10">
+            <div className="flex justify-center [&_.rdp]:text-foreground [&_.rdp-day]:text-sm [&_.rdp-day]:rounded-lg [&_.rdp-day_button]:w-9 [&_.rdp-day_button]:h-9 [&_.rdp-head_cell]:text-muted-foreground [&_.rdp-head_cell]:text-xs [&_.rdp-head_cell]:font-normal [&_.rdp-caption_label]:text-foreground [&_.rdp-caption_label]:font-bold [&_.rdp-nav_button]:text-muted-foreground [&_.rdp-nav_button:hover]:text-foreground [&_.rdp-button:hover]:bg-muted">
                 <DayPicker
                     mode="multiple"
                     selected={bookedDates}
@@ -52,7 +52,7 @@ export function BookingCalendar({ bookedDates }: BookingCalendarProps) {
                         row: "flex w-full mt-2",
                         cell: "h-9 w-9 text-center text-sm p-0 relative",
                         day: "h-9 w-9 p-0 font-normal",
-                        day_selected: "bg-primary text-white hover:bg-primary/90 rounded-lg",
+                        day_selected: "bg-primary text-foreground hover:bg-primary/90 rounded-lg",
                         day_today: "ring-1 ring-primary/50 rounded-lg",
                         day_outside: "opacity-30",
                         day_disabled: "opacity-100",

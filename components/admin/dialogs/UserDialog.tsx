@@ -68,7 +68,7 @@ export function UserDialog() {
                     <UserPlus className="mr-2 h-4 w-4" /> Add User
                 </Button>
             </DialogTrigger>
-            <DialogContent className="bg-black/90 border-white/10 text-white sm:max-w-[425px]">
+            <DialogContent className="bg-card border-border text-foreground sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Invite New User</DialogTitle>
                 </DialogHeader>
@@ -81,7 +81,7 @@ export function UserDialog() {
                                 <FormItem>
                                     <FormLabel>Full Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="John Doe" {...field} className="bg-white/5 border-white/10" />
+                                        <Input placeholder="John Doe" {...field} className="bg-muted/50 border-border" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -95,7 +95,7 @@ export function UserDialog() {
                                 <FormItem>
                                     <FormLabel>Email Address</FormLabel>
                                     <FormControl>
-                                        <Input type="email" placeholder="john@example.com" {...field} className="bg-white/5 border-white/10" />
+                                        <Input type="email" placeholder="john@example.com" {...field} className="bg-muted/50 border-border" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -110,11 +110,11 @@ export function UserDialog() {
                                     <FormLabel>Role</FormLabel>
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
-                                            <SelectTrigger className="bg-white/5 border-white/10">
+                                            <SelectTrigger className="bg-muted/50 border-border">
                                                 <SelectValue placeholder="Select role" />
                                             </SelectTrigger>
                                         </FormControl>
-                                        <SelectContent className="bg-black border-white/10">
+                                        <SelectContent className="bg-background border-border">
                                             <SelectItem value="client">Client</SelectItem>
                                             <SelectItem value="admin">Admin</SelectItem>
                                         </SelectContent>

@@ -34,29 +34,29 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                 </p>
             </div>
 
-            <Card className="bg-black/40 border-white/10 p-6 space-y-6">
-                <h3 className="text-xl font-bold text-white">{t('videoQuantities')}</h3>
+            <Card className="bg-card border-border p-6 space-y-6">
+                <h3 className="text-xl font-bold text-foreground">{t('videoQuantities')}</h3>
 
                 {hasNoTalent ? (
-                    <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
+                    <div className="flex items-center justify-between p-4 bg-muted/50 rounded-xl border border-border">
                         <div>
-                            <p className="font-bold text-white">{t('totalVideos')}</p>
+                            <p className="font-bold text-foreground">{t('totalVideos')}</p>
                             <p className="text-sm text-muted-foreground">{t('usingOwnTalent')}</p>
                         </div>
                         <div className="flex items-center gap-3">
                             <Button
                                 variant="outline"
                                 size="icon"
-                                className="border-white/10 text-white hover:bg-white/10"
+                                className="border-border text-foreground hover:bg-muted"
                                 onClick={() => setGlobalQuantity(Math.max(1, globalQuantity - 1))}
                             >
                                 <Minus className="h-4 w-4" />
                             </Button>
-                            <span className="w-8 text-center font-bold text-lg text-white">{globalQuantity}</span>
+                            <span className="w-8 text-center font-bold text-lg text-foreground">{globalQuantity}</span>
                             <Button
                                 variant="outline"
                                 size="icon"
-                                className="border-white/10 text-white hover:bg-white/10"
+                                className="border-border text-foreground hover:bg-muted"
                                 onClick={() => setGlobalQuantity(globalQuantity + 1)}
                             >
                                 <Plus className="h-4 w-4" />
@@ -66,17 +66,17 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                 ) : (
                     <div className="space-y-4">
                         {selectedModels.map(model => (
-                            <div key={model.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10 gap-4">
+                            <div key={model.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-muted/50 rounded-xl border border-border gap-4">
                                 <div className="flex items-center gap-4">
                                     <div className="h-12 w-12 rounded-full overflow-hidden bg-muted">
                                         {model.image_url ? (
                                             <img src={model.image_url} alt={model.name} className="h-full w-full object-cover" />
                                         ) : (
-                                            <div className="h-full w-full bg-white/10 flex items-center justify-center text-xs text-white">No Img</div>
+                                            <div className="h-full w-full bg-muted flex items-center justify-center text-xs text-foreground">No Img</div>
                                         )}
                                     </div>
                                     <div>
-                                        <p className="font-bold text-white">{model.name}</p>
+                                        <p className="font-bold text-foreground">{model.name}</p>
                                         <p className="text-sm text-muted-foreground">{model.hourly_rate} MAD {t('perVideo')}</p>
                                     </div>
                                 </div>
@@ -84,16 +84,16 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                                     <Button
                                         variant="outline"
                                         size="icon"
-                                        className="border-white/10 text-white hover:bg-white/10"
+                                        className="border-border text-foreground hover:bg-muted"
                                         onClick={() => setModelQuantity(model.id, Math.max(1, (model.quantity || 1) - 1))}
                                     >
                                         <Minus className="h-4 w-4" />
                                     </Button>
-                                    <span className="w-8 text-center font-bold text-lg text-white">{model.quantity || 1}</span>
+                                    <span className="w-8 text-center font-bold text-lg text-foreground">{model.quantity || 1}</span>
                                     <Button
                                         variant="outline"
                                         size="icon"
-                                        className="border-white/10 text-white hover:bg-white/10"
+                                        className="border-border text-foreground hover:bg-muted"
                                         onClick={() => setModelQuantity(model.id, (model.quantity || 1) + 1)}
                                     >
                                         <Plus className="h-4 w-4" />
@@ -105,8 +105,8 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                 )}
             </Card>
 
-            <div className="flex items-center justify-between pt-8 border-t border-white/10">
-                <Button variant="ghost" onClick={onBack} className="text-white hover:bg-white/10">
+            <div className="flex items-center justify-between pt-8 border-t border-border">
+                <Button variant="ghost" onClick={onBack} className="text-foreground hover:bg-muted">
                     {tc('back')}
                 </Button>
                 <Button size="lg" onClick={onNext} className="min-w-[150px] font-bold">

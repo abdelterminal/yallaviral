@@ -57,15 +57,15 @@ export function RejectBookingDialog({ bookingId, clientName, children }: RejectB
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 {children || (
-                    <Button size="sm" variant="ghost" className="text-red-400 hover:text-red-300 hover:bg-red-500/10 h-7 px-2 text-xs font-medium">
+                    <Button size="sm" variant="ghost" className="text-destructive hover:text-destructive hover:bg-destructive/10 h-7 px-2 text-xs font-medium">
                         <XCircle className="h-3 w-3 mr-1" /> Reject
                     </Button>
                 )}
             </DialogTrigger>
-            <DialogContent className="bg-zinc-950 border-white/10 text-white max-w-md">
+            <DialogContent className="bg-zinc-950 border-border text-foreground max-w-md">
                 <DialogHeader>
                     <DialogTitle className="flex items-center gap-2 text-lg">
-                        <AlertTriangle className="h-5 w-5 text-red-400" />
+                        <AlertTriangle className="h-5 w-5 text-destructive" />
                         Reject Booking
                     </DialogTitle>
                     <DialogDescription className="text-muted-foreground">
@@ -79,7 +79,7 @@ export function RejectBookingDialog({ bookingId, clientName, children }: RejectB
                         placeholder="e.g. The requested time slot is no longer available. Please rebook for another date."
                         value={reason}
                         onChange={(e) => setReason(e.target.value)}
-                        className="bg-white/5 border-white/10 text-white placeholder:text-muted-foreground/50 min-h-[100px] resize-none focus:border-red-500/50"
+                        className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/50 min-h-[100px] resize-none focus:border-red-500/50"
                         maxLength={500}
                     />
                     <p className="text-xs text-muted-foreground mt-2 text-right">{reason.length}/500</p>
@@ -87,7 +87,7 @@ export function RejectBookingDialog({ bookingId, clientName, children }: RejectB
 
                 <DialogFooter className="gap-2 sm:gap-0">
                     <Button variant="ghost" onClick={() => setOpen(false)} disabled={isLoading}
-                        className="text-muted-foreground hover:text-white">
+                        className="text-muted-foreground hover:text-foreground">
                         Cancel
                     </Button>
                     <Button

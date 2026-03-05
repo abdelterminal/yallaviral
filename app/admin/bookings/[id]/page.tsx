@@ -7,12 +7,16 @@ import { ArrowLeft, Calendar, User, DollarSign } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
+import { getLocale } from "next-intl/server";
+import { getDateLocale } from "@/utils/date-locale";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminBookingDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     const supabase = await createClient();
+    const locale = await getLocale();
+    const dateFnsLocale = getDateLocale(locale);
 
     // Verify admin
     const { data: { user } } = await supabase.auth.getUser();
@@ -55,7 +59,7 @@ export default async function AdminBookingDetailPage({ params }: { params: Promi
                 </Link>
                 <div className="flex items-center justify-between">
                     <div>
-                        <h2 className="text-3xl font-bold tracking-tight text-white flex items-center gap-3">
+                        <h2 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-3">
                             Booking #{booking.id.slice(0, 8)}
                             <Badge variant="secondary" className="uppercase tracking-wider text-xs">{booking.status}</Badge>
                         </h2>
@@ -68,45 +72,45 @@ export default async function AdminBookingDetailPage({ params }: { params: Promi
 
             {/* Info Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Card className="bg-black/40 border-white/10">
+                <Card className="bg-card border-border">
                     <CardContent className="p-4 flex items-center gap-3">
                         <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
                             <User className="h-5 w-5 text-primary" />
                         </div>
                         <div>
                             <p className="text-xs text-muted-foreground uppercase font-bold">Client</p>
-                            <p className="text-white font-bold">{booking.profiles?.full_name || "—"}</p>
+                            <p className="text-foreground font-bold">{booking.profiles?.full_name || "—"}</p>
                         </div>
                     </CardContent>
                 </Card>
-                <Card className="bg-black/40 border-white/10">
+                <Card className="bg-card border-border">
                     <CardContent className="p-4 flex items-center gap-3">
-                        <div className="h-10 w-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
-                            <DollarSign className="h-5 w-5 text-emerald-400" />
+                        <div className="h-10 w-10 rounded-xl bg-emerald-50 flex items-center justify-center">
+                            <DollarSign className="h-5 w-5 text-emerald-600" />
                         </div>
                         <div>
                             <p className="text-xs text-muted-foreground uppercase font-bold">Total</p>
-                            <p className="text-emerald-400 font-bold font-mono">{booking.total_price?.toFixed(2)} MAD</p>
+                            <p className="text-emerald-600 font-bold font-mono">{booking.total_price?.toFixed(2)} MAD</p>
                         </div>
                     </CardContent>
                 </Card>
-                <Card className="bg-black/40 border-white/10">
+                <Card className="bg-card border-border">
                     <CardContent className="p-4 flex items-center gap-3">
                         <div className="h-10 w-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
-                            <Calendar className="h-5 w-5 text-blue-400" />
+                            <Calendar className="h-5 w-5 text-blue-600" />
                         </div>
                         <div>
                             <p className="text-xs text-muted-foreground uppercase font-bold">Shoot Date</p>
-                            <p className="text-white font-bold">{format(new Date(booking.start_time), "PPP")}</p>
+                            <p className="text-foreground font-bold">{format(new Date(booking.start_time), "PPP", { locale: dateFnsLocale })}</p>
                         </div>
                     </CardContent>
                 </Card>
             </div>
 
             {/* Deliverables Panel */}
-            <Card className="bg-black/40 border-white/10 backdrop-blur-sm">
+            <Card className="bg-card border-border">
                 <CardHeader>
-                    <CardTitle className="text-xl font-bold text-white">Deliverables</CardTitle>
+                    <CardTitle className="text-xl font-bold text-foreground">Deliverables</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <AdminDeliverablesPanel

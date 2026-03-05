@@ -36,8 +36,7 @@ export function StudioSelectionStep({ availableStudios, onNext, onBack }: Studio
                     return (
                         <Card
                             key={studio.id}
-                            className={cn(
-                                "group relative overflow-hidden cursor-pointer transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)]",
+                            className={cn( "group relative overflow-hidden cursor-pointer transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)]",
                                 isSelected ? "ring-2 ring-primary border-primary bg-primary/10 shadow-[0_0_30px_rgba(124,58,237,0.2)]" : ""
                             )}
                             onClick={() => setSelectedStudio(studio)}
@@ -47,8 +46,7 @@ export function StudioSelectionStep({ availableStudios, onNext, onBack }: Studio
                                     <img
                                         src={studio.image_url}
                                         alt={studio.name}
-                                        className={cn(
-                                            "h-full w-full object-cover transition-transform duration-700",
+                                        className={cn( "h-full w-full object-cover transition-transform duration-700",
                                             isSelected ? "scale-105" : "group-hover:scale-105"
                                         )}
                                     />
@@ -56,8 +54,8 @@ export function StudioSelectionStep({ availableStudios, onNext, onBack }: Studio
                                     <div className="flex h-full items-center justify-center text-muted-foreground">{tc('noImage')}</div>
                                 )}
                                 {isSelected && (
-                                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[1px]">
-                                        <div className="bg-primary text-white h-10 w-10 rounded-full flex items-center justify-center shadow-lg animate-in zoom-in">
+                                    <div className="absolute inset-0 flex items-center justify-center bg-card backdrop-blur-[1px]">
+                                        <div className="bg-primary text-foreground h-10 w-10 rounded-full flex items-center justify-center shadow-lg animate-in zoom-in">
                                             <CheckCircle2 className="h-6 w-6" />
                                         </div>
                                     </div>

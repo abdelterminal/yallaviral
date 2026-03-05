@@ -14,9 +14,9 @@ interface VideoStyleStepProps {
 }
 
 const VIDEO_STYLES = [
-    { id: "ugc", titleKey: "ugcTitle", descKey: "ugcDesc", icon: MessageSquare, color: "text-green-400", bgColor: "bg-green-400/10", borderColor: "border-green-400/20" },
-    { id: "unboxing", titleKey: "unboxingTitle", descKey: "unboxingDesc", icon: PackageOpen, color: "text-blue-400", bgColor: "bg-blue-400/10", borderColor: "border-blue-400/20" },
-    { id: "ad", titleKey: "adTitle", descKey: "adDesc", icon: MonitorPlay, color: "text-purple-400", bgColor: "bg-purple-400/10", borderColor: "border-purple-400/20" },
+    { id: "ugc", titleKey: "ugcTitle", descKey: "ugcDesc", icon: MessageSquare, color: "text-primary", bgColor: "bg-green-400/10", borderColor: "border-green-400/20" },
+    { id: "unboxing", titleKey: "unboxingTitle", descKey: "unboxingDesc", icon: PackageOpen, color: "text-blue-600", bgColor: "bg-blue-50", borderColor: "border-blue-200" },
+    { id: "ad", titleKey: "adTitle", descKey: "adDesc", icon: MonitorPlay, color: "text-primary", bgColor: "bg-purple-400/10", borderColor: "border-purple-400/20" },
     { id: "lifestyle", titleKey: "lifestyleTitle", descKey: "lifestyleDesc", icon: Clapperboard, color: "text-pink-400", bgColor: "bg-pink-400/10", borderColor: "border-pink-400/20" },
 ] as const;
 
@@ -44,11 +44,10 @@ export function VideoStyleStep({ onNext, onBack }: VideoStyleStepProps) {
                     return (
                         <Card
                             key={style.id}
-                            className={cn(
-                                "relative overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)] group border-2",
+                            className={cn("relative overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)] group border-2",
                                 isSelected
                                     ? `ring-2 ring-primary border-primary bg-primary/10 shadow-[0_0_30px_rgba(124,58,237,0.2)]`
-                                    : "border-white/5 hover:border-white/20 bg-black/40"
+                                    : "border-border hover:border-primary/30 bg-card"
                             )}
                             onClick={() => setGlobalVideoStyle(style.id)}
                         >
@@ -71,7 +70,7 @@ export function VideoStyleStep({ onNext, onBack }: VideoStyleStepProps) {
                 })}
             </div>
 
-            <div className="flex items-center justify-between pt-8 border-t border-white/10">
+            <div className="flex items-center justify-between pt-8 border-t border-border">
                 <Button variant="ghost" onClick={onBack}>
                     {tc('back')}
                 </Button>

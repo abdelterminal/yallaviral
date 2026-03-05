@@ -37,7 +37,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="dark">
+    <html lang={locale}>
       <body
         className={`antialiased`}
       >
@@ -45,7 +45,7 @@ export default async function RootLayout({
           <GlowProvider>
             <AuthProvider>
               {children}
-              <Toaster position="top-center" richColors theme="dark" />
+              <Toaster position="top-center" richColors theme="light" />
 
             </AuthProvider>
           </GlowProvider>

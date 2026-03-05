@@ -125,7 +125,7 @@ export function ResourceDialog({ resource, defaultType = "model" }: ResourceDial
                     </Button>
                 )}
             </DialogTrigger>
-            <DialogContent className="bg-black/90 border-white/10 text-white sm:max-w-[425px]">
+            <DialogContent className="bg-card border-border text-foreground sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>{resource ? "Edit Resource" : "Add New Resource"}</DialogTitle>
                 </DialogHeader>
@@ -138,7 +138,7 @@ export function ResourceDialog({ resource, defaultType = "model" }: ResourceDial
                                 <FormItem>
                                     <FormLabel>Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Resource Name" {...field} className="bg-white/5 border-white/10" />
+                                        <Input placeholder="Resource Name" {...field} className="bg-muted/50 border-border" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -154,11 +154,11 @@ export function ResourceDialog({ resource, defaultType = "model" }: ResourceDial
                                         <FormLabel>Type</FormLabel>
                                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                                             <FormControl>
-                                                <SelectTrigger className="bg-white/5 border-white/10">
+                                                <SelectTrigger className="bg-muted/50 border-border">
                                                     <SelectValue placeholder="Select type" />
                                                 </SelectTrigger>
                                             </FormControl>
-                                            <SelectContent className="bg-black border-white/10">
+                                            <SelectContent className="bg-background border-border">
                                                 <SelectItem value="model">Model</SelectItem>
                                                 <SelectItem value="studio">Studio</SelectItem>
                                                 <SelectItem value="editor">Editor</SelectItem>
@@ -176,7 +176,7 @@ export function ResourceDialog({ resource, defaultType = "model" }: ResourceDial
                                     <FormItem>
                                         <FormLabel>Rate (MAD)</FormLabel>
                                         <FormControl>
-                                            <Input type="number" placeholder="0.00" {...field} className="bg-white/5 border-white/10" />
+                                            <Input type="number" placeholder="0.00" {...field} className="bg-muted/50 border-border" />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -195,14 +195,14 @@ export function ResourceDialog({ resource, defaultType = "model" }: ResourceDial
                                             <Input
                                                 type="file"
                                                 accept="image/*"
-                                                className="bg-white/5 border-white/10 cursor-pointer text-xs"
+                                                className="bg-muted/50 border-border cursor-pointer text-xs"
                                                 onChange={handleImageUpload}
                                                 disabled={uploading}
                                             />
                                         </div>
                                     </div>
                                     {field.value && (
-                                        <div className="mt-2 relative h-20 w-20 rounded-md overflow-hidden border border-white/20">
+                                        <div className="mt-2 relative h-20 w-20 rounded-md overflow-hidden border border-border">
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img src={field.value} alt="Preview" className="h-full w-full object-cover" />
                                         </div>
@@ -219,7 +219,7 @@ export function ResourceDialog({ resource, defaultType = "model" }: ResourceDial
                                 <FormItem>
                                     <FormLabel>Bio / Description</FormLabel>
                                     <FormControl>
-                                        <Textarea placeholder="Short description..." {...field} className="bg-white/5 border-white/10 resize-none h-20" />
+                                        <Textarea placeholder="Short description..." {...field} className="bg-muted/50 border-border resize-none h-20" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

@@ -11,7 +11,7 @@ import { LandingHeader } from "@/components/landing/LandingHeader";
 
 export default function LandingPage() {
     return (
-        <div className="flex min-h-screen flex-col bg-black text-white selection:bg-primary/30">
+        <div className="flex min-h-screen flex-col bg-background text-foreground selection:bg-primary/30">
             <LandingHeader />
 
             <main className="flex-1">

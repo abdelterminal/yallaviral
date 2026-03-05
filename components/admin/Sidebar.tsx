@@ -22,7 +22,7 @@ export function Sidebar() {
     return (
         <div className="flex flex-col h-full p-4 space-y-4">
             <div className="flex items-center gap-2 px-2 py-4">
-                <span className="text-xl font-black tracking-tight text-white">Yalla Viral <span className="text-primary text-xs ml-1 bg-primary/20 px-1 py-0.5 rounded">{t('adminTag')}</span></span>
+                <span className="text-xl font-black tracking-tight text-foreground">Yalla Viral <span className="text-primary text-xs ml-1 bg-primary/20 px-1 py-0.5 rounded">{t('adminTag')}</span></span>
             </div>
 
             <nav className="flex-1 space-y-1">
@@ -30,11 +30,10 @@ export function Sidebar() {
                     <Link
                         key={link.href}
                         href={link.href}
-                        className={cn(
-                            "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                        className={cn( "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
                             pathname === link.href
-                                ? "bg-primary text-white"
-                                : "text-muted-foreground hover:text-white hover:bg-white/5"
+                                ? "bg-primary text-foreground"
+                                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                         )}
                     >
                         <link.icon className="h-4 w-4" />
@@ -43,10 +42,10 @@ export function Sidebar() {
                 ))}
             </nav>
 
-            <div className="pt-4 border-t border-white/10">
+            <div className="pt-4 border-t border-border">
                 <Link
                     href="/dashboard"
-                    className="flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-white hover:bg-white/5 transition-colors group"
+                    className="flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors group"
                 >
                     <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
                     {t('switchToUser')}

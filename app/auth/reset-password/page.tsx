@@ -81,7 +81,7 @@ export default function ResetPasswordPage() {
     // Loading state while checking session
     if (isValidSession === null) {
         return (
-            <div className="h-screen flex items-center justify-center bg-black">
+            <div className="h-screen flex items-center justify-center bg-background">
                 <div className="h-8 w-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
             </div>
         )
@@ -90,17 +90,17 @@ export default function ResetPasswordPage() {
     // Invalid or expired link
     if (!isValidSession) {
         return (
-            <div className="h-screen flex items-center justify-center bg-black font-sans p-6">
+            <div className="h-screen flex items-center justify-center bg-background font-sans p-6">
                 <div className="w-full max-w-[400px] text-center space-y-6">
                     <div className="mx-auto h-16 w-16 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center">
-                        <ShieldCheck className="h-8 w-8 text-red-400" />
+                        <ShieldCheck className="h-8 w-8 text-destructive" />
                     </div>
-                    <h2 className="text-2xl font-black text-white tracking-tight">Invalid or Expired Link</h2>
+                    <h2 className="text-2xl font-black text-foreground tracking-tight">Invalid or Expired Link</h2>
                     <p className="text-sm text-muted-foreground">
                         This password reset link has expired or is invalid. Please request a new one.
                     </p>
                     <Link href="/login/forgot-password">
-                        <Button className="font-bold bg-primary hover:bg-primary/90 text-white rounded-xl">
+                        <Button className="font-bold bg-primary hover:bg-primary/90 text-foreground rounded-xl">
                             Request New Link
                         </Button>
                     </Link>
@@ -110,7 +110,7 @@ export default function ResetPasswordPage() {
     }
 
     return (
-        <div className="min-h-screen bg-black flex flex-col items-center justify-center text-white font-sans selection:bg-primary/30 selection:text-white relative p-6">
+        <div className="min-h-screen bg-background flex flex-col items-center justify-center text-foreground font-sans selection:bg-primary/30 selection:text-foreground relative p-6">
             <div className="w-full max-w-[440px] flex flex-col items-center">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 mb-10 group transition-transform hover:scale-105 active:scale-95">
@@ -120,7 +120,7 @@ export default function ResetPasswordPage() {
                     <span className="font-black text-3xl tracking-tight">Yalla<span className="text-primary">Viral</span></span>
                 </Link>
 
-                <div className="w-full bg-white/5 border border-white/10 p-8 rounded-3xl shadow-xl backdrop-blur-sm relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
+                <div className="w-full bg-muted/50 border border-border p-8 rounded-3xl shadow-xl backdrop-blur-sm relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
                     {!isSuccess ? (
                         <>
                             <div className="text-center mb-8">
@@ -131,14 +131,14 @@ export default function ResetPasswordPage() {
                             </div>
 
                             {error && (
-                                <div className="p-3 mb-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs animate-in fade-in slide-in-from-top-1">
+                                <div className="p-3 mb-4 rounded-xl bg-red-500/10 border border-red-500/20 text-destructive text-xs animate-in fade-in slide-in-from-top-1">
                                     <p className="font-medium">{error}</p>
                                 </div>
                             )}
 
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div className="space-y-1.5">
-                                    <Label htmlFor="password" className="text-white text-xs font-black uppercase opacity-60 ml-1 tracking-wider">
+                                    <Label htmlFor="password" className="text-foreground text-xs font-black uppercase opacity-60 ml-1 tracking-wider">
                                         New Password
                                     </Label>
                                     <div className="relative">
@@ -149,12 +149,12 @@ export default function ResetPasswordPage() {
                                             onChange={(e) => setPassword(e.target.value)}
                                             required
                                             minLength={8}
-                                            className="bg-white/5 border-white/10 text-white h-10 rounded-xl focus:border-primary/50 text-base transition-all focus:bg-white/10 pr-10"
+                                            className="bg-muted/50 border-border text-foreground h-10 rounded-xl focus:border-primary/50 text-base transition-all focus:bg-muted pr-10"
                                         />
                                         <button
                                             type="button"
                                             onClick={() => setShowPassword(!showPassword)}
-                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white transition-colors"
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                                         >
                                             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                                         </button>
@@ -162,7 +162,7 @@ export default function ResetPasswordPage() {
                                 </div>
 
                                 <div className="space-y-1">
-                                    <Label htmlFor="confirmPassword" className="text-white text-xs font-black uppercase opacity-60 ml-1 tracking-wider">
+                                    <Label htmlFor="confirmPassword" className="text-foreground text-xs font-black uppercase opacity-60 ml-1 tracking-wider">
                                         Confirm Password
                                     </Label>
                                     <Input
@@ -172,7 +172,7 @@ export default function ResetPasswordPage() {
                                         onChange={(e) => setConfirmPassword(e.target.value)}
                                         required
                                         minLength={8}
-                                        className="bg-white/5 border-white/10 text-white h-10 rounded-xl focus:border-primary/50 text-base transition-all focus:bg-white/10"
+                                        className="bg-muted/50 border-border text-foreground h-10 rounded-xl focus:border-primary/50 text-base transition-all focus:bg-muted"
                                     />
                                 </div>
 
@@ -188,7 +188,7 @@ export default function ResetPasswordPage() {
                                                         : password.length >= 8
                                                             ? 'bg-amber-500'
                                                             : 'bg-red-500'
-                                                    : 'bg-white/10'
+                                                    : 'bg-muted'
                                                     }`}
                                             />
                                         ))}
@@ -203,7 +203,7 @@ export default function ResetPasswordPage() {
                                 <Button
                                     type="submit"
                                     disabled={isLoading || password.length < 8}
-                                    className="w-full h-12 font-bold text-base bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_rgba(124,58,237,0.3)] hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] transition-all rounded-xl mt-6 group disabled:opacity-50"
+                                    className="w-full h-12 font-bold text-base bg-primary hover:bg-primary/90 text-foreground shadow-sm hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] transition-all rounded-xl mt-6 group disabled:opacity-50"
                                 >
                                     {isLoading ? (
                                         <span className="flex items-center gap-2">
@@ -218,10 +218,10 @@ export default function ResetPasswordPage() {
                         </>
                     ) : (
                         <div className="text-center space-y-4 animate-in fade-in zoom-in-95 duration-500">
-                            <div className="mx-auto h-16 w-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                                <CheckCircle2 className="h-8 w-8 text-emerald-400" />
+                            <div className="mx-auto h-16 w-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+                                <CheckCircle2 className="h-8 w-8 text-emerald-600" />
                             </div>
-                            <h2 className="text-2xl font-black text-white tracking-tight">Password Updated!</h2>
+                            <h2 className="text-2xl font-black text-foreground tracking-tight">Password Updated!</h2>
                             <p className="text-sm text-slate-400">
                                 Redirecting you to dashboard...
                             </p>

@@ -25,12 +25,11 @@ export function Timeline({ steps, currentStep }: TimelineProps) {
                     <div key={step.id} className="relative flex items-start gap-4">
                         {/* Circle Indicator */}
                         <div
-                            className={cn(
-                                "relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500",
+                            className={cn( "relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500",
                                 isCompleted
-                                    ? "border-primary bg-primary text-primary-foreground shadow-[0_0_20px_rgba(124,58,237,0.4)]"
+                                    ? "border-primary bg-primary text-primary-foreground shadow-md"
                                     : isActive
-                                        ? "border-primary bg-background text-primary shadow-[0_0_15px_rgba(124,58,237,0.5)] ring-4 ring-primary/10"
+                                        ? "border-primary bg-background text-primary shadow-sm ring-4 ring-primary/10"
                                         : "border-muted bg-muted/20 text-muted-foreground"
                             )}
                         >

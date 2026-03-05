@@ -37,8 +37,7 @@ export function TalentSelectionStep({ availableModels, onNext, onBack }: TalentS
                 {availableModels.map((model) => {
                     const isSelected = selectedModels.some(s => s.id === model.id);
                     return (
-                        <Card key={model.id} className={cn(
-                            "relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)] hover:border-primary/50 group h-[380px] flex flex-col",
+                        <Card key={model.id} className={cn( "relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)] hover:border-primary/50 group h-[380px] flex flex-col",
                             isSelected ? "ring-2 ring-primary border-primary bg-primary/10 shadow-[0_0_30px_rgba(124,58,237,0.2)]" : ""
                         )}>
                             <div className="relative h-2/3 w-full bg-muted overflow-hidden">
@@ -46,8 +45,7 @@ export function TalentSelectionStep({ availableModels, onNext, onBack }: TalentS
                                     <img
                                         src={model.image_url}
                                         alt={model.name}
-                                        className={cn(
-                                            "h-full w-full object-cover transition-transform duration-700",
+                                        className={cn( "h-full w-full object-cover transition-transform duration-700",
                                             isSelected ? "scale-105 saturate-0" : "group-hover:scale-105"
                                         )}
                                     />
@@ -56,18 +54,18 @@ export function TalentSelectionStep({ availableModels, onNext, onBack }: TalentS
                                 )}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-                                <div className="absolute bottom-3 left-3 right-3 text-white">
+                                <div className="absolute bottom-3 left-3 right-3 text-foreground">
                                     <h4 className="font-bold text-lg leading-tight">{model.name}</h4>
                                     <div className="flex flex-wrap gap-1 mt-1">
                                         {model.tags?.slice(0, 2).map(tag => (
-                                            <span key={tag} className="text-[10px] bg-white/20 backdrop-blur-md px-1.5 py-0.5 rounded text-white/90">#{tag}</span>
+                                            <span key={tag} className="text-[10px] bg-muted backdrop-blur-md px-1.5 py-0.5 rounded text-foreground/90">#{tag}</span>
                                         ))}
                                     </div>
                                 </div>
 
                                 {isSelected && (
-                                    <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-[1px]">
-                                        <div className="bg-primary text-white px-3 py-1 rounded-full font-bold shadow-lg animate-in zoom-in flex items-center gap-2">
+                                    <div className="absolute inset-0 flex items-center justify-center bg-card backdrop-blur-[1px]">
+                                        <div className="bg-primary text-foreground px-3 py-1 rounded-full font-bold shadow-lg animate-in zoom-in flex items-center gap-2">
                                             <CheckCircle2 className="h-4 w-4" /> {tc('selected')}
                                         </div>
                                     </div>
@@ -87,7 +85,7 @@ export function TalentSelectionStep({ availableModels, onNext, onBack }: TalentS
                                         </Button>
                                     </ModelPortfolio>
                                     <Button
-                                        className={cn("flex-1 font-bold", isSelected ? "bg-secondary hover:bg-secondary/80 text-white" : "bg-primary hover:bg-primary/90")}
+                                        className={cn("flex-1 font-bold", isSelected ? "bg-secondary hover:bg-secondary/80 text-foreground" : "bg-primary hover:bg-primary/90")}
                                         variant={isSelected ? "secondary" : "default"}
                                         onClick={() => {
                                             if (isSelected) {
