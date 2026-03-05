@@ -13,7 +13,7 @@ export function LandingHero() {
         <section className="relative w-full pt-20 pb-32 lg:pt-32 lg:pb-40 overflow-hidden">
             {/* Background Effects */}
             <div className="absolute inset-0 -z-10">
-                <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-primary/20 rounded-full blur-[120px] opacity-30 animate-pulse" />
+                <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-primary/30 rounded-full blur-[100px] opacity-40 animate-pulse" />
                 <div className="absolute bottom-0 left-0 w-[600px] h-[500px] bg-purple-600/20 rounded-full blur-[100px] opacity-20" />
             </div>
 
@@ -103,7 +103,7 @@ export function LandingHero() {
                             initial={{ opacity: 0, x: -50, y: -50 }}
                             animate={{ opacity: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.5 }}
-                            className="absolute top-10 left-0 bg-card  border border-border p-4 rounded-2xl w-64 shadow-2xl"
+                            className="absolute top-10 left-0 glass-card p-4 rounded-2xl w-64"
                         >
                             <div className="flex items-center gap-3 mb-3">
                                 <div className="w-10 h-10 rounded-full bg-gray-700 overflow-hidden">
@@ -127,7 +127,7 @@ export function LandingHero() {
                             initial={{ opacity: 0, x: 50, y: 50 }}
                             animate={{ opacity: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.7 }}
-                            className="absolute bottom-20 right-0 bg-card  border border-border p-4 rounded-2xl w-72 shadow-2xl"
+                            className="absolute bottom-20 right-0 glass-card p-4 rounded-2xl w-72"
                         >
                             <div className="flex justify-between items-center mb-3">
                                 <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{t('studioBooking')}</span>
@@ -149,7 +149,7 @@ export function LandingHero() {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, delay: 0.9 }}
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card  border border-primary/30 p-5 rounded-2xl w-60 shadow-lg"
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 glass-card border-primary/30 p-5 rounded-2xl w-60"
                         >
                             <div className="flex items-center gap-2 mb-2">
                                 <TrendingUp className="w-5 h-5 text-primary" />
