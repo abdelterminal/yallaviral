@@ -120,7 +120,7 @@ export default function ResetPasswordPage() {
                     <span className="font-black text-3xl tracking-tight">Yalla<span className="text-primary">Viral</span></span>
                 </Link>
 
-                <div className="w-full bg-muted/50 border border-border p-8 rounded-3xl shadow-xl backdrop-blur-sm relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
+                <div className="w-full bg-muted/50 border border-transparent p-8 rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur-sm relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
                     {!isSuccess ? (
                         <>
                             <div className="text-center mb-8">

@@ -13,7 +13,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
     const isAvailable = resource.status === 'active';
 
     return (
-        <Card className="group overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,58,237,0.1)] hover:border-primary/50 flex flex-col md:flex-row h-auto md:h-[300px] bg-card border-border backdrop-blur-sm">
+        <Card className="group overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] border-transparent flex flex-col md:flex-row h-auto md:h-[300px] bg-card backdrop-blur-sm">
             {/* Image Section (Left) */}
             <div className="w-full md:w-2/5 relative overflow-hidden bg-muted">
                 {resource.image_url ? (
@@ -68,7 +68,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
                             if (tag.includes('sofa')) Icon = Armchair;
 
                             return (
-                                <div key={tag} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted/50 border border-border text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
+                                <div key={tag} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted/50 border-transparent text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
                                     <Icon className="h-3 w-3 text-primary" />
                                     <span className="capitalize">{tag}</span>
                                 </div>
@@ -78,7 +78,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
                 </div>
 
                 {/* Action Section (Right) */}
-                <div className="p-6 border-t md:border-t-0 md:border-l border-border bg-muted/30 flex flex-row md:flex-col items-center md:justify-center justify-between gap-4 min-w-[200px]">
+                <div className="p-6 border-t md:border-t-0 md:border-l border-transparent bg-muted/10 flex flex-row md:flex-col items-center md:justify-center justify-between gap-4 min-w-[200px]">
                     <div className="hidden md:flex flex-col items-center">
                         <span className="text-3xl font-black text-foreground">{resource.hourly_rate} MAD</span>
                         <span className="text-muted-foreground text-xs font-medium uppercase tracking-wider">per hour</span>
