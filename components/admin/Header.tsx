@@ -24,8 +24,8 @@ export function AdminHeader({ user }: AdminHeaderProps) {
     };
 
     return (
-        <header className="h-16 border-b border-border flex items-center justify-between px-8 bg-background">
-            <h1 className="text-lg font-semibold">{t('adminDashboard')}</h1>
+        <header className="h-20 bg-card flex items-center justify-between px-10 shadow-sm z-10 relative">
+            <h1 className="text-xl font-black tracking-tight">{t('adminDashboard')}</h1>
 
             <div className="flex items-center gap-4">
                 <div className="text-right hidden md:block">

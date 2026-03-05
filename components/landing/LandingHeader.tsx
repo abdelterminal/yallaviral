@@ -23,28 +23,30 @@ export function LandingHeader() {
 
     return (
         <header
-            className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out border-b",
-                isScrolled
-                    ? "bg-card/90 backdrop-blur-md border-border py-4 shadow-lg"
-                    : "bg-transparent border-transparent py-6"
+            className={cn("fixed top-6 left-0 right-0 z-50 transition-all duration-300 ease-in-out px-4",
+                isScrolled ? "translate-y-0" : "-translate-y-2"
             )}
         >
-            <div className="container px-4 md:px-6 mx-auto flex items-center justify-between">
+            <div className={cn("container max-w-7xl mx-auto flex items-center justify-between px-8 py-4 transition-all duration-500",
+                isScrolled
+                    ? "bg-white/90 backdrop-blur-xl border border-slate-100 rounded-[2.5rem] shadow-[0_8px_30px_rgb(0_0_0_/_0.04)]"
+                    : "bg-transparent border-transparent py-6"
+            )}>
                 <Link href="/" className="flex items-center gap-2 group">
-                    <div className="bg-primary/10 p-1.5 rounded-lg border border-primary/20 group-hover:bg-primary/20 transition-colors">
-                        <YallaLogo className="h-5 w-5" />
+                    <div className="bg-primary/10 p-2 rounded-xl border border-primary/20 group-hover:bg-primary/20 transition-colors">
+                        <YallaLogo className="h-6 w-6" />
                     </div>
-                    <span className="text-xl font-black tracking-tighter text-foreground">YallaViral</span>
+                    <span className="text-2xl font-black tracking-tighter text-foreground">YallaViral</span>
                 </Link>
 
-                <nav className="hidden md:flex items-center gap-8">
-                    <Link href="#features" className="text-sm font-medium text-gray-400 hover:text-foreground hover:-translate-y-0.5 hover:scale-105 transition-all duration-300 inline-block">
+                <nav className="hidden md:flex items-center gap-10">
+                    <Link href="#features" className="text-base font-bold text-foreground/60 hover:text-primary transition-colors">
                         {t('navFeatures')}
                     </Link>
-                    <Link href="/models" className="text-sm font-medium text-gray-400 hover:text-foreground hover:-translate-y-0.5 hover:scale-105 transition-all duration-300 inline-block">
+                    <Link href="/models" className="text-base font-bold text-foreground/60 hover:text-primary transition-colors">
                         {t('navCrowd')}
                     </Link>
-                    <Link href="/studio" className="text-sm font-medium text-gray-400 hover:text-foreground hover:-translate-y-0.5 hover:scale-105 transition-all duration-300 inline-block">
+                    <Link href="/studio" className="text-base font-bold text-foreground/60 hover:text-primary transition-colors">
                         {t('navStudios')}
                     </Link>
                 </nav>
@@ -52,12 +54,12 @@ export function LandingHeader() {
                 <div className="flex items-center gap-4">
                     <LanguageSwitcher />
                     <Link href="/login" className="hidden sm:inline-flex">
-                        <Button variant="ghost" className="text-gray-400 hover:text-foreground hover:bg-muted">
+                        <Button variant="ghost" className="text-base font-bold text-foreground/60 hover:text-foreground">
                             {tc('logIn')}
                         </Button>
                     </Link>
                     <Link href="/signup">
-                        <Button className="font-bold shadow-sm hover:shadow-[0_0_25px_rgba(124,58,237,0.7)] transition-all">
+                        <Button className="h-12 px-6 text-base hover:scale-105 transition-transform duration-300 shadow-sm">
                             {tc('getStarted')}
                         </Button>
                     </Link>

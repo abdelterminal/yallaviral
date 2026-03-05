@@ -15,34 +15,34 @@ export function LandingTestimonials() {
     const t = useTranslations('Landing');
 
     return (
-        <section className="py-24 bg-muted/50 border-t border-border">
+        <section className="py-32 bg-slate-50 border-t border-slate-100">
             <div className="container px-4 md:px-6 mx-auto">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl font-black tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground mb-4">
+                <div className="text-center mb-20">
+                    <h2 className="text-4xl font-black tracking-tighter sm:text-6xl text-foreground mb-6">
                         {t('statsTitle')}
                     </h2>
-                    <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+                    <p className="text-muted-foreground text-xl max-w-xl mx-auto">
                         {t('statsSubtitle')}
                     </p>
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-20">
                     {statKeys.map((stat, i) => {
                         const Icon = stat.icon;
                         return (
                             <div
                                 key={i}
-                                className="flex flex-col items-center text-center p-8 rounded-2xl border border-border bg-muted/50 backdrop-blur-sm hover:border-primary/30 transition-all"
+                                className="flex flex-col items-center text-center p-10 rounded-[2.5rem] border border-slate-100 bg-white shadow-sm hover:shadow-md transition-all duration-300 group"
                             >
                                 <div
-                                    className="h-12 w-12 rounded-xl flex items-center justify-center mb-4"
+                                    className="h-14 w-14 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110"
                                     style={{ backgroundColor: `rgba(${stat.color}, 0.1)`, color: `rgb(${stat.color})` }}
                                 >
-                                    <Icon className="h-6 w-6" />
+                                    <Icon className="h-7 w-7" />
                                 </div>
-                                <span className="text-4xl font-black text-foreground mb-1">{stat.value}</span>
-                                <span className="text-sm text-muted-foreground font-medium">{t(stat.labelKey)}</span>
+                                <span className="text-5xl font-black text-foreground mb-2 tracking-tighter">{stat.value}</span>
+                                <span className="text-base text-muted-foreground font-bold uppercase tracking-wide">{t(stat.labelKey)}</span>
                             </div>
                         );
                     })}
@@ -51,11 +51,11 @@ export function LandingTestimonials() {
                 {/* CTA */}
                 <div className="text-center">
                     <Link href="/signup">
-                        <Button size="lg" className="font-bold text-lg px-8 py-6 shadow-[0_0_30px_rgba(124,58,237,0.4)] hover:shadow-[0_0_40px_rgba(124,58,237,0.6)] transition-all rounded-xl">
+                        <Button size="lg" className="h-16 px-12 text-xl hover:scale-105 transition-transform duration-300">
                             {t('ctaCreate')}
                         </Button>
                     </Link>
-                    <p className="text-xs text-muted-foreground mt-4">{t('ctaNoCommitment')}</p>
+                    <p className="text-sm font-medium text-muted-foreground mt-6">{t('ctaNoCommitment')}</p>
                 </div>
             </div>
         </section>

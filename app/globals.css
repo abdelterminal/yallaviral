@@ -48,63 +48,60 @@
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 1rem;
 
-  /* ===== Light Mode: "The Viral Creator" ===== */
+  /* ===== Light Mode: "Lusha Enterprise Redesign" ===== */
 
-  /* Background: Cool off-white (#F8FAFC) */
+  /* Background: A very faint, cool off-white for the main app so white cards pop off it */
   --background: 210 40% 98%;
-  /* Foreground: Dark slate (#0F172A) */
-  --foreground: 222 47% 11%;
+  /* Foreground: Deep Navy Slate (#0B1B3D) for premium contrast */
+  --foreground: 220 70% 14%;
 
-  /* Cards/Surfaces: Pure white */
+  /* Cards/Surfaces: Pure stark white */
   --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
+  --card-foreground: 220 70% 14%;
 
   /* Popovers */
   --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
+  --popover-foreground: 220 70% 14%;
 
-  /* Primary: Vibrant Violet (#7C3AED) */
+  /* Primary: Vibrant Violet */
   --primary: 263 83% 58%;
   --primary-foreground: 0 0% 100%;
 
-  /* Secondary: Soft slate (#F1F5F9) */
+  /* Secondary: Soft slate */
   --secondary: 210 40% 96%;
-  --secondary-foreground: 222 47% 11%;
+  --secondary-foreground: 220 70% 14%;
 
   /* Muted: Light gray surface */
-  --muted: 210 40% 96%;
-  --muted-foreground: 215 16% 47%;
+  --muted: 214 32% 91%;
+  --muted-foreground: 215 25% 40%;
 
-  /* Accent: Same as secondary for light mode */
+  /* Accent: Hover states */
   --accent: 210 40% 96%;
-  --accent-foreground: 222 47% 11%;
+  --accent-foreground: 220 70% 14%;
 
   /* Destructive */
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  /* Borders & Inputs (#E2E8F0) */
+  /* Borders & Inputs: Crisp, subtle gray (#E2E8F0) */
   --border: 214 32% 91%;
   --input: 214 32% 91%;
+
+  /* Ring: Thick, vibrant primary ring on focus */
   --ring: 263 83% 58%;
 
   /* Chart Colors */
   --chart-1: 263 83% 58%;
-  /* Violet */
   --chart-2: 160 84% 39%;
-  /* Emerald */
   --chart-3: 199 89% 48%;
-  /* Sky */
   --chart-4: 330 81% 60%;
-  /* Pink */
   --chart-5: 35 92% 50%;
-  /* Amber */
 
   /* Sidebar */
   --sidebar: 0 0% 100%;
-  --sidebar-foreground: 215 16% 47%;
+  --sidebar-foreground: 220 70% 14%;
   --sidebar-primary: 263 83% 58%;
   --sidebar-primary-foreground: 0 0% 100%;
   --sidebar-accent: 210 40% 96%;
@@ -114,10 +111,6 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
   body {
     @apply bg-background text-foreground;
   }
@@ -133,11 +126,12 @@
   }
 
   .glass-card {
-    @apply bg-white/70 backdrop-blur-xl border border-white/50 shadow-2xl xl:shadow-[0_8px_30px_rgb(0_0_0_/_0.04)];
+    @apply bg-white/70 backdrop-blur-xl border border-border shadow-md;
+
+    @media (min-width: 1280px) {
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+    }
   }
-
-  /* Make dark mode overrides for glass if ever added later, but default to light glass */
-
 }
 
 @media (prefers-reduced-motion: reduce) {

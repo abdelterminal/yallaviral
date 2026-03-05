@@ -27,16 +27,16 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="flex h-screen bg-background text-foreground">
+    <div className="flex h-screen bg-white text-foreground">
       {/* Sidebar */}
-      <div className="w-64 bg-card shadow-[4px_0_24px_rgba(0,0,0,0.04)] hidden md:block z-10">
+      <div className="w-72 hidden md:block z-10">
         <Sidebar />
       </div>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         <AdminHeader user={user!} />
-        <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-background">
+        <main className="flex-1 overflow-y-auto p-6 md:p-10 bg-slate-50/50">
           {children}
         </main>
       </div>
