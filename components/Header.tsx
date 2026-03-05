@@ -53,8 +53,8 @@ export function Header({ profile }: { profile: any }) {
     }, []);
 
     return (
-        <header className="sticky top-6 z-50 mx-auto w-[95%] max-w-7xl">
-            <div className="flex items-center justify-between rounded-[2rem] bg-card/90 backdrop-blur-xl border border-border px-8 py-4 shadow-[0_8px_30px_rgb(0_0_0_/_0.04)] transition-all duration-300">
+        <header className="sticky top-6 z-50 mx-auto w-[93%] max-w-7xl">
+            <div className="flex items-center justify-between rounded-[2rem] bg-white border border-border px-8 py-5 shadow-[0_8px_40px_rgb(0_0_0_/_0.06)] transition-all duration-300">
 
                 {/* Left: Mobile Menu Trigger & Breadcrumbs */}
                 <div className="flex items-center gap-2 text-sm text-muted-foreground min-w-[150px] sm:min-w-[200px]">
@@ -163,7 +163,7 @@ export function Header({ profile }: { profile: any }) {
                             placeholder={t('searchPlaceholder')}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full h-10 rounded-full border border-border bg-muted/50 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:bg-card focus:ring-1 focus:ring-primary/50 focus:border-primary/30 transition-all"
+                            className="w-full h-11 rounded-full border border-border bg-slate-50 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/50 focus:border-primary/30 transition-all"
                         />
                         <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1 pointer-events-none">
                             <span className="text-[10px] font-mono text-muted-foreground border border-border rounded px-1.5 py-0.5 group-focus-within:text-primary group-focus-within:border-primary/30 transition-all">⌘K</span>

@@ -126,7 +126,7 @@
   }
 
   .glass-card {
-    @apply bg-white/70 backdrop-blur-xl border border-border shadow-md;
+    @apply bg-white border border-border shadow-md;
 
     @media (min-width: 1280px) {
       box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
