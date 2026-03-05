@@ -4,42 +4,42 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function AdminLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    // Double check on server side layout as well
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+  // Double check on server side layout as well
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
-    let isAdmin = false;
-    if (user) {
-        const { data: profile } = await supabase
-            .from('profiles')
-            .select('role')
-            .eq('id', user.id)
-            .single();
-        isAdmin = profile?.role === 'admin';
-    }
+  let isAdmin = false;
+  if (user) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+    isAdmin = profile?.role === 'admin';
+  }
 
-    if (!user || !isAdmin) {
-        redirect("/");
-    }
+  if (!user || !isAdmin) {
+    redirect("/");
+  }
 
-    return (
-        <div className="flex h-screen bg-background text-foreground">
-            {/* Sidebar */}
-            <div className="w-64 border-r border-border hidden md:block">
-                <Sidebar />
-            </div>
+  return (
+    <div className="flex h-screen bg-background text-foreground">
+      {/* Sidebar */}
+      <div className="w-64 bg-card shadow-[4px_0_24px_rgba(0,0,0,0.04)] hidden md:block z-10">
+        <Sidebar />
+      </div>
 
-            {/* Main Content */}
-            <div className="flex-1 flex flex-col overflow-hidden">
-                <AdminHeader user={user!} />
-                <main className="flex-1 overflow-y-auto p-8 bg-black/50">
-                    {children}
-                </main>
-            </div>
-        </div>
-    );
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <AdminHeader user={user!} />
+        <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-background">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
 }

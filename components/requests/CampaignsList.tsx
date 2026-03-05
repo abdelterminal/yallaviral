@@ -36,7 +36,7 @@ export function CampaignsList({ bookings }: CampaignsListProps) {
         <div className="grid gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {bookings.map((booking) => (
                 <Link key={booking.id} href={`/requests/${booking.id}`}>
-                    <Card className="p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-primary/50 hover:bg-muted/50 transition-all group cursor-pointer border-border bg-card backdrop-blur-md">
+                    <Card className="p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-transparent hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:bg-card transition-all group cursor-pointer border-transparent bg-card backdrop-blur-md">
                         <div className="space-y-1">
                             <div className="flex items-center gap-3">
                                 <h3 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors">{t('campaignHash', { id: booking.id.slice(0, 8) })}</h3>

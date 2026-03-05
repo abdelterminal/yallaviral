@@ -34,7 +34,7 @@ export default async function LoginPage() {
                 </Link>
 
                 {/* Form Container */}
-                <div className="w-full bg-muted/50 border border-border p-8 rounded-3xl shadow-xl backdrop-blur-sm relative z-10">
+                <div className="w-full bg-muted/50 border border-transparent p-8 rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur-sm relative z-10">
                     <LoginForm />
                 </div>
 

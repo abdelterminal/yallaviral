@@ -25,9 +25,8 @@ export default async function DashboardLayout({
     return (
         <div className="min-h-screen bg-background font-sans selection:bg-primary/20 text-foreground flex">
             {/* Sidebar (Fixed Left) */}
-            <div className="sticky top-0 h-screen">
-                <Sidebar />
-            </div>
+            <div className="hidden md:block w-20 shrink-0 border-r border-transparent" />
+            <Sidebar />
 
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col relative min-w-0">

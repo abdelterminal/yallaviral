@@ -12,7 +12,7 @@ export function BookingCalendar({ bookedDates }: BookingCalendarProps) {
     const t = useTranslations('Shared');
 
     return (
-        <div className="rounded-xl border border-border bg-muted/50 p-5">
+        <div className="rounded-xl border border-transparent bg-muted/50 shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-5">
             <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
                     <CalendarDays className="h-4 w-4 text-primary" />

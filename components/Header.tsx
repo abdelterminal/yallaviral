@@ -54,7 +54,7 @@ export function Header({ profile }: { profile: any }) {
 
     return (
         <header className="sticky top-4 z-50 mx-auto w-[95%] max-w-7xl">
-            <div className="flex items-center justify-between rounded-full border border-border bg-card px-6 py-3 shadow-sm transition-all duration-300">
+            <div className="flex items-center justify-between rounded-full bg-white/80 backdrop-blur-xl border border-white/40 px-6 py-3 shadow-md shadow-black/5 transition-all duration-300">
 
                 {/* Left: Mobile Menu Trigger & Breadcrumbs */}
                 <div className="flex items-center gap-2 text-sm text-muted-foreground min-w-[150px] sm:min-w-[200px]">
@@ -84,7 +84,7 @@ export function Header({ profile }: { profile: any }) {
                                                 <SheetClose asChild key={link.href}>
                                                     <Link
                                                         href={link.href}
-                                                        className={cn( "flex items-center gap-3 rounded-lg px-3 py-3 transition-colors",
+                                                        className={cn("flex items-center gap-3 rounded-lg px-3 py-3 transition-colors",
                                                             isActive
                                                                 ? "bg-primary/10 text-foreground font-medium ring-1 ring-primary/30"
                                                                 : "text-muted-foreground hover:text-foreground hover:bg-muted"

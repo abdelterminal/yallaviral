@@ -53,7 +53,7 @@ export function Sidebar() {
   const allLinks = sidebarLinks;
 
   return (
-    <div className="group/sidebar hidden md:flex h-screen w-20 hover:w-64 flex-col border-r border-border bg-card py-6 transition-[width] duration-300 ease-in-out">
+    <div className="group/sidebar hidden md:flex h-screen w-20 hover:w-64 flex-col border-r border-border bg-card py-6 transition-[width] duration-300 ease-in-out fixed top-0 left-0 z-[60] shadow-sm hover:shadow-2xl hover:border-r-primary/20">
       <div className="mb-8 flex items-center px-4">
         <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 shadow-sm">
           <YallaLogo className="h-7 w-7" />
@@ -75,7 +75,7 @@ export function Sidebar() {
               className="group relative flex items-center gap-4 transition-all duration-300"
             >
               <div
-                className={cn( "flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl transition-all duration-300 group-hover:scale-105",
+                className={cn("flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl transition-all duration-300 group-hover:scale-105",
                   isActive
                     ? "bg-gradient-to-br from-primary via-primary to-purple-600 text-primary-foreground shadow-md ring-1 ring-primary/20"
                     : "text-muted-foreground hover:bg-muted hover:text-primary"
@@ -84,7 +84,7 @@ export function Sidebar() {
                 <Icon className={cn("h-5 w-5", isActive && "fill-current animate-pulse")} />
               </div>
               <span
-                className={cn( "text-sm font-medium transition-all duration-300 whitespace-nowrap overflow-hidden group-hover:translate-x-1", "opacity-0 group-hover/sidebar:opacity-100",
+                className={cn("text-sm font-medium transition-all duration-300 whitespace-nowrap overflow-hidden group-hover:translate-x-1", "opacity-0 group-hover/sidebar:opacity-100",
                   isActive ? "text-foreground" : "text-muted-foreground group-hover:text-primary"
                 )}
               >
