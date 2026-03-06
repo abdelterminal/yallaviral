@@ -37,55 +37,57 @@ export function TalentSelectionStep({ availableModels, onNext, onBack }: TalentS
                 {availableModels.map((model) => {
                     const isSelected = selectedModels.some(s => s.id === model.id);
                     return (
-                        <Card key={model.id} className={cn( "relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)] hover:border-primary/50 group h-[380px] flex flex-col",
-                            isSelected ? "ring-2 ring-primary border-primary bg-primary/10 shadow-[0_0_30px_rgba(124,58,237,0.2)]" : ""
+                        <Card key={model.id} className={cn("relative transition-all duration-500 rounded-[2.5rem] hover:-translate-y-2 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] group h-[420px] flex flex-col border-0 bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)]",
+                            isSelected ? "ring-[6px] ring-primary ring-offset-4 bg-primary/5" : ""
                         )}>
-                            <div className="relative h-2/3 w-full bg-muted overflow-hidden">
-                                {model.image_url ? (
-                                    <img
-                                        src={model.image_url}
-                                        alt={model.name}
-                                        className={cn( "h-full w-full object-cover transition-transform duration-700",
-                                            isSelected ? "scale-105 saturate-0" : "group-hover:scale-105"
-                                        )}
-                                    />
-                                ) : (
-                                    <div className="flex h-full items-center justify-center text-muted-foreground">{tc('noImage')}</div>
-                                )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <div className="relative h-[280px] w-full p-4 pb-0">
+                                <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-slate-100 shadow-inner">
+                                    {model.image_url ? (
+                                        <img
+                                            src={model.image_url}
+                                            alt={model.name}
+                                            className={cn("h-full w-full object-cover transition-transform duration-700",
+                                                isSelected ? "scale-105 saturate-0" : "group-hover:scale-105"
+                                            )}
+                                        />
+                                    ) : (
+                                        <div className="flex h-full items-center justify-center text-muted-foreground">{tc('noImage')}</div>
+                                    )}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-                                <div className="absolute bottom-3 left-3 right-3 text-foreground">
-                                    <h4 className="font-bold text-lg leading-tight">{model.name}</h4>
-                                    <div className="flex flex-wrap gap-1 mt-1">
-                                        {model.tags?.slice(0, 2).map(tag => (
-                                            <span key={tag} className="text-[10px] bg-muted backdrop-blur-md px-1.5 py-0.5 rounded text-foreground/90">#{tag}</span>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {isSelected && (
-                                    <div className="absolute inset-0 flex items-center justify-center bg-card backdrop-blur-[1px]">
-                                        <div className="bg-primary text-foreground px-3 py-1 rounded-full font-bold shadow-lg animate-in zoom-in flex items-center gap-2">
-                                            <CheckCircle2 className="h-4 w-4" /> {tc('selected')}
+                                    <div className="absolute bottom-3 left-3 right-3 text-foreground">
+                                        <h4 className="font-bold text-lg leading-tight">{model.name}</h4>
+                                        <div className="flex flex-wrap gap-1 mt-1">
+                                            {model.tags?.slice(0, 2).map(tag => (
+                                                <span key={tag} className="text-[10px] bg-muted backdrop-blur-md px-1.5 py-0.5 rounded text-foreground/90">#{tag}</span>
+                                            ))}
                                         </div>
                                     </div>
-                                )}
+
+                                    {isSelected && (
+                                        <div className="absolute inset-0 flex items-center justify-center bg-card/40 backdrop-blur-md rounded-[2rem]">
+                                            <div className="bg-primary text-white px-5 py-2.5 rounded-full font-black text-sm shadow-[0_8px_30px_-6px_hsl(var(--primary))] animate-in zoom-in flex items-center gap-2">
+                                                <CheckCircle2 className="h-5 w-5" /> {tc('selected')}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
-                            <div className="p-4 flex flex-col flex-1 gap-3">
+                            <div className="p-6 flex flex-col flex-1 gap-4 bg-transparent pt-4">
                                 <div className="flex items-center justify-between text-sm">
                                     <span className="text-muted-foreground">{tc('rate')}</span>
                                     <span className="font-bold">{model.hourly_rate} MAD<span className="text-xs font-normal text-muted-foreground">/video</span></span>
                                 </div>
 
-                                <div className="flex gap-2 mt-auto">
+                                <div className="flex gap-3 mt-auto mb-2">
                                     <ModelPortfolio model={model}>
-                                        <Button variant="ghost" size="sm" className="text-xs text-primary hover:text-primary/80 hover:bg-primary/10 px-2">
+                                        <Button variant="ghost" size="sm" className="text-xs font-bold text-primary hover:text-primary/80 hover:bg-primary/10 px-3 py-6 rounded-2xl h-12">
                                             <Eye className="h-3 w-3 mr-1" /> {tc('portfolio')}
                                         </Button>
                                     </ModelPortfolio>
                                     <Button
-                                        className={cn("flex-1 font-bold", isSelected ? "bg-secondary hover:bg-secondary/80 text-foreground" : "bg-primary hover:bg-primary/90")}
+                                        className={cn("flex-1 font-black rounded-2xl h-12 transition-all", isSelected ? "bg-slate-100 hover:bg-slate-200 text-foreground border-0 shadow-none" : "bg-primary hover:bg-primary/90 shadow-[0_8px_20px_-6px_hsl(var(--primary))]")}
                                         variant={isSelected ? "secondary" : "default"}
                                         onClick={() => {
                                             if (isSelected) {

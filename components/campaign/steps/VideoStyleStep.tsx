@@ -44,14 +44,14 @@ export function VideoStyleStep({ onNext, onBack }: VideoStyleStepProps) {
                     return (
                         <Card
                             key={style.id}
-                            className={cn("relative overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)] group border-2",
+                            className={cn("relative overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] group border-0 rounded-[2rem]",
                                 isSelected
-                                    ? `ring-2 ring-primary border-primary bg-primary/10 shadow-[0_0_30px_rgba(124,58,237,0.2)]`
-                                    : "border-border hover:border-primary/30 bg-card"
+                                    ? `ring-[4px] ring-primary ring-offset-2 bg-primary/5 shadow-[0_10px_30px_-10px_hsl(var(--primary))]`
+                                    : "bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]"
                             )}
                             onClick={() => setGlobalVideoStyle(style.id)}
                         >
-                            <div className="p-6 flex items-start gap-4">
+                            <div className="p-8 flex items-start gap-4">
                                 <div className={cn("p-3 rounded-xl", style.bgColor, style.color)}>
                                     <Icon className="h-8 w-8" />
                                 </div>

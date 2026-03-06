@@ -36,33 +36,35 @@ export function StudioSelectionStep({ availableStudios, onNext, onBack }: Studio
                     return (
                         <Card
                             key={studio.id}
-                            className={cn( "group relative overflow-hidden cursor-pointer transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)]",
-                                isSelected ? "ring-2 ring-primary border-primary bg-primary/10 shadow-[0_0_30px_rgba(124,58,237,0.2)]" : ""
+                            className={cn("group relative cursor-pointer transition-all duration-500 rounded-[2.5rem] hover:-translate-y-2 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-0 bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] flex flex-col h-[340px]",
+                                isSelected ? "ring-[6px] ring-primary ring-offset-4 bg-primary/5" : ""
                             )}
                             onClick={() => setSelectedStudio(studio)}
                         >
-                            <div className="aspect-video w-full bg-muted overflow-hidden">
-                                {studio.image_url ? (
-                                    <img
-                                        src={studio.image_url}
-                                        alt={studio.name}
-                                        className={cn( "h-full w-full object-cover transition-transform duration-700",
-                                            isSelected ? "scale-105" : "group-hover:scale-105"
-                                        )}
-                                    />
-                                ) : (
-                                    <div className="flex h-full items-center justify-center text-muted-foreground">{tc('noImage')}</div>
-                                )}
+                            <div className="relative h-[180px] w-full p-4 pb-0">
+                                <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-slate-100 shadow-inner">
+                                    {studio.image_url ? (
+                                        <img
+                                            src={studio.image_url}
+                                            alt={studio.name}
+                                            className={cn("h-full w-full object-cover transition-transform duration-700",
+                                                isSelected ? "scale-105" : "group-hover:scale-105"
+                                            )}
+                                        />
+                                    ) : (
+                                        <div className="flex h-full items-center justify-center text-muted-foreground">{tc('noImage')}</div>
+                                    )}
+                                </div>
                                 {isSelected && (
-                                    <div className="absolute inset-0 flex items-center justify-center bg-card backdrop-blur-[1px]">
-                                        <div className="bg-primary text-foreground h-10 w-10 rounded-full flex items-center justify-center shadow-lg animate-in zoom-in">
+                                    <div className="absolute inset-0 flex items-center justify-center bg-card/40 backdrop-blur-md rounded-[2rem]">
+                                        <div className="bg-primary text-white h-12 w-12 rounded-full flex items-center justify-center shadow-[0_8px_30px_-6px_hsl(var(--primary))] animate-in zoom-in">
                                             <CheckCircle2 className="h-6 w-6" />
                                         </div>
                                     </div>
                                 )}
                             </div>
 
-                            <div className="p-4">
+                            <div className="p-6 flex flex-col flex-1 bg-transparent pt-4">
                                 <h3 className="font-bold text-lg mb-1">{studio.name}</h3>
                                 {studio.tags && (
                                     <div className="flex items-center gap-1 text-xs text-muted-foreground mb-3">
