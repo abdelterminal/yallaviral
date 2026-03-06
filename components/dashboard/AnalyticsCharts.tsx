@@ -26,10 +26,10 @@ interface AnalyticsChartsProps {
 }
 
 const STATUS_COLORS: Record<string, string> = {
-    pending: "#f59e0b",
-    confirmed: "#10b981",
-    rejected: "#ef4444",
-    completed: "#3b82f6",
+    pending: "#d97706",
+    confirmed: "#2d9660",
+    rejected: "#dc2626",
+    completed: "#2d82a0",
 };
 
 export function AnalyticsCharts({ bookings }: AnalyticsChartsProps) {
@@ -70,8 +70,8 @@ export function AnalyticsCharts({ bookings }: AnalyticsChartsProps) {
                     <AreaChart data={spendingData} margin={{ top: 4, right: 4, left: -16, bottom: 0 }}>
                         <defs>
                             <linearGradient id="spendGradient" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="hsl(263 83% 58%)" stopOpacity={0.2} />
-                                <stop offset="95%" stopColor="hsl(263 83% 58%)" stopOpacity={0} />
+                                <stop offset="5%" stopColor="hsl(20 68% 44%)" stopOpacity={0.2} />
+                                <stop offset="95%" stopColor="hsl(20 68% 44%)" stopOpacity={0} />
                             </linearGradient>
                         </defs>
                         <XAxis
@@ -99,7 +99,7 @@ export function AnalyticsCharts({ bookings }: AnalyticsChartsProps) {
                         <Area
                             type="monotone"
                             dataKey="total"
-                            stroke="hsl(263 83% 58%)"
+                            stroke="hsl(20 68% 44%)"
                             strokeWidth={2}
                             fill="url(#spendGradient)"
                         />

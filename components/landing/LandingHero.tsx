@@ -10,7 +10,7 @@ export function LandingHero() {
     const t = useTranslations('Landing');
 
     return (
-        <section className="relative w-full pt-20 pb-32 lg:pt-32 lg:pb-40 overflow-hidden">
+        <section className="zellige-bg relative w-full pt-20 pb-32 lg:pt-32 lg:pb-40 overflow-hidden">
             {/* Background Effects */}
             <div className="absolute inset-0 -z-10 bg-grid-slate-100/[0.04] bg-[bottom_1px_center]" />
 
@@ -146,7 +146,7 @@ export function LandingHero() {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, delay: 0.9 }}
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card border border-border shadow-[0_20px_40px_-5px_rgba(124,58,237,0.1)] p-6 rounded-3xl w-64"
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card border border-border shadow-[0_20px_40px_-5px_rgba(192,86,33,0.1)] p-6 rounded-3xl w-64"
                         >
                             <div className="flex items-center gap-2 mb-3">
                                 <div className="p-2 bg-primary/10 rounded-xl">
@@ -162,7 +162,7 @@ export function LandingHero() {
                                     initial={{ width: 0 }}
                                     animate={{ width: "85%" }}
                                     transition={{ duration: 1.5, delay: 1 }}
-                                    className="h-full bg-gradient-to-r from-primary to-purple-500 rounded-full"
+                                    className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
                                 />
                             </div>
                         </motion.div>

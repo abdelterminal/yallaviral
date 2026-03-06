@@ -85,18 +85,20 @@ export default async function DashboardPage() {
                 {stats.map((stat) => (
                     <div
                         key={stat.label}
-                        className={`rounded-xl border p-5 ${stat.highlight
-                            ? "border-primary/30 bg-primary/5"
-                            : "border-border bg-card"
+                        className={`rounded-3xl p-6 ${stat.highlight
+                            ? "bg-primary text-white shadow-[0_10px_30px_-10px_hsl(var(--primary))]"
+                            : "bg-card shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]"
                             }`}
                     >
-                        <div className="flex items-center justify-between mb-3">
-                            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                        <div className="flex items-center justify-between mb-4">
+                            <span className={`text-xs font-bold uppercase tracking-wider ${stat.highlight ? "text-white/80" : "text-muted-foreground"}`}>
                                 {stat.label}
                             </span>
-                            <stat.icon className="h-4 w-4 text-muted-foreground" />
+                            <div className={`p-2.5 rounded-full ${stat.highlight ? "bg-white/20 text-white" : "bg-primary/10 text-primary"}`}>
+                                <stat.icon className="h-5 w-5" />
+                            </div>
                         </div>
-                        <p className={`text-2xl font-bold ${stat.highlight ? "text-primary" : "text-foreground"}`}>
+                        <p className={`text-3xl font-black tracking-tight ${stat.highlight ? "text-white" : "text-foreground"}`}>
                             {stat.value}
                         </p>
                     </div>
@@ -106,10 +108,10 @@ export default async function DashboardPage() {
             {/* Main Content */}
             <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
                 {/* Recent Bookings Table */}
-                <div className="rounded-xl border border-border bg-card overflow-hidden">
-                    <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-                        <h2 className="text-sm font-semibold text-foreground">{t('recentBookings')}</h2>
-                        <Link href="/requests" className="text-xs text-primary hover:text-primary/80 font-medium transition-colors">
+                <div className="rounded-[2rem] bg-card overflow-hidden shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)]">
+                    <div className="flex items-center justify-between px-6 py-5 border-b border-border/40">
+                        <h2 className="text-[15px] font-bold text-foreground">{t('recentBookings')}</h2>
+                        <Link href="/requests" className="text-sm text-primary hover:text-primary/80 font-bold transition-colors">
                             {tc('viewAll')}
                         </Link>
                     </div>

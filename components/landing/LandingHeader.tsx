@@ -29,7 +29,7 @@ export function LandingHeader() {
         >
             <div className={cn("container max-w-7xl mx-auto flex items-center justify-between px-8 py-4 transition-all duration-500",
                 isScrolled
-                    ? "bg-white border border-slate-200 rounded-[2.5rem] shadow-[0_12px_40px_rgb(0_0_0_/_0.06)]"
+                    ? "bg-background/95 backdrop-blur-sm border border-border rounded-[2.5rem] shadow-[0_12px_40px_rgb(0_0_0_/_0.06)]"
                     : "bg-transparent border-transparent py-6"
             )}>
                 <Link href="/" className="flex items-center gap-2 group">

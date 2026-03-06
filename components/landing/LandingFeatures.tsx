@@ -5,17 +5,17 @@ import { Video, Mic, Zap, TrendingUp } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const featureKeys = [
-    { titleKey: "feature1Title", descKey: "feature1Desc", icon: Video, color: "139, 92, 246" },
-    { titleKey: "feature2Title", descKey: "feature2Desc", icon: Mic, color: "16, 185, 129" },
-    { titleKey: "feature3Title", descKey: "feature3Desc", icon: Zap, color: "234, 179, 8" },
-    { titleKey: "feature4Title", descKey: "feature4Desc", icon: TrendingUp, color: "59, 130, 246" },
+    { titleKey: "feature1Title", descKey: "feature1Desc", icon: Video, color: "192, 86, 33" },
+    { titleKey: "feature2Title", descKey: "feature2Desc", icon: Mic, color: "34, 150, 110" },
+    { titleKey: "feature3Title", descKey: "feature3Desc", icon: Zap, color: "245, 166, 35" },
+    { titleKey: "feature4Title", descKey: "feature4Desc", icon: TrendingUp, color: "45, 130, 160" },
 ] as const;
 
 export function LandingFeatures() {
     const t = useTranslations('Landing');
 
     return (
-        <section id="features" className="py-32 bg-slate-50 relative overflow-hidden">
+        <section id="features" className="py-32 bg-muted/40 relative overflow-hidden">
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <h2 className="text-4xl font-black tracking-tighter sm:text-6xl text-foreground mb-6">

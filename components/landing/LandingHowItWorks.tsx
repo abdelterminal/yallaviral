@@ -13,7 +13,7 @@ export function LandingHowItWorks() {
     const t = useTranslations('Landing');
 
     return (
-        <section className="py-32 bg-white relative">
+        <section className="py-32 bg-background relative">
             <div className="container px-4 md:px-6 mx-auto">
                 <div className="text-center mb-20">
                     <h2 className="text-4xl font-black tracking-tighter sm:text-6xl text-foreground mb-6">
@@ -26,11 +26,11 @@ export function LandingHowItWorks() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative max-w-5xl mx-auto">
                     {/* Connecting Line (Desktop) */}
-                    <div className="hidden md:block absolute top-12 left-[20%] right-[20%] h-0.5 bg-slate-100" />
+                    <div className="hidden md:block absolute top-12 left-[20%] right-[20%] h-0.5 bg-border" />
 
                     {stepKeys.map((step, index) => (
                         <div key={index} className="flex flex-col items-center text-center space-y-8 relative z-10">
-                            <div className="h-24 w-24 rounded-[2rem] bg-white border border-slate-100 flex items-center justify-center relative shadow-sm group hover:border-primary/30 transition-all duration-300">
+                            <div className="h-24 w-24 rounded-[2rem] bg-card border border-border flex items-center justify-center relative shadow-sm group hover:border-primary/30 transition-all duration-300">
                                 <step.icon className="h-10 w-10 text-primary transition-transform group-hover:scale-110" />
                                 <div className="absolute -top-3 -right-3 h-10 w-10 rounded-full bg-primary text-white font-black flex items-center justify-center border-4 border-white shadow-sm text-sm">
                                     {index + 1}

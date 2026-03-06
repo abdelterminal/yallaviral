@@ -30,10 +30,10 @@ export function Sidebar() {
                     <Link
                         key={link.href}
                         href={link.href}
-                        className={cn("flex items-center gap-3 px-3 py-3 rounded-2xl text-base font-bold transition-all duration-300 mx-2",
+                        className={cn("flex items-center gap-3 px-4 py-3.5 rounded-full text-[15px] font-bold transition-all duration-300 mx-2 hover:-translate-y-0.5",
                             pathname === link.href
-                                ? "bg-primary text-primary-foreground shadow-[0_8px_30px_rgb(0_0_0_/_0.08)]"
-                                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                                ? "bg-primary text-white shadow-[0_8px_20px_-6px_hsl(var(--primary))]"
+                                : "text-muted-foreground hover:text-foreground hover:bg-slate-50/80"
                         )}
                     >
                         <link.icon className={cn("h-5 w-5", pathname === link.href && "fill-current")} />
