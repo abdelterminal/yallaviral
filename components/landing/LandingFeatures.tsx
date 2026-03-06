@@ -31,8 +31,8 @@ export function LandingFeatures() {
                     transition={{ duration: 0.7 }}
                     className="text-center max-w-3xl mx-auto mb-20"
                 >
-                    <span className="text-xs font-black uppercase tracking-widest text-primary mb-4 block">Features</span>
-                    <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-900 mb-6 pb-2">
+                    <span className="text-xs font-black uppercase tracking-widest text-primary mb-6 block">Features</span>
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-8 pb-4">
                         {t('featuresTitle')}
                     </h2>
                     <p className="text-lg md:text-xl text-slate-500 leading-relaxed">
@@ -62,7 +62,7 @@ export function LandingFeatures() {
                             >
                                 <feature.icon className="h-7 w-7" />
                             </div>
-                            <h3 className="text-2xl font-extrabold text-slate-900 mb-4 tracking-tight">{t(feature.titleKey)}</h3>
+                            <h3 className="text-2xl font-extrabold text-slate-900 mb-5 tracking-tight px-2">{t(feature.titleKey)}</h3>
                             <p className="text-base text-slate-500 leading-relaxed max-w-[280px] mx-auto">
                                 {t(feature.descKey)}
                             </p>

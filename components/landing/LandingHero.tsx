@@ -34,7 +34,7 @@ export function LandingHero() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tighter leading-[1.1] text-white pb-2"
+                        className="text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tight leading-[1.15] text-white pb-6 px-4"
                         style={{ textShadow: '0 4px 30px rgba(0,82,255,0.3)' }}
                     >
                         {t('heroTitle1')} <br />
@@ -47,7 +47,7 @@ export function LandingHero() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="max-w-[700px] text-lg md:text-xl text-slate-300 leading-relaxed"
+                        className="max-w-[750px] text-lg md:text-xl text-slate-300 leading-relaxed px-6"
                     >
                         {t('heroDescription', { code: 'MAROC2026' })}
                     </motion.p>

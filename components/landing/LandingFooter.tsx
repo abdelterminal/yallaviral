@@ -23,9 +23,9 @@ export function LandingFooter() {
                             <div className="bg-slate-50 p-2 rounded-lg border border-slate-200 transition-colors">
                                 <YallaLogo className="h-6 w-6 text-foreground" />
                             </div>
-                            <span className="text-2xl font-black text-slate-900 tracking-tighter">YallaViral</span>
+                            <span className="text-2xl font-black text-slate-900 tracking-tight ml-1">YallaViral</span>
                         </div>
-                        <p className="text-slate-500 text-sm leading-relaxed">
+                        <p className="text-slate-500 text-sm leading-relaxed px-1">
                             {t('footerBrandDesc')}
                         </p>
                         <div className="flex gap-3">
