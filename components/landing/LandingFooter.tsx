@@ -23,9 +23,9 @@ export function LandingFooter() {
                             <div className="bg-slate-50 p-2 rounded-lg border border-slate-200 transition-colors">
                                 <YallaLogo className="h-6 w-6 text-foreground" />
                             </div>
-                            <span className="text-xl font-black text-slate-900 tracking-tighter">YallaViral</span>
+                            <span className="text-2xl font-black text-slate-900 tracking-tight ml-1">YallaViral</span>
                         </div>
-                        <p className="text-slate-500 text-sm leading-relaxed">
+                        <p className="text-slate-500 text-sm leading-relaxed px-1">
                             {t('footerBrandDesc')}
                         </p>
                         <div className="flex gap-3">
@@ -43,7 +43,7 @@ export function LandingFooter() {
 
                     {/* Column 2: Platform */}
                     <div>
-                        <h4 className="text-slate-900 font-black text-sm uppercase tracking-wider mb-6">{t('footerPlatform')}</h4>
+                        <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 mb-6">{t('footerPlatform')}</h4>
                         <ul className="space-y-3">
                             <li><Link href="/models" className="text-slate-500 hover:text-primary transition-colors text-sm">{t('footerBrowseCreators')}</Link></li>
                             <li><Link href="/studio" className="text-slate-500 hover:text-primary transition-colors text-sm">{t('footerBookStudios')}</Link></li>
@@ -55,11 +55,11 @@ export function LandingFooter() {
 
                     {/* Column 3: Company */}
                     <div>
-                        <h4 className="text-slate-900 font-black text-sm uppercase tracking-wider mb-6">{t('footerCompany')}</h4>
+                        <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 mb-6">{t('footerCompany')}</h4>
                         <ul className="space-y-3">
                             <li><Link href="#" className="text-slate-500 hover:text-primary transition-colors text-sm">{t('footerAbout')}</Link></li>
                             <li><Link href="#" className="text-slate-500 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                                {t('footerCareers')} <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold">{t('footerHiring')}</span>
+                                {t('footerCareers')} <span className="text-[10px] font-black uppercase tracking-widest bg-primary/10 text-primary px-2 py-0.5 rounded-full">{t('footerHiring')}</span>
                             </Link></li>
                             <li><Link href="#" className="text-slate-500 hover:text-primary transition-colors text-sm">{t('footerBlog')}</Link></li>
                             <li><Link href="#" className="text-slate-500 hover:text-primary transition-colors text-sm">{t('footerPartner')}</Link></li>
@@ -68,7 +68,7 @@ export function LandingFooter() {
 
                     {/* Column 4: Contact */}
                     <div>
-                        <h4 className="text-slate-900 font-black text-sm uppercase tracking-wider mb-6">{t('footerContact')}</h4>
+                        <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 mb-6">{t('footerContact')}</h4>
                         <ul className="space-y-3">
                             <li className="flex items-start gap-3 text-slate-500 text-sm">
                                 <MapPin className="h-5 w-5 text-primary shrink-0" />

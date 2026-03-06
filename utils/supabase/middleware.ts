@@ -31,44 +31,55 @@ export async function updateSession(request: NextRequest) {
     // supabase.auth.getUser(). A simple mistake could make it very hard to debug
     // issues with users being randomly logged out.
 
-    const {
-        data: { user },
-    } = await supabase.auth.getUser()
+    try {
+        const {
+            data: { user },
+            error
+        } = await supabase.auth.getUser()
 
-    if (
-        !user &&
-        !request.nextUrl.pathname.startsWith('/login') &&
-        !request.nextUrl.pathname.startsWith('/auth') &&
-        !request.nextUrl.pathname.startsWith('/signup') &&
-        request.nextUrl.pathname !== '/'
-    ) {
-        // no user, potentially respond by redirecting the user to the login page
-        const url = request.nextUrl.clone()
-        url.pathname = '/login'
-        return NextResponse.redirect(url)
-    }
+        // If we get a specific Refresh Token error, we should clear the cookies
+        // so the system doesn't keep trying to refresh an invalid token.
+        const errorMsg = error?.message?.toLowerCase() || '';
+        if (error && (errorMsg.includes('refresh_token_not_found') || errorMsg.includes('invalid refresh token'))) {
+            const clearResponse = NextResponse.next({ request });
+            // By returning a fresh response without the session cookies, 
+            // the client-side will effectively be logged out.
+            return clearResponse;
+        }
 
-    // Admin Route Protection
-    if (request.nextUrl.pathname.startsWith('/admin')) {
-        // If no user, the block above would have redirected (unless it didn't catch it?)
-        // The block above redirects if !user AND path is NOT /login etc. 
-        // So if path IS /admin and !user, it redirects to /login.
-        // Here user might be present.
+        if (
+            !user &&
+            !request.nextUrl.pathname.startsWith('/login') &&
+            !request.nextUrl.pathname.startsWith('/auth') &&
+            !request.nextUrl.pathname.startsWith('/signup') &&
+            request.nextUrl.pathname !== '/'
+        ) {
+            // no user, potentially respond by redirecting the user to the login page
+            const url = request.nextUrl.clone()
+            url.pathname = '/login'
+            return NextResponse.redirect(url)
+        }
 
-        if (user) {
-            const { data: profile } = await supabase
-                .from('profiles')
-                .select('role')
-                .eq('id', user.id)
-                .single();
+        // Admin Route Protection
+        if (request.nextUrl.pathname.startsWith('/admin')) {
+            if (user) {
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('role')
+                    .eq('id', user.id)
+                    .single();
 
-            if (profile?.role !== 'admin') {
-                // Redirect unauthorized users to home
-                const url = request.nextUrl.clone()
-                url.pathname = '/'
-                return NextResponse.redirect(url)
+                if (profile?.role !== 'admin') {
+                    // Redirect unauthorized users to home
+                    const url = request.nextUrl.clone()
+                    url.pathname = '/'
+                    return NextResponse.redirect(url)
+                }
             }
         }
+    } catch (e) {
+        // Fallback for unexpected errors during getUser
+        console.error('Middleware Auth Error:', e);
     }
 
     // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
