@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon, Clock } from "lucide-react";
+import { Calendar as CalendarIcon, Clock, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -46,10 +47,10 @@ export function BookingSheet({ resource, children }: BookingSheetProps) {
         if (res.success && 'bookingId' in res) {
             router.push(`/success?id=${res.bookingId}`);
         } else if (!res.success && 'error' in res) {
-            alert("Booking failed: " + res.error);
+            toast.error(res.error);
             setIsLoading(false);
         } else {
-            alert("Booking failed.");
+            toast.error("Booking failed. Please try again.");
             setIsLoading(false);
         }
     };
@@ -109,7 +110,7 @@ export function BookingSheet({ resource, children }: BookingSheetProps) {
 
                     {/* Summary Section */}
                     {date && timeSlot && (
-                        <div className="rounded-lg bg-muted p-4 space-y-2">
+                        <div className="rounded-2xl bg-muted/50 p-4 space-y-2">
                             <h3 className="font-semibold">Booking Summary</h3>
                             <div className="flex justify-between text-sm">
                                 <span>Resource:</span>
@@ -138,7 +139,11 @@ export function BookingSheet({ resource, children }: BookingSheetProps) {
                         disabled={!date || !timeSlot || isLoading}
                         onClick={handleBooking}
                     >
-                        {isLoading ? "Booking..." : `Request Booking ${date && timeSlot ? `• ${calculateTotal()} MAD` : ''}`}
+                        {isLoading ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                            `Request Booking ${date && timeSlot ? `• ${calculateTotal()} MAD` : ''}`
+                        )}
                     </Button>
                 </SheetFooter>
             </SheetContent>

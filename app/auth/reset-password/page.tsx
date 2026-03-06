@@ -125,7 +125,7 @@ export default function ResetPasswordPage() {
                         <>
                             <div className="text-center mb-8">
                                 <h2 className="text-3xl font-black tracking-tight mb-2">New Password</h2>
-                                <p className="text-sm text-slate-400">
+                                <p className="text-sm text-white/50">
                                     Choose a strong password for your account.
                                 </p>
                             </div>
@@ -222,7 +222,7 @@ export default function ResetPasswordPage() {
                                 <CheckCircle2 className="h-8 w-8 text-emerald-600" />
                             </div>
                             <h2 className="text-2xl font-black text-foreground tracking-tight">Password Updated!</h2>
-                            <p className="text-sm text-slate-400">
+                            <p className="text-sm text-white/50">
                                 Redirecting you to dashboard...
                             </p>
                         </div>

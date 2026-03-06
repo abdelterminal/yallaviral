@@ -38,7 +38,7 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                 <h3 className="text-2xl font-black tracking-tight text-foreground">{t('videoQuantities')}</h3>
 
                 {hasNoTalent ? (
-                    <div className="flex items-center justify-between p-6 bg-slate-50/50 rounded-[1.5rem] shadow-inner border-0">
+                    <div className="flex items-center justify-between p-6 bg-muted/50 rounded-[1.5rem] shadow-inner border-0">
                         <div>
                             <p className="font-bold text-lg text-foreground">{t('totalVideos')}</p>
                             <p className="text-sm text-muted-foreground">{t('usingOwnTalent')}</p>
@@ -47,7 +47,7 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                             <Button
                                 variant="outline"
                                 size="icon"
-                                className="border-0 shadow-sm rounded-full text-foreground hover:bg-slate-100 bg-white"
+                                className="border-0 shadow-sm rounded-full text-foreground hover:bg-muted bg-card"
                                 onClick={() => setGlobalQuantity(Math.max(1, globalQuantity - 1))}
                             >
                                 <Minus className="h-4 w-4 text-muted-foreground mr-[2px]" />
@@ -56,7 +56,7 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                             <Button
                                 variant="outline"
                                 size="icon"
-                                className="border-0 shadow-sm rounded-full text-foreground hover:bg-slate-100 bg-white"
+                                className="border-0 shadow-sm rounded-full text-foreground hover:bg-muted bg-card"
                                 onClick={() => setGlobalQuantity(globalQuantity + 1)}
                             >
                                 <Plus className="h-4 w-4" />
@@ -66,9 +66,9 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                 ) : (
                     <div className="space-y-4">
                         {selectedModels.map(model => (
-                            <div key={model.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-slate-50/50 shadow-inner rounded-[1.5rem] border-0 gap-4">
+                            <div key={model.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-muted/50 shadow-inner rounded-[1.5rem] border-0 gap-4">
                                 <div className="flex items-center gap-4">
-                                    <div className="h-16 w-16 shadow-sm rounded-[1rem] overflow-hidden bg-slate-100 p-1">
+                                    <div className="h-16 w-16 shadow-sm rounded-[1rem] overflow-hidden bg-muted p-1">
                                         {model.image_url ? (
                                             <img src={model.image_url} alt={model.name} className="h-full w-full object-cover" />
                                         ) : (
@@ -84,7 +84,7 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                                     <Button
                                         variant="ghost"
                                         size="icon"
-                                        className="h-8 w-8 rounded-full hover:bg-slate-100"
+                                        className="h-8 w-8 rounded-full hover:bg-muted"
                                         onClick={() => setModelQuantity(model.id, Math.max(1, (model.quantity || 1) - 1))}
                                     >
                                         <Minus className="h-4 w-4 text-muted-foreground ml-[-1px]" />
@@ -93,7 +93,7 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                                     <Button
                                         variant="ghost"
                                         size="icon"
-                                        className="h-8 w-8 rounded-full hover:bg-slate-100"
+                                        className="h-8 w-8 rounded-full hover:bg-muted"
                                         onClick={() => setModelQuantity(model.id, (model.quantity || 1) + 1)}
                                     >
                                         <Plus className="h-4 w-4 text-muted-foreground mr-[0px]" />

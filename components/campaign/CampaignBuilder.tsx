@@ -182,21 +182,21 @@ export function CampaignBuilder({ availableModels, availableStudios }: CampaignB
                             {/* Summary Card */}
                             <Card className="p-8 space-y-6 h-fit bg-white border-0 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)] rounded-[2rem]">
                                 <h3 className="font-black text-2xl tracking-tight">{t('campaignRequest')}</h3>
-                                <div className="space-y-4 text-base bg-slate-50/50 p-6 rounded-2xl shadow-inner border-0">
-                                    <div className="flex justify-between py-2 border-b border-slate-200">
+                                <div className="space-y-4 text-base bg-muted/50 p-6 rounded-2xl shadow-inner border-0">
+                                    <div className="flex justify-between py-2 border-b border-border">
                                         <span className="text-muted-foreground font-bold">{t('shootDate')}</span>
                                         <span className="font-black flex items-center gap-2 text-foreground">
                                             <CalendarIcon className="h-4 w-4" />
                                             {date ? format(date, "MMM do, yyyy") : t('tbd')} {time ? `${t('at')} ${time}` : ''}
                                         </span>
                                     </div>
-                                    <div className="flex justify-between py-2 border-b border-slate-200">
+                                    <div className="flex justify-between py-2 border-b border-border">
                                         <span className="text-muted-foreground font-bold">{t('totalVideoCount')}</span>
                                         <span className="font-black text-foreground">
                                             {totalVideos}
                                         </span>
                                     </div>
-                                    <div className="flex justify-between py-2 border-b border-slate-200">
+                                    <div className="flex justify-between py-2 border-b border-border">
                                         <span className="text-muted-foreground font-bold">{t('talentCount')}</span>
                                         <span className="font-black text-foreground">{hasNoTalent ? t('ownTalent') : selectedModels.length}</span>
                                     </div>

@@ -55,7 +55,7 @@ export function LoginForm() {
             {/* Context Header */}
             <div className="text-center mb-8">
                 <h2 className="text-3xl font-black tracking-tight mb-2 text-white">{t('welcomeBack')}</h2>
-                <p className="text-slate-400 font-medium">{t('loginSubtitle')}</p>
+                <p className="text-white/50 font-medium">{t('loginSubtitle')}</p>
             </div>
 
             {/* Error Message */}
@@ -67,7 +67,7 @@ export function LoginForm() {
 
             <form onSubmit={onSubmit} className="space-y-5">
                 <div className="space-y-2">
-                    <Label htmlFor="email" className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">
+                    <Label htmlFor="email" className="text-xs font-black uppercase tracking-widest text-white/50 ml-1">
                         {t('emailAddress')}
                     </Label>
                     <Input
@@ -80,12 +80,12 @@ export function LoginForm() {
                         autoCorrect="off"
                         required
                         disabled={isLoading}
-                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-500 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
+                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-white/30 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
                     />
                 </div>
                 <div className="space-y-2">
                     <div className="flex items-center justify-between ml-1">
-                        <Label htmlFor="password" className="text-xs font-black uppercase tracking-widest text-slate-400">
+                        <Label htmlFor="password" className="text-xs font-black uppercase tracking-widest text-white/50">
                             {t('password')}
                         </Label>
                         <Link href="/login/forgot-password" className="text-xs font-black uppercase tracking-widest text-primary hover:text-primary/80 transition-all">
@@ -100,7 +100,7 @@ export function LoginForm() {
                         autoComplete="current-password"
                         required
                         disabled={isLoading}
-                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-500 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
+                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-white/30 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
                     />
                 </div>
 
@@ -120,7 +120,7 @@ export function LoginForm() {
             </form>
 
             <div className="text-center mt-6">
-                <p className="text-sm text-slate-400 font-medium">
+                <p className="text-sm text-white/50 font-medium">
                     {t('dontHaveAccount')}{" "}
                     <Link href="/signup" className="text-primary hover:text-primary/80 font-black transition-colors ml-1">
                         {t('signUpLink')}

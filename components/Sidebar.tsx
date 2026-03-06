@@ -46,6 +46,7 @@ export function Sidebar() {
                         <Link
                             key={link.href}
                             href={link.href}
+                            aria-label={t(link.titleKey)}
                             className={cn(
                                 "group/item relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200",
                                 isActive
@@ -70,6 +71,7 @@ export function Sidebar() {
                 {isAdmin && (
                     <Link
                         href="/admin"
+                        aria-label={tc("adminDashboard")}
                         className="group/item relative flex items-center justify-center w-10 h-10 rounded-full text-primary hover:bg-primary/10 transition-all duration-200"
                     >
                         <ShieldCheck className="h-5 w-5 shrink-0" />
@@ -82,6 +84,7 @@ export function Sidebar() {
 
                 <button
                     onClick={() => signOut()}
+                    aria-label={tc("logOut")}
                     className="group/item relative flex items-center justify-center w-10 h-10 rounded-full text-foreground/35 hover:bg-white/30 hover:text-destructive transition-all duration-200"
                 >
                     <LogOut className="h-5 w-5 shrink-0" />

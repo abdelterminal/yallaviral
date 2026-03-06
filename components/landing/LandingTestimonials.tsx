@@ -30,10 +30,10 @@ export function LandingTestimonials() {
                     className="text-center mb-20"
                 >
                     <span className="text-xs font-black uppercase tracking-widest text-primary mb-6 block">Scale</span>
-                    <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-8 pb-4">
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tight text-foreground mb-8 pb-4">
                         {t('statsTitle')}
                     </h2>
-                    <p className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-xl mx-auto">
+                    <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto">
                         {t('statsSubtitle')}
                     </p>
                 </motion.div>
@@ -49,7 +49,7 @@ export function LandingTestimonials() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.5, delay: i * 0.15 }}
-                                className="flex flex-col items-center text-center p-10 rounded-[2.5rem] bg-white border border-slate-200/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 group overflow-hidden relative"
+                                className="flex flex-col items-center text-center p-10 rounded-[2.5rem] bg-white border border-border/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 group overflow-hidden relative"
                             >
                                 {/* Colored top accent on hover */}
                                 <div
@@ -63,8 +63,8 @@ export function LandingTestimonials() {
                                 >
                                     <Icon className="h-7 w-7" />
                                 </div>
-                                <span className="text-5xl font-black text-slate-900 mb-4 tracking-tight leading-none">{stat.value}</span>
-                                <span className="text-sm font-black text-slate-500 uppercase tracking-widest">{t(stat.labelKey)}</span>
+                                <span className="text-5xl font-black text-foreground mb-4 tracking-tight leading-none">{stat.value}</span>
+                                <span className="text-sm font-black text-muted-foreground uppercase tracking-widest">{t(stat.labelKey)}</span>
                             </motion.div>
                         );
                     })}

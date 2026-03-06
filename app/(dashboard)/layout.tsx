@@ -1,5 +1,6 @@
 import { Sidebar } from "@/components/Sidebar";
 import { Header } from "@/components/Header";
+import { MobileBottomNav } from "@/components/MobileBottomNav";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
@@ -32,12 +33,13 @@ export default async function DashboardLayout({
             <div className="flex-1 flex flex-col relative min-w-0">
                 <Header profile={profile} />
 
-                <main className="flex-1 p-5 md:p-7 z-10 bg-background">
+                <main className="flex-1 p-5 md:p-7 z-10 bg-background pb-20 md:pb-7">
                     <div className="mx-auto max-w-7xl animate-in fade-in zoom-in-95 duration-500">
                         {children}
                     </div>
                 </main>
             </div>
+            <MobileBottomNav />
             <WhatsAppButton />
         </div>
     );

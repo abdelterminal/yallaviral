@@ -42,7 +42,7 @@ export function StudioSelectionStep({ availableStudios, onNext, onBack }: Studio
                             onClick={() => setSelectedStudio(studio)}
                         >
                             <div className="relative h-[180px] w-full p-4 pb-0">
-                                <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-slate-100 shadow-inner">
+                                <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-muted shadow-inner">
                                     {studio.image_url ? (
                                         <img
                                             src={studio.image_url}

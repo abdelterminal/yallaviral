@@ -66,7 +66,7 @@ export function Header({ profile }: { profile: any }) {
     const pageTitle = titleKey ? tNav(titleKey as any) : currentSection.charAt(0).toUpperCase() + currentSection.slice(1);
 
     return (
-        <header className="sticky top-0 z-[65] bg-[hsl(220_35%_88%)] pt-3 pb-2 px-4 md:px-6">
+        <header className="sticky top-0 z-[65] bg-background pt-3 pb-2 px-4 md:px-6">
             <div className="flex items-center justify-between rounded-full bg-card px-5 py-3 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.08)]">
 
                 {/* Left: mobile trigger + page title */}

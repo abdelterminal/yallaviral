@@ -58,7 +58,7 @@ export default function ForgotPasswordPage() {
                 <div className="w-full bg-muted/50 border border-border p-8 rounded-3xl shadow-xl backdrop-blur-sm relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
                     <div className="text-center mb-8">
                         <h1 className="text-3xl font-black tracking-tight mb-2">{t('forgotTitle')}</h1>
-                        <p className="text-sm text-slate-400">{t('forgotSubtitle')}</p>
+                        <p className="text-sm text-white/50">{t('forgotSubtitle')}</p>
                     </div>
 
                     {isSubmitted ? (
@@ -67,7 +67,7 @@ export default function ForgotPasswordPage() {
                                 <CheckCircle2 className="h-6 w-6 text-primary" />
                             </div>
                             <h2 className="text-xl font-bold">{t('checkEmail')}</h2>
-                            <p className="text-sm text-slate-400">
+                            <p className="text-sm text-white/50">
                                 {t('checkEmailDesc')}
                             </p>
                             <Link href="/login" className="inline-block mt-4 text-primary hover:text-primary/80 font-bold transition-colors">
@@ -77,7 +77,7 @@ export default function ForgotPasswordPage() {
                     ) : (
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div className="space-y-1.5">
-                                <Label htmlFor="email" className="text-xs font-black uppercase tracking-wider text-slate-400 ml-1">{t('emailAddress')}</Label>
+                                <Label htmlFor="email" className="text-xs font-black uppercase tracking-wider text-white/50 ml-1">{t('emailAddress')}</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -85,7 +85,7 @@ export default function ForgotPasswordPage() {
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="name@company.com"
                                     required
-                                    className="h-12 bg-muted/50 border-border focus:border-primary/50 text-foreground placeholder:text-slate-600 rounded-xl transition-all"
+                                    className="h-12 bg-muted/50 border-border focus:border-primary/50 text-foreground placeholder:text-white/25 rounded-xl transition-all"
                                 />
                             </div>
 
@@ -104,7 +104,7 @@ export default function ForgotPasswordPage() {
                             </Button>
 
                             <div className="text-center mt-6">
-                                <Link href="/login" className="text-sm text-slate-400 hover:text-foreground transition-colors">
+                                <Link href="/login" className="text-sm text-white/50 hover:text-foreground transition-colors">
                                     {t('backToLogin')}
                                 </Link>
                             </div>

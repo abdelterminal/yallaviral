@@ -11,7 +11,7 @@ export default function AdminLoading() {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="rounded-xl border border-border bg-card p-5 space-y-3">
+          <div key={i} className="rounded-[1.5rem] bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)] p-5 space-y-3">
             <div className="flex items-center justify-between">
               <Skeleton className="h-3 w-24" />
               <Skeleton className="h-4 w-4 rounded" />
@@ -22,7 +22,7 @@ export default function AdminLoading() {
       </div>
 
       {/* Table */}
-      <div className="rounded-xl border border-border bg-card overflow-hidden">
+      <div className="rounded-[2rem] bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)] overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b border-border">
           <Skeleton className="h-4 w-32" />
           <Skeleton className="h-4 w-20" />
