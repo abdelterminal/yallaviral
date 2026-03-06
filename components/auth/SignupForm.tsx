@@ -63,23 +63,23 @@ export default function SignupForm() {
 
     if (success) {
         return (
-            <div className="w-full max-w-[400px] flex flex-col items-center justify-center text-center space-y-6 animate-in fade-in duration-500">
-                <div className="h-20 w-20 bg-emerald-500/10 rounded-full flex items-center justify-center shadow-[0_8px_30px_-8px_rgba(34,197,94,0.3)]">
-                    <Sparkles className="h-10 w-10 text-primary" />
+            <div className="w-full flex flex-col items-center justify-center text-center space-y-8 animate-in fade-in zoom-in-95 duration-500 relative z-10">
+                <div className="h-24 w-24 bg-emerald-500/10 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(16,185,129,0.3)] border border-emerald-500/30">
+                    <CheckCircle2 className="h-12 w-12 text-emerald-500" />
                 </div>
-                <div className="space-y-2">
-                    <h2 className="text-3xl font-black text-foreground tracking-tight">{t('checkYourEmail')}</h2>
-                    <p className="text-muted-foreground max-w-xs mx-auto text-base">
+                <div className="space-y-3">
+                    <h2 className="text-3xl font-black text-white tracking-tight">{t('checkYourEmail')}</h2>
+                    <p className="text-slate-400 max-w-sm mx-auto text-lg leading-relaxed">
                         {t('confirmationSent')}
                     </p>
                 </div>
-                <div className="w-full max-w-xs space-y-3 pt-2">
-                    <div className="p-3 rounded-2xl bg-muted text-xs text-muted-foreground space-y-1">
-                        <p className="font-bold text-muted-foreground">{t('didntReceive')}</p>
+                <div className="w-full space-y-4 pt-4">
+                    <div className="p-4 rounded-[2rem] bg-white/5 border border-white/10 text-sm text-slate-400 space-y-2">
+                        <p className="font-black uppercase tracking-widest text-xs text-slate-300">{t('didntReceive')}</p>
                         <p>{t('checkSpam')}</p>
                     </div>
-                    <Link href="/login">
-                        <Button variant="secondary" className="w-full font-bold mt-2">
+                    <Link href="/login" className="block w-full">
+                        <Button className="w-full h-14 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-black rounded-2xl group transition-all">
                             {t('goToLogin')}
                         </Button>
                     </Link>
@@ -89,97 +89,97 @@ export default function SignupForm() {
     }
 
     return (
-        <div className="w-full max-w-[400px] flex flex-col h-full justify-center max-h-[800px]">
-            <div className="mb-6 text-center lg:text-left">
-                <h2 className="text-4xl font-black text-foreground tracking-tight mb-1">{t('createAccount')}</h2>
-                <p className="text-base text-muted-foreground">{t('createAccountSubtitle')}</p>
+        <div className="w-full flex flex-col relative z-20">
+            <div className="mb-10 text-center">
+                <h2 className="text-4xl font-black text-white tracking-tight mb-2">{t('createAccount')}</h2>
+                <p className="text-lg text-slate-400 font-medium">{t('createAccountSubtitle')}</p>
             </div>
 
             {error && (
-                <div className="mb-4 p-3 rounded-2xl bg-destructive/10 flex items-center gap-2 text-destructive text-xs">
-                    <AlertCircle className="h-4 w-4 shrink-0" />
-                    <p className="font-medium">{error}</p>
+                <div className="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center gap-3 text-red-400 text-sm animate-in fade-in slide-in-from-top-2">
+                    <AlertCircle className="h-5 w-5 shrink-0" />
+                    <p className="font-semibold">{error}</p>
                 </div>
             )}
 
-            <form action={handleSubmit} className="space-y-4" noValidate>
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                        <Label htmlFor="fullName" className="text-foreground text-xs font-black uppercase opacity-60 ml-1">{t('fullName')}</Label>
+            <form action={handleSubmit} className="space-y-5" noValidate>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                        <Label htmlFor="fullName" className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('fullName')}</Label>
                         <Input
                             id="fullName"
                             name="fullName"
                             placeholder={t('namePlaceholder')}
                             required
-                            className="h-10"
+                            className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
                         />
                     </div>
-                    <div className="space-y-1.5">
-                        <Label htmlFor="brandName" className="text-foreground text-xs font-black uppercase opacity-60 ml-1">{t('company')}</Label>
+                    <div className="space-y-2">
+                        <Label htmlFor="brandName" className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('company')}</Label>
                         <Input
                             id="brandName"
                             name="brandName"
                             placeholder={t('companyPlaceholder')}
                             required
-                            className="h-10"
+                            className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
                         />
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                        <Label htmlFor="email" className="text-foreground text-xs font-black uppercase opacity-60 ml-1">{t('email')}</Label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                        <Label htmlFor="email" className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('email')}</Label>
                         <Input
                             id="email"
                             name="email"
                             type="email"
                             placeholder={t('emailPlaceholder')}
                             required
-                            className="h-10"
+                            className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
                         />
                     </div>
-                    <div className="space-y-1.5">
-                        <Label htmlFor="phone" className="text-foreground text-xs font-black uppercase opacity-60 ml-1">{t('phone')}</Label>
+                    <div className="space-y-2">
+                        <Label htmlFor="phone" className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('phone')}</Label>
                         <Input
                             id="phone"
                             name="phone"
                             type="tel"
                             placeholder={t('phonePlaceholder')}
                             required
-                            className="h-10"
+                            className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
                         />
                     </div>
                 </div>
 
-                <div className="space-y-1.5">
-                    <Label htmlFor="password" className="text-foreground text-xs font-black uppercase opacity-60 ml-1">{t('password')}</Label>
+                <div className="space-y-2">
+                    <Label htmlFor="password" className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('password')}</Label>
                     <Input
                         id="password"
                         name="password"
                         type="password"
                         placeholder="••••••••"
                         required
-                        className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-muted"
+                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
                     />
                 </div>
 
                 {/* Bot Verification Box */}
-                <div className="py-2">
+                <div className="py-4">
                     <div className="relative">
-                        <div className="flex items-center gap-3 p-3 rounded-2xl bg-muted hover:bg-muted/80 transition-all cursor-pointer group active:scale-[0.99] select-none">
-                            <div className="h-5 w-5 rounded-lg border-2 border-primary/50 flex items-center justify-center bg-background transition-all group-hover:border-primary relative shrink-0 text-primary">
+                        <div className="flex items-center gap-4 p-4 rounded-[1.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all cursor-pointer group active:scale-[0.99] select-none">
+                            <div className="h-6 w-6 rounded-lg border-2 border-primary/40 flex items-center justify-center bg-[#0B0E17] transition-all group-hover:border-primary relative shrink-0 text-primary">
                                 <input
                                     type="checkbox"
                                     id="robot"
                                     name="robot"
                                     className="opacity-0 absolute inset-0 cursor-pointer z-10 peer"
                                 />
-                                <CheckCircle2 className="h-3.5 w-3.5 opacity-0 peer-checked:opacity-100 transition-opacity" />
+                                <CheckCircle2 className="h-4 w-4 opacity-0 peer-checked:opacity-100 transition-opacity" />
                             </div>
-                            <Label htmlFor="robot" className="text-xs text-muted-foreground cursor-pointer font-bold select-none group-hover:text-foreground transition-colors">
+                            <Label htmlFor="robot" className="text-sm text-slate-400 cursor-pointer font-bold select-none group-hover:text-white transition-colors">
                                 {t('notRobot')}
                             </Label>
-                            <div className="ml-auto opacity-30 text-[8px] font-black tracking-widest uppercase">
+                            <div className="ml-auto opacity-20 text-[10px] font-black tracking-widest uppercase text-white">
                                 {t('secure')}
                             </div>
                         </div>
@@ -190,23 +190,23 @@ export default function SignupForm() {
                     <Button
                         type="submit"
                         disabled={isPending}
-                        className="w-full h-12 font-black text-base disabled:opacity-70 disabled:grayscale"
+                        className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-black text-lg rounded-2xl shadow-[0_0_30px_rgba(0,82,255,0.3)] hover:shadow-[0_0_40px_rgba(0,82,255,0.5)] transition-all disabled:opacity-70"
                     >
                         {isPending ? (
-                            <Loader2 className="h-5 w-5 animate-spin text-foreground" />
+                            <Loader2 className="h-6 w-6 animate-spin text-white" />
                         ) : (
-                            <>
-                                <Sparkles className="h-4 w-4 mr-2" />
+                            <span className="flex items-center gap-2">
+                                <Sparkles className="h-5 w-5" />
                                 {t('createAccount')}
-                            </>
+                            </span>
                         )}
                     </Button>
                 </div>
 
-                <div className="text-center pt-2">
-                    <p className="text-sm text-muted-foreground font-medium">
+                <div className="text-center pt-4">
+                    <p className="text-sm text-slate-400 font-medium">
                         {t('alreadyHaveAccount')}{" "}
-                        <Link href="/login" className="text-primary hover:underline font-black ml-1">
+                        <Link href="/login" className="text-primary hover:text-primary/80 font-black ml-1 transition-colors">
                             {t('signIn')}
                         </Link>
                     </p>
