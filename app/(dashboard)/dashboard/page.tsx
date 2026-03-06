@@ -54,9 +54,9 @@ export default async function DashboardPage() {
     const firstName = user.user_metadata?.full_name?.split(" ")[0] || "there";
 
     const stats = [
-        { label: t('totalBookings'), value: totalBookings || 0, icon: FileText },
+        { label: t('totalBookings'), value: totalBookings || 0, icon: FileText, isHero: true },
         { label: t('active'), value: activeBookings || 0, icon: Clock },
-        { label: t('awaitingPayment'), value: awaitingPayment || 0, icon: CreditCard, highlight: (awaitingPayment || 0) > 0 },
+        { label: t('awaitingPayment'), value: awaitingPayment || 0, icon: CreditCard, isWarning: (awaitingPayment || 0) > 0 },
         { label: t('totalSpent'), value: `${totalSpent.toLocaleString()} MAD`, icon: Calendar },
     ];
 
@@ -74,7 +74,7 @@ export default async function DashboardPage() {
                     </p>
                 </div>
                 <Link href="/campaign">
-                    <Button className="font-semibold">
+                    <Button className="font-semibold shadow-[0_8px_30px_-6px_hsl(var(--primary))] bg-gradient-to-tr from-primary to-blue-500 border-0">
                         <Plus className="h-4 w-4 mr-2" /> {tc('newBooking')}
                     </Button>
                 </Link>
@@ -85,20 +85,25 @@ export default async function DashboardPage() {
                 {stats.map((stat) => (
                     <div
                         key={stat.label}
-                        className={`rounded-3xl p-6 ${stat.highlight
-                            ? "bg-primary text-white shadow-[0_10px_30px_-10px_hsl(var(--primary))]"
-                            : "bg-card shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]"
+                        className={`rounded-[2rem] p-6 relative overflow-hidden ${stat.isHero
+                                ? "bg-gradient-to-br from-primary to-[#4f46e5] text-white shadow-[0_15px_40px_-10px_rgba(79,70,229,0.5)] border-0"
+                                : stat.isWarning
+                                    ? "bg-amber-50 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] border border-amber-200/50"
+                                    : "bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.05)] border-0"
                             }`}
                     >
-                        <div className="flex items-center justify-between mb-4">
-                            <span className={`text-xs font-bold uppercase tracking-wider ${stat.highlight ? "text-white/80" : "text-muted-foreground"}`}>
+                        {stat.isHero && (
+                            <div className="absolute -right-6 -top-6 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+                        )}
+                        <div className="flex items-center justify-between mb-4 relative z-10">
+                            <span className={`text-[11px] font-bold uppercase tracking-widest ${stat.isHero ? "text-white/80" : stat.isWarning ? "text-amber-700/80" : "text-muted-foreground"}`}>
                                 {stat.label}
                             </span>
-                            <div className={`p-2.5 rounded-full ${stat.highlight ? "bg-white/20 text-white" : "bg-primary/10 text-primary"}`}>
+                            <div className={`p-3 rounded-2xl shadow-sm ${stat.isHero ? "bg-white/20 text-white backdrop-blur-md" : stat.isWarning ? "bg-amber-100/50 text-amber-600" : "bg-primary/5 text-primary"}`}>
                                 <stat.icon className="h-5 w-5" />
                             </div>
                         </div>
-                        <p className={`text-3xl font-black tracking-tight ${stat.highlight ? "text-white" : "text-foreground"}`}>
+                        <p className={`text-4xl font-black tracking-tighter relative z-10 ${stat.isHero ? "text-white" : stat.isWarning ? "text-amber-700" : "text-foreground"}`}>
                             {stat.value}
                         </p>
                     </div>

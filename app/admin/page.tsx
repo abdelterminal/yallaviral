@@ -93,70 +93,77 @@ export default async function AdminDashboard() {
 
                 {(!actionableBookings || actionableBookings.length === 0) ? (
                     <div className="flex flex-col items-center justify-center py-16 text-center">
-                        <div className="h-12 w-12 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mb-3">
-                            <CheckCircle className="h-5 w-5 text-emerald-600" />
+                        <div className="h-12 w-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3">
+                            <CheckCircle className="h-5 w-5" />
                         </div>
-                        <p className="text-sm text-emerald-600 font-medium">{t('allClear')}</p>
+                        <p className="text-sm text-emerald-600 font-bold">{t('allClear')}</p>
                         <p className="text-xs text-muted-foreground mt-1">{t('noAttentionNeeded')}</p>
                     </div>
                 ) : (
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm">
-                            <thead>
-                                <tr className="border-b border-border">
-                                    <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('table.client')}</th>
-                                    <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('table.resource')}</th>
-                                    <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('table.amount')}</th>
-                                    <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('table.status')}</th>
-                                    <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('table.payment')}</th>
-                                    <th className="text-right px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wide">{t('table.actions')}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {actionableBookings.map((booking: any) => {
-                                    const profile = booking.profiles as any;
-                                    const name = profile?.brand_name || profile?.full_name || t('table.unknown');
+                    <div className="flex flex-col gap-3 p-6 bg-slate-50/50">
+                        {/* Custom Header Row */}
+                        <div className="hidden md:grid grid-cols-[2fr_1.5fr_1fr_1fr_1fr_0.5fr] gap-4 px-6 py-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                            <div>{t('table.client')}</div>
+                            <div>{t('table.resource')}</div>
+                            <div>{t('table.amount')}</div>
+                            <div>{t('table.status')}</div>
+                            <div>{t('table.payment')}</div>
+                            <div className="text-right">{t('table.actions')}</div>
+                        </div>
 
-                                    return (
-                                        <tr key={booking.id} className="border-b border-border hover:bg-muted/50 transition-colors">
-                                            <td className="px-5 py-3">
-                                                <div>
-                                                    <p className="font-medium text-foreground text-sm">{name}</p>
-                                                    <p className="text-xs text-muted-foreground">{profile?.email}</p>
-                                                </div>
-                                            </td>
-                                            <td className="px-5 py-3 text-muted-foreground text-sm">
-                                                {booking.resources?.name || "—"}
-                                            </td>
-                                            <td className="px-5 py-3 text-foreground font-mono text-sm">
-                                                {booking.total_price?.toLocaleString()} MAD
-                                            </td>
-                                            <td className="px-5 py-3">
-                                                <Badge variant={getStatusBadgeVariant(booking.status)} className="capitalize">
-                                                    {tc(booking.status)}
+                        {/* List Items */}
+                        <div className="flex flex-col gap-3">
+                            {actionableBookings.map((booking: any) => {
+                                const profile = booking.profiles as any;
+                                const name = profile?.brand_name || profile?.full_name || t('table.unknown');
+
+                                return (
+                                    <div key={booking.id} className="grid grid-cols-1 md:grid-cols-[2fr_1.5fr_1fr_1fr_1fr_0.5fr] items-center gap-4 bg-white rounded-full px-6 py-4 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300">
+                                        <div className="flex items-center min-w-0">
+                                            <div className="h-10 w-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm shrink-0 uppercase">
+                                                {name.substring(0, 2)}
+                                            </div>
+                                            <div className="ml-4 min-w-0">
+                                                <p className="font-bold text-foreground text-sm truncate">{name}</p>
+                                                <p className="text-xs text-muted-foreground truncate">{profile?.email}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="text-muted-foreground text-sm font-medium truncate">
+                                            {booking.resources?.name || "—"}
+                                        </div>
+
+                                        <div className="text-foreground font-black text-sm">
+                                            {booking.total_price?.toLocaleString()} MAD
+                                        </div>
+
+                                        <div>
+                                            <Badge variant={getStatusBadgeVariant(booking.status)} className="capitalize w-fit">
+                                                {tc(booking.status)}
+                                            </Badge>
+                                        </div>
+
+                                        <div>
+                                            {booking.payment_status && booking.status === "confirmed" ? (
+                                                <Badge variant={getStatusBadgeVariant(booking.payment_status)} className="capitalize w-fit">
+                                                    {tc(booking.payment_status)}
                                                 </Badge>
-                                            </td>
-                                            <td className="px-5 py-3">
-                                                {booking.payment_status && booking.status === "confirmed" ? (
-                                                    <Badge variant={getStatusBadgeVariant(booking.payment_status)} className="capitalize">
-                                                        {tc(booking.payment_status)}
-                                                    </Badge>
-                                                ) : (
-                                                    <span className="text-xs text-muted-foreground">—</span>
-                                                )}
-                                            </td>
-                                            <td className="px-5 py-3">
-                                                <AdminActionButtons
-                                                    bookingId={booking.id}
-                                                    status={booking.status}
-                                                    paymentStatus={booking.payment_status}
-                                                />
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
+                                            ) : (
+                                                <span className="text-xs text-muted-foreground font-bold">—</span>
+                                            )}
+                                        </div>
+
+                                        <div className="flex justify-end">
+                                            <AdminActionButtons
+                                                bookingId={booking.id}
+                                                status={booking.status}
+                                                paymentStatus={booking.payment_status}
+                                            />
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
                 )}
             </div>
