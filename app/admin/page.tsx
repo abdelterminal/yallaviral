@@ -62,20 +62,20 @@ export default async function AdminDashboard() {
                 {stats.map((stat) => (
                     <div
                         key={stat.label}
-                        className={`rounded-3xl p-6 ${stat.highlight
-                            ? "bg-primary text-white shadow-[0_10px_30px_-10px_hsl(var(--primary))]"
-                            : "bg-card shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]"
+                        className={`rounded-[1.5rem] p-6 ${stat.highlight
+                            ? "bg-[hsl(var(--primary))] text-white shadow-[0_8px_30px_-8px_hsl(var(--primary)/0.45)]"
+                            : "bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)]"
                             }`}
                     >
                         <div className="flex items-center justify-between mb-4">
                             <span className={`text-xs font-bold uppercase tracking-wider ${stat.highlight ? "text-primary-foreground" : "text-muted-foreground"}`}>
                                 {stat.label}
                             </span>
-                            <div className={`p-2.5 rounded-full ${stat.highlight ? "bg-white/20 text-white" : "bg-primary/10 text-primary"}`}>
+                            <div className={`p-2.5 rounded-full ${stat.highlight ? "bg-primary-foreground/20 text-primary-foreground" : "bg-primary/10 text-primary"}`}>
                                 <stat.icon className="h-5 w-5" />
                             </div>
                         </div>
-                        <p className={`text-3xl font-black tracking-tight ${stat.highlight ? "text-white" : "text-foreground"}`}>
+                        <p className={`text-3xl font-black tracking-tight ${stat.highlight ? "text-primary-foreground" : "text-foreground"}`}>
                             {stat.value}
                         </p>
                     </div>
@@ -83,7 +83,7 @@ export default async function AdminDashboard() {
             </div>
 
             {/* Actionable Bookings */}
-            <div className="rounded-[2rem] bg-card overflow-hidden shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)]">
+            <div className="rounded-[2rem] bg-card overflow-hidden shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)]">
                 <div className="flex items-center justify-between px-6 py-5 border-b border-border/40">
                     <h2 className="text-[15px] font-bold text-foreground">{t('needsAttention')}</h2>
                     <Link href="/admin/bookings" className="text-sm text-primary hover:text-primary/80 font-bold transition-colors">

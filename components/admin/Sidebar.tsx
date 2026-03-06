@@ -5,13 +5,14 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { LayoutDashboard, CalendarDays, Users, Building2, Camera, User, ArrowLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { YallaLogo } from "@/components/Logo";
 
 export function Sidebar() {
     const pathname = usePathname();
     const t = useTranslations('Admin.sidebar');
 
     const links = [
-        { href: "/admin", label: t('overview'), icon: LayoutDashboard },
+        { href: "/admin", label: t('overview'), icon: LayoutDashboard, exact: true },
         { href: "/admin/bookings", label: t('bookings'), icon: CalendarDays },
         { href: "/admin/models", label: t('models'), icon: User },
         { href: "/admin/studios", label: t('studios'), icon: Building2 },
@@ -20,35 +21,60 @@ export function Sidebar() {
     ];
 
     return (
-        <div className="flex flex-col h-full p-4 space-y-4">
-            <div className="flex items-center gap-2 px-2 py-4">
-                <span className="text-xl font-black tracking-tight text-foreground">Yalla Viral <span className="text-primary text-xs ml-1 bg-primary/20 px-1 py-0.5 rounded">{t('adminTag')}</span></span>
+        <div className="hidden md:flex h-[calc(100vh-1.5rem)] w-16 flex-col py-5 fixed top-3 left-3 z-[60] overflow-visible items-center">
+
+            {/* Logo + Admin badge */}
+            <div className="mb-6 flex flex-col items-center gap-1.5">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/60">
+                    <YallaLogo className="h-6 w-6" />
+                </div>
+                <span className="text-[8px] font-black uppercase tracking-widest text-primary bg-primary/10 rounded-full px-2 py-0.5">
+                    Admin
+                </span>
             </div>
 
-            <nav className="flex-1 space-y-1">
-                {links.map((link) => (
-                    <Link
-                        key={link.href}
-                        href={link.href}
-                        className={cn("flex items-center gap-3 px-4 py-3.5 rounded-full text-[15px] font-bold transition-all duration-300 mx-2 hover:-translate-y-0.5",
-                            pathname === link.href
-                                ? "bg-primary text-white shadow-[0_8px_20px_-6px_hsl(var(--primary))]"
-                                : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                        )}
-                    >
-                        <link.icon className={cn("h-5 w-5", pathname === link.href && "fill-current")} />
-                        {link.label}
-                    </Link>
-                ))}
+            {/* Nav */}
+            <nav className="flex flex-1 flex-col gap-1 items-center w-full px-3">
+                {links.map((link) => {
+                    const Icon = link.icon;
+                    const isActive = link.exact
+                        ? pathname === link.href
+                        : pathname === link.href || pathname.startsWith(link.href + "/");
+
+                    return (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className={cn(
+                                "group/item relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200",
+                                isActive
+                                    ? "bg-[hsl(var(--primary))] shadow-[0_6px_20px_-4px_hsl(var(--primary)/0.6)]"
+                                    : "text-foreground/35 hover:bg-white/30 hover:text-foreground/70"
+                            )}
+                        >
+                            <Icon className={cn("h-5 w-5 shrink-0", isActive ? "text-white" : "text-current")} />
+
+                            {/* Tooltip */}
+                            <span className="pointer-events-none absolute left-[calc(100%+12px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-xl bg-foreground px-3 py-1.5 text-xs font-semibold text-background opacity-0 shadow-lg transition-opacity duration-150 group-hover/item:opacity-100 z-[70]">
+                                {link.label}
+                                <span className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-foreground" />
+                            </span>
+                        </Link>
+                    );
+                })}
             </nav>
 
-            <div className="pt-4 border-t border-border">
+            {/* Bottom: back to user dashboard */}
+            <div className="flex flex-col items-center gap-1 px-3 pt-3 w-full border-t border-white/20">
                 <Link
                     href="/dashboard"
-                    className="flex items-center gap-3 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors group"
+                    className="group/item relative flex items-center justify-center w-10 h-10 rounded-full text-foreground/35 hover:bg-white/30 hover:text-foreground/70 transition-all duration-200"
                 >
-                    <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-                    {t('switchToUser')}
+                    <ArrowLeft className="h-5 w-5 shrink-0" />
+                    <span className="pointer-events-none absolute left-[calc(100%+12px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-xl bg-foreground px-3 py-1.5 text-xs font-semibold text-background opacity-0 shadow-lg transition-opacity duration-150 group-hover/item:opacity-100 z-[70]">
+                        {t('switchToUser')}
+                        <span className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-foreground" />
+                    </span>
                 </Link>
             </div>
         </div>

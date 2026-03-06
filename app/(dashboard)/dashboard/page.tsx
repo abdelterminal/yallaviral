@@ -5,34 +5,40 @@ import { format } from "date-fns";
 import { getDateLocale } from "@/utils/date-locale";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, CreditCard, FileText, Plus } from "lucide-react";
+import {
+    BarChart2,
+    Clock,
+    CreditCard,
+    FileText,
+    Plus,
+    Settings,
+    Sparkles,
+    TrendingUp,
+} from "lucide-react";
 import Link from "next/link";
 import { getTranslations, getLocale } from "next-intl/server";
 import { getStatusBadgeVariant } from "@/lib/utils";
 
 export async function generateMetadata() {
-    const t = await getTranslations('Nav');
+    const t = await getTranslations("Nav");
     return {
-        title: `${t('dashboard')} - YallaViral`,
+        title: `${t("dashboard")} - YallaViral`,
         description: "Manage your bookings and campaigns.",
     };
 }
 
 export default async function DashboardPage() {
     const supabase = await createClient();
-    const t = await getTranslations('Dashboard');
-    const tc = await getTranslations('Common');
+    const t = await getTranslations("Dashboard");
+    const tc = await getTranslations("Common");
     const locale = await getLocale();
 
     const {
         data: { user },
     } = await supabase.auth.getUser();
 
-    if (!user) {
-        redirect("/login");
-    }
+    if (!user) redirect("/login");
 
-    // Fetch all data in parallel
     const [
         { count: totalBookings },
         { count: activeBookings },
@@ -41,128 +47,237 @@ export default async function DashboardPage() {
         { data: recentBookings },
         { data: bookedDatesRaw },
     ] = await Promise.all([
-        supabase.from("bookings").select("*", { count: "exact", head: true }).eq("user_id", user.id),
-        supabase.from("bookings").select("*", { count: "exact", head: true }).eq("user_id", user.id).in("status", ["pending", "confirmed"]),
-        supabase.from("bookings").select("*", { count: "exact", head: true }).eq("user_id", user.id).eq("status", "confirmed").eq("payment_status", "unpaid"),
-        supabase.from("bookings").select("total_price").eq("user_id", user.id),
-        supabase.from("bookings").select(`*, resources (name, image_url)`).eq("user_id", user.id).order("created_at", { ascending: false }).limit(5),
-        supabase.from("bookings").select("start_time").eq("user_id", user.id).not("start_time", "is", null),
+        supabase
+            .from("bookings")
+            .select("*", { count: "exact", head: true })
+            .eq("user_id", user.id),
+        supabase
+            .from("bookings")
+            .select("*", { count: "exact", head: true })
+            .eq("user_id", user.id)
+            .in("status", ["pending", "confirmed"]),
+        supabase
+            .from("bookings")
+            .select("*", { count: "exact", head: true })
+            .eq("user_id", user.id)
+            .eq("status", "confirmed")
+            .eq("payment_status", "unpaid"),
+        supabase
+            .from("bookings")
+            .select("total_price")
+            .eq("user_id", user.id),
+        supabase
+            .from("bookings")
+            .select(`*, resources (name, image_url)`)
+            .eq("user_id", user.id)
+            .order("created_at", { ascending: false })
+            .limit(8),
+        supabase
+            .from("bookings")
+            .select("start_time")
+            .eq("user_id", user.id)
+            .not("start_time", "is", null),
     ]);
 
-    const totalSpent = allPrices?.reduce((acc, curr) => acc + (curr.total_price || 0), 0) || 0;
-    const bookedDates = (bookedDatesRaw || []).map(b => new Date(b.start_time));
-    const firstName = user.user_metadata?.full_name?.split(" ")[0] || "there";
+    const totalSpent =
+        allPrices?.reduce((acc, curr) => acc + (curr.total_price || 0), 0) || 0;
+    const bookedDates = (bookedDatesRaw || []).map(
+        (b) => new Date(b.start_time)
+    );
+    const firstName =
+        user.user_metadata?.full_name?.split(" ")[0] || "there";
+    const hasAwaitingPayment = (awaitingPayment || 0) > 0;
 
-    const stats = [
-        { label: t('totalBookings'), value: totalBookings || 0, icon: FileText, isHero: true },
-        { label: t('active'), value: activeBookings || 0, icon: Clock },
-        { label: t('awaitingPayment'), value: awaitingPayment || 0, icon: CreditCard, isWarning: (awaitingPayment || 0) > 0 },
-        { label: t('totalSpent'), value: `${totalSpent.toLocaleString()} MAD`, icon: Calendar },
+    const quickLinks = [
+        { label: t("recentBookings"), href: "/requests", icon: FileText },
+        { label: "Analytics", href: "/analytics", icon: BarChart2 },
+        { label: tc("settings") || "Settings", href: "/settings", icon: Settings },
+        { label: "Campaign", href: "/campaign", icon: Sparkles },
     ];
 
-
     return (
-        <div className="flex-1 space-y-6 p-6 md:p-8 pt-6 animate-in fade-in duration-500">
-            {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                    <h1 className="text-2xl font-black tracking-tight text-foreground">
-                        {t('welcomeBack', { name: firstName })}
-                    </h1>
-                    <p className="text-sm text-muted-foreground mt-1">
-                        {t('overview')}
-                    </p>
-                </div>
-                <Link href="/campaign">
-                    <Button className="font-semibold">
-                        <Plus className="h-4 w-4 mr-2" /> {tc('newBooking')}
-                    </Button>
-                </Link>
-            </div>
+        <div className="animate-in fade-in duration-500">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                {stats.map((stat) => (
-                    <div
-                        key={stat.label}
-                        className={`rounded-[2rem] p-6 relative overflow-hidden ${stat.isHero
-                                ? "bg-primary text-white shadow-[0_15px_40px_-10px_hsl(var(--primary)/0.5)] border-0"
-                                : stat.isWarning
-                                    ? "bg-amber-50 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] border border-amber-200/50"
-                                    : "bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.05)] border-0"
-                            }`}
-                    >
-                        {stat.isHero && (
-                            <div className="absolute -right-6 -top-6 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-                        )}
-                        <div className="flex items-center justify-between mb-4 relative z-10">
-                            <span className={`text-[11px] font-bold uppercase tracking-widest ${stat.isHero ? "text-primary-foreground" : stat.isWarning ? "text-amber-700" : "text-muted-foreground"}`}>
-                                {stat.label}
-                            </span>
-                            <div className={`p-3 rounded-2xl shadow-sm ${stat.isHero ? "bg-primary-foreground/20 text-primary-foreground" : stat.isWarning ? "bg-amber-100 text-amber-600" : "bg-primary/5 text-primary"}`}>
-                                <stat.icon className="h-5 w-5" />
-                            </div>
+                {/* ── LEFT COLUMN ── */}
+                <div className="flex flex-col gap-4">
+
+                    {/* Hero card */}
+                    <div className="relative rounded-[2rem] bg-[hsl(var(--primary))] p-7 overflow-hidden shadow-[0_8px_30px_-8px_hsl(var(--primary)/0.4)]">
+                        {/* Decorative blobs */}
+                        <div className="absolute -top-10 -right-10 w-44 h-44 bg-white/10 rounded-full blur-3xl pointer-events-none" />
+                        <div className="absolute -bottom-12 -left-12 w-52 h-52 bg-white/5 rounded-full blur-3xl pointer-events-none" />
+
+                        <div className="relative z-10">
+                            <p className="text-primary-foreground/60 text-xs font-semibold uppercase tracking-widest">
+                                {t("welcomeBack", { name: "" })}
+                            </p>
+                            <h1 className="text-white text-2xl font-bold tracking-tight mt-0.5 mb-6">
+                                {firstName}
+                            </h1>
+
+                            <p className="text-primary-foreground/60 text-xs font-semibold uppercase tracking-widest">
+                                {t("totalBookings")}
+                            </p>
+                            <p className="text-white text-6xl font-black tracking-tighter mt-1 mb-7">
+                                {totalBookings ?? 0}
+                            </p>
+
+                            <Link href="/campaign">
+                                <Button
+                                    className="bg-white text-primary hover:bg-white/90 rounded-full font-bold shadow-none w-full border-0"
+                                    variant="secondary"
+                                >
+                                    <Plus className="h-4 w-4 mr-2" />
+                                    {tc("newBooking")}
+                                </Button>
+                            </Link>
                         </div>
-                        <p className={`text-4xl font-black tracking-tighter relative z-10 ${stat.isHero ? "text-white" : stat.isWarning ? "text-amber-700" : "text-foreground"}`}>
-                            {stat.value}
-                        </p>
                     </div>
-                ))}
-            </div>
 
-            {/* Main Content */}
-            <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
-                {/* Recent Bookings Table */}
-                <div className="rounded-[2rem] bg-card overflow-hidden shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)]">
+                    {/* Stat tiles row */}
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="rounded-[1.5rem] bg-card p-5 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)]">
+                            <div className="p-2.5 rounded-2xl bg-primary/8 text-primary w-fit mb-3">
+                                <Clock className="h-4 w-4" />
+                            </div>
+                            <p className="text-2xl font-black text-foreground">
+                                {activeBookings ?? 0}
+                            </p>
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mt-1">
+                                {t("active")}
+                            </p>
+                        </div>
+
+                        <div
+                            className={`rounded-[1.5rem] p-5 ${hasAwaitingPayment ? "bg-amber-50 shadow-[0_8px_30px_-8px_rgba(245,158,11,0.2)]" : "bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)]"}`}
+                        >
+                            <div
+                                className={`p-2.5 rounded-2xl w-fit mb-3 ${hasAwaitingPayment ? "bg-amber-100 text-amber-600" : "bg-primary/8 text-primary"}`}
+                            >
+                                <CreditCard className="h-4 w-4" />
+                            </div>
+                            <p
+                                className={`text-2xl font-black ${hasAwaitingPayment ? "text-amber-700" : "text-foreground"}`}
+                            >
+                                {awaitingPayment ?? 0}
+                            </p>
+                            <p
+                                className={`text-xs font-semibold uppercase tracking-wide mt-1 ${hasAwaitingPayment ? "text-amber-600" : "text-muted-foreground"}`}
+                            >
+                                {t("awaitingPayment")}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Total spent */}
+                    <div className="rounded-[1.5rem] bg-card p-5 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)] flex items-center justify-between">
+                        <div>
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
+                                {t("totalSpent")}
+                            </p>
+                            <p className="text-xl font-black text-foreground">
+                                {totalSpent.toLocaleString()}{" "}
+                                <span className="text-sm font-bold text-muted-foreground">
+                                    MAD
+                                </span>
+                            </p>
+                        </div>
+                        <div className="p-3 rounded-2xl bg-emerald-50 text-emerald-600">
+                            <TrendingUp className="h-5 w-5" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* ── CENTER COLUMN ── */}
+                <div className="rounded-[2rem] bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col">
                     <div className="flex items-center justify-between px-6 py-5 border-b border-border/40">
-                        <h2 className="text-[15px] font-bold text-foreground">{t('recentBookings')}</h2>
-                        <Link href="/requests" className="text-sm text-primary hover:text-primary/80 font-bold transition-colors">
-                            {tc('viewAll')}
+                        <div>
+                            <h2 className="text-sm font-bold text-foreground">
+                                {t("recentBookings")}
+                            </h2>
+                            <p className="text-xs text-muted-foreground mt-0.5">
+                                {recentBookings?.length ?? 0} recent entries
+                            </p>
+                        </div>
+                        <Link href="/requests">
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-primary font-bold text-xs rounded-full px-4"
+                            >
+                                {tc("viewAll")}
+                            </Button>
                         </Link>
                     </div>
 
-                    {(!recentBookings || recentBookings.length === 0) ? (
-                        <div className="flex flex-col items-center justify-center py-16 text-center">
-                            <div className="h-12 w-12 rounded-full bg-muted border border-border flex items-center justify-center mb-3">
-                                <FileText className="h-5 w-5 text-muted-foreground/50" />
+                    {!recentBookings || recentBookings.length === 0 ? (
+                        <div className="flex flex-col items-center justify-center py-20 text-center px-6">
+                            <div className="h-14 w-14 rounded-full bg-muted flex items-center justify-center mb-4">
+                                <FileText className="h-6 w-6 text-muted-foreground/40" />
                             </div>
-                            <p className="text-sm text-muted-foreground">{t('noBookingsYet')}</p>
-                            <Link href="/campaign" className="text-xs text-primary hover:underline mt-2">
-                                {t('createFirst')}
+                            <p className="text-sm font-bold text-foreground">
+                                {t("noBookingsYet")}
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-1 mb-4">
+                                {t("createFirst")}
+                            </p>
+                            <Link href="/campaign">
+                                <Button size="sm" className="rounded-full font-bold">
+                                    <Plus className="h-3.5 w-3.5 mr-1.5" />
+                                    {tc("newBooking")}
+                                </Button>
                             </Link>
                         </div>
                     ) : (
-                        <div className="divide-y divide-border">
+                        <div className="flex flex-col divide-y divide-border/40">
                             {recentBookings.map((booking: any) => (
                                 <Link
                                     key={booking.id}
                                     href={`/requests/${booking.id}`}
-                                    className="flex items-center justify-between px-5 py-3.5 hover:bg-muted/50 hover:-translate-y-0.5 hover:shadow-sm transition-all duration-200 group"
+                                    className="flex items-center gap-4 px-6 py-4 hover:bg-muted/40 transition-colors"
                                 >
-                                    <div className="flex items-center gap-3 min-w-0">
-                                        <div className="h-9 w-9 rounded-lg bg-muted border border-border flex items-center justify-center shrink-0 overflow-hidden">
-                                            {booking.resources?.image_url ? (
-                                                <img src={booking.resources.image_url} alt="" className="h-full w-full object-cover" />
-                                            ) : (
-                                                <FileText className="h-4 w-4 text-muted-foreground" />
-                                            )}
-                                        </div>
-                                        <div className="min-w-0">
-                                            <p className="text-sm font-medium text-foreground truncate">
-                                                {booking.resources?.name || `#${booking.id.slice(0, 8)}`}
-                                            </p>
-                                            <p className="text-xs text-muted-foreground">
-                                                {format(new Date(booking.created_at), "MMM d, yyyy", { locale: getDateLocale(locale) })}
-                                            </p>
-                                        </div>
+                                    {/* Resource avatar */}
+                                    <div className="h-11 w-11 rounded-2xl bg-muted shrink-0 overflow-hidden">
+                                        {booking.resources?.image_url ? (
+                                            <img
+                                                src={booking.resources.image_url}
+                                                alt=""
+                                                className="h-full w-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="h-full w-full flex items-center justify-center">
+                                                <FileText className="h-4 w-4 text-muted-foreground/50" />
+                                            </div>
+                                        )}
                                     </div>
-                                    <div className="flex items-center gap-3 shrink-0 ml-4">
-                                        <span className="text-sm font-mono text-muted-foreground hidden sm:block">
-                                            {booking.total_price?.toLocaleString()} MAD
-                                        </span>
-                                        <Badge variant={getStatusBadgeVariant(booking.status)} className="capitalize">
+
+                                    {/* Info */}
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-sm font-bold text-foreground truncate">
+                                            {booking.resources?.name ||
+                                                `#${booking.id.slice(0, 8)}`}
+                                        </p>
+                                        <p className="text-xs text-muted-foreground mt-0.5">
+                                            {format(
+                                                new Date(booking.created_at),
+                                                "MMM d, yyyy",
+                                                { locale: getDateLocale(locale) }
+                                            )}
+                                        </p>
+                                    </div>
+
+                                    {/* Right: badge + price */}
+                                    <div className="flex flex-col items-end gap-1.5 shrink-0">
+                                        <Badge
+                                            variant={getStatusBadgeVariant(booking.status)}
+                                            className="capitalize"
+                                        >
                                             {tc(booking.status)}
                                         </Badge>
+                                        <span className="text-xs font-mono font-bold text-muted-foreground">
+                                            {booking.total_price?.toLocaleString()} MAD
+                                        </span>
                                     </div>
                                 </Link>
                             ))}
@@ -170,8 +285,30 @@ export default async function DashboardPage() {
                     )}
                 </div>
 
-                {/* Calendar */}
-                <BookingCalendar bookedDates={bookedDates} />
+                {/* ── RIGHT COLUMN ── */}
+                <div className="flex flex-col gap-4">
+                    {/* Calendar */}
+                    <BookingCalendar bookedDates={bookedDates} />
+
+                    {/* Quick access tiles */}
+                    <div className="rounded-[2rem] bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)] p-5">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+                            Quick Access
+                        </p>
+                        <div className="grid grid-cols-2 gap-3">
+                            {quickLinks.map((link) => (
+                                <Link key={link.href} href={link.href}>
+                                    <div className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-muted hover:bg-primary/8 hover:text-primary transition-all duration-200 group cursor-pointer">
+                                        <link.icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                                        <span className="text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors text-center leading-tight">
+                                            {link.label}
+                                        </span>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
