@@ -31,11 +31,11 @@ export function LandingFeatures() {
                     transition={{ duration: 0.7 }}
                     className="text-center max-w-3xl mx-auto mb-20"
                 >
-                    <span className="text-sm font-bold tracking-widest uppercase text-primary/60 mb-4 block">Features</span>
-                    <h2 className="text-4xl font-black tracking-tighter sm:text-6xl text-slate-900 mb-6 pb-2">
+                    <span className="text-xs font-black uppercase tracking-widest text-primary mb-4 block">Features</span>
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-900 mb-6 pb-2">
                         {t('featuresTitle')}
                     </h2>
-                    <p className="text-slate-500 text-xl leading-relaxed">
+                    <p className="text-lg md:text-xl text-slate-500 leading-relaxed">
                         {t('featuresSubtitle')}
                     </p>
                 </motion.div>
@@ -62,8 +62,8 @@ export function LandingFeatures() {
                             >
                                 <feature.icon className="h-7 w-7" />
                             </div>
-                            <h3 className="text-xl font-black text-slate-900 mb-4 tracking-tight">{t(feature.titleKey)}</h3>
-                            <p className="text-base text-slate-500 font-medium leading-relaxed max-w-[280px] mx-auto">
+                            <h3 className="text-2xl font-extrabold text-slate-900 mb-4 tracking-tight">{t(feature.titleKey)}</h3>
+                            <p className="text-base text-slate-500 leading-relaxed max-w-[280px] mx-auto">
                                 {t(feature.descKey)}
                             </p>
                         </motion.div>

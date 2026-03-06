@@ -27,11 +27,11 @@ export function LandingHowItWorks() {
                     transition={{ duration: 0.7 }}
                     className="text-center mb-20"
                 >
-                    <span className="text-sm font-bold tracking-widest uppercase text-primary/60 mb-4 block">Process</span>
-                    <h2 className="text-4xl font-black tracking-tighter sm:text-6xl text-slate-900 mb-6 pb-2">
+                    <span className="text-xs font-black uppercase tracking-widest text-primary mb-4 block">Process</span>
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-900 mb-6 pb-2">
                         {t('howItWorksTitle')}
                     </h2>
-                    <p className="text-slate-500 text-xl max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-2xl mx-auto">
                         {t('howItWorksSubtitle')}
                     </p>
                 </motion.div>
@@ -66,8 +66,8 @@ export function LandingHowItWorks() {
                                 </div>
                             </div>
                             <div className="space-y-3">
-                                <h3 className="text-xl font-black text-slate-900 tracking-tight">{t(step.titleKey)}</h3>
-                                <p className="text-slate-500 text-sm leading-relaxed max-w-[250px] mx-auto">
+                                <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight">{t(step.titleKey)}</h3>
+                                <p className="text-base text-slate-500 leading-relaxed max-w-[250px] mx-auto">
                                     {t(step.descKey)}
                                 </p>
                             </div>

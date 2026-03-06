@@ -29,11 +29,11 @@ export function LandingTestimonials() {
                     transition={{ duration: 0.7 }}
                     className="text-center mb-20"
                 >
-                    <span className="text-sm font-bold tracking-widest uppercase text-primary/60 mb-4 block">Scale</span>
-                    <h2 className="text-4xl font-black tracking-tighter sm:text-6xl text-slate-900 mb-6 pb-2">
+                    <span className="text-xs font-black uppercase tracking-widest text-primary mb-4 block">Scale</span>
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-900 mb-6 pb-2">
                         {t('statsTitle')}
                     </h2>
-                    <p className="text-slate-500 text-xl max-w-xl mx-auto">
+                    <p className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-xl mx-auto">
                         {t('statsSubtitle')}
                     </p>
                 </motion.div>
@@ -64,7 +64,7 @@ export function LandingTestimonials() {
                                     <Icon className="h-7 w-7" />
                                 </div>
                                 <span className="text-5xl font-black text-slate-900 mb-2 tracking-tighter">{stat.value}</span>
-                                <span className="text-base text-slate-500 font-bold uppercase tracking-wide">{t(stat.labelKey)}</span>
+                                <span className="text-sm font-black text-slate-500 uppercase tracking-widest">{t(stat.labelKey)}</span>
                             </motion.div>
                         );
                     })}
@@ -85,7 +85,7 @@ export function LandingTestimonials() {
                     {/* Dot grid overlay */}
                     <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
-                    <h3 className="text-3xl md:text-5xl font-black tracking-tight mb-4 relative z-10">Choose a plan<br />that fits your needs.</h3>
+                    <h3 className="text-4xl md:text-5xl font-black tracking-tighter mb-4 relative z-10 text-white">Choose a plan<br />that fits your needs.</h3>
                     <p className="text-white/50 text-lg mb-8 relative z-10 max-w-md mx-auto">Start growing your brand with Morocco&apos;s top creators today.</p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
