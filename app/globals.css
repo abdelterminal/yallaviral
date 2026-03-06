@@ -140,6 +140,11 @@
   ::placeholder {
     color: hsl(var(--muted-foreground));
     opacity: 1;
+    transition: opacity 0.15s ease;
+  }
+
+  :focus::placeholder {
+    opacity: 0;
   }
 }
 
