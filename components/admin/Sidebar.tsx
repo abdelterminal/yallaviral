@@ -33,7 +33,7 @@ export function Sidebar() {
                         className={cn("flex items-center gap-3 px-4 py-3.5 rounded-full text-[15px] font-bold transition-all duration-300 mx-2 hover:-translate-y-0.5",
                             pathname === link.href
                                 ? "bg-primary text-white shadow-[0_8px_20px_-6px_hsl(var(--primary))]"
-                                : "text-muted-foreground hover:text-foreground hover:bg-slate-50/80"
+                                : "text-muted-foreground hover:text-foreground hover:bg-muted"
                         )}
                     >
                         <link.icon className={cn("h-5 w-5", pathname === link.href && "fill-current")} />
@@ -45,7 +45,7 @@ export function Sidebar() {
             <div className="pt-4 border-t border-border">
                 <Link
                     href="/dashboard"
-                    className="flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors group"
+                    className="flex items-center gap-3 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors group"
                 >
                     <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
                     {t('switchToUser')}

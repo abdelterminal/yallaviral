@@ -27,14 +27,14 @@ export default async function LoginPage() {
 
                 {/* Logo Area */}
                 <Link href="/" className="flex items-center gap-2 mb-10 group transition-transform hover:scale-105 active:scale-95">
-                    <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center shadow-sm">
-                        <Sparkles className="h-4 w-4 text-foreground" />
+                    <div className="h-8 w-8 bg-primary rounded-xl flex items-center justify-center shadow-[0_4px_14px_-4px_hsl(var(--primary)/0.5)]">
+                        <Sparkles className="h-4 w-4 text-primary-foreground" />
                     </div>
                     <span className="font-black text-3xl tracking-tight">Yalla<span className="text-primary">Viral</span></span>
                 </Link>
 
                 {/* Form Container */}
-                <div className="w-full bg-muted/50 border border-transparent p-8 rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur-sm relative z-10">
+                <div className="w-full bg-card border-0 p-8 rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] relative z-10">
                     <LoginForm />
                 </div>
 

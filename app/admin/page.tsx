@@ -53,7 +53,7 @@ export default async function AdminDashboard() {
         <div className="space-y-6 animate-in fade-in duration-500">
             {/* Header */}
             <div>
-                <h1 className="text-2xl font-bold tracking-tight text-foreground">{t('title')}</h1>
+                <h1 className="text-2xl font-black tracking-tight text-foreground">{t('title')}</h1>
                 <p className="text-sm text-muted-foreground mt-1">{t('subtitle')}</p>
             </div>
 
@@ -68,7 +68,7 @@ export default async function AdminDashboard() {
                             }`}
                     >
                         <div className="flex items-center justify-between mb-4">
-                            <span className={`text-xs font-bold uppercase tracking-wider ${stat.highlight ? "text-white/80" : "text-muted-foreground"}`}>
+                            <span className={`text-xs font-bold uppercase tracking-wider ${stat.highlight ? "text-primary-foreground" : "text-muted-foreground"}`}>
                                 {stat.label}
                             </span>
                             <div className={`p-2.5 rounded-full ${stat.highlight ? "bg-white/20 text-white" : "bg-primary/10 text-primary"}`}>
@@ -100,7 +100,7 @@ export default async function AdminDashboard() {
                         <p className="text-xs text-muted-foreground mt-1">{t('noAttentionNeeded')}</p>
                     </div>
                 ) : (
-                    <div className="flex flex-col gap-3 p-6 bg-slate-50/50">
+                    <div className="flex flex-col gap-3 p-6 bg-muted/30">
                         {/* Custom Header Row */}
                         <div className="hidden md:grid grid-cols-[2fr_1.5fr_1fr_1fr_1fr_0.5fr] gap-4 px-6 py-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
                             <div>{t('table.client')}</div>
@@ -118,7 +118,7 @@ export default async function AdminDashboard() {
                                 const name = profile?.brand_name || profile?.full_name || t('table.unknown');
 
                                 return (
-                                    <div key={booking.id} className="grid grid-cols-1 md:grid-cols-[2fr_1.5fr_1fr_1fr_1fr_0.5fr] items-center gap-4 bg-white rounded-full px-6 py-4 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300">
+                                    <div key={booking.id} className="grid grid-cols-1 md:grid-cols-[2fr_1.5fr_1fr_1fr_1fr_0.5fr] items-center gap-4 bg-card rounded-full px-6 py-4 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300">
                                         <div className="flex items-center min-w-0">
                                             <div className="h-10 w-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm shrink-0 uppercase">
                                                 {name.substring(0, 2)}

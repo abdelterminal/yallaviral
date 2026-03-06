@@ -66,7 +66,7 @@ export default async function DashboardPage() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold tracking-tight text-foreground">
+                    <h1 className="text-2xl font-black tracking-tight text-foreground">
                         {t('welcomeBack', { name: firstName })}
                     </h1>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -74,7 +74,7 @@ export default async function DashboardPage() {
                     </p>
                 </div>
                 <Link href="/campaign">
-                    <Button className="font-semibold shadow-[0_8px_30px_-6px_hsl(var(--primary))] bg-gradient-to-tr from-primary to-blue-500 border-0">
+                    <Button className="font-semibold">
                         <Plus className="h-4 w-4 mr-2" /> {tc('newBooking')}
                     </Button>
                 </Link>
@@ -86,7 +86,7 @@ export default async function DashboardPage() {
                     <div
                         key={stat.label}
                         className={`rounded-[2rem] p-6 relative overflow-hidden ${stat.isHero
-                                ? "bg-gradient-to-br from-primary to-[#4f46e5] text-white shadow-[0_15px_40px_-10px_rgba(79,70,229,0.5)] border-0"
+                                ? "bg-primary text-white shadow-[0_15px_40px_-10px_hsl(var(--primary)/0.5)] border-0"
                                 : stat.isWarning
                                     ? "bg-amber-50 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] border border-amber-200/50"
                                     : "bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.05)] border-0"
@@ -96,10 +96,10 @@ export default async function DashboardPage() {
                             <div className="absolute -right-6 -top-6 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none" />
                         )}
                         <div className="flex items-center justify-between mb-4 relative z-10">
-                            <span className={`text-[11px] font-bold uppercase tracking-widest ${stat.isHero ? "text-white/80" : stat.isWarning ? "text-amber-700/80" : "text-muted-foreground"}`}>
+                            <span className={`text-[11px] font-bold uppercase tracking-widest ${stat.isHero ? "text-primary-foreground" : stat.isWarning ? "text-amber-700" : "text-muted-foreground"}`}>
                                 {stat.label}
                             </span>
-                            <div className={`p-3 rounded-2xl shadow-sm ${stat.isHero ? "bg-white/20 text-white backdrop-blur-md" : stat.isWarning ? "bg-amber-100/50 text-amber-600" : "bg-primary/5 text-primary"}`}>
+                            <div className={`p-3 rounded-2xl shadow-sm ${stat.isHero ? "bg-primary-foreground/20 text-primary-foreground" : stat.isWarning ? "bg-amber-100 text-amber-600" : "bg-primary/5 text-primary"}`}>
                                 <stat.icon className="h-5 w-5" />
                             </div>
                         </div>
@@ -137,7 +137,7 @@ export default async function DashboardPage() {
                                 <Link
                                     key={booking.id}
                                     href={`/requests/${booking.id}`}
-                                    className="flex items-center justify-between px-5 py-3.5 hover:bg-muted/50 transition-colors group"
+                                    className="flex items-center justify-between px-5 py-3.5 hover:bg-muted/50 hover:-translate-y-0.5 hover:shadow-sm transition-all duration-200 group"
                                 >
                                     <div className="flex items-center gap-3 min-w-0">
                                         <div className="h-9 w-9 rounded-lg bg-muted border border-border flex items-center justify-center shrink-0 overflow-hidden">

@@ -1,27 +1,27 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useTransition } from "react";
-import { Globe } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { useTransition, useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 const languages = [
-    { code: "en", label: "English", flag: "🇬🇧" },
-    { code: "fr", label: "Français", flag: "🇫🇷" },
+    { code: "en", label: "EN" },
+    { code: "fr", label: "FR" },
 ];
 
 export function LanguageSwitcher() {
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
+    const [currentLocale, setCurrentLocale] = useState("en");
+
+    useEffect(() => {
+        const match = document.cookie.match(/NEXT_LOCALE=(\w+)/);
+        if (match) setCurrentLocale(match[1]);
+    }, []);
 
     function switchLocale(locale: string) {
-        // Set cookie and refresh
+        if (locale === currentLocale || isPending) return;
+        setCurrentLocale(locale);
         document.cookie = `NEXT_LOCALE=${locale};path=/;max-age=31536000;SameSite=Lax`;
         startTransition(() => {
             router.refresh();
@@ -29,33 +29,27 @@ export function LanguageSwitcher() {
     }
 
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-9 w-9 text-muted-foreground hover:text-foreground hover:bg-muted rounded-full transition-all"
-                    disabled={isPending}
-                >
-                    <Globe className="h-4 w-4" />
-                    <span className="sr-only">Switch language</span>
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-                align="end"
-                className="w-40 bg-card border-border  text-foreground"
-            >
-                {languages.map((lang) => (
-                    <DropdownMenuItem
+        <div className="flex items-center bg-white/10 backdrop-blur-md border border-white/20 rounded-full p-1 w-fit shadow-sm">
+            {languages.map((lang) => {
+                const isActive = currentLocale === lang.code;
+                return (
+                    <button
                         key={lang.code}
                         onClick={() => switchLocale(lang.code)}
-                        className="focus:bg-muted cursor-pointer gap-2"
+                        disabled={isPending}
+                        className={cn(
+                            "px-3 py-1 rounded-full text-xs font-black tracking-widest transition-all duration-200",
+                            isActive
+                                ? "bg-white text-[#0B0E17] shadow-sm transform scale-100"
+                                : "text-white/50 hover:text-white hover:bg-white/10 transform scale-95"
+                        )}
+                        aria-pressed={isActive}
+                        aria-label={`Switch to ${lang.code}`}
                     >
-                        <span className="text-base">{lang.flag}</span>
-                        <span className="text-sm font-medium">{lang.label}</span>
-                    </DropdownMenuItem>
-                ))}
-            </DropdownMenuContent>
-        </DropdownMenu>
+                        {lang.label}
+                    </button>
+                );
+            })}
+        </div>
     );
 }

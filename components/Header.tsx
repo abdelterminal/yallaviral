@@ -54,7 +54,7 @@ export function Header({ profile }: { profile: any }) {
 
     return (
         <header className="sticky top-6 z-50 mx-auto w-[93%] max-w-7xl">
-            <div className="flex items-center justify-between rounded-full bg-white/95 backdrop-blur-md px-8 py-5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] transition-all duration-300">
+            <div className="flex items-center justify-between rounded-full bg-card px-8 py-5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] transition-all duration-300">
 
                 {/* Left: Mobile Menu Trigger & Breadcrumbs */}
                 <div className="flex items-center gap-2 text-sm text-muted-foreground min-w-[150px] sm:min-w-[200px]">

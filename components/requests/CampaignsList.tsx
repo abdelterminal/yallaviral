@@ -63,7 +63,7 @@ export function CampaignsList({ bookings }: CampaignsListProps) {
             <div className="grid gap-4">
                 {filtered.map((booking) => (
                     <Link key={booking.id} href={`/requests/${booking.id}`}>
-                        <Card className="p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:-translate-y-1 transition-all duration-300 group cursor-pointer border-border bg-card shadow-sm hover:shadow-md">
+                        <Card className="p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:-translate-y-1 transition-all duration-300 group cursor-pointer border-0 bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_-10px_rgba(0,0,0,0.08)]">
                             <div className="space-y-2">
                                 <div className="flex items-center gap-3">
                                     <h3 className="font-bold text-xl text-foreground group-hover:text-primary transition-colors tracking-tight">{t('campaignHash', { id: booking.id.slice(0, 8) })}</h3>
@@ -97,7 +97,7 @@ export function CampaignsList({ bookings }: CampaignsListProps) {
                                 <Button
                                     variant="outline"
                                     size="lg"
-                                    className="w-full md:w-auto h-12 px-6 font-bold bg-white"
+                                    className="w-full md:w-auto h-12 px-6 font-bold"
                                 >
                                     {t('viewDetails')}
                                 </Button>

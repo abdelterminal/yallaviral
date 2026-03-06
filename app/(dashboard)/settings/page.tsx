@@ -52,16 +52,16 @@ export default async function SettingsPage({
 
             <Tabs defaultValue={defaultTab} className="space-y-8">
                 <TabsList className="bg-muted border border-border p-1 h-auto rounded-full inline-flex">
-                    <TabsTrigger value="profile" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
+                    <TabsTrigger value="profile" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
                         <User className="h-4 w-4 mr-2" /> {t('profileTab')}
                     </TabsTrigger>
-                    <TabsTrigger value="billing" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
+                    <TabsTrigger value="billing" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
                         <CreditCard className="h-4 w-4 mr-2" /> {t('billingTab')}
                     </TabsTrigger>
-                    <TabsTrigger value="notifications" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
+                    <TabsTrigger value="notifications" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
                         <Bell className="h-4 w-4 mr-2" /> {t('notificationsTab')}
                     </TabsTrigger>
-                    <TabsTrigger value="security" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
+                    <TabsTrigger value="security" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
                         <Shield className="h-4 w-4 mr-2" /> {t('securityTab')}
                     </TabsTrigger>
                 </TabsList>
@@ -71,7 +71,7 @@ export default async function SettingsPage({
                 </TabsContent>
 
                 <TabsContent value="billing" className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-500">
-                    <Card className="bg-gradient-to-br from-primary/5 to-purple-50 border-border text-center py-12">
+                    <Card className="bg-primary/5 border-0 text-center py-12">
                         <CardHeader>
                             <CardTitle className="text-2xl">{t('billingTitle')}</CardTitle>
                             <CardDescription className="text-base max-w-md mx-auto">
@@ -80,7 +80,7 @@ export default async function SettingsPage({
                         </CardHeader>
                         <CardContent>
                             <a href="https://wa.me/212600000000?text=Hi%2C%20I%27d%20like%20to%20discuss%20billing" target="_blank" rel="noopener noreferrer">
-                                <Button className="font-bold bg-emerald-600 hover:bg-emerald-700 text-foreground shadow-lg shadow-emerald-900/20">
+                                <Button className="font-bold bg-[#25D366] hover:bg-[#1da851] text-white shadow-[0_8px_20px_-6px_rgba(37,211,102,0.5)]">
                                     {t('contactWhatsApp')}
                                 </Button>
                             </a>
