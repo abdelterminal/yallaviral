@@ -26,10 +26,10 @@ interface AnalyticsChartsProps {
 }
 
 const STATUS_COLORS: Record<string, string> = {
-    pending: "#f59e0b",
-    confirmed: "#10b981",
-    rejected: "#ef4444",
-    completed: "#3b82f6",
+    pending: "#d97706",
+    confirmed: "#2d9660",
+    rejected: "#dc2626",
+    completed: "#2d82a0",
 };
 
 export function AnalyticsCharts({ bookings }: AnalyticsChartsProps) {
@@ -61,56 +61,65 @@ export function AnalyticsCharts({ bookings }: AnalyticsChartsProps) {
     return (
         <div className="grid gap-6 md:grid-cols-2">
             {/* Spending Over Time */}
-            <Card className="p-6 space-y-4">
+            <Card className="p-6 space-y-4 rounded-[2rem] border-0 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)]">
                 <div>
-                    <h3 className="text-sm font-bold text-foreground">Spending Over Time</h3>
+                    <h3 className="text-[15px] font-bold text-foreground">Spending Over Time</h3>
                     <p className="text-xs text-muted-foreground mt-0.5">Monthly MAD spend</p>
                 </div>
                 <ResponsiveContainer width="100%" height={220}>
-                    <AreaChart data={spendingData} margin={{ top: 4, right: 4, left: -16, bottom: 0 }}>
+                    <AreaChart data={spendingData} margin={{ top: 4, right: 4, left: -6, bottom: 0 }}>
                         <defs>
                             <linearGradient id="spendGradient" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="hsl(263 83% 58%)" stopOpacity={0.2} />
-                                <stop offset="95%" stopColor="hsl(263 83% 58%)" stopOpacity={0} />
+                                <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3} />
+                                <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0} />
                             </linearGradient>
                         </defs>
                         <XAxis
                             dataKey="month"
-                            tick={{ fontSize: 11, fill: "hsl(215 25% 40%)" }}
+                            tick={{ fontSize: 11, fill: "hsl(215 16% 47%)", fontWeight: 600 }}
                             axisLine={false}
                             tickLine={false}
+                            dy={10}
                         />
                         <YAxis
-                            tick={{ fontSize: 11, fill: "hsl(215 25% 40%)" }}
+                            tick={{ fontSize: 11, fill: "hsl(215 16% 47%)", fontWeight: 600 }}
                             axisLine={false}
                             tickLine={false}
                             tickFormatter={(v) => `${v}`}
+                            dx={-10}
                         />
                         <Tooltip
+                            cursor={{ stroke: 'hsl(var(--primary))', strokeWidth: 1, strokeDasharray: '4 4' }}
                             contentStyle={{
-                                background: "hsl(0 0% 100%)",
-                                border: "1px solid hsl(214 32% 91%)",
-                                borderRadius: "12px",
+                                background: "hsl(222 47% 11%)",
+                                border: "none",
+                                borderRadius: "9999px",
+                                padding: "8px 16px",
                                 fontSize: "12px",
-                                color: "hsl(220 70% 14%)",
+                                fontWeight: "bold",
+                                color: "#ffffff",
+                                boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)"
                             }}
+                            itemStyle={{ color: "#ffffff" }}
                             formatter={(value) => [`${value ?? 0} MAD`, "Spend"]}
                         />
                         <Area
                             type="monotone"
                             dataKey="total"
-                            stroke="hsl(263 83% 58%)"
-                            strokeWidth={2}
+                            stroke="hsl(var(--primary))"
+                            strokeWidth={4}
+                            strokeLinecap="round"
                             fill="url(#spendGradient)"
+                            activeDot={{ r: 6, fill: "hsl(var(--primary))", stroke: "#fff", strokeWidth: 2 }}
                         />
                     </AreaChart>
                 </ResponsiveContainer>
             </Card>
 
             {/* Status Distribution */}
-            <Card className="p-6 space-y-4">
+            <Card className="p-6 space-y-4 rounded-[2rem] border-0 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)]">
                 <div>
-                    <h3 className="text-sm font-bold text-foreground">Booking Status</h3>
+                    <h3 className="text-[15px] font-bold text-foreground">Booking Status</h3>
                     <p className="text-xs text-muted-foreground mt-0.5">Distribution by status</p>
                 </div>
                 <ResponsiveContainer width="100%" height={220}>
@@ -119,10 +128,12 @@ export function AnalyticsCharts({ bookings }: AnalyticsChartsProps) {
                             data={statusData}
                             cx="50%"
                             cy="50%"
-                            innerRadius={55}
+                            innerRadius={65}
                             outerRadius={85}
-                            paddingAngle={3}
+                            paddingAngle={5}
                             dataKey="value"
+                            stroke="none"
+                            cornerRadius={10}
                         >
                             {statusData.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={entry.color} />
@@ -130,19 +141,23 @@ export function AnalyticsCharts({ bookings }: AnalyticsChartsProps) {
                         </Pie>
                         <Tooltip
                             contentStyle={{
-                                background: "hsl(0 0% 100%)",
-                                border: "1px solid hsl(214 32% 91%)",
-                                borderRadius: "12px",
+                                background: "hsl(222 47% 11%)",
+                                border: "none",
+                                borderRadius: "9999px",
+                                padding: "8px 16px",
                                 fontSize: "12px",
-                                color: "hsl(220 70% 14%)",
+                                fontWeight: "bold",
+                                color: "#ffffff",
+                                boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)"
                             }}
+                            itemStyle={{ color: "#ffffff" }}
                             formatter={(value, name) => [value ?? 0, name]}
                         />
                         <Legend
                             iconType="circle"
                             iconSize={8}
                             formatter={(value) => (
-                                <span style={{ fontSize: 12, color: "hsl(215 25% 40%)" }}>{value}</span>
+                                <span style={{ fontSize: 12, color: "hsl(215 16% 47%)", fontWeight: 600, marginLeft: "4px" }}>{value}</span>
                             )}
                         />
                     </PieChart>

@@ -48,66 +48,70 @@
 }
 
 :root {
-  --radius: 1rem;
+  --radius: 1.5rem;
 
-  /* ===== Light Mode: "Lusha Enterprise Redesign" ===== */
+  /* ===== Electron Theme: "Deep Space to Light" ===== */
 
-  /* Background: A very faint, cool off-white for the main app so white cards pop off it */
-  --background: 210 40% 98%;
-  /* Foreground: Deep Navy Slate (#0B1B3D) for premium contrast */
-  --foreground: 220 70% 14%;
+  /* Background: Deep Violet / Midnight Blue */
+  --background: 230 40% 7%;
+  /* Foreground: Bright White for high contrast */
+  --foreground: 0 0% 100%;
 
-  /* Cards/Surfaces: Pure stark white */
-  --card: 0 0% 100%;
-  --card-foreground: 220 70% 14%;
+  /* Cards/Surfaces: Deep translucent darks initially */
+  --card: 230 40% 10%;
+  --card-foreground: 0 0% 100%;
 
   /* Popovers */
-  --popover: 0 0% 100%;
-  --popover-foreground: 220 70% 14%;
+  --popover: 230 40% 10%;
+  --popover-foreground: 0 0% 100%;
 
-  /* Primary: Vibrant Violet */
-  --primary: 263 83% 58%;
+  /* Primary: Electric Blue */
+  --primary: 220 100% 50%;
   --primary-foreground: 0 0% 100%;
 
-  /* Secondary: Soft slate */
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 220 70% 14%;
+  /* Secondary: Soft Grayish Blue for dark theme (semi-transparent) */
+  --secondary: 230 20% 90%;
+  --secondary-foreground: 222 47% 11%;
 
-  /* Muted: Light gray surface */
-  --muted: 214 32% 91%;
-  --muted-foreground: 215 25% 40%;
+  /* Muted: Lighter Gray for dark theme */
+  --muted: 230 30% 15%;
+  --muted-foreground: 230 20% 70%;
 
-  /* Accent: Hover states */
-  --accent: 210 40% 96%;
-  --accent-foreground: 220 70% 14%;
+  /* Accent: Hover background */
+  --accent: 230 30% 15%;
+  --accent-foreground: 0 0% 100%;
 
   /* Destructive */
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  /* Borders & Inputs: Crisp, subtle gray (#E2E8F0) */
-  --border: 214 32% 91%;
-  --input: 214 32% 91%;
+  /* Borders & Inputs: Very light/subtle */
+  --border: 230 20% 15%;
+  --input: 230 20% 15%;
 
-  /* Ring: Thick, vibrant primary ring on focus */
-  --ring: 263 83% 58%;
+  /* Ring: Primary focus ring */
+  --ring: 220 100% 50%;
 
   /* Chart Colors */
-  --chart-1: 263 83% 58%;
-  --chart-2: 160 84% 39%;
-  --chart-3: 199 89% 48%;
-  --chart-4: 330 81% 60%;
-  --chart-5: 35 92% 50%;
+  --chart-1: 220 100% 50%;
+  /* Electric Blue */
+  --chart-2: 230 40% 20%;
+  /* Dark Violet */
+  --chart-3: 150 45% 38%;
+  /* Accent Green */
+  --chart-4: 280 60% 60%;
+  /* Bright Purple */
+  --chart-5: 340 55% 48%;
 
   /* Sidebar */
   --sidebar: 0 0% 100%;
-  --sidebar-foreground: 220 70% 14%;
-  --sidebar-primary: 263 83% 58%;
+  --sidebar-foreground: 222 47% 11%;
+  --sidebar-primary: 220 100% 50%;
   --sidebar-primary-foreground: 0 0% 100%;
   --sidebar-accent: 210 40% 96%;
-  --sidebar-accent-foreground: 263 83% 58%;
+  --sidebar-accent-foreground: 220 100% 50%;
   --sidebar-border: 214 32% 91%;
-  --sidebar-ring: 263 83% 58%;
+  --sidebar-ring: 220 100% 50%;
 }
 
 @layer base {
@@ -122,7 +126,33 @@
   }
 
   .glow-box {
-    box-shadow: 0 0 20px -5px hsl(263 83% 58% / 0.25);
+    box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.25);
+  }
+
+  .float-card {
+    @apply bg-card rounded-[2rem] border-0;
+    box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.08);
+  }
+
+  .float-card-lg {
+    @apply bg-card rounded-[2.5rem] border-0;
+    box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.1);
+  }
+
+  .page-title {
+    @apply text-3xl font-black tracking-tight text-foreground;
+  }
+
+  .section-label {
+    @apply text-[11px] font-black uppercase tracking-widest text-muted-foreground;
+  }
+
+  .primary-shadow {
+    box-shadow: 0 8px 30px -6px hsl(var(--primary) / 0.4);
+  }
+
+  .zellige-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C05621' fill-opacity='0.045'%3E%3Cpath d='M20 0 L40 20 L20 40 L0 20Z'/%3E%3C/g%3E%3C/svg%3E");
   }
 
   .glass-card {
@@ -147,14 +177,17 @@
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: hsl(var(--muted));
   border-radius: 99px;
 }
+
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--border));
   border-radius: 99px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.4);
 }

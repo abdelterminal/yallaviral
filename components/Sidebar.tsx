@@ -53,7 +53,7 @@ export function Sidebar() {
   const allLinks = sidebarLinks;
 
   return (
-    <div className="group/sidebar hidden md:flex h-screen w-20 hover:w-64 flex-col border-r border-border bg-card py-6 transition-[width] duration-300 ease-in-out fixed top-0 left-0 z-[60] shadow-sm hover:shadow-2xl hover:border-r-primary/20">
+    <div className="group/sidebar hidden md:flex h-[calc(100vh-2rem)] w-20 hover:w-64 flex-col border-0 bg-card py-6 transition-[width] duration-300 ease-in-out fixed top-4 left-4 z-[60] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] rounded-[2rem] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.1)] overflow-hidden">
       <div className="mb-8 flex items-center px-4">
         <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 shadow-sm">
           <YallaLogo className="h-7 w-7" />
@@ -72,12 +72,12 @@ export function Sidebar() {
             <Link
               key={link.href}
               href={link.href}
-              className={cn("group relative flex items-center gap-4 transition-all duration-300 rounded-2xl p-3 w-[calc(100%-1rem)] mx-2",
-                isActive ? "bg-primary text-primary-foreground shadow-[0_8px_30px_rgb(0_0_0_/_0.08)]" : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              className={cn("group relative flex items-center gap-4 transition-all duration-300 rounded-full p-3 w-[calc(100%-1rem)] mx-2 hover:-translate-y-0.5",
+                isActive ? "bg-primary text-white shadow-[0_8px_20px_-6px_hsl(var(--primary))]" : "text-muted-foreground hover:bg-slate-50/80 hover:text-foreground"
               )}
             >
               <div className="flex-shrink-0 flex items-center justify-center w-8">
-                <Icon className={cn("h-6 w-6 transition-transform group-hover:scale-110", isActive && "fill-current")} />
+                <Icon className={cn("h-6 w-6 transition-transform group-hover:scale-110", isActive && "text-white")} />
               </div>
               <span
                 className={cn("text-base font-bold transition-all duration-300 whitespace-nowrap overflow-hidden", "opacity-0 group-hover/sidebar:opacity-100",

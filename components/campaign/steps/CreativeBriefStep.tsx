@@ -34,29 +34,29 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                 </p>
             </div>
 
-            <Card className="bg-card border-border p-6 space-y-6">
-                <h3 className="text-xl font-bold text-foreground">{t('videoQuantities')}</h3>
+            <Card className="bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)] border-0 rounded-[2rem] p-8 space-y-8">
+                <h3 className="text-2xl font-black tracking-tight text-foreground">{t('videoQuantities')}</h3>
 
                 {hasNoTalent ? (
-                    <div className="flex items-center justify-between p-4 bg-muted/50 rounded-xl border border-border">
+                    <div className="flex items-center justify-between p-6 bg-slate-50/50 rounded-[1.5rem] shadow-inner border-0">
                         <div>
-                            <p className="font-bold text-foreground">{t('totalVideos')}</p>
+                            <p className="font-bold text-lg text-foreground">{t('totalVideos')}</p>
                             <p className="text-sm text-muted-foreground">{t('usingOwnTalent')}</p>
                         </div>
                         <div className="flex items-center gap-3">
                             <Button
                                 variant="outline"
                                 size="icon"
-                                className="border-border text-foreground hover:bg-muted"
+                                className="border-0 shadow-sm rounded-full text-foreground hover:bg-slate-100 bg-white"
                                 onClick={() => setGlobalQuantity(Math.max(1, globalQuantity - 1))}
                             >
-                                <Minus className="h-4 w-4" />
+                                <Minus className="h-4 w-4 text-muted-foreground mr-[2px]" />
                             </Button>
-                            <span className="w-8 text-center font-bold text-lg text-foreground">{globalQuantity}</span>
+                            <span className="w-10 text-center font-black text-2xl text-foreground">{globalQuantity}</span>
                             <Button
                                 variant="outline"
                                 size="icon"
-                                className="border-border text-foreground hover:bg-muted"
+                                className="border-0 shadow-sm rounded-full text-foreground hover:bg-slate-100 bg-white"
                                 onClick={() => setGlobalQuantity(globalQuantity + 1)}
                             >
                                 <Plus className="h-4 w-4" />
@@ -66,9 +66,9 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                 ) : (
                     <div className="space-y-4">
                         {selectedModels.map(model => (
-                            <div key={model.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-muted/50 rounded-xl border border-border gap-4">
+                            <div key={model.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-slate-50/50 shadow-inner rounded-[1.5rem] border-0 gap-4">
                                 <div className="flex items-center gap-4">
-                                    <div className="h-12 w-12 rounded-full overflow-hidden bg-muted">
+                                    <div className="h-16 w-16 shadow-sm rounded-[1rem] overflow-hidden bg-slate-100 p-1">
                                         {model.image_url ? (
                                             <img src={model.image_url} alt={model.name} className="h-full w-full object-cover" />
                                         ) : (
@@ -80,23 +80,23 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                                         <p className="text-sm text-muted-foreground">{model.hourly_rate} MAD {t('perVideo')}</p>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-3 self-end sm:self-auto">
+                                <div className="flex items-center gap-3 self-end sm:self-auto bg-white p-2 rounded-full shadow-sm">
                                     <Button
-                                        variant="outline"
+                                        variant="ghost"
                                         size="icon"
-                                        className="border-border text-foreground hover:bg-muted"
+                                        className="h-8 w-8 rounded-full hover:bg-slate-100"
                                         onClick={() => setModelQuantity(model.id, Math.max(1, (model.quantity || 1) - 1))}
                                     >
-                                        <Minus className="h-4 w-4" />
+                                        <Minus className="h-4 w-4 text-muted-foreground ml-[-1px]" />
                                     </Button>
-                                    <span className="w-8 text-center font-bold text-lg text-foreground">{model.quantity || 1}</span>
+                                    <span className="w-8 text-center font-black text-xl text-foreground">{model.quantity || 1}</span>
                                     <Button
-                                        variant="outline"
+                                        variant="ghost"
                                         size="icon"
-                                        className="border-border text-foreground hover:bg-muted"
+                                        className="h-8 w-8 rounded-full hover:bg-slate-100"
                                         onClick={() => setModelQuantity(model.id, (model.quantity || 1) + 1)}
                                     >
-                                        <Plus className="h-4 w-4" />
+                                        <Plus className="h-4 w-4 text-muted-foreground mr-[0px]" />
                                     </Button>
                                 </div>
                             </div>

@@ -64,7 +64,7 @@ export default function SignupForm() {
     if (success) {
         return (
             <div className="w-full max-w-[400px] flex flex-col items-center justify-center text-center space-y-6 animate-in fade-in duration-500">
-                <div className="h-20 w-20 bg-green-500/10 rounded-full flex items-center justify-center border border-green-500/20 shadow-xl shadow-green-500/10">
+                <div className="h-20 w-20 bg-emerald-500/10 rounded-full flex items-center justify-center shadow-[0_8px_30px_-8px_rgba(34,197,94,0.3)]">
                     <Sparkles className="h-10 w-10 text-primary" />
                 </div>
                 <div className="space-y-2">
@@ -74,12 +74,12 @@ export default function SignupForm() {
                     </p>
                 </div>
                 <div className="w-full max-w-xs space-y-3 pt-2">
-                    <div className="p-3 rounded-xl bg-muted/50 border border-border text-xs text-muted-foreground space-y-1">
+                    <div className="p-3 rounded-2xl bg-muted text-xs text-muted-foreground space-y-1">
                         <p className="font-bold text-muted-foreground">{t('didntReceive')}</p>
                         <p>{t('checkSpam')}</p>
                     </div>
                     <Link href="/login">
-                        <Button className="w-full font-bold bg-white text-black hover:bg-gray-200 mt-2">
+                        <Button variant="secondary" className="w-full font-bold mt-2">
                             {t('goToLogin')}
                         </Button>
                     </Link>
@@ -96,7 +96,7 @@ export default function SignupForm() {
             </div>
 
             {error && (
-                <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center gap-2 text-destructive text-xs">
+                <div className="mb-4 p-3 rounded-2xl bg-destructive/10 flex items-center gap-2 text-destructive text-xs">
                     <AlertCircle className="h-4 w-4 shrink-0" />
                     <p className="font-medium">{error}</p>
                 </div>
@@ -111,7 +111,7 @@ export default function SignupForm() {
                             name="fullName"
                             placeholder={t('namePlaceholder')}
                             required
-                            className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-muted"
+                            className="h-10"
                         />
                     </div>
                     <div className="space-y-1.5">
@@ -121,7 +121,7 @@ export default function SignupForm() {
                             name="brandName"
                             placeholder={t('companyPlaceholder')}
                             required
-                            className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-muted"
+                            className="h-10"
                         />
                     </div>
                 </div>
@@ -135,7 +135,7 @@ export default function SignupForm() {
                             type="email"
                             placeholder={t('emailPlaceholder')}
                             required
-                            className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-muted"
+                            className="h-10"
                         />
                     </div>
                     <div className="space-y-1.5">
@@ -146,7 +146,7 @@ export default function SignupForm() {
                             type="tel"
                             placeholder={t('phonePlaceholder')}
                             required
-                            className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/30 h-10 rounded-xl focus:border-primary/50 focus:placeholder-transparent text-base transition-all focus:bg-muted"
+                            className="h-10"
                         />
                     </div>
                 </div>
@@ -166,7 +166,7 @@ export default function SignupForm() {
                 {/* Bot Verification Box */}
                 <div className="py-2">
                     <div className="relative">
-                        <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/50 border border-border hover:bg-muted/70 transition-all cursor-pointer group active:scale-[0.99] hover:border-primary/30 select-none">
+                        <div className="flex items-center gap-3 p-3 rounded-2xl bg-muted hover:bg-muted/80 transition-all cursor-pointer group active:scale-[0.99] select-none">
                             <div className="h-5 w-5 rounded-lg border-2 border-primary/50 flex items-center justify-center bg-background transition-all group-hover:border-primary relative shrink-0 text-primary">
                                 <input
                                     type="checkbox"
@@ -190,7 +190,7 @@ export default function SignupForm() {
                     <Button
                         type="submit"
                         disabled={isPending}
-                        className="w-full h-12 font-black text-base bg-primary hover:bg-primary/90 text-foreground shadow-[0_8px_16px_rgba(124,58,237,0.2)] rounded-xl transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:grayscale"
+                        className="w-full h-12 font-black text-base disabled:opacity-70 disabled:grayscale"
                     >
                         {isPending ? (
                             <Loader2 className="h-5 w-5 animate-spin text-foreground" />

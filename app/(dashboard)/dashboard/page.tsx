@@ -54,9 +54,9 @@ export default async function DashboardPage() {
     const firstName = user.user_metadata?.full_name?.split(" ")[0] || "there";
 
     const stats = [
-        { label: t('totalBookings'), value: totalBookings || 0, icon: FileText },
+        { label: t('totalBookings'), value: totalBookings || 0, icon: FileText, isHero: true },
         { label: t('active'), value: activeBookings || 0, icon: Clock },
-        { label: t('awaitingPayment'), value: awaitingPayment || 0, icon: CreditCard, highlight: (awaitingPayment || 0) > 0 },
+        { label: t('awaitingPayment'), value: awaitingPayment || 0, icon: CreditCard, isWarning: (awaitingPayment || 0) > 0 },
         { label: t('totalSpent'), value: `${totalSpent.toLocaleString()} MAD`, icon: Calendar },
     ];
 
@@ -66,7 +66,7 @@ export default async function DashboardPage() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold tracking-tight text-foreground">
+                    <h1 className="text-2xl font-black tracking-tight text-foreground">
                         {t('welcomeBack', { name: firstName })}
                     </h1>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -85,18 +85,25 @@ export default async function DashboardPage() {
                 {stats.map((stat) => (
                     <div
                         key={stat.label}
-                        className={`rounded-xl border p-5 ${stat.highlight
-                            ? "border-primary/30 bg-primary/5"
-                            : "border-border bg-card"
+                        className={`rounded-[2rem] p-6 relative overflow-hidden ${stat.isHero
+                                ? "bg-primary text-white shadow-[0_15px_40px_-10px_hsl(var(--primary)/0.5)] border-0"
+                                : stat.isWarning
+                                    ? "bg-amber-50 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] border border-amber-200/50"
+                                    : "bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.05)] border-0"
                             }`}
                     >
-                        <div className="flex items-center justify-between mb-3">
-                            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                        {stat.isHero && (
+                            <div className="absolute -right-6 -top-6 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+                        )}
+                        <div className="flex items-center justify-between mb-4 relative z-10">
+                            <span className={`text-[11px] font-bold uppercase tracking-widest ${stat.isHero ? "text-primary-foreground" : stat.isWarning ? "text-amber-700" : "text-muted-foreground"}`}>
                                 {stat.label}
                             </span>
-                            <stat.icon className="h-4 w-4 text-muted-foreground" />
+                            <div className={`p-3 rounded-2xl shadow-sm ${stat.isHero ? "bg-primary-foreground/20 text-primary-foreground" : stat.isWarning ? "bg-amber-100 text-amber-600" : "bg-primary/5 text-primary"}`}>
+                                <stat.icon className="h-5 w-5" />
+                            </div>
                         </div>
-                        <p className={`text-2xl font-bold ${stat.highlight ? "text-primary" : "text-foreground"}`}>
+                        <p className={`text-4xl font-black tracking-tighter relative z-10 ${stat.isHero ? "text-white" : stat.isWarning ? "text-amber-700" : "text-foreground"}`}>
                             {stat.value}
                         </p>
                     </div>
@@ -106,10 +113,10 @@ export default async function DashboardPage() {
             {/* Main Content */}
             <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
                 {/* Recent Bookings Table */}
-                <div className="rounded-xl border border-border bg-card overflow-hidden">
-                    <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-                        <h2 className="text-sm font-semibold text-foreground">{t('recentBookings')}</h2>
-                        <Link href="/requests" className="text-xs text-primary hover:text-primary/80 font-medium transition-colors">
+                <div className="rounded-[2rem] bg-card overflow-hidden shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)]">
+                    <div className="flex items-center justify-between px-6 py-5 border-b border-border/40">
+                        <h2 className="text-[15px] font-bold text-foreground">{t('recentBookings')}</h2>
+                        <Link href="/requests" className="text-sm text-primary hover:text-primary/80 font-bold transition-colors">
                             {tc('viewAll')}
                         </Link>
                     </div>
@@ -130,7 +137,7 @@ export default async function DashboardPage() {
                                 <Link
                                     key={booking.id}
                                     href={`/requests/${booking.id}`}
-                                    className="flex items-center justify-between px-5 py-3.5 hover:bg-muted/50 transition-colors group"
+                                    className="flex items-center justify-between px-5 py-3.5 hover:bg-muted/50 hover:-translate-y-0.5 hover:shadow-sm transition-all duration-200 group"
                                 >
                                     <div className="flex items-center gap-3 min-w-0">
                                         <div className="h-9 w-9 rounded-lg bg-muted border border-border flex items-center justify-center shrink-0 overflow-hidden">

@@ -180,66 +180,66 @@ export function CampaignBuilder({ availableModels, availableStudios }: CampaignB
 
                         <div className="grid gap-6 md:grid-cols-2">
                             {/* Summary Card */}
-                            <Card className="p-6 space-y-4 h-fit">
-                                <h3 className="font-bold text-xl">{t('campaignRequest')}</h3>
-                                <div className="space-y-3 text-sm">
-                                    <div className="flex justify-between py-2 border-b">
-                                        <span className="text-muted-foreground">{t('shootDate')}</span>
-                                        <span className="font-medium flex items-center gap-2">
+                            <Card className="p-8 space-y-6 h-fit bg-white border-0 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)] rounded-[2rem]">
+                                <h3 className="font-black text-2xl tracking-tight">{t('campaignRequest')}</h3>
+                                <div className="space-y-4 text-base bg-slate-50/50 p-6 rounded-2xl shadow-inner border-0">
+                                    <div className="flex justify-between py-2 border-b border-slate-200">
+                                        <span className="text-muted-foreground font-bold">{t('shootDate')}</span>
+                                        <span className="font-black flex items-center gap-2 text-foreground">
                                             <CalendarIcon className="h-4 w-4" />
                                             {date ? format(date, "MMM do, yyyy") : t('tbd')} {time ? `${t('at')} ${time}` : ''}
                                         </span>
                                     </div>
-                                    <div className="flex justify-between py-2 border-b">
-                                        <span className="text-muted-foreground">{t('totalVideoCount')}</span>
-                                        <span className="font-medium">
+                                    <div className="flex justify-between py-2 border-b border-slate-200">
+                                        <span className="text-muted-foreground font-bold">{t('totalVideoCount')}</span>
+                                        <span className="font-black text-foreground">
                                             {totalVideos}
                                         </span>
                                     </div>
-                                    <div className="flex justify-between py-2 border-b">
-                                        <span className="text-muted-foreground">{t('talentCount')}</span>
-                                        <span className="font-medium">{hasNoTalent ? t('ownTalent') : selectedModels.length}</span>
+                                    <div className="flex justify-between py-2 border-b border-slate-200">
+                                        <span className="text-muted-foreground font-bold">{t('talentCount')}</span>
+                                        <span className="font-black text-foreground">{hasNoTalent ? t('ownTalent') : selectedModels.length}</span>
                                     </div>
-                                    <div className="flex justify-between py-2 border-b">
-                                        <span className="text-muted-foreground">{t('studio')}</span>
-                                        <span className="font-medium">{selectedStudio?.name || tc('none')}</span>
+                                    <div className="flex justify-between py-2">
+                                        <span className="text-muted-foreground font-bold">{t('studio')}</span>
+                                        <span className="font-black text-foreground">{selectedStudio?.name || tc('none')}</span>
                                     </div>
                                 </div>
                             </Card>
 
                             {/* Quote Card */}
-                            <Card className="p-6 space-y-4 border-primary/20 bg-primary/5">
-                                <h3 className="font-bold text-xl text-primary">{t('estimatedQuote')}</h3>
-                                <div className="space-y-2">
+                            <Card className="p-8 space-y-6 bg-gradient-to-br from-primary/5 to-primary/10 border-0 shadow-[0_10px_40px_-10px_rgba(124,58,237,0.15)] rounded-[2rem]">
+                                <h3 className="font-black text-2xl text-primary tracking-tight">{t('estimatedQuote')}</h3>
+                                <div className="space-y-3 bg-white/50 backdrop-blur-sm p-6 rounded-2xl shadow-inner border-0">
                                     {selectedModels.map(model => (
-                                        <div key={model.id} className="flex justify-between text-sm">
-                                            <span>{model.name} (x{model.quantity || 1})</span>
-                                            <span>{(model.hourly_rate * (model.quantity || 1)).toFixed(2)} MAD</span>
+                                        <div key={model.id} className="flex justify-between text-sm font-bold">
+                                            <span className="text-muted-foreground">{model.name} (x{model.quantity || 1})</span>
+                                            <span className="text-foreground">{(model.hourly_rate * (model.quantity || 1)).toFixed(2)} MAD</span>
                                         </div>
                                     ))}
                                     {hasNoTalent && (
-                                        <div className="flex justify-between text-sm">
-                                            <span>{t('production')} (x{globalQuantity})</span>
-                                            <span className="text-muted-foreground italic">{t('quotedLater')}</span>
+                                        <div className="flex justify-between text-sm font-bold">
+                                            <span className="text-muted-foreground">{t('production')} (x{globalQuantity})</span>
+                                            <span className="text-primary/70 italic">{t('quotedLater')}</span>
                                         </div>
                                     )}
                                     {selectedStudio && (
-                                        <div className="flex justify-between text-sm">
-                                            <span>{t('studio')} ({selectedStudio.name}) - {estimatedHours}h</span>
-                                            <span>{finalStudioCost.toFixed(2)} MAD</span>
+                                        <div className="flex justify-between text-sm font-bold">
+                                            <span className="text-muted-foreground">{t('studio')} ({selectedStudio.name}) - {estimatedHours}h</span>
+                                            <span className="text-foreground">{finalStudioCost.toFixed(2)} MAD</span>
                                         </div>
                                     )}
-                                    <div className="flex justify-between text-sm text-muted-foreground pt-2 border-t border-dashed border-primary/20">
+                                    <div className="flex justify-between text-sm font-black text-muted-foreground pt-4 border-t-2 border-dashed border-primary/20">
                                         <span>{t('platformFee')}</span>
                                         <span>{platformFee.toFixed(2)} MAD</span>
                                     </div>
-                                    <div className="flex justify-between text-xl font-black pt-4 border-t border-primary/20">
-                                        <span>{tc('total')}</span>
-                                        <span>{total.toFixed(2)} MAD</span>
+                                    <div className="flex justify-between text-2xl font-black pt-4 border-t-2 border-primary/20 mt-4">
+                                        <span className="text-foreground">{tc('total')}</span>
+                                        <span className="text-primary">{total.toFixed(2)} MAD</span>
                                     </div>
                                 </div>
                                 <Button
-                                    className="w-full font-bold text-lg h-12 shadow-lg shadow-primary/25 mt-4"
+                                    className="w-full font-black text-lg h-14 rounded-full shadow-[0_8px_30px_-6px_hsl(var(--primary))] mt-6 transition-all hover:scale-[1.02]"
                                     onClick={handleLaunch}
                                     disabled={isLoading}
                                 >

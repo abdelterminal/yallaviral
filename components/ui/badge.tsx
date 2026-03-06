@@ -4,14 +4,14 @@ import { Slot } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
-const badgeVariants = cva("inline-flex items-center justify-center rounded-full border border-transparent px-3 py-1 text-xs font-bold w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[4px] aria-invalid:ring-destructive/20 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
+const badgeVariants = cva("inline-flex items-center justify-center rounded-full border-0 px-3 py-1 text-xs font-bold w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:ring-ring/50 focus-visible:ring-[4px] aria-invalid:ring-destructive/20 aria-invalid:border-destructive transition-[color,box-shadow,transform] overflow-hidden hover:scale-[1.02]",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground [a&]:hover:bg-primary/90 shadow-sm",
+        default: "bg-primary text-primary-foreground shadow-[0_4px_14px_-4px_hsl(var(--primary))] [a&]:hover:bg-primary/90",
         secondary: "bg-primary/10 text-primary [a&]:hover:bg-primary/20",
         destructive: "bg-destructive/10 text-destructive [a&]:hover:bg-destructive/20",
-        outline: "border-border text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+        outline: "bg-white shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         link: "text-primary underline-offset-4 [a&]:hover:underline",
         // Status variants
