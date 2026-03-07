@@ -17,7 +17,7 @@ export function LandingHowItWorks() {
     return (
         <section className="py-32 bg-muted/40 relative overflow-hidden text-foreground">
             {/* Ambient background effects */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white rounded-full blur-[150px] pointer-events-none -z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-card rounded-full blur-[150px] pointer-events-none -z-10" />
 
             <div className="container px-4 md:px-6 mx-auto relative z-10">
                 <motion.div

@@ -69,13 +69,13 @@ export default function SignupForm() {
                 </div>
                 <div className="space-y-3">
                     <h2 className="text-3xl font-black text-white tracking-tight">{t('checkYourEmail')}</h2>
-                    <p className="text-slate-400 max-w-sm mx-auto text-lg leading-relaxed">
+                    <p className="text-white/50 max-w-sm mx-auto text-lg leading-relaxed">
                         {t('confirmationSent')}
                     </p>
                 </div>
                 <div className="w-full space-y-4 pt-4">
-                    <div className="p-4 rounded-[2rem] bg-white/5 border border-white/10 text-sm text-slate-400 space-y-2">
-                        <p className="font-black uppercase tracking-widest text-xs text-slate-300">{t('didntReceive')}</p>
+                    <div className="p-4 rounded-[2rem] bg-white/5 border border-white/10 text-sm text-white/50 space-y-2">
+                        <p className="font-black uppercase tracking-widest text-xs text-white/70">{t('didntReceive')}</p>
                         <p>{t('checkSpam')}</p>
                     </div>
                     <Link href="/login" className="block w-full">
@@ -92,7 +92,7 @@ export default function SignupForm() {
         <div className="w-full flex flex-col relative z-20">
             <div className="mb-10 text-center">
                 <h2 className="text-4xl font-black text-white tracking-tight mb-2">{t('createAccount')}</h2>
-                <p className="text-lg text-slate-400 font-medium">{t('createAccountSubtitle')}</p>
+                <p className="text-lg text-white/50 font-medium">{t('createAccountSubtitle')}</p>
             </div>
 
             {error && (
@@ -105,7 +105,7 @@ export default function SignupForm() {
             <form action={handleSubmit} className="space-y-5" noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                        <Label htmlFor="fullName" className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('fullName')}</Label>
+                        <Label htmlFor="fullName" className="text-xs font-black uppercase tracking-widest text-white/50 ml-1">{t('fullName')}</Label>
                         <Input
                             id="fullName"
                             name="fullName"
@@ -115,7 +115,7 @@ export default function SignupForm() {
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="brandName" className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('company')}</Label>
+                        <Label htmlFor="brandName" className="text-xs font-black uppercase tracking-widest text-white/50 ml-1">{t('company')}</Label>
                         <Input
                             id="brandName"
                             name="brandName"
@@ -128,7 +128,7 @@ export default function SignupForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                        <Label htmlFor="email" className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('email')}</Label>
+                        <Label htmlFor="email" className="text-xs font-black uppercase tracking-widest text-white/50 ml-1">{t('email')}</Label>
                         <Input
                             id="email"
                             name="email"
@@ -139,7 +139,7 @@ export default function SignupForm() {
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="phone" className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('phone')}</Label>
+                        <Label htmlFor="phone" className="text-xs font-black uppercase tracking-widest text-white/50 ml-1">{t('phone')}</Label>
                         <Input
                             id="phone"
                             name="phone"
@@ -152,7 +152,7 @@ export default function SignupForm() {
                 </div>
 
                 <div className="space-y-2">
-                    <Label htmlFor="password" className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">{t('password')}</Label>
+                    <Label htmlFor="password" className="text-xs font-black uppercase tracking-widest text-white/50 ml-1">{t('password')}</Label>
                     <Input
                         id="password"
                         name="password"
@@ -176,7 +176,7 @@ export default function SignupForm() {
                                 />
                                 <CheckCircle2 className="h-4 w-4 opacity-0 peer-checked:opacity-100 transition-opacity" />
                             </div>
-                            <Label htmlFor="robot" className="text-sm text-slate-400 cursor-pointer font-bold select-none group-hover:text-white transition-colors">
+                            <Label htmlFor="robot" className="text-sm text-white/50 cursor-pointer font-bold select-none group-hover:text-white transition-colors">
                                 {t('notRobot')}
                             </Label>
                             <div className="ml-auto opacity-20 text-[10px] font-black tracking-widest uppercase text-white">
@@ -204,7 +204,7 @@ export default function SignupForm() {
                 </div>
 
                 <div className="text-center pt-4">
-                    <p className="text-sm text-slate-400 font-medium">
+                    <p className="text-sm text-white/50 font-medium">
                         {t('alreadyHaveAccount')}{" "}
                         <Link href="/login" className="text-primary hover:text-primary/80 font-black ml-1 transition-colors">
                             {t('signIn')}

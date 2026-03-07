@@ -1,5 +1,6 @@
 import { Sidebar } from "@/components/Sidebar";
 import { Header } from "@/components/Header";
+import { MobileBottomNav } from "@/components/MobileBottomNav";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
@@ -38,6 +39,7 @@ export default async function DashboardLayout({
                     </div>
                 </main>
             </div>
+            <MobileBottomNav />
             <WhatsAppButton />
         </div>
     );

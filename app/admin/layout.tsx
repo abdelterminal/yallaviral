@@ -26,7 +26,7 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-[hsl(220_35%_88%)]">
+    <div className="flex min-h-screen bg-background">
       {/* Spacer for fixed sidebar */}
       <div className="w-20 shrink-0 hidden md:block" />
 

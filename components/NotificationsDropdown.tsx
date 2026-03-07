@@ -80,7 +80,7 @@ export function NotificationsDropdown() {
                 <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full text-muted-foreground hover:bg-muted/50 hover:text-foreground relative">
                     <Bell className="h-5 w-5" />
                     {unreadCount > 0 && (
-                        <span className="absolute top-2 right-2.5 h-1.5 w-1.5 rounded-full bg-red-500 ring-1 ring-black animate-pulse" />
+                        <span className="absolute top-2 right-2.5 h-1.5 w-1.5 rounded-full bg-red-500 ring-1 ring-card animate-pulse" />
                     )}
                 </Button>
             </DropdownMenuTrigger>
