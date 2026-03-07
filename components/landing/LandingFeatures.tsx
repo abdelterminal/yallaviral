@@ -15,7 +15,7 @@ export function LandingFeatures() {
     const t = useTranslations('Landing');
 
     return (
-        <section id="features" className="py-32 bg-white relative overflow-hidden text-foreground">
+        <section id="features" className="py-32 bg-card relative overflow-hidden text-foreground">
             {/* Soft top gradient to transition from the blue hero */}
             <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#0052FF]/10 to-transparent pointer-events-none" />
 
@@ -32,10 +32,10 @@ export function LandingFeatures() {
                     className="text-center max-w-3xl mx-auto mb-20"
                 >
                     <span className="text-xs font-black uppercase tracking-widest text-primary mb-6 block">Features</span>
-                    <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-8 pb-4">
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tight text-foreground mb-8 pb-4">
                         {t('featuresTitle')}
                     </h2>
-                    <p className="text-lg md:text-xl text-slate-500 leading-relaxed">
+                    <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
                         {t('featuresSubtitle')}
                     </p>
                 </motion.div>
@@ -48,7 +48,7 @@ export function LandingFeatures() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="h-full flex flex-col items-center justify-start text-center p-10 rounded-[2rem] bg-white border border-slate-200/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] group relative overflow-hidden"
+                            className="h-full flex flex-col items-center justify-start text-center p-10 rounded-[2rem] bg-card border border-border/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] group relative overflow-hidden"
                         >
                             {/* Colored accent bar at top on hover */}
                             <div
@@ -62,8 +62,8 @@ export function LandingFeatures() {
                             >
                                 <feature.icon className="h-7 w-7" />
                             </div>
-                            <h3 className="text-2xl font-extrabold text-slate-900 mb-5 tracking-tight px-2">{t(feature.titleKey)}</h3>
-                            <p className="text-base text-slate-500 leading-relaxed max-w-[280px] mx-auto">
+                            <h3 className="text-2xl font-extrabold text-foreground mb-5 tracking-tight px-2">{t(feature.titleKey)}</h3>
+                            <p className="text-base text-muted-foreground leading-relaxed max-w-[280px] mx-auto">
                                 {t(feature.descKey)}
                             </p>
                         </motion.div>
@@ -72,7 +72,7 @@ export function LandingFeatures() {
             </div>
 
             {/* Bottom section gradient divider */}
-            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-b from-transparent to-slate-50 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-b from-transparent to-background pointer-events-none" />
         </section>
     );
 }

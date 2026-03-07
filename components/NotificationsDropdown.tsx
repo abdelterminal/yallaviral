@@ -80,11 +80,11 @@ export function NotificationsDropdown() {
                 <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full text-muted-foreground hover:bg-muted/50 hover:text-foreground relative">
                     <Bell className="h-5 w-5" />
                     {unreadCount > 0 && (
-                        <span className="absolute top-2 right-2.5 h-1.5 w-1.5 rounded-full bg-red-500 ring-1 ring-black animate-pulse" />
+                        <span className="absolute top-2 right-2.5 h-1.5 w-1.5 rounded-full bg-red-500 ring-1 ring-card animate-pulse" />
                     )}
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-96 bg-zinc-950/90 border-border  text-foreground p-0 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <DropdownMenuContent align="end" className="w-96 bg-card text-foreground p-0 overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.12)]">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-muted/30">
                     <DropdownMenuLabel className="p-0 font-black text-xl tracking-tight">{t('notificationsTitle')}</DropdownMenuLabel>
                     {unreadCount > 0 && (
@@ -142,7 +142,7 @@ export function NotificationsDropdown() {
                     )}
                 </div>
                 <DropdownMenuSeparator className="bg-muted m-0" />
-                <div className="p-2 border-t border-border bg-white/[0.01]">
+                <div className="p-2 border-t border-border">
                     <a href="/requests" className="w-full">
                         <Button variant="ghost" className="w-full h-10 text-xs font-bold text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all rounded-lg">
                             {t('viewAllActivity')}

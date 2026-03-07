@@ -47,7 +47,7 @@ export function LandingHero() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="max-w-[750px] text-lg md:text-xl text-slate-300 leading-relaxed px-6"
+                        className="max-w-[750px] text-lg md:text-xl text-white/70 leading-relaxed px-6"
                     >
                         {t('heroDescription', { code: 'MAROC2026' })}
                     </motion.p>

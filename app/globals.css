@@ -133,6 +133,10 @@
     box-shadow: 0 6px 20px -4px hsl(var(--primary) / 0.35);
   }
 
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
 }
 
 /* Normalize placeholder opacity across browsers */
@@ -140,6 +144,11 @@
   ::placeholder {
     color: hsl(var(--muted-foreground));
     opacity: 1;
+    transition: opacity 0.15s ease;
+  }
+
+  :focus::placeholder {
+    opacity: 0;
   }
 }
 

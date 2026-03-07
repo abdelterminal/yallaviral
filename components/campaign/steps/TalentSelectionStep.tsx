@@ -41,7 +41,7 @@ export function TalentSelectionStep({ availableModels, onNext, onBack }: TalentS
                             isSelected ? "ring-[6px] ring-primary ring-offset-4 bg-primary/5" : ""
                         )}>
                             <div className="relative h-[280px] w-full p-4 pb-0">
-                                <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-slate-100 shadow-inner">
+                                <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-muted shadow-inner">
                                     {model.image_url ? (
                                         <img
                                             src={model.image_url}
@@ -87,7 +87,7 @@ export function TalentSelectionStep({ availableModels, onNext, onBack }: TalentS
                                         </Button>
                                     </ModelPortfolio>
                                     <Button
-                                        className={cn("flex-1 font-black rounded-2xl h-12 transition-all", isSelected ? "bg-slate-100 hover:bg-slate-200 text-foreground border-0 shadow-none" : "bg-primary hover:bg-primary/90 shadow-[0_8px_20px_-6px_hsl(var(--primary))]")}
+                                        className={cn("flex-1 font-black rounded-2xl h-12 transition-all", isSelected ? "bg-muted hover:bg-muted/80 text-foreground border-0 shadow-none" : "bg-primary hover:bg-primary/90 shadow-[0_8px_20px_-6px_hsl(var(--primary))]")}
                                         variant={isSelected ? "secondary" : "default"}
                                         onClick={() => {
                                             if (isSelected) {

@@ -59,7 +59,7 @@ export function CalendarStep({ onNext, onBack }: CalendarStepProps) {
                         mode="single"
                         selected={date}
                         onSelect={setDate}
-                        className="rounded-2xl border-0 shadow-inner bg-slate-50 p-6"
+                        className="rounded-2xl border-0 shadow-inner bg-muted/50 p-6"
                         disabled={(date) => date < new Date() || date < new Date(new Date().setHours(0, 0, 0, 0))}
                         initialFocus
                     />
@@ -83,7 +83,7 @@ export function CalendarStep({ onNext, onBack }: CalendarStepProps) {
                                     className={cn("w-full font-black rounded-xl h-12 transition-all relative overflow-hidden border-0",
                                         time === slot && "bg-primary text-white shadow-[0_8px_30px_-6px_hsl(var(--primary))] scale-[1.02]",
                                         isBooked && "opacity-50 cursor-not-allowed bg-red-500/5 text-red-500",
-                                        !isBooked && time !== slot && "bg-white shadow-sm hover:bg-slate-50 hover:shadow-md hover:-translate-y-0.5"
+                                        !isBooked && time !== slot && "bg-white shadow-sm hover:bg-muted/50 hover:shadow-md hover:-translate-y-0.5"
                                     )}
                                     onClick={() => setTime(slot)}
                                 >
@@ -98,7 +98,7 @@ export function CalendarStep({ onNext, onBack }: CalendarStepProps) {
                         })}
                     </div>
                     {date && (
-                        <div className="mt-8 p-6 rounded-2xl bg-slate-50 shadow-inner border-0 text-center animate-in fade-in">
+                        <div className="mt-8 p-6 rounded-2xl bg-muted/50 shadow-inner border-0 text-center animate-in fade-in">
                             <p className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-1">{t('youSelected')}</p>
                             <p className="font-black text-xl text-primary">
                                 {format(date, "MMMM do, yyyy")}

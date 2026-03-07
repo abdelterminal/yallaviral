@@ -61,7 +61,7 @@ export default async function CheckoutPage({ params }: { params: Promise<{ id: s
                 </div>
 
                 {/* Order Summary */}
-                <div className="rounded-2xl border border-border bg-card overflow-hidden">
+                <div className="rounded-[2rem] border-0 shadow-[0_10px_40px_-5px_rgba(0,0,0,0.06)] bg-card overflow-hidden">
                     <div className="p-6 space-y-4">
                         <div className="flex items-center justify-between pb-4 border-b border-border">
                             <div>

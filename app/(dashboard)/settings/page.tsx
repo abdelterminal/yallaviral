@@ -52,16 +52,16 @@ export default async function SettingsPage({
 
             <Tabs defaultValue={defaultTab} className="space-y-8">
                 <TabsList className="bg-muted border border-border p-1 h-auto rounded-full inline-flex">
-                    <TabsTrigger value="profile" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
+                    <TabsTrigger value="profile" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:bg-muted/80">
                         <User className="h-4 w-4 mr-2" /> {t('profileTab')}
                     </TabsTrigger>
-                    <TabsTrigger value="billing" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
+                    <TabsTrigger value="billing" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:bg-muted/80">
                         <CreditCard className="h-4 w-4 mr-2" /> {t('billingTab')}
                     </TabsTrigger>
-                    <TabsTrigger value="notifications" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
+                    <TabsTrigger value="notifications" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:bg-muted/80">
                         <Bell className="h-4 w-4 mr-2" /> {t('notificationsTab')}
                     </TabsTrigger>
-                    <TabsTrigger value="security" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
+                    <TabsTrigger value="security" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:bg-muted/80">
                         <Shield className="h-4 w-4 mr-2" /> {t('securityTab')}
                     </TabsTrigger>
                 </TabsList>

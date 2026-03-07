@@ -45,6 +45,7 @@ export function Sidebar() {
                         <Link
                             key={link.href}
                             href={link.href}
+                            aria-label={link.label}
                             className={cn(
                                 "group/item relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200",
                                 isActive
@@ -68,6 +69,7 @@ export function Sidebar() {
             <div className="flex flex-col items-center gap-1 px-3 pt-3 w-full border-t border-white/20">
                 <Link
                     href="/dashboard"
+                    aria-label={t('switchToUser')}
                     className="group/item relative flex items-center justify-center w-10 h-10 rounded-full text-foreground/35 hover:bg-white/30 hover:text-foreground/70 transition-all duration-200"
                 >
                     <ArrowLeft className="h-5 w-5 shrink-0" />
