@@ -51,7 +51,7 @@ export default async function CheckoutPage({ params }: { params: Promise<{ id: s
             <div className="w-full max-w-lg space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
                 {/* Header */}
                 <div className="text-center space-y-2">
-                    <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-primary/20 border border-primary/30 mb-4">
+                    <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-primary/20 shadow-[0_0_20px_-4px_hsl(var(--primary)/0.4)] mb-4">
                         <svg className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -61,16 +61,16 @@ export default async function CheckoutPage({ params }: { params: Promise<{ id: s
                 </div>
 
                 {/* Order Summary */}
-                <div className="rounded-2xl border border-border bg-card overflow-hidden">
+                <div className="rounded-2xl bg-card shadow-[0_8px_32px_-4px_rgba(0,0,0,0.45)] overflow-hidden">
                     <div className="p-6 space-y-4">
-                        <div className="flex items-center justify-between pb-4 border-b border-border">
+                        <div className="flex items-center justify-between pb-4">
                             <div>
                                 <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">{t('bookingReference')}</p>
                                 <p className="text-foreground font-bold text-lg">#{booking.id.slice(0, 8)}</p>
                             </div>
                             <div className="text-right">
                                 <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">{t('status')}</p>
-                                <span className="inline-block px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">
+                                <span className="inline-block px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-400 shadow-[0_0_10px_-2px_rgba(52,211,153,0.2)]">
                                     {t('approved')}
                                 </span>
                             </div>
@@ -95,7 +95,7 @@ export default async function CheckoutPage({ params }: { params: Promise<{ id: s
                             </div>
                         </div>
 
-                        <div className="pt-4 border-t border-border">
+                        <div className="pt-4">
                             <div className="flex justify-between items-baseline">
                                 <span className="text-muted-foreground font-medium">{t('totalAmount')}</span>
                                 <span className="text-3xl font-black text-foreground">{booking.total_price?.toFixed(2)} <span className="text-lg text-muted-foreground">MAD</span></span>
@@ -104,7 +104,7 @@ export default async function CheckoutPage({ params }: { params: Promise<{ id: s
                     </div>
 
                     {/* Payment Actions */}
-                    <div className="p-6 bg-muted/30 border-t border-border">
+                    <div className="p-6 bg-muted/30">
                         <CheckoutActions
                             bookingId={booking.id}
                             whatsappUrl={whatsappUrl}

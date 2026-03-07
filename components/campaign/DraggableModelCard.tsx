@@ -39,7 +39,7 @@ export function DraggableModelCard({ model }: DraggableModelCardProps) {
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col gap-2">
                         <div className="flex flex-wrap gap-1">
                             {model.tags?.slice(0, 3).map((tag) => (
-                                <Badge key={tag} variant="secondary" className="bg-primary/20 text-primary-foreground border-primary/20 text-[10px] px-1.5 backdrop-blur-sm">
+                                <Badge key={tag} variant="secondary" className="bg-primary/20 text-primary-foreground border-primary/20 text-[10px] px-1.5">
                                     #{tag}
                                 </Badge>
                             ))}

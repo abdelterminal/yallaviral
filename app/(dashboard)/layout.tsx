@@ -25,14 +25,14 @@ export default async function DashboardLayout({
     return (
         <div className="min-h-screen bg-background font-sans selection:bg-primary/20 text-foreground flex">
             {/* Sidebar (Fixed Left with Margin Spacer) */}
-            <div className="hidden md:block w-20 shrink-0" />
+            <div className="hidden md:block w-56 shrink-0" />
             <Sidebar />
 
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col relative min-w-0">
                 <Header profile={profile} />
 
-                <main className="flex-1 p-5 md:p-7 z-10 bg-background">
+                <main className="flex-1 p-6 md:p-8 z-10 bg-background">
                     <div className="mx-auto max-w-7xl animate-in fade-in zoom-in-95 duration-500">
                         {children}
                     </div>

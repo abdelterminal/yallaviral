@@ -50,7 +50,7 @@ export function SecurityForm() {
     }
 
     return (
-        <Card className="bg-card border-border backdrop-blur-sm">
+        <Card className="bg-card border-0">
             <CardHeader>
                 <CardTitle>{t('changePassword')}</CardTitle>
                 <CardDescription>{t('changePasswordDesc')}</CardDescription>
@@ -118,7 +118,7 @@ export function SecurityForm() {
                         )}
                     </div>
                 </CardContent>
-                <CardFooter className="border-t border-border px-6 py-4 flex justify-end">
+                <CardFooter className="px-6 py-4 flex justify-end">
                     <Button
                         type="submit"
                         disabled={saving || newPassword.length < 8 || newPassword !== confirmPassword}

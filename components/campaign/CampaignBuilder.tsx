@@ -180,23 +180,23 @@ export function CampaignBuilder({ availableModels, availableStudios }: CampaignB
 
                         <div className="grid gap-6 md:grid-cols-2">
                             {/* Summary Card */}
-                            <Card className="p-8 space-y-6 h-fit bg-white border-0 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)] rounded-[2rem]">
+                            <Card className="p-8 space-y-6 h-fit bg-card border-0 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] rounded-[2rem]">
                                 <h3 className="font-black text-2xl tracking-tight">{t('campaignRequest')}</h3>
-                                <div className="space-y-4 text-base bg-slate-50/50 p-6 rounded-2xl shadow-inner border-0">
-                                    <div className="flex justify-between py-2 border-b border-slate-200">
+                                <div className="space-y-4 text-base bg-muted/50 p-6 rounded-2xl shadow-inner border-0">
+                                    <div className="flex justify-between py-2 border-b border-border">
                                         <span className="text-muted-foreground font-bold">{t('shootDate')}</span>
                                         <span className="font-black flex items-center gap-2 text-foreground">
                                             <CalendarIcon className="h-4 w-4" />
                                             {date ? format(date, "MMM do, yyyy") : t('tbd')} {time ? `${t('at')} ${time}` : ''}
                                         </span>
                                     </div>
-                                    <div className="flex justify-between py-2 border-b border-slate-200">
+                                    <div className="flex justify-between py-2 border-b border-border">
                                         <span className="text-muted-foreground font-bold">{t('totalVideoCount')}</span>
                                         <span className="font-black text-foreground">
                                             {totalVideos}
                                         </span>
                                     </div>
-                                    <div className="flex justify-between py-2 border-b border-slate-200">
+                                    <div className="flex justify-between py-2 border-b border-border">
                                         <span className="text-muted-foreground font-bold">{t('talentCount')}</span>
                                         <span className="font-black text-foreground">{hasNoTalent ? t('ownTalent') : selectedModels.length}</span>
                                     </div>
@@ -210,7 +210,7 @@ export function CampaignBuilder({ availableModels, availableStudios }: CampaignB
                             {/* Quote Card */}
                             <Card className="p-8 space-y-6 bg-gradient-to-br from-primary/5 to-primary/10 border-0 shadow-[0_10px_40px_-10px_rgba(124,58,237,0.15)] rounded-[2rem]">
                                 <h3 className="font-black text-2xl text-primary tracking-tight">{t('estimatedQuote')}</h3>
-                                <div className="space-y-3 bg-white/50 backdrop-blur-sm p-6 rounded-2xl shadow-inner border-0">
+                                <div className="space-y-3 bg-muted/50 p-6 rounded-2xl shadow-inner border-0">
                                     {selectedModels.map(model => (
                                         <div key={model.id} className="flex justify-between text-sm font-bold">
                                             <span className="text-muted-foreground">{model.name} (x{model.quantity || 1})</span>
@@ -260,7 +260,7 @@ export function CampaignBuilder({ availableModels, availableStudios }: CampaignB
         <div className="relative">
             {/* Loading Overlay */}
             {isLoading && (
-                <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-card backdrop-blur-md rounded-xl animate-in fade-in duration-300">
+                <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-card/95 rounded-xl animate-in fade-in duration-300">
                     <Loader2 className="h-16 w-16 text-primary animate-spin mb-4" />
                     <h3 className="text-xl font-black uppercase tracking-widest text-foreground">{t('launchingCampaign')}</h3>
                     <p className="text-muted-foreground mt-2">{t('securingSlots')}</p>

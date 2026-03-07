@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut, Settings, CreditCard, User, ShieldCheck, Menu } from "lucide-react";
+import { LogOut, Settings, CreditCard, User, ShieldCheck, Menu, Search, Plus } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -66,21 +66,22 @@ export function Header({ profile }: { profile: any }) {
     const pageTitle = titleKey ? tNav(titleKey as any) : currentSection.charAt(0).toUpperCase() + currentSection.slice(1);
 
     return (
-        <header className="sticky top-0 z-[65] bg-[hsl(220_35%_88%)] pt-3 pb-2 px-4 md:px-6">
-            <div className="flex items-center justify-between rounded-full bg-card px-5 py-3 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.08)]">
+        <div className="sticky top-0 z-[65] px-4 pt-3 pointer-events-none">
+        <header className="bg-card shadow-[0_8px_32px_-6px_rgba(0,0,0,0.45)] h-[60px] flex items-center px-5 rounded-2xl pointer-events-auto">
+            <div className="flex items-center gap-4 w-full">
 
                 {/* Left: mobile trigger + page title */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 shrink-0">
                     {/* Mobile hamburger */}
                     <div className="md:hidden">
                         <Sheet>
                             <SheetTrigger asChild>
-                                <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted">
+                                <Button variant="ghost" size="icon" className="h-9 w-9 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted">
                                     <Menu className="h-5 w-5" />
                                 </Button>
                             </SheetTrigger>
-                            <SheetContent side="left" className="w-[80vw] sm:w-[320px] bg-card border-r border-border p-0 text-foreground">
-                                <SheetHeader className="p-6 text-left border-b border-border">
+                            <SheetContent side="left" className="w-[80vw] sm:w-[320px] bg-card shadow-[4px_0_32px_-4px_rgba(0,0,0,0.5)] p-0 text-foreground">
+                                <SheetHeader className="p-6 text-left">
                                     <SheetTitle className="flex items-center gap-3 text-foreground">
                                         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
                                             <YallaLogo className="h-6 w-6" />
@@ -98,9 +99,9 @@ export function Header({ profile }: { profile: any }) {
                                                     <Link
                                                         href={link.href}
                                                         className={cn(
-                                                            "flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors font-semibold",
+                                                            "flex items-center gap-3 rounded-xl px-4 py-3 transition-colors font-semibold",
                                                             isActive
-                                                                ? "bg-primary text-white"
+                                                                ? "bg-primary/10 text-primary"
                                                                 : "text-muted-foreground hover:text-foreground hover:bg-muted"
                                                         )}
                                                     >
@@ -117,7 +118,7 @@ export function Header({ profile }: { profile: any }) {
                                                 <SheetClose asChild>
                                                     <Link
                                                         href="/admin"
-                                                        className="flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors font-semibold text-primary hover:bg-primary/10"
+                                                        className="flex items-center gap-3 rounded-xl px-4 py-3 transition-colors font-semibold text-primary hover:bg-primary/10"
                                                     >
                                                         <ShieldCheck className="h-5 w-5" />
                                                         {t("adminDashboard")}
@@ -126,11 +127,11 @@ export function Header({ profile }: { profile: any }) {
                                             </>
                                         )}
                                     </nav>
-                                    <div className="p-4 border-t border-border mt-auto">
+                                    <div className="p-4 mt-auto">
                                         <SheetClose asChild>
                                             <Button
                                                 variant="ghost"
-                                                className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10 rounded-2xl font-semibold"
+                                                className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10 rounded-xl font-semibold"
                                                 onClick={() => signOut()}
                                             >
                                                 <LogOut className="h-5 w-5 mr-3" />
@@ -144,13 +145,31 @@ export function Header({ profile }: { profile: any }) {
                     </div>
 
                     {/* Page title */}
-                    <h2 className="text-sm font-semibold text-foreground">
+                    <h2 className="text-xl font-black tracking-tight text-foreground">
                         {pageTitle}
                     </h2>
                 </div>
 
-                {/* Right: lang + notifications + avatar */}
-                <div className="flex items-center gap-2">
+                {/* Center: Search */}
+                <div className="hidden md:flex flex-1 justify-center">
+                    <div className="relative w-full max-w-xs">
+                        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                        <input
+                            type="text"
+                            placeholder="Search anything..."
+                            className="w-full h-9 pl-10 pr-4 rounded-full bg-muted border-0 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+                        />
+                    </div>
+                </div>
+
+                {/* Right: Create + lang + notifications + avatar */}
+                <div className="flex items-center gap-2 shrink-0 ml-auto md:ml-0">
+                    <Link href="/campaign" className="hidden sm:block">
+                        <Button size="sm" className="rounded-full font-bold px-5 h-9">
+                            <Plus className="h-3.5 w-3.5 mr-1.5" />
+                            {t("newBooking")}
+                        </Button>
+                    </Link>
                     <LanguageSwitcher />
                     <NotificationsDropdown />
 
@@ -170,7 +189,7 @@ export function Header({ profile }: { profile: any }) {
                                 </Avatar>
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-56 bg-card border-border text-foreground rounded-2xl p-1.5">
+                        <DropdownMenuContent align="end" className="w-56 bg-card border-0 shadow-[0_16px_40px_-8px_rgba(0,0,0,0.5)] text-foreground rounded-2xl p-1.5">
                             <DropdownMenuLabel className="rounded-xl">
                                 <div className="flex flex-col">
                                     <span className="font-bold">{displayName}</span>
@@ -225,5 +244,6 @@ export function Header({ profile }: { profile: any }) {
                 </div>
             </div>
         </header>
+        </div>
     );
 }

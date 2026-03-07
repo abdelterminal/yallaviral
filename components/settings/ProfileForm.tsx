@@ -50,14 +50,14 @@ export function ProfileForm({ user, profile }: ProfileFormProps) {
     }
 
     return (
-        <Card className="bg-card border-border backdrop-blur-sm">
+        <Card className="bg-card border-0">
             <CardHeader>
                 <CardTitle>{t('profileTitle')}</CardTitle>
                 <CardDescription>{t('profileDesc')}</CardDescription>
             </CardHeader>
             <form action={handleSubmit}>
                 <CardContent className="space-y-6">
-                    <div className="flex items-center gap-6 pb-6 border-b border-border">
+                    <div className="flex items-center gap-6 pb-6">
                         <div className="h-24 w-24 rounded-full bg-gradient-to-br from-primary to-purple-900 border-4 border-black shadow-xl flex items-center justify-center text-3xl font-black text-foreground uppercase">
                             {profile?.full_name ? profile.full_name.substring(0, 2) : user.email.substring(0, 2)}
                         </div>
@@ -118,7 +118,7 @@ export function ProfileForm({ user, profile }: ProfileFormProps) {
                         </div>
                     </div>
                 </CardContent>
-                <CardFooter className="border-t border-border px-6 py-4 flex justify-end">
+                <CardFooter className="px-6 py-4 flex justify-end">
                     <Button type="submit" disabled={isPending} className="font-bold shadow-lg shadow-primary/20">
                         {isPending ? (
                             <>

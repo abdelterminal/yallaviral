@@ -61,7 +61,7 @@ export function AnalyticsCharts({ bookings }: AnalyticsChartsProps) {
     return (
         <div className="grid gap-6 md:grid-cols-2">
             {/* Spending Over Time */}
-            <Card className="p-6 space-y-4 rounded-[2rem] border-0 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)]">
+            <Card className="p-6 space-y-4">
                 <div>
                     <h3 className="text-[15px] font-bold text-foreground">Spending Over Time</h3>
                     <p className="text-xs text-muted-foreground mt-0.5">Monthly MAD spend</p>
@@ -76,13 +76,13 @@ export function AnalyticsCharts({ bookings }: AnalyticsChartsProps) {
                         </defs>
                         <XAxis
                             dataKey="month"
-                            tick={{ fontSize: 11, fill: "hsl(215 16% 47%)", fontWeight: 600 }}
+                            tick={{ fontSize: 11, fill: "hsl(215, 16%, 55%)", fontWeight: 600 }}
                             axisLine={false}
                             tickLine={false}
                             dy={10}
                         />
                         <YAxis
-                            tick={{ fontSize: 11, fill: "hsl(215 16% 47%)", fontWeight: 600 }}
+                            tick={{ fontSize: 11, fill: "hsl(215, 16%, 55%)", fontWeight: 600 }}
                             axisLine={false}
                             tickLine={false}
                             tickFormatter={(v) => `${v}`}
@@ -91,16 +91,16 @@ export function AnalyticsCharts({ bookings }: AnalyticsChartsProps) {
                         <Tooltip
                             cursor={{ stroke: 'hsl(var(--primary))', strokeWidth: 1, strokeDasharray: '4 4' }}
                             contentStyle={{
-                                background: "hsl(222 47% 11%)",
+                                background: "hsl(215, 28%, 17%)",
                                 border: "none",
-                                borderRadius: "9999px",
+                                borderRadius: "12px",
                                 padding: "8px 16px",
                                 fontSize: "12px",
                                 fontWeight: "bold",
-                                color: "#ffffff",
-                                boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)"
+                                color: "hsl(214, 32%, 95%)",
+                                boxShadow: "0 8px 32px -8px rgba(0,0,0,0.6)"
                             }}
-                            itemStyle={{ color: "#ffffff" }}
+                            itemStyle={{ color: "hsl(214, 32%, 75%)" }}
                             formatter={(value) => [`${value ?? 0} MAD`, "Spend"]}
                         />
                         <Area
@@ -117,7 +117,7 @@ export function AnalyticsCharts({ bookings }: AnalyticsChartsProps) {
             </Card>
 
             {/* Status Distribution */}
-            <Card className="p-6 space-y-4 rounded-[2rem] border-0 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)]">
+            <Card className="p-6 space-y-4">
                 <div>
                     <h3 className="text-[15px] font-bold text-foreground">Booking Status</h3>
                     <p className="text-xs text-muted-foreground mt-0.5">Distribution by status</p>
@@ -141,23 +141,23 @@ export function AnalyticsCharts({ bookings }: AnalyticsChartsProps) {
                         </Pie>
                         <Tooltip
                             contentStyle={{
-                                background: "hsl(222 47% 11%)",
+                                background: "hsl(215, 28%, 17%)",
                                 border: "none",
-                                borderRadius: "9999px",
+                                borderRadius: "12px",
                                 padding: "8px 16px",
                                 fontSize: "12px",
                                 fontWeight: "bold",
-                                color: "#ffffff",
-                                boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)"
+                                color: "hsl(214, 32%, 95%)",
+                                boxShadow: "0 8px 32px -8px rgba(0,0,0,0.6)"
                             }}
-                            itemStyle={{ color: "#ffffff" }}
+                            itemStyle={{ color: "hsl(214, 32%, 75%)" }}
                             formatter={(value, name) => [value ?? 0, name]}
                         />
                         <Legend
                             iconType="circle"
                             iconSize={8}
                             formatter={(value) => (
-                                <span style={{ fontSize: 12, color: "hsl(215 16% 47%)", fontWeight: 600, marginLeft: "4px" }}>{value}</span>
+                                <span style={{ fontSize: 12, color: "hsl(215, 16%, 55%)", fontWeight: 600, marginLeft: "4px" }}>{value}</span>
                             )}
                         />
                     </PieChart>

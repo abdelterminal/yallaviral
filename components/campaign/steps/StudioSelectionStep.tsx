@@ -36,13 +36,13 @@ export function StudioSelectionStep({ availableStudios, onNext, onBack }: Studio
                     return (
                         <Card
                             key={studio.id}
-                            className={cn("group relative cursor-pointer transition-all duration-500 rounded-[2.5rem] hover:-translate-y-2 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-0 bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] flex flex-col h-[340px]",
+                            className={cn("group relative cursor-pointer transition-all duration-500 rounded-[2.5rem] hover:-translate-y-2 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-0 bg-card shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] flex flex-col h-[340px]",
                                 isSelected ? "ring-[6px] ring-primary ring-offset-4 bg-primary/5" : ""
                             )}
                             onClick={() => setSelectedStudio(studio)}
                         >
                             <div className="relative h-[180px] w-full p-4 pb-0">
-                                <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-slate-100 shadow-inner">
+                                <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-muted shadow-inner">
                                     {studio.image_url ? (
                                         <img
                                             src={studio.image_url}
@@ -56,7 +56,7 @@ export function StudioSelectionStep({ availableStudios, onNext, onBack }: Studio
                                     )}
                                 </div>
                                 {isSelected && (
-                                    <div className="absolute inset-0 flex items-center justify-center bg-card/40 backdrop-blur-md rounded-[2rem]">
+                                    <div className="absolute inset-0 flex items-center justify-center bg-card/60 rounded-[2rem]">
                                         <div className="bg-primary text-white h-12 w-12 rounded-full flex items-center justify-center shadow-[0_8px_30px_-6px_hsl(var(--primary))] animate-in zoom-in">
                                             <CheckCircle2 className="h-6 w-6" />
                                         </div>

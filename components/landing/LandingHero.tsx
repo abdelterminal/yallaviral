@@ -13,7 +13,7 @@ export function LandingHero() {
         <section className="relative w-full pt-36 pb-44 overflow-hidden bg-gradient-to-b from-[#0B0E17] via-[#0B0E17] to-[#0052FF] text-white isolate">
             {/* Background Effects — dual ambient blobs for richer depth */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-primary/20 rounded-[100%] blur-[120px] pointer-events-none -z-10" />
-            <div className="absolute top-[20%] right-0 w-[600px] h-[600px] bg-[#0052FF]/15 rounded-full blur-[150px] pointer-events-none -z-10" />
+            <div className="absolute top-[20%] right-0 w-[600px] h-[600px] bg-primary/15 rounded-full blur-[150px] pointer-events-none -z-10" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px] pointer-events-none -z-10" />
             <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay pointer-events-none -z-10" />
 
@@ -35,7 +35,7 @@ export function LandingHero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
                         className="text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tight leading-[1.15] text-white pb-6 px-4"
-                        style={{ textShadow: '0 4px 30px rgba(0,82,255,0.3)' }}
+                        style={{ textShadow: '0 4px 30px hsl(220 100% 50% / 0.3)' }}
                     >
                         {t('heroTitle1')} <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-blue-100">
@@ -62,7 +62,7 @@ export function LandingHero() {
                         <Link href="/signup" className="relative group">
                             {/* Pulse glow behind CTA */}
                             <div className="absolute inset-0 rounded-full bg-primary/50 blur-xl group-hover:blur-2xl transition-all duration-500 opacity-60 group-hover:opacity-80" />
-                            <Button size="lg" className="relative h-14 px-8 text-lg w-full sm:w-auto bg-primary text-white hover:bg-primary/90 shadow-[0_0_30px_rgba(0,82,255,0.5)] border-0 rounded-full font-bold">
+                            <Button size="lg" className="relative h-14 px-8 text-lg w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_30px_hsl(var(--primary)/0.5)] border-0 rounded-full font-bold">
                                 {t('ctaStart')} <ArrowRight className="ml-2 h-5 w-5" />
                             </Button>
                         </Link>
@@ -104,9 +104,9 @@ export function LandingHero() {
                     className="relative w-full max-w-5xl mx-auto mt-8"
                 >
                     {/* Glowing Backing behind the mockup */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#0052FF] opacity-40 blur-[120px] rounded-full z-0 pointer-events-none" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary opacity-40 blur-[120px] rounded-full z-0 pointer-events-none" />
 
-                    <div className="relative z-10 rounded-[2rem] border border-white/15 bg-[#0B0E17]/70 backdrop-blur-2xl p-5 shadow-[0_0_80px_rgba(0,82,255,0.3)] overflow-hidden">
+                    <div className="relative z-10 rounded-[2rem] border border-white/15 bg-[#0B0E17]/70 backdrop-blur-2xl p-5 shadow-[0_0_80px_hsl(var(--primary)/0.3)] overflow-hidden">
 
                         {/* Browser Bar */}
                         <div className="flex items-center gap-2 mb-5 px-2">

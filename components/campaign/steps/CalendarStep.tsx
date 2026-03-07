@@ -54,12 +54,12 @@ export function CalendarStep({ onNext, onBack }: CalendarStepProps) {
 
             <div className="grid gap-8 md:grid-cols-[1fr_300px]">
                 {/* Date Picker */}
-                <Card className="p-8 flex flex-col items-center justify-center bg-white border-0 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)] rounded-[2rem]">
+                <Card className="p-8 flex flex-col items-center justify-center bg-card border-0 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] rounded-[2rem]">
                     <Calendar
                         mode="single"
                         selected={date}
                         onSelect={setDate}
-                        className="rounded-2xl border-0 shadow-inner bg-slate-50 p-6"
+                        className="rounded-2xl border-0 shadow-inner bg-muted p-6"
                         disabled={(date) => date < new Date() || date < new Date(new Date().setHours(0, 0, 0, 0))}
                         initialFocus
                     />
@@ -83,13 +83,13 @@ export function CalendarStep({ onNext, onBack }: CalendarStepProps) {
                                     className={cn("w-full font-black rounded-xl h-12 transition-all relative overflow-hidden border-0",
                                         time === slot && "bg-primary text-white shadow-[0_8px_30px_-6px_hsl(var(--primary))] scale-[1.02]",
                                         isBooked && "opacity-50 cursor-not-allowed bg-red-500/5 text-red-500",
-                                        !isBooked && time !== slot && "bg-white shadow-sm hover:bg-slate-50 hover:shadow-md hover:-translate-y-0.5"
+                                        !isBooked && time !== slot && "bg-card shadow-sm hover:bg-muted hover:shadow-md hover:-translate-y-0.5"
                                     )}
                                     onClick={() => setTime(slot)}
                                 >
                                     {slot}
                                     {isBooked && (
-                                        <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-[1px] text-[10px] font-bold uppercase tracking-widest text-destructive">
+                                        <div className="absolute inset-0 flex items-center justify-center bg-card/90 text-[10px] font-bold uppercase tracking-widest text-destructive">
                                             {t('booked')}
                                         </div>
                                     )}
@@ -98,7 +98,7 @@ export function CalendarStep({ onNext, onBack }: CalendarStepProps) {
                         })}
                     </div>
                     {date && (
-                        <div className="mt-8 p-6 rounded-2xl bg-slate-50 shadow-inner border-0 text-center animate-in fade-in">
+                        <div className="mt-8 p-6 rounded-2xl bg-muted shadow-inner border-0 text-center animate-in fade-in">
                             <p className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-1">{t('youSelected')}</p>
                             <p className="font-black text-xl text-primary">
                                 {format(date, "MMMM do, yyyy")}

@@ -25,17 +25,18 @@ export function Sidebar() {
     const tc = useTranslations("Common");
 
     return (
-        <div className="hidden md:flex h-[calc(100vh-1.5rem)] w-16 flex-col py-5 fixed top-3 left-3 z-[60] overflow-visible items-center">
+        <div className="hidden md:flex h-screen w-56 flex-col fixed top-0 left-0 z-[70] bg-card shadow-[2px_0_20px_-4px_rgba(0,0,0,0.35)]">
 
             {/* Logo */}
-            <div className="mb-6 flex items-center justify-center">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/60">
-                    <YallaLogo className="h-6 w-6" />
+            <div className="flex items-center gap-3 px-5 h-[72px] shrink-0">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20">
+                    <YallaLogo className="h-5 w-5 text-primary" />
                 </div>
+                <span className="text-base font-black tracking-tight text-foreground">YallaViral</span>
             </div>
 
             {/* Nav */}
-            <nav className="flex flex-1 flex-col gap-1 items-center w-full px-3">
+            <nav className="flex flex-1 flex-col gap-0.5 p-3 pt-4 overflow-y-auto">
                 {sidebarLinks.map((link) => {
                     const Icon = link.icon;
                     const isActive =
@@ -47,48 +48,37 @@ export function Sidebar() {
                             key={link.href}
                             href={link.href}
                             className={cn(
-                                "group/item relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200",
+                                "flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 text-sm font-semibold group",
                                 isActive
-                                    ? "bg-[hsl(var(--primary))] shadow-[0_6px_20px_-4px_hsl(var(--primary)/0.6)]"
-                                    : "text-foreground/35 hover:bg-white/30 hover:text-foreground/70"
+                                    ? "bg-gradient-to-r from-primary/20 to-secondary/10 text-primary shadow-[0_2px_12px_-2px_hsl(var(--primary)/0.25)]"
+                                    : "text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                             )}
                         >
-                            <Icon className={cn("h-5 w-5 shrink-0", isActive ? "text-white" : "text-current")} />
-
-                            {/* Tooltip */}
-                            <span className="pointer-events-none absolute left-[calc(100%+12px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-xl bg-foreground px-3 py-1.5 text-xs font-semibold text-background opacity-0 shadow-lg transition-opacity duration-150 group-hover/item:opacity-100 z-[70]">
-                                {t(link.titleKey)}
-                                <span className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-foreground" />
-                            </span>
+                            <Icon className={cn("h-4 w-4 shrink-0 transition-transform duration-200", !isActive && "group-hover:scale-110")} />
+                            <span>{t(link.titleKey)}</span>
+                            {isActive && <div className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />}
                         </Link>
                     );
                 })}
             </nav>
 
             {/* Bottom actions */}
-            <div className="flex flex-col items-center gap-1 px-3 pt-3 w-full border-t border-white/20">
+            <div className="p-3 flex flex-col gap-0.5 pt-4">
                 {isAdmin && (
                     <Link
                         href="/admin"
-                        className="group/item relative flex items-center justify-center w-10 h-10 rounded-full text-primary hover:bg-primary/10 transition-all duration-200"
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-primary hover:bg-primary/10 transition-all duration-200"
                     >
-                        <ShieldCheck className="h-5 w-5 shrink-0" />
-                        <span className="pointer-events-none absolute left-[calc(100%+12px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-xl bg-foreground px-3 py-1.5 text-xs font-semibold text-background opacity-0 shadow-lg transition-opacity duration-150 group-hover/item:opacity-100 z-[70]">
-                            {tc("adminDashboard")}
-                            <span className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-foreground" />
-                        </span>
+                        <ShieldCheck className="h-4 w-4 shrink-0" />
+                        <span>{tc("adminDashboard")}</span>
                     </Link>
                 )}
-
                 <button
                     onClick={() => signOut()}
-                    className="group/item relative flex items-center justify-center w-10 h-10 rounded-full text-foreground/35 hover:bg-white/30 hover:text-destructive transition-all duration-200"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all duration-200 w-full text-left"
                 >
-                    <LogOut className="h-5 w-5 shrink-0" />
-                    <span className="pointer-events-none absolute left-[calc(100%+12px)] top-1/2 -translate-y-1/2 whitespace-nowrap rounded-xl bg-foreground px-3 py-1.5 text-xs font-semibold text-background opacity-0 shadow-lg transition-opacity duration-150 group-hover/item:opacity-100 z-[70]">
-                        {tc("logOut")}
-                        <span className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-foreground" />
-                    </span>
+                    <LogOut className="h-4 w-4 shrink-0" />
+                    <span>{tc("logOut")}</span>
                 </button>
             </div>
         </div>

@@ -15,7 +15,7 @@ export function LandingHowItWorks() {
     const t = useTranslations('Landing');
 
     return (
-        <section className="py-32 bg-slate-50 relative overflow-hidden text-foreground">
+        <section className="py-32 bg-muted/40 relative overflow-hidden text-foreground">
             {/* Ambient background effects */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white rounded-full blur-[150px] pointer-events-none -z-10" />
 
@@ -28,10 +28,10 @@ export function LandingHowItWorks() {
                     className="text-center mb-20"
                 >
                     <span className="text-xs font-black uppercase tracking-widest text-primary mb-6 block">Process</span>
-                    <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-8 pb-4">
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tight text-foreground mb-8 pb-4">
                         {t('howItWorksTitle')}
                     </h2>
-                    <p className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
                         {t('howItWorksSubtitle')}
                     </p>
                 </motion.div>
@@ -47,7 +47,7 @@ export function LandingHowItWorks() {
                             whileInView={{ opacity: 1, scale: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.5, delay: index * 0.2 }}
-                            className="flex flex-col items-center text-center p-8 rounded-[2.5rem] bg-white border border-slate-200/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] relative z-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] group overflow-hidden"
+                            className="flex flex-col items-center text-center p-8 rounded-[2.5rem] bg-card border-0 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.06)] relative z-10 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] group overflow-hidden"
                         >
                             {/* Colored top accent on hover */}
                             <div
@@ -56,18 +56,18 @@ export function LandingHowItWorks() {
                             />
 
                             <div className="h-24 w-24 rounded-[2rem] flex items-center justify-center relative shadow-sm mb-6 transition-all duration-300 group-hover:scale-110"
-                                style={{ backgroundColor: `${step.accent}10`, border: `1px solid ${step.accent}20` }}
+                                style={{ backgroundColor: `${step.accent}10`, boxShadow: `0 0 0 1px ${step.accent}20, 0 4px 16px -4px ${step.accent}30` }}
                             >
                                 <step.icon className="h-10 w-10" style={{ color: step.accent }} />
-                                <div className="absolute -top-3 -right-3 h-10 w-10 rounded-full text-white font-black flex items-center justify-center border-4 border-white shadow-[0_0_15px_rgba(0,82,255,0.3)] text-sm"
+                                <div className="absolute -top-3 -right-3 h-10 w-10 rounded-full text-white font-black flex items-center justify-center border-4 border-background shadow-[0_0_15px_hsl(var(--primary)/0.3)] text-sm"
                                     style={{ backgroundColor: step.accent }}
                                 >
                                     {index + 1}
                                 </div>
                             </div>
                             <div className="space-y-3">
-                                <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight mb-2">{t(step.titleKey)}</h3>
-                                <p className="text-base text-slate-500 leading-relaxed max-w-[250px] mx-auto px-2">
+                                <h3 className="text-2xl font-extrabold text-foreground tracking-tight mb-2">{t(step.titleKey)}</h3>
+                                <p className="text-base text-muted-foreground leading-relaxed max-w-[250px] mx-auto px-2">
                                     {t(step.descKey)}
                                 </p>
                             </div>

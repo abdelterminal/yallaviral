@@ -29,7 +29,7 @@ export function LanguageSwitcher() {
     }
 
     return (
-        <div className="flex items-center bg-white/10 backdrop-blur-md border border-white/20 rounded-full p-1 w-fit shadow-sm">
+        <div className="flex items-center bg-muted rounded-full p-1 w-fit shadow-[0_2px_8px_-2px_rgba(0,0,0,0.3)]">
             {languages.map((lang) => {
                 const isActive = currentLocale === lang.code;
                 return (
@@ -40,8 +40,8 @@ export function LanguageSwitcher() {
                         className={cn(
                             "px-3 py-1 rounded-full text-xs font-black tracking-widest transition-all duration-200",
                             isActive
-                                ? "bg-white text-[#0B0E17] shadow-sm transform scale-100"
-                                : "text-white/50 hover:text-white hover:bg-white/10 transform scale-95"
+                                ? "bg-card text-foreground shadow-sm"
+                                : "text-muted-foreground hover:text-foreground hover:bg-card/50"
                         )}
                         aria-pressed={isActive}
                         aria-label={`Switch to ${lang.code}`}

@@ -111,7 +111,7 @@ export default function SignupForm() {
                             name="fullName"
                             placeholder={t('namePlaceholder')}
                             required
-                            className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
+                            className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary focus:placeholder-transparent transition-all"
                         />
                     </div>
                     <div className="space-y-2">
@@ -121,7 +121,7 @@ export default function SignupForm() {
                             name="brandName"
                             placeholder={t('companyPlaceholder')}
                             required
-                            className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
+                            className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary focus:placeholder-transparent transition-all"
                         />
                     </div>
                 </div>
@@ -135,7 +135,7 @@ export default function SignupForm() {
                             type="email"
                             placeholder={t('emailPlaceholder')}
                             required
-                            className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
+                            className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary focus:placeholder-transparent transition-all"
                         />
                     </div>
                     <div className="space-y-2">
@@ -146,7 +146,7 @@ export default function SignupForm() {
                             type="tel"
                             placeholder={t('phonePlaceholder')}
                             required
-                            className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
+                            className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary focus:placeholder-transparent transition-all"
                         />
                     </div>
                 </div>
@@ -159,7 +159,7 @@ export default function SignupForm() {
                         type="password"
                         placeholder="••••••••"
                         required
-                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
+                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 rounded-2xl focus:ring-primary/40 focus:border-primary focus:placeholder-transparent transition-all"
                     />
                 </div>
 
