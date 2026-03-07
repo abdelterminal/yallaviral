@@ -39,7 +39,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
                     <div className="flex items-start justify-between mb-4">
                         <CardTitle className="text-3xl font-black tracking-tighter text-foreground group-hover:text-primary transition-colors">{resource.name}</CardTitle>
                         {isAvailable && (
-                            <Badge variant="outline" className="text-emerald-600 border-emerald-100 bg-emerald-50 rounded-full hidden md:flex items-center gap-1.5 px-3 py-1 text-xs">
+                            <Badge variant="outline" className="text-emerald-400 border-emerald-500/20 bg-emerald-500/10 rounded-full hidden md:flex items-center gap-1.5 px-3 py-1 text-xs">
                                 <span className="relative flex h-2 w-2">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -72,7 +72,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
                 </div>
 
                 {/* Action Section (Right) */}
-                <div className="p-8 border-0 bg-muted/30 flex flex-row md:flex-col items-center md:justify-center justify-between gap-6 min-w-[240px]">
+                <div className="p-8 border-0 bg-muted/20 border-l border-border/30 flex flex-row md:flex-col items-center md:justify-center justify-between gap-6 min-w-[240px]">
                     <div className="flex flex-col items-center mb-4">
                         <span className="text-4xl font-black text-foreground tracking-tighter">{resource.hourly_rate} MAD</span>
                         <span className="text-muted-foreground text-[11px] font-black uppercase tracking-widest mt-1">per hour</span>

@@ -84,8 +84,8 @@ export function NotificationsDropdown() {
                     )}
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-96 bg-card text-foreground p-0 overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.12)]">
-                <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-muted/30">
+            <DropdownMenuContent align="end" className="w-96 bg-zinc-950/90 border-0 text-foreground p-0 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                <div className="flex items-center justify-between px-5 py-4 bg-muted/30">
                     <DropdownMenuLabel className="p-0 font-black text-xl tracking-tight">{t('notificationsTitle')}</DropdownMenuLabel>
                     {unreadCount > 0 && (
                         <Button
@@ -108,7 +108,7 @@ export function NotificationsDropdown() {
                         notifications.map((n) => (
                             <DropdownMenuItem
                                 key={n.id}
-                                className={cn( "flex flex-col items-start gap-1.5 py-4 px-5 focus:bg-muted/50 cursor-pointer border-b border-border last:border-0 transition-all duration-200 outline-none",
+                                className={cn( "flex flex-col items-start gap-1.5 py-4 px-5 focus:bg-muted/50 cursor-pointer transition-all duration-200 outline-none",
                                     !n.read && "bg-primary/5"
                                 )}
                                 onClick={() => markAsRead(n.id)}
@@ -142,7 +142,7 @@ export function NotificationsDropdown() {
                     )}
                 </div>
                 <DropdownMenuSeparator className="bg-muted m-0" />
-                <div className="p-2 border-t border-border">
+                <div className="p-2 bg-white/[0.01]">
                     <a href="/requests" className="w-full">
                         <Button variant="ghost" className="w-full h-10 text-xs font-bold text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all rounded-lg">
                             {t('viewAllActivity')}

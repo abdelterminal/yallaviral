@@ -15,12 +15,12 @@ const badgeVariants = cva("inline-flex items-center justify-center rounded-full 
         ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         link: "text-primary underline-offset-4 [a&]:hover:underline",
         // Status variants
-        pending: "bg-amber-50 text-amber-700 border-amber-200",
-        confirmed: "bg-emerald-50 text-emerald-700 border-emerald-200",
-        rejected: "bg-red-50 text-red-600 border-red-200",
-        completed: "bg-blue-50 text-blue-600 border-blue-200",
-        unpaid: "bg-orange-50 text-orange-600 border-orange-200",
-        paid: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        pending: "bg-amber-500/15 text-amber-400 shadow-[0_0_10px_-2px_rgba(245,158,11,0.2)]",
+        confirmed: "bg-emerald-500/15 text-emerald-400 shadow-[0_0_10px_-2px_rgba(52,211,153,0.2)]",
+        rejected: "bg-red-500/15 text-red-400 shadow-[0_0_10px_-2px_rgba(239,68,68,0.2)]",
+        completed: "bg-blue-500/15 text-blue-400 shadow-[0_0_10px_-2px_rgba(59,130,246,0.2)]",
+        unpaid: "bg-orange-500/15 text-orange-400 shadow-[0_0_10px_-2px_rgba(249,115,22,0.2)]",
+        paid: "bg-emerald-500/15 text-emerald-400 shadow-[0_0_10px_-2px_rgba(52,211,153,0.2)]",
       },
     },
     defaultVariants: {

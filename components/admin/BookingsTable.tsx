@@ -68,125 +68,142 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
     };
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-6">
             {/* Status Filter Tabs */}
             <div className="flex flex-wrap gap-2">
                 {STATUS_FILTERS.map((filter) => {
                     const count = filter === "all" ? bookings.length : bookings.filter(b => b.status === filter).length;
+                    const isActive = statusFilter === filter;
                     return (
                         <button
                             key={filter}
                             onClick={() => setStatusFilter(filter)}
-                            className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all capitalize ${
-                                statusFilter === filter
-                                    ? "bg-primary text-primary-foreground shadow-sm"
-                                    : "bg-muted text-muted-foreground hover:text-foreground hover:bg-muted/80"
+                            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[10px] text-xs font-semibold transition-all duration-150 capitalize hover:scale-[1.02] ${
+                                isActive
+                                    ? "bg-primary/15 text-primary border border-primary/25 shadow-[0_0_12px_-2px_hsl(var(--primary)/0.2)]"
+                                    : "bg-muted/40 text-muted-foreground border border-border/20 hover:bg-muted/70 hover:text-foreground"
                             }`}
                         >
-                            {filter} ({count})
+                            {filter}
+                            <span className={`px-1.5 py-0.5 rounded-md text-[10px] font-bold ${isActive ? "bg-primary/20 text-primary" : "bg-muted text-muted-foreground"}`}>
+                                {count}
+                            </span>
                         </button>
                     );
                 })}
             </div>
 
-        <div className="rounded-md border border-border bg-card backdrop-blur-sm">
+            {/* Table container — no grid borders */}
+            <div className="rounded-[16px] bg-card overflow-hidden shadow-[0_8px_32px_-4px_rgba(0,0,0,0.45)]">
+                {/* Table header row — subtle bg tint */}
+                <div className="px-6 py-4 bg-muted/20">
+                    <div className="grid grid-cols-[0.5fr_1.5fr_1fr_0.8fr_0.8fr_0.8fr_1fr] gap-4 items-center">
+                        {["ID", "Client", "Date", "Amount", "Status", "Payment", ""].map((h, i) => (
+                            <span key={i} className={`text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/60 ${i === 6 ? "text-right" : ""}`}>{h}</span>
+                        ))}
+                    </div>
+                </div>
+
             <Table>
-                <TableHeader>
-                    <TableRow className="border-border hover:bg-muted/50">
-                        <TableHead className="text-foreground">ID</TableHead>
-                        <TableHead className="text-foreground">Client</TableHead>
-                        <TableHead className="text-foreground">Date</TableHead>
-                        <TableHead className="text-foreground">Amount</TableHead>
-                        <TableHead className="text-foreground">Status</TableHead>
-                        <TableHead className="text-foreground">Payment</TableHead>
-                        <TableHead className="text-right text-foreground">Actions</TableHead>
+                <TableHeader className="sr-only">
+                    <TableRow>
+                        <TableHead>ID</TableHead>
+                        <TableHead>Client</TableHead>
+                        <TableHead>Date</TableHead>
+                        <TableHead>Amount</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Payment</TableHead>
+                        <TableHead className="text-right">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {filtered.length === 0 ? (
                         <TableRow className="hover:bg-transparent border-none">
-                            <TableCell colSpan={7} className="h-[300px] text-center">
-                                <div className="flex flex-col items-center justify-center text-muted-foreground animate-in fade-in duration-700">
-                                    <div className="h-16 w-16 mb-4 rounded-full bg-muted/50 border border-border flex items-center justify-center">
-                                        <Inbox className="h-8 w-8 opacity-50 text-foreground" />
+                            <TableCell colSpan={7} className="h-[260px] text-center">
+                                <div className="flex flex-col items-center justify-center gap-3 animate-in fade-in duration-500">
+                                    <div className="h-14 w-14 rounded-[14px] bg-muted/50 flex items-center justify-center">
+                                        <Inbox className="h-6 w-6 text-muted-foreground/40" />
                                     </div>
-                                    <p className="font-mono text-sm font-bold uppercase tracking-wider text-muted-foreground">
-                                        No bookings found
-                                    </p>
-                                    <p className="text-xs text-muted-foreground/60 mt-2 max-w-[200px]">
-                                        There are no operations in this table yet.
-                                    </p>
+                                    <div>
+                                        <p className="text-sm font-semibold text-foreground">No bookings found</p>
+                                        <p className="text-xs text-muted-foreground mt-0.5">No entries match this filter yet.</p>
+                                    </div>
                                 </div>
                             </TableCell>
                         </TableRow>
                     ) : (
                         filtered.map((booking) => (
-                            <TableRow key={booking.id} className="border-border hover:bg-muted/50">
-                                <TableCell className="font-mono text-xs">{booking.id.slice(0, 8)}</TableCell>
+                            <TableRow key={booking.id}>
                                 <TableCell>
-                                    <div className="flex flex-col">
-                                        <span className="font-medium text-foreground">{booking.profiles?.full_name || 'Unknown'}</span>
-                                        <span className="text-xs text-muted-foreground">{booking.profiles?.email}</span>
+                                    <span className="font-mono text-[11px] text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-md">
+                                        #{booking.id.slice(0, 8)}
+                                    </span>
+                                </TableCell>
+                                <TableCell>
+                                    <div className="flex flex-col gap-0.5">
+                                        <span className="font-medium text-foreground text-sm">{booking.profiles?.full_name || 'Unknown'}</span>
+                                        <span className="text-[11px] text-muted-foreground">{booking.profiles?.email}</span>
                                     </div>
                                 </TableCell>
-                                <TableCell className="text-muted-foreground">
-                                    {format(new Date(booking.created_at), "MMM do, yyyy", { locale: dateFnsLocale })}
-                                </TableCell>
-                                <TableCell className="font-mono text-emerald-600">
-                                    {booking.total_price?.toFixed(2)} MAD
+                                <TableCell className="text-muted-foreground text-sm">
+                                    {format(new Date(booking.created_at), "MMM d, yyyy", { locale: dateFnsLocale })}
                                 </TableCell>
                                 <TableCell>
-                                    <Badge variant={getStatusBadgeVariant(booking.status)} className="capitalize">
+                                    <span className="font-mono text-sm font-semibold text-accent">
+                                        {booking.total_price?.toFixed(2)} MAD
+                                    </span>
+                                </TableCell>
+                                <TableCell>
+                                    <Badge variant={getStatusBadgeVariant(booking.status)} className="capitalize text-[11px]">
                                         {booking.status}
                                     </Badge>
                                 </TableCell>
                                 <TableCell>
                                     {booking.payment_status === 'paid' ? (
-                                        <Badge variant="paid">Paid</Badge>
+                                        <Badge variant="paid" className="text-[11px]">Paid</Badge>
                                     ) : booking.payment_status === 'pending' ? (
-                                        <Button
-                                            size="sm"
-                                            variant="ghost"
-                                            className="text-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10 text-xs font-bold h-7 px-2"
+                                        <button
+                                            className="inline-flex items-center gap-1 text-[11px] font-semibold text-amber-400 bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/20 px-2.5 py-1 rounded-[8px] transition-all hover:scale-[1.02] disabled:opacity-50"
                                             onClick={() => handleMarkPaid(booking.id)}
                                             disabled={!!processingId}
                                         >
-                                            {processingId === booking.id ? <Loader2 className="h-3 w-3 animate-spin" /> : <Banknote className="h-3 w-3 mr-1" />}
-                                            Confirm Pay
-                                        </Button>
+                                            {processingId === booking.id ? <Loader2 className="h-3 w-3 animate-spin" /> : <Banknote className="h-3 w-3" />}
+                                            Confirm
+                                        </button>
                                     ) : booking.status === 'confirmed' ? (
-                                        <Badge variant="unpaid">Unpaid</Badge>
+                                        <Badge variant="unpaid" className="text-[11px]">Unpaid</Badge>
                                     ) : (
-                                        <span className="text-xs text-muted-foreground">—</span>
+                                        <span className="text-xs text-muted-foreground/40">—</span>
                                     )}
                                 </TableCell>
                                 <TableCell className="text-right">
-                                    {booking.status === 'pending' && (
-                                        <div className="flex justify-end gap-2">
-                                            <Button
-                                                size="sm"
-                                                variant="ghost"
-                                                className="text-emerald-500 hover:text-emerald-600 hover:bg-emerald-50 h-8 w-8 p-0"
-                                                onClick={() => handleAction(booking.id, 'approve')}
-                                                disabled={!!processingId}
-                                            >
-                                                {processingId === booking.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <CheckCircle className="h-4 w-4" />}
-                                            </Button>
-                                            <RejectBookingDialog bookingId={booking.id} clientName={booking.profiles?.full_name} />
-                                        </div>
-                                    )}
-                                    <Link href={`/admin/bookings/${booking.id}`}>
-                                        <Button size="sm" variant="ghost" className="text-primary hover:text-primary/80 hover:bg-primary/10 h-8 px-2 text-xs font-bold">
-                                            <ExternalLink className="h-3 w-3 mr-1" /> Manage
-                                        </Button>
-                                    </Link>
+                                    <div className="flex justify-end items-center gap-1.5">
+                                        {booking.status === 'pending' && (
+                                            <>
+                                                <button
+                                                    className="h-7 w-7 rounded-[8px] flex items-center justify-center text-accent bg-accent/10 hover:bg-accent/20 border border-accent/20 transition-all hover:scale-[1.05] disabled:opacity-50"
+                                                    onClick={() => handleAction(booking.id, 'approve')}
+                                                    disabled={!!processingId}
+                                                    title="Approve"
+                                                >
+                                                    {processingId === booking.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <CheckCircle className="h-3.5 w-3.5" />}
+                                                </button>
+                                                <RejectBookingDialog bookingId={booking.id} clientName={booking.profiles?.full_name} />
+                                            </>
+                                        )}
+                                        <Link href={`/admin/bookings/${booking.id}`}>
+                                            <button className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary bg-primary/10 hover:bg-primary/20 border border-primary/20 px-2.5 py-1 rounded-[8px] transition-all hover:scale-[1.02]">
+                                                <ExternalLink className="h-3 w-3" /> Manage
+                                            </button>
+                                        </Link>
+                                    </div>
                                 </TableCell>
                             </TableRow>
                         ))
                     )}
                 </TableBody>
             </Table>
-        </div>
+            </div>
         </div>
     );
 }

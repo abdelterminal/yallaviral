@@ -47,7 +47,7 @@ export function VideoStyleStep({ onNext, onBack }: VideoStyleStepProps) {
                             className={cn("relative overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] group border-0 rounded-[2rem]",
                                 isSelected
                                     ? `ring-[4px] ring-primary ring-offset-2 bg-primary/5 shadow-[0_10px_30px_-10px_hsl(var(--primary))]`
-                                    : "bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]"
+                                    : "bg-card shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)]"
                             )}
                             onClick={() => setGlobalVideoStyle(style.id)}
                         >

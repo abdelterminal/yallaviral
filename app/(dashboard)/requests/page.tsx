@@ -48,23 +48,23 @@ export default async function RequestsPage() {
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="flex items-center gap-2 text-3xl font-black tracking-tight">
-                        {t('title')} <Rocket className="h-8 w-8 text-primary" />
+                    <h1 className="flex items-center gap-2 text-2xl font-semibold tracking-tight">
+                        {t('title')} <Rocket className="h-5 w-5 text-primary" />
                     </h1>
-                    <p className="text-muted-foreground">{t('subtitle')}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{t('subtitle')}</p>
                 </div>
                 <Link href="/campaign">
-                    <Button className="font-bold shadow-lg shadow-primary/25">
-                        <Plus className="mr-2 h-4 w-4" /> {t('newCampaign')}
+                    <Button size="sm" className="font-semibold">
+                        <Plus className="h-4 w-4" /> {t('newCampaign')}
                     </Button>
                 </Link>
             </div>
 
             {!bookings || bookings.length === 0 ? (
-                <div className="rounded-[2rem] border-2 border-dashed border-border/60 bg-muted/30 p-12 text-center space-y-4">
-                    <p className="text-muted-foreground text-lg">{t('noCampaigns')}</p>
+                <div className="rounded-[14px] border border-dashed border-border/30 bg-muted/10 p-16 text-center space-y-4">
+                    <p className="text-muted-foreground">{t('noCampaigns')}</p>
                     <Link href="/campaign">
-                        <Button variant="outline">{t('startFirst')}</Button>
+                        <Button variant="outline" size="sm">{t('startFirst')}</Button>
                     </Link>
                 </div>
             ) : (

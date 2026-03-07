@@ -6,14 +6,12 @@ import { getDateLocale } from "@/utils/date-locale";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-    BarChart2,
-    Clock,
+    CalendarDays,
     CreditCard,
     FileText,
     Plus,
-    Settings,
-    Sparkles,
     TrendingUp,
+    ArrowUpRight,
 } from "lucide-react";
 import Link from "next/link";
 import { getTranslations, getLocale } from "next-intl/server";
@@ -42,7 +40,6 @@ export default async function DashboardPage() {
     const [
         { count: totalBookings },
         { count: activeBookings },
-        { count: awaitingPayment },
         { data: allPrices },
         { data: recentBookings },
         { data: bookedDatesRaw },
@@ -56,12 +53,6 @@ export default async function DashboardPage() {
             .select("*", { count: "exact", head: true })
             .eq("user_id", user.id)
             .in("status", ["pending", "confirmed"]),
-        supabase
-            .from("bookings")
-            .select("*", { count: "exact", head: true })
-            .eq("user_id", user.id)
-            .eq("status", "confirmed")
-            .eq("payment_status", "unpaid"),
         supabase
             .from("bookings")
             .select("total_price")
@@ -86,228 +77,276 @@ export default async function DashboardPage() {
     );
     const firstName =
         user.user_metadata?.full_name?.split(" ")[0] || "there";
-    const hasAwaitingPayment = (awaitingPayment || 0) > 0;
 
-    const quickLinks = [
-        { label: t("recentBookings"), href: "/requests", icon: FileText },
-        { label: "Analytics", href: "/analytics", icon: BarChart2 },
-        { label: tc("settings") || "Settings", href: "/settings", icon: Settings },
-        { label: "Campaign", href: "/campaign", icon: Sparkles },
-    ];
+    // Last 7 days chart data from bookedDates
+    const last7Days = Array.from({ length: 7 }, (_, i) => {
+        const d = new Date();
+        d.setDate(d.getDate() - (6 - i));
+        return d;
+    });
+    const chartData = last7Days.map((day) => ({
+        label: format(day, "EEE", { locale: getDateLocale(locale) }),
+        count: bookedDates.filter(
+            (bd) =>
+                bd.getDate() === day.getDate() &&
+                bd.getMonth() === day.getMonth() &&
+                bd.getFullYear() === day.getFullYear()
+        ).length,
+        isToday: day.toDateString() === new Date().toDateString(),
+    }));
+    const maxCount = Math.max(...chartData.map((d) => d.count), 1);
 
     return (
-        <div className="animate-in fade-in duration-500">
+        <div className="animate-in fade-in duration-500 space-y-6">
+
+            {/* ── OVERVIEW HEADER ── */}
+            <div className="flex items-center justify-between">
+                <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-0.5">
+                        {t("welcomeBack", { name: firstName })}
+                    </p>
+                    <h1 className="text-2xl font-black tracking-tight text-foreground">
+                        {t("totalBookings")} Overview
+                    </h1>
+                </div>
+                <Link href="/campaign">
+                    <Button className="rounded-full font-bold shadow-none" size="sm">
+                        <Plus className="h-3.5 w-3.5 mr-1.5" />
+                        {tc("newBooking")}
+                    </Button>
+                </Link>
+            </div>
+
+            {/* ── MAIN GRID ── */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
 
-                {/* ── LEFT COLUMN ── */}
-                <div className="flex flex-col gap-4">
+                {/* ── LEFT+CENTER (2/3) ── */}
+                <div className="lg:col-span-2 flex flex-col gap-6">
 
-                    {/* Hero card */}
-                    <div className="relative rounded-[2rem] bg-[hsl(var(--primary))] p-7 overflow-hidden shadow-[0_8px_30px_-8px_hsl(var(--primary)/0.4)]">
-                        {/* Decorative blobs */}
-                        <div className="absolute -top-10 -right-10 w-44 h-44 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-                        <div className="absolute -bottom-12 -left-12 w-52 h-52 bg-white/5 rounded-full blur-3xl pointer-events-none" />
-
-                        <div className="relative z-10">
-                            <p className="text-primary-foreground/60 text-xs font-semibold uppercase tracking-widest">
-                                {t("welcomeBack", { name: "" })}
-                            </p>
-                            <h1 className="text-white text-2xl font-bold tracking-tight mt-0.5 mb-6">
-                                {firstName}
-                            </h1>
-
-                            <p className="text-primary-foreground/60 text-xs font-semibold uppercase tracking-widest">
+                    {/* Stat cards row */}
+                    <div className="grid grid-cols-2 gap-4">
+                        {/* Total Bookings */}
+                        <div className="rounded-xl bg-card shadow-[0_4px_24px_-4px_rgba(0,0,0,0.4)] p-6 hover:-translate-y-0.5 transition-all duration-200 hover:shadow-[0_12px_40px_-8px_rgba(0,0,0,0.55)]">
+                            <div className="flex items-center gap-2 text-muted-foreground text-xs font-semibold uppercase tracking-wide mb-4">
+                                <div className="h-6 w-6 rounded-lg bg-primary/20 flex items-center justify-center">
+                                    <CalendarDays className="h-3.5 w-3.5 text-primary" />
+                                </div>
                                 {t("totalBookings")}
-                            </p>
-                            <p className="text-white text-6xl font-black tracking-tighter mt-1 mb-7">
+                            </div>
+                            <p className="text-5xl font-black text-foreground tracking-tight">
                                 {totalBookings ?? 0}
                             </p>
-
-                            <Link href="/campaign">
-                                <Button
-                                    className="bg-white text-primary hover:bg-white/90 rounded-full font-bold shadow-none w-full border-0"
-                                    variant="secondary"
-                                >
-                                    <Plus className="h-4 w-4 mr-2" />
-                                    {tc("newBooking")}
-                                </Button>
-                            </Link>
-                        </div>
-                    </div>
-
-                    {/* Stat tiles row */}
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="rounded-[1.5rem] bg-card p-5 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)]">
-                            <div className="p-2.5 rounded-2xl bg-primary/8 text-primary w-fit mb-3">
-                                <Clock className="h-4 w-4" />
+                            <div className="flex items-center gap-1 mt-3 text-emerald-400 text-xs font-semibold">
+                                <ArrowUpRight className="h-3.5 w-3.5" />
+                                <span>{activeBookings ?? 0} {t("active")}</span>
                             </div>
-                            <p className="text-2xl font-black text-foreground">
-                                {activeBookings ?? 0}
-                            </p>
-                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mt-1">
-                                {t("active")}
-                            </p>
                         </div>
 
-                        <div
-                            className={`rounded-[1.5rem] p-5 ${hasAwaitingPayment ? "bg-amber-50 shadow-[0_8px_30px_-8px_rgba(245,158,11,0.2)]" : "bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)]"}`}
-                        >
-                            <div
-                                className={`p-2.5 rounded-2xl w-fit mb-3 ${hasAwaitingPayment ? "bg-amber-100 text-amber-600" : "bg-primary/8 text-primary"}`}
-                            >
-                                <CreditCard className="h-4 w-4" />
-                            </div>
-                            <p
-                                className={`text-2xl font-black ${hasAwaitingPayment ? "text-amber-700" : "text-foreground"}`}
-                            >
-                                {awaitingPayment ?? 0}
-                            </p>
-                            <p
-                                className={`text-xs font-semibold uppercase tracking-wide mt-1 ${hasAwaitingPayment ? "text-amber-600" : "text-muted-foreground"}`}
-                            >
-                                {t("awaitingPayment")}
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Total spent */}
-                    <div className="rounded-[1.5rem] bg-card p-5 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)] flex items-center justify-between">
-                        <div>
-                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
+                        {/* Total Spent */}
+                        <div className="rounded-xl bg-card shadow-[0_4px_24px_-4px_rgba(0,0,0,0.4)] p-6 hover:-translate-y-0.5 transition-all duration-200 hover:shadow-[0_12px_40px_-8px_rgba(0,0,0,0.55)]">
+                            <div className="flex items-center gap-2 text-muted-foreground text-xs font-semibold uppercase tracking-wide mb-4">
+                                <div className="h-6 w-6 rounded-lg bg-secondary/20 flex items-center justify-center">
+                                    <CreditCard className="h-3.5 w-3.5 text-secondary" />
+                                </div>
                                 {t("totalSpent")}
+                            </div>
+                            <p className="text-5xl font-black text-foreground tracking-tight">
+                                {totalSpent > 0
+                                    ? totalSpent >= 1000
+                                        ? `${(totalSpent / 1000).toFixed(1)}k`
+                                        : totalSpent.toLocaleString()
+                                    : "0"}
                             </p>
-                            <p className="text-xl font-black text-foreground">
-                                {totalSpent.toLocaleString()}{" "}
-                                <span className="text-sm font-bold text-muted-foreground">
-                                    MAD
-                                </span>
-                            </p>
+                            <div className="flex items-center gap-1 mt-3 text-muted-foreground text-xs font-semibold">
+                                <TrendingUp className="h-3.5 w-3.5 text-secondary/70" />
+                                <span>MAD {t("active").toLowerCase()}</span>
+                            </div>
                         </div>
-                        <div className="p-3 rounded-2xl bg-emerald-50 text-emerald-600">
-                            <TrendingUp className="h-5 w-5" />
+                    </div>
+
+                    {/* Active bookings strip + avatar row */}
+                    <div className="rounded-xl bg-card shadow-[0_4px_24px_-4px_rgba(0,0,0,0.4)] p-6">
+                        <p className="text-base font-bold text-foreground">
+                            {activeBookings ?? 0} active booking{(activeBookings ?? 0) !== 1 ? "s" : ""} in progress
+                        </p>
+                        <p className="text-sm text-muted-foreground mt-0.5 mb-5">
+                            {t("createFirst")}
+                        </p>
+                        <div className="flex items-center gap-2 flex-wrap">
+                            {recentBookings && recentBookings.length > 0 ? (
+                                <>
+                                    {recentBookings.slice(0, 6).map((booking: any) => (
+                                        <Link key={booking.id} href={`/requests/${booking.id}`}>
+                                            <div className="h-10 w-10 rounded-full bg-muted overflow-hidden ring-2 ring-card hover:ring-primary/30 transition-all shrink-0">
+                                                {booking.resources?.image_url ? (
+                                                    <img
+                                                        src={booking.resources.image_url}
+                                                        alt=""
+                                                        className="h-full w-full object-cover"
+                                                    />
+                                                ) : (
+                                                    <div className="h-full w-full flex items-center justify-center bg-primary/10 text-primary text-xs font-black">
+                                                        {booking.resources?.name?.[0]?.toUpperCase() || "?"}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </Link>
+                                    ))}
+                                    {(recentBookings?.length ?? 0) > 6 && (
+                                        <Link href="/requests">
+                                            <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-[10px] font-black text-muted-foreground ring-2 ring-card hover:ring-primary/30 transition-all">
+                                                +{recentBookings!.length - 6}
+                                            </div>
+                                        </Link>
+                                    )}
+                                    <Link href="/requests" className="ml-1 flex items-center gap-1 text-sm font-bold text-primary hover:underline underline-offset-2 transition-all">
+                                        {tc("viewAll")} <ArrowUpRight className="h-3.5 w-3.5" />
+                                    </Link>
+                                </>
+                            ) : (
+                                <Link href="/campaign">
+                                    <Button size="sm" className="rounded-full font-bold">
+                                        <Plus className="h-3.5 w-3.5 mr-1.5" />
+                                        {tc("newBooking")}
+                                    </Button>
+                                </Link>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Activity chart */}
+                    <div className="rounded-xl bg-card shadow-[0_4px_24px_-4px_rgba(0,0,0,0.4)] p-6">
+                        <div className="flex items-center justify-between mb-2">
+                            <h3 className="text-sm font-bold text-foreground">
+                                Booking Activity
+                            </h3>
+                            <span className="text-xs text-muted-foreground font-medium bg-muted px-2.5 py-1 rounded-lg">
+                                Last 7 days
+                            </span>
+                        </div>
+                        <p className="text-3xl font-black text-foreground tracking-tight mb-6">
+                            {totalSpent.toLocaleString()}{" "}
+                            <span className="text-base font-bold text-muted-foreground">MAD</span>
+                        </p>
+                        {/* Bar chart */}
+                        <div className="flex items-end gap-2 h-28">
+                            {chartData.map((day, i) => (
+                                <div key={i} className="flex-1 flex flex-col items-center gap-2">
+                                    <div className="w-full flex items-end justify-center" style={{ height: "80px" }}>
+                                        <div
+                                            className={`w-full rounded-t-md transition-all duration-300 ${
+                                                day.isToday
+                                                    ? "bg-gradient-to-t from-primary to-secondary"
+                                                    : day.count > 0
+                                                    ? "bg-primary/40"
+                                                    : "bg-muted/60"
+                                            }`}
+                                            style={{
+                                                height: `${Math.max(6, (day.count / maxCount) * 80)}px`,
+                                            }}
+                                        />
+                                    </div>
+                                    <span className="text-[10px] text-muted-foreground font-medium capitalize">
+                                        {day.label}
+                                    </span>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
 
-                {/* ── CENTER COLUMN ── */}
-                <div className="rounded-[2rem] bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col">
-                    <div className="flex items-center justify-between px-6 py-5 border-b border-border/40">
-                        <div>
-                            <h2 className="text-sm font-bold text-foreground">
-                                {t("recentBookings")}
-                            </h2>
-                            <p className="text-xs text-muted-foreground mt-0.5">
-                                {recentBookings?.length ?? 0} recent entries
-                            </p>
-                        </div>
-                        <Link href="/requests">
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                className="text-primary font-bold text-xs rounded-full px-4"
-                            >
-                                {tc("viewAll")}
-                            </Button>
-                        </Link>
-                    </div>
+                {/* ── RIGHT PANEL (1/3) ── */}
+                <div className="flex flex-col gap-6">
 
-                    {!recentBookings || recentBookings.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center py-20 text-center px-6">
-                            <div className="h-14 w-14 rounded-full bg-muted flex items-center justify-center mb-4">
-                                <FileText className="h-6 w-6 text-muted-foreground/40" />
-                            </div>
-                            <p className="text-sm font-bold text-foreground">
-                                {t("noBookingsYet")}
-                            </p>
-                            <p className="text-xs text-muted-foreground mt-1 mb-4">
-                                {t("createFirst")}
-                            </p>
-                            <Link href="/campaign">
-                                <Button size="sm" className="rounded-full font-bold">
-                                    <Plus className="h-3.5 w-3.5 mr-1.5" />
-                                    {tc("newBooking")}
+                    {/* Recent campaigns — like "Popular products" */}
+                    <div className="rounded-xl bg-card shadow-[0_4px_24px_-4px_rgba(0,0,0,0.4)] overflow-hidden">
+                        <div className="flex items-center justify-between px-5 py-4">
+                            <h3 className="text-sm font-bold text-foreground">
+                                {t("recentBookings")}
+                            </h3>
+                            <Link href="/requests">
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="text-xs font-bold text-primary rounded-full px-3 h-7"
+                                >
+                                    {tc("viewAll")}
                                 </Button>
                             </Link>
                         </div>
-                    ) : (
-                        <div className="flex flex-col divide-y divide-border/40">
-                            {recentBookings.map((booking: any) => (
-                                <Link
-                                    key={booking.id}
-                                    href={`/requests/${booking.id}`}
-                                    className="flex items-center gap-4 px-6 py-4 hover:bg-muted/40 transition-colors"
-                                >
-                                    {/* Resource avatar */}
-                                    <div className="h-11 w-11 rounded-2xl bg-muted shrink-0 overflow-hidden">
-                                        {booking.resources?.image_url ? (
-                                            <img
-                                                src={booking.resources.image_url}
-                                                alt=""
-                                                className="h-full w-full object-cover"
-                                            />
-                                        ) : (
-                                            <div className="h-full w-full flex items-center justify-center">
-                                                <FileText className="h-4 w-4 text-muted-foreground/50" />
-                                            </div>
-                                        )}
-                                    </div>
 
-                                    {/* Info */}
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-bold text-foreground truncate">
-                                            {booking.resources?.name ||
-                                                `#${booking.id.slice(0, 8)}`}
-                                        </p>
-                                        <p className="text-xs text-muted-foreground mt-0.5">
-                                            {format(
-                                                new Date(booking.created_at),
-                                                "MMM d, yyyy",
-                                                { locale: getDateLocale(locale) }
+                        {!recentBookings || recentBookings.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center py-12 text-center px-5">
+                                <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center mb-3">
+                                    <FileText className="h-5 w-5 text-muted-foreground/40" />
+                                </div>
+                                <p className="text-sm font-bold text-foreground">
+                                    {t("noBookingsYet")}
+                                </p>
+                                <p className="text-xs text-muted-foreground mt-1 mb-4">
+                                    {t("createFirst")}
+                                </p>
+                                <Link href="/campaign">
+                                    <Button size="sm" className="rounded-full font-bold">
+                                        <Plus className="h-3.5 w-3.5 mr-1.5" />
+                                        {tc("newBooking")}
+                                    </Button>
+                                </Link>
+                            </div>
+                        ) : (
+                            <div className="flex flex-col">
+                                {recentBookings.slice(0, 6).map((booking: any) => (
+                                    <Link
+                                        key={booking.id}
+                                        href={`/requests/${booking.id}`}
+                                        className="flex items-center gap-3 px-5 py-3.5 hover:bg-muted/40 transition-colors"
+                                    >
+                                        <div className="h-10 w-10 rounded-xl bg-muted shrink-0 overflow-hidden">
+                                            {booking.resources?.image_url ? (
+                                                <img
+                                                    src={booking.resources.image_url}
+                                                    alt=""
+                                                    className="h-full w-full object-cover"
+                                                />
+                                            ) : (
+                                                <div className="h-full w-full flex items-center justify-center">
+                                                    <FileText className="h-4 w-4 text-muted-foreground/40" />
+                                                </div>
                                             )}
-                                        </p>
-                                    </div>
-
-                                    {/* Right: badge + price */}
-                                    <div className="flex flex-col items-end gap-1.5 shrink-0">
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-sm font-bold text-foreground truncate">
+                                                {booking.resources?.name ||
+                                                    `#${booking.id.slice(0, 8)}`}
+                                            </p>
+                                            <p className="text-xs text-muted-foreground font-mono">
+                                                {booking.total_price?.toLocaleString()} MAD
+                                            </p>
+                                        </div>
                                         <Badge
                                             variant={getStatusBadgeVariant(booking.status)}
-                                            className="capitalize"
+                                            className="text-[10px] shrink-0"
                                         >
                                             {tc(booking.status)}
                                         </Badge>
-                                        <span className="text-xs font-mono font-bold text-muted-foreground">
-                                            {booking.total_price?.toLocaleString()} MAD
-                                        </span>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    )}
-                </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
 
-                {/* ── RIGHT COLUMN ── */}
-                <div className="flex flex-col gap-4">
+                        {recentBookings && recentBookings.length > 0 && (
+                            <div className="px-5 py-3">
+                                <Link href="/requests" className="block w-full">
+                                    <Button variant="ghost" size="sm" className="w-full text-xs text-muted-foreground hover:text-foreground rounded-xl h-8">
+                                        View all campaigns
+                                    </Button>
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+
                     {/* Calendar */}
                     <BookingCalendar bookedDates={bookedDates} />
-
-                    {/* Quick access tiles */}
-                    <div className="rounded-[2rem] bg-card shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)] p-5">
-                        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
-                            Quick Access
-                        </p>
-                        <div className="grid grid-cols-2 gap-3">
-                            {quickLinks.map((link) => (
-                                <Link key={link.href} href={link.href}>
-                                    <div className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-muted hover:bg-primary/8 hover:text-primary transition-all duration-200 group cursor-pointer">
-                                        <link.icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                                        <span className="text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors text-center leading-tight">
-                                            {link.label}
-                                        </span>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@ export function LandingTestimonials() {
     const t = useTranslations('Landing');
 
     return (
-        <section className="py-32 bg-white relative overflow-hidden text-foreground">
+        <section className="py-32 bg-background relative overflow-hidden text-foreground">
             {/* Ambient background effects */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[100px] pointer-events-none -z-10" />
             <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-violet-50/40 rounded-full blur-[100px] pointer-events-none -z-10" />
@@ -49,7 +49,7 @@ export function LandingTestimonials() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.5, delay: i * 0.15 }}
-                                className="flex flex-col items-center text-center p-10 rounded-[2.5rem] bg-white border border-border/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 group overflow-hidden relative"
+                                className="flex flex-col items-center text-center p-10 rounded-[2.5rem] bg-card border-0 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 group overflow-hidden relative"
                             >
                                 {/* Colored top accent on hover */}
                                 <div
@@ -59,7 +59,7 @@ export function LandingTestimonials() {
 
                                 <div
                                     className="h-14 w-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 shadow-sm"
-                                    style={{ backgroundColor: `rgba(${stat.color}, 0.1)`, color: `rgb(${stat.color})`, border: `1px solid rgba(${stat.color}, 0.15)` }}
+                                    style={{ backgroundColor: `rgba(${stat.color}, 0.1)`, color: `rgb(${stat.color})`, boxShadow: `0 0 0 1px rgba(${stat.color}, 0.15), 0 4px 16px -4px rgba(${stat.color}, 0.2)` }}
                                 >
                                     <Icon className="h-7 w-7" />
                                 </div>
@@ -90,7 +90,7 @@ export function LandingTestimonials() {
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
                         <Link href="/signup">
-                            <Button size="lg" className="h-16 px-12 text-xl bg-primary text-white hover:bg-primary/90 shadow-[0_0_30px_rgba(0,82,255,0.4)] border-0 rounded-full font-bold">
+                            <Button size="lg" className="h-16 px-12 text-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_30px_hsl(var(--primary)/0.4)] border-0 rounded-full font-bold">
                                 {t('ctaCreate')}
                             </Button>
                         </Link>

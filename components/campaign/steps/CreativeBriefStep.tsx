@@ -34,7 +34,7 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                 </p>
             </div>
 
-            <Card className="bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)] border-0 rounded-[2rem] p-8 space-y-8">
+            <Card className="bg-card shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] border-0 rounded-[2rem] p-8 space-y-8">
                 <h3 className="text-2xl font-black tracking-tight text-foreground">{t('videoQuantities')}</h3>
 
                 {hasNoTalent ? (
@@ -80,7 +80,7 @@ export function CreativeBriefStep({ onNext, onBack }: CreativeBriefStepProps) {
                                         <p className="text-sm text-muted-foreground">{model.hourly_rate} MAD {t('perVideo')}</p>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-3 self-end sm:self-auto bg-white p-2 rounded-full shadow-sm">
+                                <div className="flex items-center gap-3 self-end sm:self-auto bg-card p-2 rounded-full shadow-sm">
                                     <Button
                                         variant="ghost"
                                         size="icon"

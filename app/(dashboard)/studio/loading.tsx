@@ -9,7 +9,7 @@ export default function StudioLoading() {
       </div>
       <div className="grid gap-6">
         {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} className="rounded-3xl border border-border bg-card overflow-hidden flex flex-col md:flex-row h-auto md:h-[320px]">
+          <div key={i} className="rounded-3xl bg-card shadow-[0_8px_32px_-4px_rgba(0,0,0,0.45)] overflow-hidden flex flex-col md:flex-row h-auto md:h-[320px]">
             {/* Image */}
             <Skeleton className="w-full md:w-2/5 h-48 md:h-full rounded-none" />
             {/* Content */}
@@ -27,7 +27,7 @@ export default function StudioLoading() {
                   ))}
                 </div>
               </div>
-              <div className="p-8 border-t md:border-t-0 md:border-l border-border min-w-[240px] flex flex-col items-center justify-center gap-6">
+              <div className="p-8 min-w-[240px] flex flex-col items-center justify-center gap-6">
                 <div className="space-y-2 text-center">
                   <Skeleton className="h-10 w-32 mx-auto" />
                   <Skeleton className="h-3 w-16 mx-auto" />

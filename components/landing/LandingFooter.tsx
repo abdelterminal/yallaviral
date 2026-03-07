@@ -10,7 +10,7 @@ export function LandingFooter() {
     const tc = useTranslations('Common');
 
     return (
-        <footer className="w-full bg-card pt-20 pb-8 relative overflow-hidden text-foreground border-t border-border">
+        <footer className="w-full bg-background pt-20 pb-8 relative overflow-hidden text-foreground border-t border-border/50">
             {/* Ambient subtle top light */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
@@ -20,7 +20,7 @@ export function LandingFooter() {
                     {/* Column 1: Brand */}
                     <div className="space-y-6">
                         <div className="flex items-center gap-2">
-                            <div className="bg-muted p-2 rounded-lg transition-colors">
+                            <div className="bg-muted p-2 rounded-lg border border-border transition-colors">
                                 <YallaLogo className="h-6 w-6 text-foreground" />
                             </div>
                             <span className="text-2xl font-black text-foreground tracking-tight ml-1">YallaViral</span>
@@ -29,13 +29,13 @@ export function LandingFooter() {
                             {t('footerBrandDesc')}
                         </p>
                         <div className="flex gap-3">
-                            <Link href="#" className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-muted/80 hover:shadow-[0_4px_10px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300">
+                            <Link href="#" className="h-10 w-10 rounded-full bg-muted border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-muted/80 hover:shadow-[0_4px_10px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300">
                                 <Instagram className="h-4 w-4" />
                             </Link>
-                            <Link href="#" className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-muted/80 hover:shadow-[0_4px_10px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300">
+                            <Link href="#" className="h-10 w-10 rounded-full bg-muted border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-muted/80 hover:shadow-[0_4px_10px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300">
                                 <Linkedin className="h-4 w-4" />
                             </Link>
-                            <Link href="#" className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-muted/80 hover:shadow-[0_4px_10px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300">
+                            <Link href="#" className="h-10 w-10 rounded-full bg-muted border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-muted/80 hover:shadow-[0_4px_10px_rgba(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300">
                                 <Twitter className="h-4 w-4" />
                             </Link>
                         </div>
@@ -87,16 +87,16 @@ export function LandingFooter() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-sm text-muted-foreground">
+                <div className="pt-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-sm text-muted-foreground/70">
                         {tc('allRightsReserved')}
                     </p>
                     <div className="flex gap-6">
-                        <Link href="/legal/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('footerPrivacy')}</Link>
-                        <Link href="/legal/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('footerTerms')}</Link>
-                        <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t('footerCookies')}</Link>
+                        <Link href="/legal/privacy" className="text-sm text-muted-foreground/70 hover:text-foreground transition-colors">{t('footerPrivacy')}</Link>
+                        <Link href="/legal/terms" className="text-sm text-muted-foreground/70 hover:text-foreground transition-colors">{t('footerTerms')}</Link>
+                        <Link href="#" className="text-sm text-muted-foreground/70 hover:text-foreground transition-colors">{t('footerCookies')}</Link>
                     </div>
-                    <p className="text-xs text-muted-foreground font-mono flex items-center gap-1">
+                    <p className="text-xs text-muted-foreground/70 font-mono flex items-center gap-1">
                         🇲🇦 {tc('madeInMeknes')}
                     </p>
                 </div>

@@ -147,7 +147,7 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
 
             {/* Payment Banner */}
             {booking.status === "confirmed" && booking.payment_status === "unpaid" && (
-                <div className="rounded-2xl border border-primary/30 bg-primary/5 backdrop-blur-xl p-6 flex flex-col md:flex-row items-center justify-between gap-4 animate-in slide-in-from-top-2 duration-500">
+                <div className="rounded-2xl bg-primary/5 shadow-[0_0_24px_-4px_hsl(var(--primary)/0.25)] p-6 flex flex-col md:flex-row items-center justify-between gap-4 animate-in slide-in-from-top-2 duration-500">
                     <div className="flex items-center gap-4">
                         <div className="h-12 w-12 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
                             <svg className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -167,23 +167,23 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                 </div>
             )}
             {booking.payment_status === "pending" && (
-                <div className="rounded-2xl border border-yellow-500/30 bg-yellow-500/5 backdrop-blur-xl p-4 flex items-center gap-3">
-                    <div className="h-2 w-2 rounded-full bg-yellow-400 animate-pulse" />
-                    <p className="text-sm text-yellow-600 font-medium">{t('paymentUnderReview')}</p>
+                <div className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-4 flex items-center gap-3">
+                    <div className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
+                    <p className="text-sm text-amber-400 font-medium">{t('paymentUnderReview')}</p>
                 </div>
             )}
             {booking.payment_status === "paid" && (
-                <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 backdrop-blur-xl p-4 flex items-center gap-3">
+                <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 flex items-center gap-3">
                     <svg className="h-5 w-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <p className="text-sm text-emerald-600 font-medium">{t('paymentConfirmed')}</p>
+                    <p className="text-sm text-emerald-400 font-medium">{t('paymentConfirmed')}</p>
                 </div>
             )}
             {booking.status === "rejected" && (
-                <div className="rounded-2xl border border-red-500/30 bg-red-500/5 backdrop-blur-xl p-6 space-y-3">
+                <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-6 space-y-3">
                     <div className="flex items-start gap-3">
-                        <div className="h-10 w-10 rounded-xl bg-red-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                        <div className="h-10 w-10 rounded-xl bg-red-500/15 flex items-center justify-center shrink-0 mt-0.5">
                             <svg className="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                             </svg>
@@ -191,7 +191,7 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                         <div>
                             <h3 className="font-bold text-red-400 text-base">{t('bookingRejected')}</h3>
                             {booking.rejection_reason && (
-                                <p className="text-sm text-foreground/80 mt-1 leading-relaxed">
+                                <p className="text-sm text-foreground/70 mt-1 leading-relaxed">
                                     &ldquo;{booking.rejection_reason}&rdquo;
                                 </p>
                             )}
@@ -204,7 +204,7 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
             )}
 
             {/* Visual Timeline */}
-            <Card className="bg-card border-border overflow-hidden">
+            <Card className="bg-card border-0 overflow-hidden">
                 <CardContent className="p-8">
                     <div className="relative">
                         {/* Progress Bar Background (Desktop) */}
@@ -217,9 +217,9 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
 
                                 return (
                                     <div key={step.id} className="flex flex-row md:flex-col items-center gap-4 md:gap-4 w-full text-left md:text-center group">
-                                        <div className={`h-10 w-10 shrink-0 rounded-full flex items-center justify-center border-2 transition-all duration-500 z-10 ${isCompleted ? "bg-primary border-primary text-primary-foreground shadow-sm" :
-                                            isCurrent ? "bg-card border-primary text-primary ring-4 ring-primary/20 scale-110" :
-                                                "bg-muted border-border text-muted-foreground"
+                                        <div className={`h-10 w-10 shrink-0 rounded-full flex items-center justify-center transition-all duration-500 z-10 ${isCompleted ? "bg-primary text-primary-foreground shadow-[0_4px_14px_-2px_hsl(var(--primary)/0.6)]" :
+                                            isCurrent ? "bg-card text-primary shadow-[0_0_0_3px_hsl(var(--primary)/0.3),0_4px_14px_-2px_hsl(var(--primary)/0.4)] scale-110" :
+                                                "bg-muted text-muted-foreground shadow-[inset_0_1px_3px_rgba(0,0,0,0.2)]"
                                             }`}>
                                             {isCompleted ? <CheckCircle2 className="h-5 w-5" /> : <Circle className="h-4 w-4" />}
                                         </div>
@@ -237,7 +237,7 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
 
             {/* Tabs Content */}
             <Tabs defaultValue="overview" className="space-y-6">
-                <div className="border-b border-border pb-1">
+                <div className="pb-1">
                     <TabsList className="bg-transparent p-0 h-auto space-x-6">
                         <TabsTrigger value="overview" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:bg-transparent px-2 py-3 font-bold transition-all text-muted-foreground hover:text-foreground">{t('overview')}</TabsTrigger>
                         <TabsTrigger value="deliverables" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:bg-transparent px-2 py-3 font-bold transition-all text-muted-foreground hover:text-foreground">{t('deliverables')}</TabsTrigger>
@@ -249,7 +249,7 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                     <div className="grid md:grid-cols-3 gap-6">
                         {/* Left Column: Details */}
                         <div className="md:col-span-2 space-y-6">
-                            <Card className="bg-card border-border">
+                            <Card className="bg-card border-0">
                                 <CardHeader>
                                     <CardTitle className="flex items-center gap-2 text-xl font-bold">
                                         <FileText className="h-5 w-5 text-primary" /> {t('creativeBrief')}
@@ -257,14 +257,14 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                                 </CardHeader>
                                 <CardContent className="space-y-6">
                                     <div className="grid grid-cols-2 gap-4">
-                                        <div className="p-4 rounded-xl bg-muted border border-border hover:bg-muted/80 transition-colors">
+                                        <div className="p-4 rounded-xl bg-muted hover:bg-muted/80 transition-colors">
                                             <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2 font-bold">{t('shootDate')}</p>
                                             <p className="font-bold flex items-center gap-2 text-lg">
                                                 <Calendar className="h-4 w-4 text-primary" />
                                                 {format(new Date(booking.start_time), "PPP", { locale: dateFnsLocale })}
                                             </p>
                                         </div>
-                                        <div className="p-4 rounded-xl bg-muted border border-border hover:bg-muted/80 transition-colors">
+                                        <div className="p-4 rounded-xl bg-muted hover:bg-muted/80 transition-colors">
                                             <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2 font-bold">{t('time')}</p>
                                             <p className="font-bold flex items-center gap-2 text-lg">
                                                 <Clock className="h-4 w-4 text-primary" />
@@ -275,7 +275,7 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
 
                                     <div className="space-y-3">
                                         <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">{t('projectNotes')}</p>
-                                        <div className="p-5 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-sm leading-relaxed">
+                                        <div className="p-5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-sm leading-relaxed">
                                             {booking.notes || t('noNotesProvided')}
                                         </div>
                                     </div>
@@ -285,13 +285,13 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
 
                         {/* Right Column: Resources */}
                         <div className="space-y-6">
-                            <Card className="bg-card border-border h-full">
+                            <Card className="bg-card border-0 h-full">
                                 <CardHeader>
                                     <CardTitle className="text-lg font-bold">{t('selectedTalent')}</CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="flex items-center gap-4 p-4 rounded-xl bg-muted border border-border">
-                                        <div className="h-16 w-16 rounded-full bg-muted overflow-hidden ring-2 ring-border">
+                                    <div className="flex items-center gap-4 p-4 rounded-xl bg-muted">
+                                        <div className="h-16 w-16 rounded-full bg-muted overflow-hidden ring-2 ring-muted-foreground/20">
                                             {booking.resources?.image_url ? (
                                                 <img src={booking.resources.image_url} alt={booking.resources.name} className="h-full w-full object-cover" />
                                             ) : (
@@ -300,7 +300,7 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                                         </div>
                                         <div>
                                             <p className="font-bold text-lg text-foreground">{booking.resources?.name || t('unknown')}</p>
-                                            <Badge variant="outline" className="mt-1 border-primary/20 text-primary bg-primary/10">{t('contentCreator')}</Badge>
+                                            <Badge variant="secondary" className="mt-1">{t('contentCreator')}</Badge>
                                         </div>
                                     </div>
 
@@ -316,7 +316,7 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                                             <span className="text-muted-foreground">{t('serviceFee')}</span>
                                             <span className="font-mono">{t('included')}</span>
                                         </div>
-                                        <Separator className="bg-white/10" />
+                                        <Separator className="bg-border" />
                                         <div className="flex justify-between items-center pt-2">
                                             <span className="font-bold text-foreground">{t('total')}</span>
                                             <span className="font-black text-xl text-emerald-600">{booking.total_price?.toFixed(2)} MAD</span>
@@ -332,7 +332,7 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                     {deliverables && deliverables.length > 0 ? (
                         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                             {deliverables.map((d: any) => (
-                                <Card key={d.id} className="bg-card border-border hover:border-primary/30 transition-colors group">
+                                <Card key={d.id} className="bg-card border-0 hover:shadow-[0_8px_32px_-8px_hsl(var(--primary)/0.2)] transition-all group">
                                     <CardContent className="p-5 space-y-3">
                                         <div className="flex items-start gap-3">
                                             <div className="h-10 w-10 shrink-0 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -350,7 +350,7 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                                             </div>
                                         </div>
                                         <a href={d.file_url} target="_blank" rel="noopener noreferrer" className="block">
-                                            <Button size="sm" className="w-full font-bold bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20">
+                                            <Button size="sm" className="w-full font-bold bg-primary/10 text-primary hover:bg-primary/20 shadow-[0_2px_10px_-2px_hsl(var(--primary)/0.2)]">
                                                 <Download className="h-4 w-4 mr-2" /> {t('download')}
                                             </Button>
                                         </a>
@@ -359,9 +359,9 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                             ))}
                         </div>
                     ) : (
-                        <Card className="bg-card border-border py-16 border-dashed">
+                        <Card className="bg-card border-0 py-16">
                             <CardContent className="flex flex-col items-center justify-center text-center space-y-6">
-                                <div className="h-24 w-24 rounded-full bg-muted flex items-center justify-center border border-border">
+                                <div className="h-24 w-24 rounded-full bg-muted flex items-center justify-center">
                                     <PlayCircle className="h-10 w-10 text-muted-foreground/50" />
                                 </div>
                                 <div className="space-y-2">
@@ -376,7 +376,7 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                 </TabsContent>
 
                 <TabsContent value="activity" className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                    <Card className="bg-card border-border">
+                    <Card className="bg-card border-0">
                         <CardHeader className="pb-2">
                             <CardTitle className="text-xl font-black text-foreground">{t('activityLogTitle')}</CardTitle>
                             <CardDescription className="text-muted-foreground">{t('activityLogDesc')}</CardDescription>
@@ -385,16 +385,16 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                             <div className="space-y-8 relative before:absolute before:inset-0 before:left-[19px] before:w-0.5 before:bg-gradient-to-b before:from-primary before:via-border before:to-transparent">
                                 {/* Entry: Order Placed (always present) */}
                                 <div className="relative pl-12 group">
-                                    <div className="absolute left-0 top-1.5 h-10 w-10 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center z-10 shadow-[0_0_20px_rgba(124,58,237,0.3)] transition-transform group-hover:scale-110">
+                                    <div className="absolute left-0 top-1.5 h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center z-10 shadow-[0_0_20px_rgba(124,58,237,0.3),0_0_0_2px_hsl(var(--primary)/0.4)] transition-transform group-hover:scale-110">
                                         <CheckCircle2 className="h-5 w-5 text-primary" />
                                     </div>
-                                    <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 p-4 rounded-xl bg-muted/50 border border-border hover:bg-muted transition-colors">
+                                    <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 p-4 rounded-xl bg-muted/50 hover:bg-muted transition-colors">
                                         <div className="space-y-1">
                                             <h4 className="font-bold text-foreground text-lg">{t('orderPlaced')}</h4>
                                             <p className="text-muted-foreground text-sm leading-relaxed">{t('orderPlacedDesc', { id: booking.id.slice(0, 8) })}</p>
                                         </div>
                                         <div className="shrink-0">
-                                            <span className="text-xs font-mono font-bold text-primary px-2 py-1 rounded bg-primary/10 border border-primary/20">
+                                            <span className="text-xs font-mono font-bold text-primary px-2 py-1 rounded bg-primary/10">
                                                 {format(new Date(booking.created_at), "MMM d, HH:mm", { locale: dateFnsLocale })}
                                             </span>
                                         </div>
@@ -414,16 +414,16 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                                         const title = statusLabels[log.status] || log.status.replace(/_/g, " ");
                                         return (
                                             <div key={log.id || index} className="relative pl-12 group">
-                                                <div className="absolute left-0 top-1.5 h-10 w-10 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center z-10 shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-transform group-hover:scale-110">
+                                                <div className="absolute left-0 top-1.5 h-10 w-10 rounded-full bg-emerald-500/20 flex items-center justify-center z-10 shadow-[0_0_20px_rgba(16,185,129,0.2),0_0_0_2px_rgba(52,211,153,0.4)] transition-transform group-hover:scale-110">
                                                     <CheckCircle2 className="h-5 w-5 text-emerald-500" />
                                                 </div>
-                                                <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 p-4 rounded-xl bg-muted/50 border border-border hover:bg-muted transition-colors">
+                                                <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 p-4 rounded-xl bg-muted/50 hover:bg-muted transition-colors">
                                                     <div className="space-y-1">
                                                         <h4 className="font-bold text-foreground text-lg capitalize">{title}</h4>
                                                         {log.notes && <p className="text-muted-foreground text-sm leading-relaxed">{log.notes}</p>}
                                                     </div>
                                                     <div className="shrink-0">
-                                                        <span className="text-xs font-mono font-bold text-emerald-400 px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20">
+                                                        <span className="text-xs font-mono font-bold text-emerald-400 px-2 py-1 rounded bg-emerald-500/10">
                                                             {format(new Date(log.created_at), "MMM d, HH:mm", { locale: dateFnsLocale })}
                                                         </span>
                                                     </div>
@@ -433,10 +433,10 @@ export default async function CampaignDetailsPage({ params }: { params: Promise<
                                     })
                                 ) : (
                                     <div className="relative pl-12 group">
-                                        <div className="absolute left-0 top-1.5 h-10 w-10 rounded-full bg-muted border-2 border-border flex items-center justify-center z-10">
+                                        <div className="absolute left-0 top-1.5 h-10 w-10 rounded-full bg-muted flex items-center justify-center z-10 shadow-[inset_0_1px_3px_rgba(0,0,0,0.2)]">
                                             <Clock className="h-5 w-5 text-muted-foreground" />
                                         </div>
-                                        <div className="p-4 rounded-xl bg-muted/50 border border-border">
+                                        <div className="p-4 rounded-xl bg-muted/50">
                                             <p className="text-muted-foreground text-sm">{t('waitingForUpdate')}</p>
                                         </div>
                                     </div>

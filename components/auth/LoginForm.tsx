@@ -80,7 +80,7 @@ export function LoginForm() {
                         autoCorrect="off"
                         required
                         disabled={isLoading}
-                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-white/30 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
+                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-500 rounded-2xl focus:ring-primary/40 focus:border-primary focus:placeholder-transparent transition-all"
                     />
                 </div>
                 <div className="space-y-2">
@@ -100,7 +100,7 @@ export function LoginForm() {
                         autoComplete="current-password"
                         required
                         disabled={isLoading}
-                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-white/30 rounded-2xl focus:ring-primary/40 focus:border-primary transition-all"
+                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-500 rounded-2xl focus:ring-primary/40 focus:border-primary focus:placeholder-transparent transition-all"
                     />
                 </div>
 

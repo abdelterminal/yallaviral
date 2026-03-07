@@ -43,16 +43,16 @@ export default async function SettingsPage({
         <div className="space-y-8 pb-10">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="flex items-center gap-2 text-3xl font-black tracking-tight text-foreground">
-                        {t('title')} <Settings className="h-8 w-8 text-primary" />
+                    <h1 className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-foreground">
+                        {t('title')} <Settings className="h-5 w-5 text-primary" />
                     </h1>
-                    <p className="text-muted-foreground mt-1">{t('subtitle')}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{t('subtitle')}</p>
                 </div>
             </div>
 
             <Tabs defaultValue={defaultTab} className="space-y-8">
-                <TabsList className="bg-muted border border-border p-1 h-auto rounded-full inline-flex">
-                    <TabsTrigger value="profile" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:bg-muted/80">
+                <TabsList className="bg-muted shadow-[0_2px_12px_-2px_rgba(0,0,0,0.3)] p-1 h-auto rounded-full inline-flex">
+                    <TabsTrigger value="profile" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02]">
                         <User className="h-4 w-4 mr-2" /> {t('profileTab')}
                     </TabsTrigger>
                     <TabsTrigger value="billing" className="rounded-full data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-muted/80 px-6 py-2 transition-all duration-300 hover:bg-muted/80">
@@ -71,7 +71,7 @@ export default async function SettingsPage({
                 </TabsContent>
 
                 <TabsContent value="billing" className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-500">
-                    <Card className="bg-primary/5 border-0 text-center py-12">
+                    <Card className="bg-primary/5 shadow-[0_4px_24px_-4px_hsl(var(--primary)/0.15)] text-center py-12">
                         <CardHeader>
                             <CardTitle className="text-2xl">{t('billingTitle')}</CardTitle>
                             <CardDescription className="text-base max-w-md mx-auto">

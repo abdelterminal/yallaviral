@@ -26,7 +26,7 @@ export function CampaignSetupStep({ onComplete }: CampaignSetupStepProps) {
 
             <div className="grid gap-6 md:grid-cols-2">
                 <Card
-                    className="p-8 cursor-pointer border-0 rounded-[2rem] hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] hover:bg-primary/5 transition-all duration-500 group relative overflow-hidden bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]"
+                    className="p-8 cursor-pointer border-0 rounded-[2rem] hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] hover:bg-primary/5 transition-all duration-500 group relative overflow-hidden bg-card shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)]"
                     onClick={() => onComplete(false, false)}
                 >
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -42,7 +42,7 @@ export function CampaignSetupStep({ onComplete }: CampaignSetupStepProps) {
                 </Card>
 
                 <Card
-                    className="p-8 cursor-pointer border-0 rounded-[2rem] hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] hover:bg-primary/5 transition-all duration-500 group relative overflow-hidden bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]"
+                    className="p-8 cursor-pointer border-0 rounded-[2rem] hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] hover:bg-primary/5 transition-all duration-500 group relative overflow-hidden bg-card shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)]"
                     onClick={() => onComplete(true, false)}
                 >
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">

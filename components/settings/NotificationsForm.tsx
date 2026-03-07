@@ -60,7 +60,7 @@ export function NotificationsForm({ defaults }: NotificationsFormProps) {
     ];
 
     return (
-        <Card className="bg-card border-border backdrop-blur-sm">
+        <Card className="bg-card border-0">
             <CardHeader>
                 <CardTitle>{t('emailNotifications')}</CardTitle>
                 <CardDescription>{t('emailNotificationsDesc')}</CardDescription>

@@ -37,7 +37,7 @@ export function TalentSelectionStep({ availableModels, onNext, onBack }: TalentS
                 {availableModels.map((model) => {
                     const isSelected = selectedModels.some(s => s.id === model.id);
                     return (
-                        <Card key={model.id} className={cn("relative transition-all duration-500 rounded-[2.5rem] hover:-translate-y-2 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] group h-[420px] flex flex-col border-0 bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)]",
+                        <Card key={model.id} className={cn("relative transition-all duration-500 rounded-[2.5rem] hover:-translate-y-2 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] group h-[420px] flex flex-col border-0 bg-card shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)]",
                             isSelected ? "ring-[6px] ring-primary ring-offset-4 bg-primary/5" : ""
                         )}>
                             <div className="relative h-[280px] w-full p-4 pb-0">
@@ -59,13 +59,13 @@ export function TalentSelectionStep({ availableModels, onNext, onBack }: TalentS
                                         <h4 className="font-bold text-lg leading-tight">{model.name}</h4>
                                         <div className="flex flex-wrap gap-1 mt-1">
                                             {model.tags?.slice(0, 2).map(tag => (
-                                                <span key={tag} className="text-[10px] bg-muted backdrop-blur-md px-1.5 py-0.5 rounded text-foreground/90">#{tag}</span>
+                                                <span key={tag} className="text-[10px] bg-muted px-1.5 py-0.5 rounded text-foreground/90">#{tag}</span>
                                             ))}
                                         </div>
                                     </div>
 
                                     {isSelected && (
-                                        <div className="absolute inset-0 flex items-center justify-center bg-card/40 backdrop-blur-md rounded-[2rem]">
+                                        <div className="absolute inset-0 flex items-center justify-center bg-card/60 rounded-[2rem]">
                                             <div className="bg-primary text-white px-5 py-2.5 rounded-full font-black text-sm shadow-[0_8px_30px_-6px_hsl(var(--primary))] animate-in zoom-in flex items-center gap-2">
                                                 <CheckCircle2 className="h-5 w-5" /> {tc('selected')}
                                             </div>
@@ -87,7 +87,7 @@ export function TalentSelectionStep({ availableModels, onNext, onBack }: TalentS
                                         </Button>
                                     </ModelPortfolio>
                                     <Button
-                                        className={cn("flex-1 font-black rounded-2xl h-12 transition-all", isSelected ? "bg-muted hover:bg-muted/80 text-foreground border-0 shadow-none" : "bg-primary hover:bg-primary/90 shadow-[0_8px_20px_-6px_hsl(var(--primary))]")}
+                                        className={cn("flex-1 font-black rounded-2xl h-12 transition-all", isSelected ? "bg-muted hover:bg-muted/80 text-foreground border-0 shadow-none" : "bg-primary hover:bg-primary/90 shadow-[0_6px_16px_-4px_hsl(var(--primary)/0.5)]")}
                                         variant={isSelected ? "secondary" : "default"}
                                         onClick={() => {
                                             if (isSelected) {

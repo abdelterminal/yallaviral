@@ -15,7 +15,7 @@ export function LandingFeatures() {
     const t = useTranslations('Landing');
 
     return (
-        <section id="features" className="py-32 bg-card relative overflow-hidden text-foreground">
+        <section id="features" className="py-32 bg-background relative overflow-hidden text-foreground">
             {/* Soft top gradient to transition from the blue hero */}
             <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#0052FF]/10 to-transparent pointer-events-none" />
 
@@ -48,7 +48,7 @@ export function LandingFeatures() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="h-full flex flex-col items-center justify-start text-center p-10 rounded-[2rem] bg-card border border-border/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] group relative overflow-hidden"
+                            className="h-full flex flex-col items-center justify-start text-center p-10 rounded-[2rem] bg-card border-0 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] group relative overflow-hidden"
                         >
                             {/* Colored accent bar at top on hover */}
                             <div
@@ -72,7 +72,7 @@ export function LandingFeatures() {
             </div>
 
             {/* Bottom section gradient divider */}
-            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-b from-transparent to-background pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-b from-transparent to-muted/20 pointer-events-none" />
         </section>
     );
 }
